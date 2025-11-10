@@ -1,4 +1,4 @@
-# [3] Operadores Essenciais — Versão Didática (11.º ano)
+# [3] Operadores Essenciais (11.º ano)
 
 > **Objetivo**: dominar as operações básicas de matemática, comparação e decisão em JavaScript usando uma linguagem clara e evitando armadilhas de coerção.
 

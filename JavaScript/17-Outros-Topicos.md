@@ -1,4 +1,4 @@
-# [17] Outros Tópicos Úteis no Browser — URLSearchParams, History API, IntersectionObserver, Intl, A11y, Segurança, Performance
+# [17] Outros Tópicos Úteis no Browser - URLSearchParams, History API, IntersectionObserver, Intl, A11y, Segurança, Performance (11.º ano)
 
 > **Objetivo**: conhecer ferramentas úteis do browser para tornar as páginas mais **funcionais, acessíveis e rápidas**. Explicações simples, exemplos curtos e desafios.
 

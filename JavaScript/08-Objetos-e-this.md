@@ -1,4 +1,4 @@
-# [8] Objetos e `this` — Versão Didática (11.º ano)
+# [8] Objetos e `this` (11.º ano)
 
 > **Objetivo**: representar dados com pares `chave → valor`, alterar e ler propriedades, entender `this` em métodos simples e copiar/mesclar objetos sem surpresas.
 

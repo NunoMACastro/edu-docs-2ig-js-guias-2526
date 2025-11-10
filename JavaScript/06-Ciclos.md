@@ -1,4 +1,4 @@
-# [6] Ciclos — Versão Didática (11.º ano)
+# [6] Ciclos (11.º ano)
 
 > **Objetivo**: repetir ações sem escrever o mesmo código várias vezes, escolhendo o ciclo certo (`for`, `while`, `for...of`, etc.) e evitando armadilhas como loops infinitos.
 

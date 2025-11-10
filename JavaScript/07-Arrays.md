@@ -1,4 +1,4 @@
-# [7] Arrays — Versão Didática (11.º ano)
+# [7] Arrays (11.º ano)
 
 > **Objetivo**: trabalhar listas ordenadas de valores, saber quando alterar o array original e quando criar cópias imutáveis, além de dominar métodos básicos usados todos os dias.
 

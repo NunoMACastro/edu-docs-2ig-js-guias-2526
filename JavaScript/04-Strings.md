@@ -1,4 +1,4 @@
-# [4] Strings — Versão Didática (11.º ano)
+# [4] Strings (11.º ano)
 
 > **Objetivo**: trabalhar textos em JavaScript de forma simples: criar, formatar, procurar, recortar e substituir sem te perderes em detalhes demasiado técnicos.
 

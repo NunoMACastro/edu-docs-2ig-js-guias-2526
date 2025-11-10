@@ -1,4 +1,4 @@
-# [2] Input/Output Básico — Versão Didática (11.º ano)
+# [2] Input/Output Básico (11.º ano)
 
 > **Objetivo**: mostrar informação (`output`) e recolher dados (`input`) tanto no browser como em Node.js, usando ferramentas simples e previsíveis.
 

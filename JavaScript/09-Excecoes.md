@@ -1,4 +1,4 @@
-# [9] Exceções — Versão Didática (11.º ano)
+# [9] Exceções (11.º ano)
 
 > **Objetivo**: perceber como o JavaScript reage a erros, como lançar (`throw`) e apanhar (`try/catch`) exceções e como tratar erros assíncronos com `Promises` ou `async/await` de forma simples.
 

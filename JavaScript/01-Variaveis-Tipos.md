@@ -1,4 +1,4 @@
-# [1] Variáveis e Tipos — Versão Didática (11.º ano)
+# [1] Variáveis e Tipos (11.º ano)
 
 > **Objetivo**: perceber porque existe `"use strict"`, quando usar `var`/`let`/`const`, o que significa “tipo” em JavaScript e como evitar surpresas com coerção e igualdade.
 

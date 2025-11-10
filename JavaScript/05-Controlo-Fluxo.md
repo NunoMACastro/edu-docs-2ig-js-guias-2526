@@ -1,4 +1,4 @@
-# [5] Estruturas de Controlo — Versão Didática (11.º ano)
+# [5] Estruturas de Controlo (11.º ano)
 
 > **Objetivo**: tomar decisões claras com `if`, `else`, `switch`, operadores lógicos e guard clauses sem cair em armadilhas de `truthy/falsy`.
 

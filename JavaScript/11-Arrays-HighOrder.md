@@ -1,4 +1,4 @@
-# [11] Funções de Alto Nível em Arrays — Versão Didática (11.º ano)
+# [11] Funções de Alto Nível em Arrays (11.º ano)
 
 > **Objetivo**: deixar os ciclos manuais de lado e usar métodos como `map`, `filter`, `reduce` e `find` para escrever código mais declarativo e fácil de ler.
 
@@ -6,7 +6,7 @@
 
 ## 0) O que são HOFs?
 
-HOF significa *Higher-Order Functions*. São métodos de array que recebem uma **função callback**. Tu explicas o que queres fazer e o método trata do ciclo.
+HOF significa _Higher-Order Functions_. São métodos de array que recebem uma **função callback**. Tu explicas o que queres fazer e o método trata do ciclo.
 
 Assinatura genérica:
 
