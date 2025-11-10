@@ -1,6 +1,6 @@
-# Guias JavaScript — Versão Didática (11.º ano)
+# Guias JavaScript (11.º ano)
 
-Este repositório junta os apontamentos usados nas aulas de Programação para o 11.º IG. Cada capítulo foi revisto para usar **linguagem simples**, muitos exemplos e mini desafios ao estilo das versões 13‑17, garantindo uma linha orientadora única.
+Este repositório junta os apontamentos usados nas aulas de Programação para o 11.º IG.
 
 ---
 
@@ -70,13 +70,3 @@ Cada ficheiro tem exemplos prontos a colar no DevTools/Node e termina com desafi
 ## React
 
 A pasta `React/` contém guias de introdução à framework (setup, componentes, estado). Estes materiais seguem a mesma filosofia: capítulos em Markdown focados em exemplos e desafios.
-
----
-
-## Próximos passos
-
--   Mantém os ficheiros abertos enquanto praticas (são notas de secretária).
--   Sugere melhorias via pull request ou deixa comentários no classroom.
--   Consulta a documentação oficial (MDN) para aprofundar tópicos específicos.
-
-Bons estudos e bom código!
