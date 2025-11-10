@@ -177,16 +177,18 @@ No Node moderno podes usar `import dados from "./dados.json" assert { type: "jso
 
 ## 8) Mini desafios
 
-1. Cria `alunos.js` com `export const alunos = [...]` e `export function media()`. Importa em `main.js` e mostra a média.
-2. Cria um módulo `cores.js` com default export (função que recebe `#RRGGBB` e devolve `{ r, g, b }`).
-3. No browser, usa `import()` dinâmico para só carregar um módulo de gráficos quando o utilizador clicar num botão.
-4. Monta um `index.js` (barrel) que reexporta utilitários de `math.js`, `string.js` e `tempo.js`. Mostra no `console` que consegues importar tudo de um único sítio.
-5. Cria um módulo `config.js` que carrega JSON via top-level `await` e exporta `cfg`. Usa-o em `main.js` e garante que só arrancas depois de `cfg` estar carregada.
-6. Em Node com `"type": "module"`, cria um script `cli.mjs` que usa `import.meta.url` para resolver o caminho de um ficheiro `.json` relativo ao módulo.
-7. Simula lazy loading: ao clicar num botão “Estatísticas”, faz `import("./stats.js")` e executa `render()` apenas nessa altura.
+1. Cria `alunos.js` com `export const alunos = [...]` e `export function media()`; em `main.js`, importa ambos e mostra a média na consola.
+2. Faz `cores.js` com um `export default function hex(r, g, b)` e usa-o noutro ficheiro para gerar `#FFA500`.
+3. Cria `strings.js` com `export function title(texto)` e `export const vogais`. Depois cria `utils/index.js` que reexporta tudo para poderes importar de um único sítio.
+4. No browser, adiciona um botão “Ajuda”. Ao clicar, carrega o módulo `./ajuda.js` com `import()` dinâmico e mostra um `alert` com a mensagem exportada.
+5. Cria `config.js` com `export const cfg = { api: "https://exemplo.test" }` e usa-o noutro módulo para montar URLs.
+6. Usa `top-level await` num módulo `dados.js` apenas para fazer `await Promise.resolve({ total: 42 })` e exporta o resultado. Importa-o em `main.js` e mostra no `console`.
+7. Reescreve um ficheiro que tinha `export default` para passar a exportar vários valores nomeados e ajusta o import respetivo.
 
 ## Changelog
 
+-   **v1.2.0 — 2025-11-10**
+    -   Mini desafios simplificados e agora focados em cenários de browser (sem Node CLI).
 -   **v1.1.0 — 2025-11-10**
     -   Separação entre boas práticas e mini desafios, com quatro novos desafios avançados.
     -   Changelog adicionado para registar alterações ao capítulo.

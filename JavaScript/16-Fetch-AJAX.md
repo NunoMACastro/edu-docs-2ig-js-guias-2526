@@ -265,13 +265,12 @@ async function getPrivado(url, token) {
 
 ## 11) Mini desafios
 
-1. **GET simples**: escreve uma função `listarCursos()` que faz GET a `/api/cursos` e imprime o resultado.
-2. **POST**: cria `criarCurso({ nome, ects })` que faz POST em `/api/cursos`. Trata 400/500 como erros visíveis.
-3. **URL builder**: cria `urlComParams("/api/cursos", { page:1, q:"js" })` e verifica no DevTools que a URL fica correta.
-4. **Timeout**: implementa `getComTimeout` (como acima) e usa‑o para `/api/lento`. Mostra mensagem amigável em `AbortError`.
-5. **DELETE**: cria `removerCurso(id)` com `delJSON`. Depois volta a pedir a lista para confirmar.
-6. **Upload**: cria `uploadPDF(inputFile)` que envia para `/api/docs`. Mostra um “A carregar…” enquanto faz upload.
-7. **Retry**: implementa `getComRetry` e faz um pedido a um endpoint que falha 50% das vezes (simulado). Observa no `console` as tentativas.
+1. **Botão Carregar** — cria um botão que, ao clicar, usa `fetch("alunos.json")`, chama `response.json()` e mostra os nomes numa `<ul>`.
+2. **Mensagem de erro** — altera o desafio anterior para mostrar “Tenta mais tarde” num `<p>` se o `fetch` falhar (simula trocando o URL por um inexistente).
+3. **Pesquisa simples** — cria um formulário com `<input name="q">`. No `submit`, usa `urlComParams` para montar `/api/alunos?q=valor` (pode ser apenas `console.log` da URL) e limpa o formulário.
+4. **Loader** — antes de fazer `fetch`, mostra “A carregar…”; quando termina, troca para “Concluído” ou “Erro”. Usa `try/catch` com `await`.
+5. **POST fictício** — cria um formulário com `nome` e `nota`, lê com `FormData` e envia para `https://jsonplaceholder.typicode.com/posts` com `fetch` (método `POST`). Mostra o `id` devolvido.
+6. **Abortar pedido** — usa `AbortController` para cancelar um `fetch` após 2 segundos (`setTimeout`). Mostra no `console` se foi cancelado ou concluído.
 
 ---
 
@@ -286,6 +285,8 @@ async function getPrivado(url, token) {
 
 ## Changelog
 
+-   **v1.2.0 — 2025-11-10**
+    -   Mini desafios simplificados para cenários de browser com `fetch` a ficheiros locais ou APIs públicas.
 -   **v1.1.0 — 2025-11-10**
     -   Exercícios renomeados para Mini desafios e revistos para cobrir o ciclo completo de pedidos.
     -   Changelog adicionado para acompanhar futuras melhorias do capítulo.

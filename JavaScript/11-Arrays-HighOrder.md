@@ -128,16 +128,18 @@ Quando a cadeia crescer demasiado, guarda resultados intermédios em variáveis 
 
 ## 9) Mini desafios
 
-1. Com `[1, 2, 3, 4, 5]`, cria um array com os pares já multiplicados por 10.
-2. Recebe alunos `{ nome, nota }`, filtra os aprovados e devolve só os nomes.
-3. Usa `reduce` para construir um objeto `{ aprovados: X, reprovados: Y }`.
-4. Usa `find` para descobrir o primeiro produto com `stock === 0`.
-5. Transforma uma lista de palavras num objeto `{ primeiraLetra: [palavras...] }` usando `reduce`.
-6. Implementa `groupBy(arr, keyFn)` que devolve um objeto com chaves calculadas dinamicamente (usa `reduce`).
-7. Cria um pipeline que filtra produtos ativos, ordena por preço (com `toSorted`) e devolve apenas os nomes em maiúsculas.
+1. Com `[1, 2, 3, 4, 5]`, usa `map` para devolver um array com o dobro de cada valor.
+2. Recebe `[15, 8, 20, 9, 18]` e usa `filter` para ficar apenas com notas ≥ 10.
+3. A partir de `[{ nome: "Ana", nota: 18 }, ...]`, usa `map` seguido de `join(", ")` para gerar a frase `"Alunos: Ana, Bruno"`.
+4. Usa `reduce` para somar os números `[3, 7, 4]` e calcula a média dividindo pelo comprimento.
+5. Com `["Ana", "Álvaro", "Bruno"]`, mostra qual o primeiro nome que começa por "A" usando `find` (ignora acentos com `toLowerCase`).
+6. Verifica se há algum valor maior que 50 com `some` e se todos são positivos com `every` num array à tua escolha.
+7. Escreve um pequeno pipeline com `filter` + `map` que recebe palavras e devolve só as que têm mais de 4 letras em maiúsculas.
 
 ## Changelog
 
+-   **v1.2.0 — 2025-11-10**
+    -   Mini desafios simplificados para focar em `map`, `filter`, `reduce`, `find`, `some/every` sem padrões avançados.
 -   **v1.1.0 — 2025-11-10**
     -   Mini desafios reforçados com duas novas propostas (`groupBy` e pipeline encadeado).
     -   Nova secção de changelog para documentar revisões futuras.

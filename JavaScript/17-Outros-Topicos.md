@@ -267,13 +267,13 @@ console.timeEnd('render');
 
 ## 9) Mini desafios
 
-1. **URLSearchParams**: cria `getQuery(nome)` que devolve o valor de um parâmetro. Testa com `?q=js&page=2`.
-2. **Build URL**: escreve `urlComParams('/api/alunos', { page:1, q:'ana' })`. Confere no DevTools.
-3. **History API**: implementa `pushState` ao clicar num menu e `popstate` para voltar à vista anterior.
-4. **IntersectionObserver**: cria um “sentinela” para carregar mais items quando se aproxima do fim da lista.
-5. **Intl**: formata `1234.56` como EUR e a data atual em `pt-PT`. Ordena `["maçã","manga","abacate"]` de forma correta.
-6. **A11y**: liga/desliga `aria-pressed` num botão “Favorito” e verifica com o inspetor de acessibilidade.
-7. **Performance**: renderiza 1000 `<li>` usando `DocumentFragment` e mede com `console.time` o tempo gasto.
+1. **Ler query** — escreve `getQuery(nome)` usando `new URLSearchParams(location.search)` e testa com `?q=js&page=2`.
+2. **Atualizar query** — cria um formulário com campo `q`. No `submit`, usa `url.searchParams.set` e `history.replaceState` para atualizar a barra de endereço sem recarregar.
+3. **SPA simples** — dois botões “Home” e “Sobre” que trocam o conteúdo de uma `<section>` e usam `history.pushState`/`popstate` para manter o estado ao navegar para trás.
+4. **IntersectionObserver básico** — observa o último `<li>` e, quando aparece no ecrã, adiciona mais três itens a partir de um array (sem servidor).
+5. **Intl** — mostra o preço `12.5` como `pt-PT` EUR e a data atual com `Intl.DateTimeFormat`. Ordena `["maçã", "manga", "abacate"]` com `localeCompare`.
+6. **A11y rápido** — cria um botão só com ícone e adiciona `aria-label`. Depois adiciona `aria-pressed` para indicar favorito e alterna o valor ao clicar.
+7. **Performance/medição** — cria 500 `<li>` usando `DocumentFragment` e mede com `console.time`/`console.timeEnd` quanto demorou.
 
 ---
 
@@ -288,6 +288,8 @@ console.timeEnd('render');
 
 ## Changelog
 
+-   **v1.2.0 — 2025-11-10**
+    -   Mini desafios reescritos com passos mais guiados (sem dependência de APIs externas ou listas enormes).
 -   **v1.1.0 — 2025-11-10**
     -   Secção final convertida em Mini desafios com foco em APIs modernas do browser.
     -   Adicionado changelog para manter histórico de alterações.

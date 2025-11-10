@@ -362,14 +362,18 @@ class Termometro {
 
 ## 12) Mini desafios
 
-1. **Pessoa simples**: cria `class Pessoa` com `nome` e `apresentar()`. Cria 3 pessoas e imprime as apresentações.
-2. **Validação**: cria `class Aluno` com `#nota` e um `set nota(v)` que só aceita 0–20.
-3. **Conta bancária**: `depositar`, `levantar`, `get saldo` e um método privado `#registar`. Lança erros quando necessário.
-4. **Estáticos**: cria uma classe `Moeda` com `static EUR(valor)` e `static USD(valor)` que devolvem objetos `{ valor, moeda }`.
-5. **Herança**: `Pessoa` → `Aluno` (com `turma`) e sobrepõe `apresentar()` usando `super`.
-6. **Composição**: `Temporizador` + `Relogio` que conta segundos; adiciona `reset()`.
-7. **Callbacks**: cria `Botao` com `handleClick` (versão com `bind` e versão com class field + arrow). Usa `addEventListener` num botão real.
-8. **Fábrica vs Classe**: implementa `criarTermometro()` e `class Termometro`. Lista vantagens e desvantagens de cada.
+1. **Saudação** — cria `class Saudacao` com `mensagem` no constructor e um método `falar()` que devolve `Olá + mensagem`. Instancia duas versões e mostra o texto no `console`.
+2. **Contador simples** — cria `class Contador` com uma propriedade `valor = 0` e um método `incrementar()` que soma 1. Mostra o valor após três chamadas.
+3. **Pessoa básica** — cria `class Pessoa` com `nome` e `apresentar()`. Cria 3 pessoas e imprime as apresentações.
+4. **Getter introdutório** — cria `class Termometro` com um campo privado `#celsius` e um getter `fahrenheit` que devolve `#celsius * 1.8 + 32`. Mostra ambos os valores.
+5. **Setter introdutório** — cria `class Produto` com `#preco` e um setter `preco` que rejeita valores negativos (lança `RangeError`). Usa o getter correspondente para ler o valor atual.
+6. **Validação** — cria `class Aluno` com `#nota` e um `set nota(v)` que só aceita 0–20 (lança `RangeError` caso contrário).
+7. **Conta bancária** — implementa `depositar`, `levantar` e `get saldo`; lança erro se tentar levantar mais do que o saldo.
+8. **Estáticos** — cria `class Conversor` com `static eurParaUsd(valor)` e `static usdParaEur(valor)` e usa-os em dois exemplos.
+9. **Herança** — `class Pessoa` → `class Professor` (com `disciplina`). Sobrepõe `apresentar()` para incluir a disciplina mas chama `super.apresentar()`.
+10. **Composição** — `class Relogio` que usa internamente `setInterval` para contar segundos e expõe `iniciar()`, `parar()` e `get segundos`.
+11. **JSON** — adiciona `toJSON()` a `class Aluno` para devolver `{ nome, turma }` e confirma com `JSON.stringify` que só esses campos aparecem.
+12. **Fábrica x Classe** — escreve uma função `criarContador()` (fábrica) e `class Contador`. Usa ambos para mostrar que guardam estado.
 
 ## 13) Resumo final
 
@@ -381,6 +385,12 @@ class Termometro {
 
 ## Changelog
 
+-   **v1.4.0 — 2025-11-10**
+    -   Adicionados dois desafios introdutórios específicos para getters e setters antes do exercício de validação.
+-   **v1.3.0 — 2025-11-10**
+    -   Mini desafios reorganizados para começarem com exercícios muito simples e progressivos (Saudação e Contador) antes dos tópicos avançados.
+-   **v1.2.0 — 2025-11-10**
+    -   Mini desafios simplificados para focar em padrões básicos (classes, getters/setters, estáticos e herança direta).
 -   **v1.1.0 — 2025-11-10**
     -   Secção de desafios renomeada para Mini desafios para reforçar o caráter avançado.
     -   Adicionado changelog inicial para registar futuras alterações no capítulo.

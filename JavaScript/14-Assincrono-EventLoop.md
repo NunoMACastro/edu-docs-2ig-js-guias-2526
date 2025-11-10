@@ -240,13 +240,12 @@ Imagina que tens uma fila de pessoas (callbacks) à espera de serem atendidas. O
 
 ## 9) Mini desafios
 
-1. **Loading simpático** — Mostra “A carregar…”, faz `getJSON` a um URL (podes usar um JSON local), substitui pelo resultado ou por “Tenta mais tarde” em `catch`.
-2. **Três pedidos em paralelo** — Cria `getJSON` para `/alunos`, `/professores`, `/turmas` (simulados). Usa `Promise.all` e mostra contagens no `console`.
-3. **Relógio com `setInterval`** — Mostra horas:min:seg num `<span>`. Para ao clicar num botão “Parar”.
-4. **Ordem dos logs** — Copia o snippet de `A/D/C/B`, corre no DevTools e explica a ordem em 3 frases.
-5. **Retry com limite** — Implementa `fetchComRetry(url, tentativas)` que volta a tentar com `await` e `setTimeout` entre tentativas. Loga cada tentativa.
-6. **Timeout com AbortController** — Cria um formulário de pesquisa que faz `fetch`. Se a resposta demorar mais de 2s, aborta e mostra mensagem.
-7. **Fila de tarefas** — Usa `setTimeout`, `Promise.resolve().then(...)` e `console.log` para demonstrar a ordem real (Call Stack → microtarefas → tarefas). Documenta o resultado.
+1. **Tempo de espera** — cria `esperar(ms)` que devolve uma Promise resolvida após `ms`. Usa `then` para escrever “Já passou!” ao fim de 1 segundo.
+2. **Mensagem sequencial** — escreve uma função `async` que lança duas Promises em paralelo com `Promise.all` e mostra a soma dos valores quando ambas terminarem.
+3. **Relógio simples** — usa `setInterval` para atualizar um `<span>` com horas:min:seg. Adiciona um botão “Parar” que usa `clearInterval`.
+4. **Ordem dos logs** — corre o snippet do capítulo (A, D, C, B) e descreve num parágrafo a ordem observada e o motivo.
+5. **Loading fictício** — mostra “A carregar…” num `<p>`, chama `esperar(1500)` e depois troca o texto para “Pronto”. Em caso de erro (simula lançando `throw`), mostra “Ups”.
+6. **Fetch simulado** — cria `fakeFetch(url)` que devolve uma Promise resolvida com `{ ok: true, dados: [...] }` após 700 ms e usa `async/await` para tratar sucesso e erro (lança manualmente um erro para praticar o `catch`).
 
 ## 10) Dicionário rápido
 
@@ -269,6 +268,8 @@ Imagina que tens uma fila de pessoas (callbacks) à espera de serem atendidas. O
 
 ## Changelog
 
+-   **v1.2.0 — 2025-11-10**
+    -   Mini desafios simplificados para focar em esperas simples, `Promise.all`, `setInterval` e simulações sem APIs externas.
 -   **v1.1.0 — 2025-11-10**
     -   Mini desafios atualizados (agora com sete propostas). Inclui exercícios de retry, timeout e ordem de execução.
     -   Changelog introduzido para acompanhar evoluções futuras do capítulo.
