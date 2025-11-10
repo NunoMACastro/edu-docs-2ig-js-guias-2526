@@ -160,11 +160,6 @@ console.log((a || b) && c); // força outra ordem
     - `-3 ** 2`
     - `"5" + 1`
     - `"5" - 1`
-2. Escreve uma expressão que devolva **"visitante"** apenas quando `nome` é `null` ou `undefined` (mas **não** quando é `""`).
-3. Usa `?.` e `??` para ler `user.profile.email` em segurança, devolvendo `"sem email"` se não existir.
-4. Ordena `["Álvaro","Ana","Élio"]` respeitando pt-PT.
-5. Reescreve: `const pagina = entrada || 1;` preservando `0` como válido.
-6. Mostra a diferença entre `a ||= 10` e `a ??= 10` quando `a` é `0`, `""`, `false`, `undefined`.
 
 ---
 

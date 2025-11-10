@@ -246,16 +246,18 @@ console.log(telefone);
 
 ## 9) Exercícios rápidos
 
-1. **Classificador de notas**: lê uma nota (0–20) e imprime `"Excelente"` (≥18), `"Bom"` (14–17), `"Suficiente"` (10–13) ou `"Insuficiente"` (<10). Faz com `if/else` **e** com `switch(true)`.
+1. **Classificador de notas**: lê uma nota (0–20) do utilizador e imprime `"Excelente"` (≥18), `"Bom"` (14–17), `"Suficiente"` (10–13) ou `"Insuficiente"` (<10). Faz com `if/else` **e** com `switch(true)`.
 2. **Mês → Estação**: implementa `estacaoDoAno(mes)` (1–12) como acima e testa.
-3. **Validação de formulário**: cria `validarIdade(i)` com guard clauses:
+3. **Validação de formulário**: Pede a idade ao utilizador e depois, com guard clauses, diz se é maior ou menor, tratando estes casos:
     - `null/undefined` → `"Idade em falta"`
     - não numérico ou `NaN` → `"Não numérico"`
     - `<0` → `"Idade inválida"`
     - `<18` → `"Menor"`
     - caso contrário `"Maior"`
-4. **Defaults seguros**: reescreve `const pagina = entrada || 1;` para preservar `0` como válido.
-5. **Condições legíveis**: transforma `if (a && !b || c && d)` em versão com **variáveis booleanas nomeadas** e parênteses.
+4. **Temperatura**: lê uma temperatura da água do utilizador e imprime:
+    - `<0` → `"Congela"`
+    - `0–100` → `"Líquido"`
+    - `>100` → `"Ferve"`
 
 ---
 

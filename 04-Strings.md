@@ -256,17 +256,4 @@ for (const ch of Array.from("Olá 🙂")) {
 
 ---
 
-## 12) Exercícios rápidos
-
-1. Pede ao utilizador um texto e mostra:
-    - comprimento **sem espaços extremos**, versão **maiúscula** e **minúscula**.
-2. Implementa `contarVogais(s)` (considera acentos comuns pt) e testa.
-3. Cria `primeirasLetras(frase)` que devolve as iniciais de cada palavra (ex.: `"Escola Profissional"` → `"EP"`).
-4. Implementa `mascararTelefone("912345678")` → `"91******8"` (mantém 2 primeiros e último).
-5. Ordena `["maçã", "pêra", "uva", "abacaxi"]` de forma correta para pt-PT.
-6. Escreve `slugifyPt` como acima e aplica à frase `"Olá, mundo! Programar é fixe."`.
-7. Cria `truncar(s, max)` que não corte a meio de palavras quando possível (extra).
-
----
-
 **Resumo**: strings em JS são **imutáveis**; usa **templates** para construir, **slice** para recortar, **replace/replaceAll** para substituir, **includes/indexOf** para procurar, e **localeCompare** para ordenar corretamente em português.

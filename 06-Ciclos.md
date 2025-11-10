@@ -249,13 +249,10 @@ function inverterSeguro(s) {
 ## 8) Exercícios rápidos
 
 1. **Somatório**: lê um número `n` e calcula `1 + 2 + ... + n` com `for` e com `while`.
-2. **Tabuada** (1 a 10) para um número dado, usando **do...while**.
+2. **Tabuada** (1 a 10) para um número dado pelo utilizador, usando **do...while**.
 3. **Maior valor**: dado `arr = [7,3,10,2,9]`, encontra mínimo e máximo com um único ciclo.
 4. **Contar letras**: conta quantas vezes aparece `"a"` em `"banana"` (usa `for...of`).
-5. **Array → objeto**: transforma `["nome","Ana","nota",18]` em `{ nome:"Ana", nota:18 }` usando um ciclo com passo 2.
-6. **Objeto → pares**: cria uma função `toPairs(obj)` que devolve `[[k,v], ...]` sem usar `Object.entries` (usa `for...in` com `hasOwnProperty`).
-7. **Inverter string**: implementa `inverterSeguro` como acima e testa com `"Olá 🙂"`.
-8. **Procurar primeiro par**: percorre um array e devolve o **primeiro** número par (usa `break`).
+5. **Contagem decrescente**: Pede um número ao utilizador, verifica se é positivo, e imprime a contagem decrescente até 0 usando o `while`, o `do...while` e o `for`.
 
 ---
 
