@@ -168,15 +168,25 @@ No Node moderno podes usar `import dados from "./dados.json" assert { type: "jso
 
 ---
 
-## 7) Boas práticas e mini desafios
+## 7) Boas práticas
 
 -   Cada módulo deve ter uma responsabilidade clara.
 -   Evita defaults quando exportas muitas coisas do mesmo ficheiro — `named exports` tornam o autocompletar mais fácil.
 -   Usa index/barrel apenas quando realmente simplifica (demasiadas camadas podem confundir).
 -   Documenta no topo do ficheiro o que ele expõe (`// Exporta: getAluno, salvarAluno`).
 
-### Desafios
+## 8) Mini desafios
 
 1. Cria `alunos.js` com `export const alunos = [...]` e `export function media()`. Importa em `main.js` e mostra a média.
 2. Cria um módulo `cores.js` com default export (função que recebe `#RRGGBB` e devolve `{ r, g, b }`).
 3. No browser, usa `import()` dinâmico para só carregar um módulo de gráficos quando o utilizador clicar num botão.
+4. Monta um `index.js` (barrel) que reexporta utilitários de `math.js`, `string.js` e `tempo.js`. Mostra no `console` que consegues importar tudo de um único sítio.
+5. Cria um módulo `config.js` que carrega JSON via top-level `await` e exporta `cfg`. Usa-o em `main.js` e garante que só arrancas depois de `cfg` estar carregada.
+6. Em Node com `"type": "module"`, cria um script `cli.mjs` que usa `import.meta.url` para resolver o caminho de um ficheiro `.json` relativo ao módulo.
+7. Simula lazy loading: ao clicar num botão “Estatísticas”, faz `import("./stats.js")` e executa `render()` apenas nessa altura.
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Separação entre boas práticas e mini desafios, com quatro novos desafios avançados.
+    -   Changelog adicionado para registar alterações ao capítulo.

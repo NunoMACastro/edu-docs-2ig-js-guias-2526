@@ -127,8 +127,19 @@ Desestruturação permite extrair valores por posição com sintaxe concisa.
 
 ---
 
-## 8) Mini desafios
+## 8) Exercícios
 
 1. Cria uma função `adicionarAluno(lista, nome)` que devolve **novo** array com o nome no fim (não muta).
-2. Usa `splice` para inserir "EPMS" na posição 2 de `["11º", "Turma", "A"]`.
+2. Usa `splice` para inserir "EPMS" na posição 2 de `["11º", "Turma", "A"]` e explica o resultado passo a passo.
 3. A partir de `[5, 8, 12, 3]`, devolve um array com os números pares multiplicados por 10 (podes usar `for` ou já experimentar `filter` + `map`).
+4. Escreve um programa que pede 10 números ao utilizador, guarda‑os num array e depois mostra o maior e o menor valor inseridos.
+5. Ainda no array de números do exercício anterior, cria uma cópia ordenada sem alterar o original e mostra ambos.
+6. Ainda no array de números, verifica se todos são positivos e se algum é maior que 100.
+7. Usa `includes`, `indexOf` e `find` para procurar o aluno `"Ana"` numa lista de objetos `{ nome, nota }`. Comenta as diferenças.
+8. Desestrutura `["João", "Maria", "Ana", "Rui"]` para extrair o primeiro, o último e ficar com um array `resto` para o meio. Usa `spread` para construir um novo array `novoGrupo` começando por `"Prof."`.
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Secção de Exercícios expandida para sete desafios sobre mutação, cópia e pesquisa.
+    -   Changelog adicionado para manter histórico de alterações do capítulo.

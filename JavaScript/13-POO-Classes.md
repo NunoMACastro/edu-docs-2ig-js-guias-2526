@@ -360,7 +360,7 @@ class Termometro {
 
 ---
 
-## 12) Desafios (progressivos)
+## 12) Mini desafios
 
 1. **Pessoa simples**: cria `class Pessoa` com `nome` e `apresentar()`. Cria 3 pessoas e imprime as apresentações.
 2. **Validação**: cria `class Aluno` com `#nota` e um `set nota(v)` que só aceita 0–20.
@@ -371,8 +371,6 @@ class Termometro {
 7. **Callbacks**: cria `Botao` com `handleClick` (versão com `bind` e versão com class field + arrow). Usa `addEventListener` num botão real.
 8. **Fábrica vs Classe**: implementa `criarTermometro()` e `class Termometro`. Lista vantagens e desvantagens de cada.
 
----
-
 ## 13) Resumo final
 
 -   **Classe** = molde; **objeto** = instância do molde.
@@ -380,3 +378,9 @@ class Termometro {
 -   Usa **`static`** para utilitários e informação da classe.
 -   **Herança** só quando for claramente “**é‑um**”; caso contrário, **composição**.
 -   Cuida do **`this`** quando passares métodos como callbacks.
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Secção de desafios renomeada para Mini desafios para reforçar o caráter avançado.
+    -   Adicionado changelog inicial para registar futuras alterações no capítulo.

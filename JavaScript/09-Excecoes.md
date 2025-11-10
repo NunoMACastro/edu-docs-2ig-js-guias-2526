@@ -187,3 +187,13 @@ function lerJSONSeguro(texto, fallback = {}) {
 1. Cria uma função `lerNumero(promptMsg)` que usa `prompt`, converte para número e lança `TypeError` se for inválido. Apanha o erro fora da função.
 2. Implementa `fetchAluno(id)` que simula `fetch` com `setTimeout` e trata erros dentro da Promise.
 3. Faz uma mini utilidade que recebe uma função `async` e volta a tentar até 3 vezes antes de desistir (com mensagens no `console`).
+4. Define uma classe `SaldoInsuficienteError` e usa-a num método `levantar` que recusa levantamentos maiores que o saldo.
+5. Escreve `executarComRetry(fn, tentativas)` que volta a tentar funções síncronas e devolve `{ ok, valor/erro, tentativasUsadas }`.
+6. Cria um `try/catch/finally` que abre um recurso simulado (`const recurso = { aberto: true }`), lança erro propositado e garante no `finally` que `recurso.aberto = false`.
+7. Usa `Promise.allSettled` para correr três Promises, duas que resolvem e uma que rejeita. Faz pós-processamento que identifica quais falharam.
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Mini desafios expandidos para sete propostas cobrindo erros síncronos e assíncronos.
+    -   Changelog inaugurado para seguir alterações do capítulo.

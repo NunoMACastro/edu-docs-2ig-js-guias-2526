@@ -263,7 +263,7 @@ async function getPrivado(url, token) {
 
 ---
 
-## 11) Exercícios (progressivos)
+## 11) Mini desafios
 
 1. **GET simples**: escreve uma função `listarCursos()` que faz GET a `/api/cursos` e imprime o resultado.
 2. **POST**: cria `criarCurso({ nome, ects })` que faz POST em `/api/cursos`. Trata 400/500 como erros visíveis.
@@ -283,3 +283,9 @@ async function getPrivado(url, token) {
 -   Envia **JSON** com `Content-Type: application/json`; para **ficheiros**, usa `FormData`.
 -   **CORS** precisa de configuração **no servidor** (ou proxy de desenvolvimento).
 -   Cria **utilitários** (`getJSON`, `postJSON`, `urlComParams`) para escreveres menos e com menos erros.
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Exercícios renomeados para Mini desafios e revistos para cobrir o ciclo completo de pedidos.
+    -   Changelog adicionado para acompanhar futuras melhorias do capítulo.

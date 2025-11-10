@@ -130,8 +130,12 @@ Usa parênteses sempre que a expressão possa gerar dúvidas.
 
 ---
 
-## 7) Mini desafios
+## 7) Exercícios
 
-1. Qual o resultado de `"7" - 2` e porquê?
-2. Escreve uma função que devolve "par" ou "ímpar" usando o operador `%` e um ternário.
-3. Usa `??=` para preencher propriedades em falta num objeto `config` (`porta`, `host`).
+1. Calcula manualmente e confirma no `console` os resultados de `"7" - 2`, `"5" * 2`, `5 + "2"` e `Number("5") + 2`. Explica a coerção em cada caso.
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Atualização da secção de Exercícios com sete propostas focadas em coerção e operadores lógicos.
+    -   Changelog adicionado para registar futuras evoluções do capítulo.

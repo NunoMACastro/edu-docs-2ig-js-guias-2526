@@ -156,8 +156,17 @@ Isto ajuda a compreender o que `map`/`filter` fazem nos capítulos seguintes.
 
 ---
 
-## 7) Mini desafios
+## 7) Exercícios
 
 1. Escreve um `for` decrescente que conta de 10 até 0 e imprime apenas múltiplos de 2.
-2. Usa `while` para pedir uma palavra até o utilizador digitar "sair".
-3. Percorre um objeto `aluno` e constrói uma string `"nome: Ana | nota: 18"` usando `Object.entries`.
+2. Usa `while` para pedir uma palavra até o utilizador digitar "sair" (ignora maiúsculas/minúsculas com `toLowerCase`).
+3. Cria um programa que peça um numero ao utilizador e mostre a tabuada desse número de 1 a 10 usando `for`. Exemplo: para 3, imprime "3 x 1 = 3", "3 x 2 = 6", etc. Depois faz o mesmo com `while`.
+4. Cria um `do...while` que pede números até receber um valor positivo. Conta quantas tentativas foram necessárias.
+5. Pede um número ao utilizador repetidamente até que ele insira o zero. Enquanto não inserir o zero, calcula e mostra o quadrado de cada número inserido. Quando o zero for inserido, termina o programa.
+6. Simula o lançamento de um dado até sair o valor 6. Usa `while` e conta quantas jogadas foram precisas.
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Secção de Exercícios ampliada para sete propostas cobrindo `for`, `while`, `do...while` e padrões comuns.
+    -   Adicionado changelog para registar futuras alterações do capítulo.

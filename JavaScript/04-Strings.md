@@ -143,8 +143,18 @@ Explica passo a passo aos alunos antes de copiarem; aproveita para falar de rege
 
 ---
 
-## 9) Mini desafios
+## 9) Exercícios
 
-1. Pede uma frase e devolve-a capitalizada (primeira letra de cada palavra em maiúscula).
-2. Pergunta o nome completo e mostra apenas o apelido (usa `lastIndexOf(" ")`).
-3. Conta quantas vezes a letra "a" aparece numa palavra (ignora maiúsculas/minúsculas).
+1. Lê uma frase com `prompt` e devolve-a capitalizada: usa `split`, `map` e `join`. Mostra resultado com `alert`.
+2. Pergunta o nome completo e mostra apenas o apelido usando `lastIndexOf(" ")` + `slice`. Trata casos sem espaços.
+3. Cria `contarLetra(frase, letra)` que usa `toLowerCase` e `split`/`filter` ou `match` para devolver o número de ocorrências.
+4. Imprime uma tabela (`console.table`) com resultado de `includes`, `startsWith`, `endsWith` e `localeCompare` para diferentes palavras. Usa comentários para analisar.
+5. Implementa `mascararEmail("ana@example.com")` → `"a***@example.com"` usando `slice`, `padEnd` ou `repeat`.
+6. Escreve `apenasNumeros(str)` que remove tudo menos dígitos (`replace(/\D+/g, "")`). Usa-a para limpar números de telefone.
+7. Constrói um slug simples a partir de títulos inseridos pelo utilizador e mostra-o numa frase do género `"URL: /artigos/${slug}"`.
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Nova secção de Exercícios com sete propostas focadas em manipulação de strings.
+    -   Adicionada secção de changelog para acompanhar futuras revisões.

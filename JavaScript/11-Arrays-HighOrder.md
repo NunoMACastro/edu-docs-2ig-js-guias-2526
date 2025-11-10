@@ -133,3 +133,11 @@ Quando a cadeia crescer demasiado, guarda resultados intermédios em variáveis 
 3. Usa `reduce` para construir um objeto `{ aprovados: X, reprovados: Y }`.
 4. Usa `find` para descobrir o primeiro produto com `stock === 0`.
 5. Transforma uma lista de palavras num objeto `{ primeiraLetra: [palavras...] }` usando `reduce`.
+6. Implementa `groupBy(arr, keyFn)` que devolve um objeto com chaves calculadas dinamicamente (usa `reduce`).
+7. Cria um pipeline que filtra produtos ativos, ordena por preço (com `toSorted`) e devolve apenas os nomes em maiúsculas.
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Mini desafios reforçados com duas novas propostas (`groupBy` e pipeline encadeado).
+    -   Nova secção de changelog para documentar revisões futuras.

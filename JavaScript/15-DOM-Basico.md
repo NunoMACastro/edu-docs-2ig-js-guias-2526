@@ -272,14 +272,15 @@ lista.addEventListener("click", (e) => {
 
 ---
 
-## 11) Exercícios (crescentes)
+## 11) Mini desafios
 
-1. **Selecionar & alterar**: muda o texto de um `<h1>` para “Bem‑vindo/a!”.
-2. **Criar itens**: a partir de um array `["Ana","Bruno","Carla"]`, cria `<li>` e injeta numa `<ul>`.
-3. **Classes**: ao clicar num botão “Alternar tema”, faz `document.body.classList.toggle("escuro")`.
-4. **Form**: lê um formulário com `FormData` e mostra os pares chave/valor com `console.table`.
-5. **Delegação**: cria uma lista onde cada `<li>` tem um botão “remover”. Usa um único `addEventListener` no `<ul>`.
-6. **Filtro**: ao escrever num input, mostra só os `<li>` que contêm esse texto (case‑insensitive).
+1. **Selecionar & alterar** — muda o texto de um `<h1>` para “Bem‑vindo/a!” e adiciona uma classe `destacado`.
+2. **Criar itens** — a partir de um array `["Ana","Bruno","Carla"]`, cria `<li>` e injeta numa `<ul>` usando `DocumentFragment`.
+3. **Tema escuro** — ao clicar num botão “Alternar tema”, faz `document.body.classList.toggle("escuro")` e altera o texto do botão para “Tema claro”/“Tema escuro”.
+4. **Form + validação** — lê um formulário com `FormData`, verifica campos vazios e mostra mensagens diferentes num `<p>` usando `textContent`.
+5. **Delegação** — cria uma lista onde cada `<li>` tem um botão “remover”. Usa um único `addEventListener` no `<ul>` e remove o item correto com `closest`.
+6. **Filtro** — ao escrever num input, mostra só os `<li>` que contêm esse texto (case‑insensitive) e destaca o termo encontrado com uma classe.
+7. **Contador com `setInterval`** — cria um botão “Iniciar contador” que adiciona `<li>` numerados a cada segundo até clicar em “Parar”. Limpa o intervalo corretamente.
 
 ---
 
@@ -291,3 +292,9 @@ lista.addEventListener("click", (e) => {
 -   Reage a eventos com **`addEventListener`** e usa **delegação** para listas grandes.
 -   Em formulários, usa **`FormData`** e **`preventDefault`** para controlar o envio.
 -   Lembra‑te de **segurança** (`textContent`) e **acessibilidade** (labels).
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Exercícios promovidos a Mini desafios e expandidos para sete cenários de manipulação do DOM.
+    -   Adicionada secção de changelog para acompanhar evoluções do capítulo.

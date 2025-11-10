@@ -265,7 +265,7 @@ console.timeEnd('render');
 
 ---
 
-## 9) Exercícios (crescentes)
+## 9) Mini desafios
 
 1. **URLSearchParams**: cria `getQuery(nome)` que devolve o valor de um parâmetro. Testa com `?q=js&page=2`.
 2. **Build URL**: escreve `urlComParams('/api/alunos', { page:1, q:'ana' })`. Confere no DevTools.
@@ -285,3 +285,9 @@ console.timeEnd('render');
 -   **Intl** dá **formatação correta** para números/datas/texto em `pt-PT`.
 -   **A11y** e **Segurança**: pequenas regras que evitam grandes problemas.
 -   **Performance**: agrupa alterações, limita eventos rápidos, mede resultados.
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Secção final convertida em Mini desafios com foco em APIs modernas do browser.
+    -   Adicionado changelog para manter histórico de alterações.

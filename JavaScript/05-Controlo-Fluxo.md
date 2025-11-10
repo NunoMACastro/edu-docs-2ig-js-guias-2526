@@ -118,15 +118,26 @@ if ((maior && escolaAberta) || (temAut && acompanhado)) {
 
 ```js
 const nota = 18;
-const conceito = nota >= 18 ? "Excelente" : nota >= 10 ? "Aprovado" : "Reprovado";
+const conceito =
+    nota >= 18 ? "Excelente" : nota >= 10 ? "Aprovado" : "Reprovado";
 ```
 
 Dica: se o ternário tiver de fazer duas ou mais instruções, volta ao `if/else`. Vários ternários alinhados funcionam, mas usa quebras de linha para manter a leitura.
 
 ---
 
-## 7) Mini desafios
+## 7) Exercícios
 
-1. Reescreve um bloco `if` com três níveis de indentação usando guard clauses.
-2. Usa `switch` para mostrar o nome do mês a partir de um número (1–12).
-3. Pergunta duas notas, calcula a média e classifica com ternário.
+1. Constrói um programa que lê a média de um aluno e imprime "Excelente", "Aprovado" ou "Reprovado" usando `if/else if/else`. Depois reescreve com ternário.
+2. Cria um `switch` que recebe o número do mês e devolve a estação do ano. Mostra exemplo com dois meses diferentes.
+3. Pede duas notas via `prompt`, valida se são números e usa guard clauses numa função `classificarMedia` para devolver mensagens diferentes.
+4. Implementa um programa que pede a temperatura da água e diz se está congelada, fria, morna, quente ou a ferver usando `if/else if` e depois com `switch(true)`.
+5. Escreve `avaliarFormulario(campos)` que recebe um objeto com `nome`, `idade`, `email` e devolve a primeira mensagem de erro usando guard clauses.
+6. Cria um `switch(true)` que classifica temperaturas: `<0`, `0-15`, `16-25`, `>25`. Relata resultados com `console.log`.
+7. Simula um menu textual (`prompt`) onde o utilizador escolhe `1` para consultar saldo, `2` para depositar, `3` para sair. Usa `switch` e repete até escolher sair.
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Exercícios reformulados com sete propostas progressivas sobre decisões e guard clauses.
+    -   Changelog introduzido para documentar atualizações no capítulo.

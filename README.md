@@ -1,85 +1,82 @@
-# Guias de JavaScript — 11.º IG
+# Guias JavaScript — Versão Didática (11.º ano)
 
-Este repositório reúne **apontamentos práticos** para as aulas de Programação (JavaScript). São guias de **consulta rápida** com teoria sucinta e exemplos curtos, pensados para acompanhar a prática.
-
----
-
-## Como usar
-1. **Lê o capítulo em Markdown** diretamente no GitHub para rever a teoria.
-2. **Experimenta o código** no DevTools do browser (Consola) ou em Node.js.
-3. Mantém estes guias abertos enquanto praticas: são o teu **apoio de secretária**.
-
-> Dica: começa pelo **Básico** e avança para o **Intermédio** quando te sentires confiante.
+Este repositório junta os apontamentos usados nas aulas de Programação para o 11.º IG. Cada capítulo foi revisto para usar **linguagem simples**, muitos exemplos e mini desafios ao estilo das versões 13‑17, garantindo uma linha orientadora única.
 
 ---
 
-## Conteúdos
+## Estrutura
 
-### 01_Guia_js_Basico.md
-Guia de **introdução ao JavaScript**. Cobre, de forma direta:
+| Pasta/ficheiro | Conteúdo                                                                                 |
+| -------------- | ---------------------------------------------------------------------------------------- |
+| `JavaScript/`  | 17 capítulos em Markdown cobrindo o percurso completo: fundamentos → browser/intermédio. |
+| `React/`       | Materiais introdutórios de React (em evolução).                                          |
 
-- Variáveis (`let`, `const`) e tipos primitivos
-- Operadores e regras de truthy/falsy
-- Strings e *template literals*
-- Estruturas de controlo (`if`, `switch`) e repetição (`for`, `while`, `for...of`)
-- Arrays e métodos essenciais (`map`, `filter`, `reduce`, …)
-- Objetos e noções de `this`
-- Exceções (`try/catch/throw`)
-- Funções (declaração, expressão, arrow, parâmetros, closures)
-
-**Capítulos (Básico):**
-- [01 — Variáveis, Tipos e Conceitos](./guias-js-md/01-Variaveis-Tipos.md)
-- [02 — Input/Output Básico](./guias-js-md/02-IO-Basico.md)
-- [03 — Operadores Essenciais](./guias-js-md/03-Operadores.md)
-- [04 — Strings](./guias-js-md/04-Strings.md)
-- [05 — Estruturas de Controlo](./guias-js-md/05-Controlo-Fluxo.md)
-- [06 — Estruturas de Repetição](./guias-js-md/06-Ciclos.md)
-- [07 — Arrays](./guias-js-md/07-Arrays.md)
-- [08 — Funções de Alto Nível em Arrays](./guias-js-md/08-Arrays-HighOrder.md)
-- [09 — Objetos e noção de `this`](./guias-js-md/09-Objetos-e-this.md)
-- [10 — Exceções](./guias-js-md/10-Excecoes.md)
-- [11 — Funções](./guias-js-md/11-Funcoes.md)
+> Todos os capítulos de JavaScript seguem o mesmo formato: título, objetivo, secções numeradas, exemplos comentados e desafios no fim.
 
 ---
 
-### 02_Guia_js_Intermedio.md
-Guia **intermédio** para quem já domina o básico. Inclui:
+## JavaScript — Capítulos
 
-- **ES Modules** (`import/export`, top‑level `await`)
-- **Classes/OOP** modernas (`constructor`, `get/set`, `#privado`, `static`, herança)
-- **Assíncrono** (Promises, `async/await`, microtasks vs tasks)
-- **DOM** (seletores, criação/injeção, classes, eventos, delegação, formulários)
-- **Fetch/AJAX** (GET/POST JSON, erros, `AbortController`/timeout, upload com `FormData`)
-- Extras úteis no browser: `URLSearchParams`, History API, `IntersectionObserver`, `Intl`, notas rápidas de A11y/Segurança/Performance
+### Fundamentos (01‑12)
 
-**Capítulos (Intermédio):**
-- [12 — Módulos ES](./guias-js-md/12-Modulos-ES.md)
-- [13 — Classes e OOP Moderno](./guias-js-md/13-POO-Classes.md)
-- [14 — Assíncrono e Event Loop](./guias-js-md/14-Assincrono-EventLoop.md)
-- [15 — DOM Básico](./guias-js-md/15-DOM-Basico.md)
-- [16 — Fetch / AJAX](./guias-js-md/16-Fetch-AJAX.md)
-- [17 — Outros Tópicos Úteis](./guias-js-md/17-Outros-Topicos.md)
+1. [01 — Variáveis e Tipos](JavaScript/01-Variaveis-Tipos.md)
+2. [02 — Input/Output Básico](JavaScript/02-IO-Basico.md)
+3. [03 — Operadores Essenciais](JavaScript/03-Operadores.md)
+4. [04 — Strings](JavaScript/04-Strings.md)
+5. [05 — Estruturas de Controlo](JavaScript/05-Controlo-Fluxo.md)
+6. [06 — Ciclos](JavaScript/06-Ciclos.md)
+7. [07 — Arrays](JavaScript/07-Arrays.md)
+8. [08 — Objetos e `this`](JavaScript/08-Objetos-e-this.md)
+9. [09 — Exceções](JavaScript/09-Excecoes.md)
+10. [10 — Funções](JavaScript/10-Funcoes.md)
+11. [11 — Funções de Alto Nível em Arrays](JavaScript/11-Arrays-HighOrder.md)
+12. [12 — Módulos ES](JavaScript/12-Modulos-ES.md)
 
----
+### Intermédio / Browser (13‑17)
 
-## Sugestão de estudo
-- **Sessão 1–2**: Capítulos 01–06 (fundamentos, fluxo e ciclos).
-- **Sessão 3**: Capítulos 07–09 (arrays e objetos).
-- **Sessão 4**: Capítulos 10–11 (exceções e funções/closures).
-- **Sessão 5–6**: Capítulos 12–17 (módulos, OOP, assíncrono e browser).
+13. [13 — Classes e OOP](JavaScript/13-POO-Classes.md)
+14. [14 — Assíncrono e Event Loop](JavaScript/14-Assincrono-EventLoop.md)
+15. [15 — DOM Básico](JavaScript/15-DOM-Basico.md)
+16. [16 — Fetch / AJAX](JavaScript/16-Fetch-AJAX.md)
+17. [17 — Outros Tópicos Úteis](JavaScript/17-Outros-Topicos.md)
 
----
-
-## Como correr exemplos (opcional)
-- **Node.js** (terminal): `node ficheiro.js`
-- **Browser**: abre os DevTools → separador **Console** e cola os snippets.
+Cada ficheiro tem exemplos prontos a colar no DevTools/Node e termina com desafios curtos para garantir prática imediata.
 
 ---
 
-## Notas
-- Os guias focam **JS moderno (ES6+)**.
-- Alguns tópicos são **resumos operacionais**; para estudo aprofundado, consulta a MDN.
+## Como estudar
+
+1. **Percurso recomendado**
+    - Sessão 1: capítulos 01‑04 (variáveis, operadores, strings)
+    - Sessão 2: 05‑07 (controlo, ciclos, arrays)
+    - Sessão 3: 08‑10 (objetos, exceções, funções)
+    - Sessão 4: 11‑12 (HOFs e módulos)
+    - Sessões 5‑6: 13‑17 (OOP, async, DOM, Fetch, extras)
+2. **Método**
+    - Lê o capítulo rapidamente.
+    - Executa os snippets na consola do browser ou em Node (`node ficheiro.js`).
+    - Resolve os desafios antes de avançar.
 
 ---
 
-Boa prática e bons projetos!
+## Ambiente sugerido
+
+-   **Browser (DevTools → Console)** para testar snippets de forma rápida ou usar JSFiddle / JS Playground.
+-   **Node.js** para scripts standalone: `node exemplo.js`.
+-   Usa `"use strict"` ou `<script type="module">` para manter o comportamento moderno.
+
+---
+
+## React
+
+A pasta `React/` contém guias de introdução à framework (setup, componentes, estado). Estes materiais seguem a mesma filosofia: capítulos em Markdown focados em exemplos e desafios.
+
+---
+
+## Próximos passos
+
+-   Mantém os ficheiros abertos enquanto praticas (são notas de secretária).
+-   Sugere melhorias via pull request ou deixa comentários no classroom.
+-   Consulta a documentação oficial (MDN) para aprofundar tópicos específicos.
+
+Bons estudos e bom código!

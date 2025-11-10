@@ -238,24 +238,15 @@ Imagina que tens uma fila de pessoas (callbacks) à espera de serem atendidas. O
 
 ---
 
-## 9) Mini‑projetos para praticar
+## 9) Mini desafios
 
-1. **Loading simpático**
-
-    - Mostra “A carregar…”, faz `getJSON` a um URL (podes usar um JSON local), substitui pelo resultado ou por “Tenta mais tarde” em `catch`.
-
-2. **Três pedidos em paralelo**
-
-    - Cria `getJSON` para `/alunos`, `/professores`, `/turmas` (simulados com ficheiros). Usa `Promise.all` e faz um `console.table` com contagens.
-
-3. **Relógio com `setInterval`**
-
-    - Mostra horas:min:seg num `<span>`. Para ao clicar num botão “Parar”.
-
-4. **Ordem dos logs**
-    - Copia o snippet de `A/D/C/B`, corre no DevTools e escreve 3 frases a explicar o porquê da ordem.
-
----
+1. **Loading simpático** — Mostra “A carregar…”, faz `getJSON` a um URL (podes usar um JSON local), substitui pelo resultado ou por “Tenta mais tarde” em `catch`.
+2. **Três pedidos em paralelo** — Cria `getJSON` para `/alunos`, `/professores`, `/turmas` (simulados). Usa `Promise.all` e mostra contagens no `console`.
+3. **Relógio com `setInterval`** — Mostra horas:min:seg num `<span>`. Para ao clicar num botão “Parar”.
+4. **Ordem dos logs** — Copia o snippet de `A/D/C/B`, corre no DevTools e explica a ordem em 3 frases.
+5. **Retry com limite** — Implementa `fetchComRetry(url, tentativas)` que volta a tentar com `await` e `setTimeout` entre tentativas. Loga cada tentativa.
+6. **Timeout com AbortController** — Cria um formulário de pesquisa que faz `fetch`. Se a resposta demorar mais de 2s, aborta e mostra mensagem.
+7. **Fila de tarefas** — Usa `setTimeout`, `Promise.resolve().then(...)` e `console.log` para demonstrar a ordem real (Call Stack → microtarefas → tarefas). Documenta o resultado.
 
 ## 10) Dicionário rápido
 
@@ -275,3 +266,9 @@ Imagina que tens uma fila de pessoas (callbacks) à espera de serem atendidas. O
 -   **Promises** e **`async/await`** tornam fácil trabalhar com resultados que **chegam depois**.
 -   O **Event Loop** dá **prioridade** às **Promises** (microtarefas) antes dos **timeouts/cliques** (tarefas).
 -   Pensa se queres fazer **em paralelo** (`Promise.all`) para não perder tempo.
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Mini desafios atualizados (agora com sete propostas). Inclui exercícios de retry, timeout e ordem de execução.
+    -   Changelog introduzido para acompanhar evoluções futuras do capítulo.

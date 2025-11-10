@@ -6,6 +6,7 @@
 
 ## 0) O que é um objeto?
 
+-   É o mesmo que um dicionário, mapa ou tabela hash noutras linguagens.
 -   Coleção dinâmica de pares `chave: valor`.
 -   Chaves são sempre **strings** ou `Symbol` (até números são convertidos para string).
 -   Se leres uma chave inexistente, recebes `undefined`.
@@ -17,6 +18,27 @@ aluno.nome; // "Ana"
 aluno["idade"]; // 17
 aluno.altura; // undefined
 ```
+
+### O que é o `this`?
+
+-   Palavra-chave especial que aparece em métodos de objetos.
+-   Aponta para o objeto usado na chamada do método.
+-   Ou seja, o this representa "o objeto atual" que está a usar o método ou a aceder à propriedade.
+-   Imagina uma planta de uma casa. Imagina agora que várias casas estão a ser construídas, ao mesmo tempo, com a mesma planta. O `this` é como se fosse a "casa atual" que está a ser construída, permitindo que cada casa use a planta para construir-se corretamente, sem confundir-se com as outras casas.
+
+```js
+const casa = {
+    quartos: 3,
+    area: 120,
+    descricao() {
+        return `Casa com ${this.quartos} quartos e ${this.area} m²`;
+    },
+};
+
+console.log(casa.descricao()); // "Casa com 3 quartos e 120 m²"
+```
+
+Neste exemplo, o `this` dentro do método `descricao` refere-se ao objeto `casa`, permitindo aceder às suas propriedades `quartos` e `area`.
 
 ---
 
@@ -31,6 +53,8 @@ const escola = {
     ativa: true,
 };
 ```
+
+Um objeto pode conter outros objetos, arrays, funções (métodos), etc.
 
 ### Chaves calculadas
 
@@ -160,8 +184,16 @@ JSON usa aspas duplas e não aceita comentários.
 
 ---
 
-## 7) Mini desafios
+## 7) Exercícios
 
-1. Cria um objeto `aluno` com `nome`, `idade`, `nota`. Atualiza a nota usando `aluno.nota = ...` e mostra todas as propriedades com `Object.entries`.
-2. Escreve uma função `clonaAluno(aluno)` que devolve uma cópia onde podes atualizar `aluno.endereco.cidade` sem mexer no original.
-3. Implementa uma função `contaPropriedades(obj)` que devolve quantas chaves próprias o objeto tem (ignora as herdadas).
+1. Cria um objeto `aluno` com `nome`, `idade`, `nota`. Atualiza a nota usando `aluno.nota = ...`.
+2. Cria um objeto `conta` com métodos `depositar` e `levantar`. Usa `this` corretamente e mostra erros quando o levantamento é maior que o saldo.
+3. Usa `Object.freeze` para proteger uma configuração e demonstra, em modo estrito, que reatribuir campos lança erro (ou falha silenciosamente fora dele).
+4. Constrói uma função `mergeConfig(...fontes)` que usa `Object.assign` ou `spread` para criar um objeto final com defaults + overrides.
+5. Converte um array de pares `[["id", 1], ["nome", "Ana"]]` em objeto usando `Object.fromEntries` (ou recria com `for...of`).
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Secção de Exercícios ampliada com sete atividades sobre criação, cópia, `this` e utilitários `Object.*`.
+    -   Changelog incluído para registar evoluções do capítulo.

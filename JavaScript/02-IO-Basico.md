@@ -101,8 +101,18 @@ rl.close();
 
 ---
 
-## 5) Mini desafios
+## 5) Exercícios
 
-1. Pergunta dois números com `prompt`, converte-os e mostra a soma com `alert`.
-2. Pergunta o nome e pergunta com `confirm` se quer receber notificações. Mostra uma frase diferente para cada resposta.
-3. Em Node, pede a idade com `readline` e classifica como "menor" ou "maior".
+1. Cria um pequeno script de browser que pergunta o primeiro e o último nome com `prompt` e mostra `alert("Olá, ...")` apenas se ambos não forem `null` nem vazios.
+2. Lê dois números com `prompt`, converte-os com `Number` e mostra a média com duas casas decimais (usa `toFixed`). Trata entradas inválidas com `alert`.
+3. Usa `confirm` para perguntar se o aluno quer receber notificações. Dependendo do resultado, escreve mensagens distintas no `console` e num `alert`.
+4. Constrói um mini menu em Node usando `readline` que pergunta “1) Somar 2) Dobrar”. Dependendo da resposta, pede outro valor e mostra o resultado antes de fechar a interface.
+5. Adiciona um exemplo com `console.table` para mostrar uma lista de alunos lida de um `prompt` (separados por vírgulas). Divide com `split` e mostra nome e comprimento.
+6. Em Node, usa `readline/promises` para perguntar email e senha, valida se a senha tem pelo menos 6 caracteres e mostra mensagens diferentes mantendo o terminal aberto até validares.
+7. Cria um snippet que lê um número e mostra no `console` o dobro, triplo e quadrado usando `console.group` para organizar as saídas.
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Acrescentados sete exercícios cobrindo browser e Node para treinar I/O.
+    -   Passa a existir secção de changelog para acompanhar futuras revisões.

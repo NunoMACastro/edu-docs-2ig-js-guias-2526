@@ -150,6 +150,16 @@ function fatorial(n) {
 }
 ```
 
+Contar vogais numa palavra:
+
+````js
+function contarVogais(palavra) {
+    if (palavra.length === 0) return 0;
+    const primeira = palavra[0].toLowerCase();
+    const resto = palavra.slice(1);
+    const ehVogal = "aeiou".includes(primeira) ? 1 : 0;
+    return ehVogal + contarVogais(resto);
+
 ---
 
 ## 6) Funções puras vs impuras
@@ -164,7 +174,7 @@ let total = 0;
 function adicionar(n) {
     total += n; // impura (depende de total)
 }
-```
+````
 
 Prefere funções puras sempre que possível: mais fáceis de testar e repetir.
 
@@ -187,8 +197,38 @@ Arrow functions capturam o `this` exterior, portanto são ótimas para callbacks
 
 ---
 
+## 9) Funções de Callback
+
+Funções que são passadas como argumentos para outras funções.
+
+Por exemplo, fazer uma função que recebe uma operação matemática como callback permite flexibilidade para executar diferentes cálculos sem alterar a função principal.
+
+```js
+function calcular(a, b, operacao) {
+    return operacao(a, b);
+}
+const soma = (x, y) => x + y;
+const produto = (x, y) => x * y;
+console.log(calcular(4, 2, soma)); // 6
+console.log(calcular(4, 2, produto)); // 8
+```
+
 ## 8) Mini desafios
 
-1. Escreve `criarTabuada(numero)` que devolve uma função. Essa função, quando chamada com `ate`, imprime a tabuada até esse limite.
-2. Implementa `memoizar(fn)` simples: guarda o último resultado (`entrada → saída`) numa variável e volta a usá-lo.
-3. Converte um conjunto de `function ...` tradicionais para arrow quando não precisarem de `this`.
+1. Escreve uma função `saudacao(nome, hora)` que devolve uma saudação diferente consoante a hora do dia (manhã, tarde, noite). Usa valores por defeito para `hora` (hora atual).
+2. Cria uma função `contador(inicio)`que faz uma contagem decrescente desde o argumento `inicio` até 0, imprimindo cada número.
+3. Cria uma função que recebe um array de números e diz quantos são pares e quantos são ímpares. Usa `for...of`.
+4. Cria uma função que recebe um nome, uma idade e peso e devolve true se a pessoa poder doar sangue (idade entre 18 e 65 e peso ≥ 50kg) e false caso contrário.
+5. Cria uma arrow `function` que recebe um array de strings e devolve um novo array com todas as strings em maiúsculas.
+6. Cria uma função que recebe 2 números e um callback `operacao`. A função deve aplicar a operação aos dois números e devolver o resultado. Testa com operações de soma, subtração, multiplicação e divisão.
+7. Cria uma função recursiva `contarVogais(palavra)` que conta o número de vogais numa palavra.
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Mini desafios ampliados com mais quatro propostas sobre closures e composição de funções.
+    -   Changelog adicionado para acompanhar futuras melhorias do capítulo.
+
+```
+
+```

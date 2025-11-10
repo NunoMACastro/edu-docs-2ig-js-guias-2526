@@ -140,8 +140,18 @@ a === c; // true
 
 ---
 
-## 7) Mini desafios
+## 7) Exercícios
 
-1. Declara duas variáveis: `const escola = "EPMS"; let ano = 11;`. Atualiza o ano e imprime uma frase que combine ambos.
-2. Pede um número ao utilizador (`prompt`) e mostra o triplo apenas se o valor for realmente numérico.
-3. Cria uma função `ehVazio(v)` que devolve `true` apenas para `null` e `undefined`. Usa `===` e mostra no `console` o resultado para vários valores.
+1. Cria `const escola = "EPMS"; let ano = 11;` e escreve no `console` uma frase como `"Estou no 11.º ano na EPMS"`. Atualiza `ano` para `12` e mostra a nova mensagem.
+2. Usa `prompt` para ler a idade. Converte com `Number`, valida com `Number.isNaN` e escreve `"Maior"` ou `"Menor"` usando `const`/`let` adequados.
+3. Declara três variáveis num bloco `{ ... }`, duas com `const` e uma com `let`. Mostra como o `shadowing` funciona declarando outra variável com o mesmo nome dentro de um bloco interno.
+4. Implementa `function ehVazio(v)` que devolve `true` apenas para `null` e `undefined`. Testa a função com valores truthy/falsy e regista os resultados.
+5. Escreve uma pequena tabela no `console` onde comparas `==` vs `===` para os pares `""/0`, `"0"/0`, `false/0` e `null/undefined`. Explica em comentários cada resultado.
+6. Cria um array com valores mistos (`[0, "0", null, undefined, []]`). Percorre-o com `for...of` e, para cada elemento, mostra `typeof`, se é truthy e a conversão explícita para `Number`.
+7. Desenvolve uma função `converteParaNumero(texto)` que devolve um número válido ou `null`. Usa-a para converter entradas de `prompt` e mostrar mensagens claras ao utilizador.
+
+## Changelog
+
+-   **v1.1.0 — 2025-11-10**
+    -   Secção de Exercícios expandida para sete propostas práticas.
+    -   Adicionada a primeira entrada de changelog para registar futuras alterações.
