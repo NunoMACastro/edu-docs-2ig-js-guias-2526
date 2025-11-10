@@ -182,18 +182,7 @@ for (const n of nums) soma += n;
 const media = soma / nums.length;
 ```
 
-### 6.2 Mínimo/Máximo
-
-```js
-let min = +Infinity,
-    max = -Infinity;
-for (const n of nums) {
-    if (n < min) min = n;
-    if (n > max) max = n;
-}
-```
-
-### 6.3 Procurar o primeiro que cumpre a condição
+### 6.2 Procurar o primeiro que cumpre a condição
 
 ```js
 let encontrado;
@@ -205,7 +194,7 @@ for (const n of nums) {
 }
 ```
 
-### 6.4 Construir novo array (filtrar/mapear manualmente)
+### 6.3 Construir novo array (filtrar/mapear manualmente)
 
 ```js
 const orig = [1, 2, 3, 4, 5];
@@ -214,6 +203,27 @@ const dobrados = [];
 for (const n of orig) {
     if (n % 2 === 0) pares.push(n);
     dobrados.push(n * 2);
+}
+```
+
+### 6.4 Calcular o maximo e minimo de um array
+
+```js
+let arr = [5, 3, 8, 1, 4];
+let max = arr[0];
+let min = arr[0];
+for (const n of arr) {
+    if (n > max) max = n;
+    if (n < min) min = n;
+}
+// Ou usando um for tradicional para evitar comparar o primeiro elemento duas vezes
+
+let max2 = arr[0];
+let min2 = arr[0];
+for (let i = 1; i < arr.length; i++) {
+    const n = arr[i];
+    if (n > max2) max2 = n;
+    if (n < min2) min2 = n;
 }
 ```
 
