@@ -136,6 +136,29 @@ const copia = [...original]; // [5,6,7]
 
 ---
 
+## 8) Percorrer arrays
+
+-   Para percorrer arrays, usa `for`, `for...of` ou métodos como `forEach`, `map`, `filter`. Estes últimos serão abordados em detalhe no capítulo 11-Arrays-HighOrder.md.
+
+-   Com o `for...of`:
+
+```js
+const frutas = ["maçã", "banana", "cereja"];
+for (const fruta of frutas) {
+    console.log(fruta);
+}
+```
+
+-   Com o `for` tradicional:
+
+```js
+for (let i = 0; i < frutas.length; i++) {
+    console.log(frutas[i]);
+}
+```
+
+> Com o `for...of` não podemos alterar diretamente os elementos do array original. Se precisares de modificar os valores, usa o `for` tradicional ou métodos como `map`.
+
 ## 7) Boas práticas
 
 -   Não uses `for...in` em arrays (pode trazer propriedades inesperadas). Prefere `for`, `for...of` ou métodos de array.
