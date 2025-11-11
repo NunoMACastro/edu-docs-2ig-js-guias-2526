@@ -171,6 +171,9 @@ for (let i = 0; i < frutas.length; i++) {
 ## 9) Exercícios
 
 1. Cria um array com três disciplinas favoritas e usa `console.log` para mostrar o primeiro elemento, o último (`length - 1`) e o tamanho total.
+
+-   ESTÁ ATENTO MIGUEL!! LARGA O TELEMOVEL!
+
 2. Simula uma fila com `const fila = ["Ana", "Bruno"];`: usa `push`, `unshift`, `pop` e `shift` para adicionar e remover pessoas e, no fim, mostra como ficou a lista e o seu `length`.
 3. Parte de `["11º", "Turma", "A"]` e usa `splice` para inserir `"EPMS"` logo após `"11º"`.
 4. Copia `[10, 20, 30, 40]` usando `slice()` ou o operador `...` (spread), altera apenas a cópia (por exemplo, removendo o último elemento) e comprova que o array original se manteve igual.
