@@ -68,7 +68,7 @@ notas.sort((a, b) => a - b); // [5,12,18]
 ```js
 const base = [3, 1, 2];
 const ordenado = base.slice().sort((a, b) => a - b); // base intacto
-const comExtra = [...base, 4];
+const comExtra = [...base, 4]; // [3,1,2,4]
 ```
 
 Se `toSorted` ainda não existir no ambiente dos alunos, explica como usar `slice()` antes de `sort()` para criar uma cópia.
@@ -108,13 +108,31 @@ Vamos aprofundar isto no capítulo `[8] Funções de Alto Nível`. Usa estes mé
 
 ## 6) Desestruturação, `rest` e `spread`
 
+Desestruturação: É o acto de "desmontar" um array em variáveis individuais.
+`rest`: Permite agrupar o restante dos elementos num novo array.
+`spread`: Permite "espalhar" os elementos de um array dentro de outro array ou função.
+
 ```js
 const [primeiro, segundo, ...resto] = [10, 20, 30, 40];
 // primeiro=10, segundo=20, resto=[30,40]
 const combinado = [0, ...resto, 50]; // [0,30,40,50]
+// Os ... fazem uma cópia do resto do array e colocam os seus elementos individualmente no novo array.
 ```
 
 Desestruturação permite extrair valores por posição com sintaxe concisa.
+
+-   Exemplo de spread:
+
+```js
+const arr1 = [1, 2];
+const arr2 = [3, 4];
+const combinado = [...arr1, ...arr2]; // [1,2,3,4]
+
+// Fazer cópias rápidas:
+const original = [5, 6, 7];
+const copia = [...original]; // [5,6,7]
+// Assim a copia é independente do original. Se alterarmos uma das cópias, a outra não muda.
+```
 
 ---
 
@@ -129,17 +147,32 @@ Desestruturação permite extrair valores por posição com sintaxe concisa.
 
 ## 8) Exercícios
 
-1. Cria uma função `adicionarAluno(lista, nome)` que devolve **novo** array com o nome no fim (não muta).
-2. Usa `splice` para inserir "EPMS" na posição 2 de `["11º", "Turma", "A"]` e explica o resultado passo a passo.
-3. A partir de `[5, 8, 12, 3]`, devolve um array com os números pares multiplicados por 10 (podes usar `for` ou já experimentar `filter` + `map`).
-4. Escreve um programa que pede 10 números ao utilizador, guarda‑os num array e depois mostra o maior e o menor valor inseridos.
-5. Ainda no array de números do exercício anterior, cria uma cópia ordenada sem alterar o original e mostra ambos.
-6. Ainda no array de números, verifica se todos são positivos e se algum é maior que 100.
-7. Usa `includes`, `indexOf` e `find` para procurar o aluno `"Ana"` numa lista de objetos `{ nome, nota }`. Comenta as diferenças.
-8. Desestrutura `["João", "Maria", "Ana", "Rui"]` para extrair o primeiro, o último e ficar com um array `resto` para o meio. Usa `spread` para construir um novo array `novoGrupo` começando por `"Prof."`.
+1. Cria um array com três disciplinas favoritas e usa `console.log` para mostrar o primeiro elemento, o último (`length - 1`) e o tamanho total.
+2. Simula uma fila com `const fila = ["Ana", "Bruno"];`: usa `push`, `unshift`, `pop` e `shift` para adicionar e remover pessoas e, no fim, mostra como ficou a lista e o seu `length`.
+3. Parte de `["11º", "Turma", "A"]` e usa `splice` para inserir `"EPMS"` logo após `"11º"`.
+4. Copia `[10, 20, 30, 40]` usando `slice()` ou o operador `...` (spread), altera apenas a cópia (por exemplo, removendo o último elemento) e comprova que o array original se manteve igual.
+5. Dado `[5, 8, 12, 3, 9, 14]`, percorre os valores com um `for` e constrói manualmente um novo array apenas com os números pares multiplicados por 10. Não recorras a `map`/`filter` ainda.
+6. Pede 6 números ao utilizador (por exemplo, com `prompt` num ambiente de browser), guarda-os num array e no final mostra o maior e o menor valor encontrados.
+7. Com `const alunos = ["Ana", "Bruno", "Carla", "Ana"];`, usa `includes`, `indexOf` e `lastIndexOf` para responder: a) se "Ana" existe, b) em que posição aparece primeiro e c) em que posição aparece pela última vez.
+8. Cria um array com 10 números aleatórios entre -100 e 100. Depois diz quantos são positivos, quantos são negativos e quantos são zeros.
+   (Para gerar números aleatórios, podes usar `Math.floor(Math.random() * 201) - 100`.)
+
+Exemplo de gerar 1 número aleatório entre -100 e 100:
+
+```js
+const num = Math.floor(Math.random() * 201) - 100;
+console.log(num);
+```
+
+-   O Math.random() gera um número decimal entre 0 (inclusivo) e 1 (exclusivo).
+-   Multiplicamos por 201 para obter um intervalo de 0 a 200,999...
+-   O Math.floor() arredonda para baixo, dando um inteiro entre 0 e 200.
+-   Subtraímos 100 para ajustar o intervalo para -100 a 100.
 
 ## Changelog
 
+-   **v1.1.1 — 2025-11-11**
+    -   Exercícios reorganizados com progressão gradual e sem depender de criação de funções.
 -   **v1.1.0 — 2025-11-10**
     -   Secção de Exercícios expandida para sete desafios sobre mutação, cópia e pesquisa.
     -   Changelog adicionado para manter histórico de alterações do capítulo.

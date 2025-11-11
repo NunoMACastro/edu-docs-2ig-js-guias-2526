@@ -6,6 +6,8 @@
 
 ## 0) Porque usar funções?
 
+> Funções são blocos de código reutilizáveis que executam tarefas específicas e têm um nome. Depois de definidas, podem ser chamadas várias vezes ao longo do programa.
+
 -   Agrupam passos que pertencem juntos.
 -   Podem receber **parâmetros** e devolver **valores**.
 -   Evitam repetir código e facilitam testes.
@@ -195,6 +197,8 @@ const conta = {
 
 Arrow functions capturam o `this` exterior, portanto são ótimas para callbacks onde não queres um `this` novo.
 
+> Para uma definição mais detalhada de `this`, vê o capítulo 08-Objetos-e-this.md
+
 ---
 
 ## 9) Funções de Callback
@@ -212,6 +216,8 @@ const produto = (x, y) => x * y;
 console.log(calcular(4, 2, soma)); // 6
 console.log(calcular(4, 2, produto)); // 8
 ```
+
+-   Normalmente usam-se em funções como `map`, `filter`, `reduce`, ou em operações assíncronas como `setTimeout` ou `fetch`. Ver os capítulos 11-Arrays-HighOrder.md e 14-Assincrono-EventLoop.md para mais detalhes.
 
 ## 8) Mini desafios
 

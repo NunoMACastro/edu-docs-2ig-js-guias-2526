@@ -186,14 +186,30 @@ JSON usa aspas duplas e não aceita comentários.
 
 ## 7) Exercícios
 
-1. Cria um objeto `aluno` com `nome`, `idade`, `nota`. Atualiza a nota usando `aluno.nota = ...`.
-2. Cria um objeto `conta` com métodos `depositar` e `levantar`. Usa `this` corretamente e mostra erros quando o levantamento é maior que o saldo.
-3. Usa `Object.freeze` para proteger uma configuração e demonstra, em modo estrito, que reatribuir campos lança erro (ou falha silenciosamente fora dele).
-4. Constrói uma função `mergeConfig(...fontes)` que usa `Object.assign` ou `spread` para criar um objeto final com defaults + overrides.
-5. Converte um array de pares `[["id", 1], ["nome", "Ana"]]` em objeto usando `Object.fromEntries` (ou recria com `for...of`).
+1. Cria `const aluno = { nome: "Franciscano", curso: "IG", idade: 16 };` e usa `console.log` para mostrar o nome, a idade e o valor de `aluno.cidade` (que deverá dar undefined).
+2. No mesmo objeto `aluno`, adiciona a propriedade `notaFinal` com a sintaxe de ponto, altera `curso` usando `[]` com uma string e remove `idade` com `delete`. Mostra o resultado final.
+3. Declara `const campo = "media";` e cria um objeto `avaliacao` que aproveita `[campo]` para guardar a média do aluno. Acrescenta também uma propriedade `disciplina` e mostra ambas as chaves com `console.log`.
+4. Completa o objeto abaixo preenchendo o método `resumo` para que devolva a string indicada usando `this`:
+    ```js
+    const conta = {
+        titular: "João",
+        saldo: 150,
+        resumo() {
+            // devolve "João tem 150 EUR"
+        },
+    };
+    console.log(conta.resumo());
+    ```
+    Explica porque `this.titular` e `this.saldo` funcionam aqui.
+5. Com `const inventario = { canetas: 12, cadernos: 5, mochilas: 2 };`, percorre as chaves com `for...in` e ignora propriedades herdadas usando `Object.prototype.hasOwnProperty.call`. Mostra cada par `chave → valor` no ecrã.
+6. Copia `const perfil = { nome: "Sara", contactos: { email: "sara@epms.pt" } };` usando `const clone = { ...perfil, contactos: { ...perfil.contactos } };` e altera apenas `clone.contactos.email`. Confirma que `perfil` continua igual e explica o motivo.
+7. Junta `const padrao = { tema: "claro", notificacoes: true };` com `const preferenciaAluno = { notificacoes: false };` através de `const final = { ...padrao, ...preferenciaAluno };` e descreve quais valores foram sobrepostos.
+8. Transforma o array `const pares = [["id", 7], ["nome", "Ana"]];` em objeto com `Object.fromEntries`, converte-o para JSON com `JSON.stringify` e volta ao objeto original com `JSON.parse`. Mostra as três etapas.
 
 ## Changelog
 
+-   **v1.1.1 — 2025-11-11**
+    -   Exercícios reorganizados com progressão suave, evitando funções independentes e focando numa tarefa por conceito.
 -   **v1.1.0 — 2025-11-10**
     -   Secção de Exercícios ampliada com sete atividades sobre criação, cópia, `this` e utilitários `Object.*`.
     -   Changelog incluído para registar evoluções do capítulo.
