@@ -39,17 +39,28 @@ Usa sempre o literal `[]` quando possível — é mais claro.
 
 -   `push` / `pop` → fim.
 -   `unshift` / `shift` → início.
--   `splice(inicio, quantos, ...novos)` → remove/insere em qualquer posição.
--   `sort(compareFn)` → ordena (muta!).
--   `reverse()` → inverte (muta!).
+-   `splice(índice, nRemover, ...itens)` → remove/inserir em qualquer posição. Indice -> onde começar, nRemover -> quantos remover, itens -> o que inserir.
+    Exemplo:
+    ```js
+    const arr = [1, 2, 3];
+    // Adicionar
+    arr.splice(1, 0, 1.5); // [1, 1.5, 2, 3]
+    // Remover
+    arr.splice(2, 1); // [1, 1.5, 3]
+    // Adicionar e remover
+    arr.splice(0, 2, 0); // [0, 3]
+    ```
+-   `sort(compareFn)` → ordena (muta o array!).
+-   `reverse()` → inverte (muta o array!).
 -   `fill(valor, inicio?, fim?)` → preenche intervalo.
 
+-   Exemplos detalhados:
+
 ```js
-const alunos = ["Ana", "Bruno"];
-alunos.push("Carla"); // ["Ana","Bruno","Carla"]
-alunos.splice(1, 1, "Bia"); // ["Ana","Bia","Carla"]
-const notas = [12, 5, 18];
-notas.sort((a, b) => a - b); // [5,12,18]
+const frutas = ["maçã", "banana"];
+frutas.push("cereja"); // ["maçã", "banana", "cereja"]
+frutas.splice(1, 0, "laranja"); // ["maçã", "laranja", "banana", "cereja"]
+frutas.sort(); // ["banana", "cereja", "laranja", "maçã"]
 ```
 
 > Quando ordenares strings com acentos, usa `localeCompare("pt")` na função de comparação.
@@ -172,7 +183,7 @@ for (let i = 0; i < frutas.length; i++) {
 
 1. Cria um array com três disciplinas favoritas e usa `console.log` para mostrar o primeiro elemento, o último (`length - 1`) e o tamanho total.
 2. Simula uma fila com `const fila = ["Ana", "Bruno"];`: usa `push`, `unshift`, `pop` e `shift` para adicionar e remover pessoas e, no fim, mostra como ficou a lista e o seu `length`.
-3. Parte de `["11º", "Turma", "A"]` e usa `splice` para inserir `"EPMS"` logo após `"11º"`.
+3. Cria o array `["11º", "Turma", "A"]` e usa `splice` para inserir `"EPMS"` logo após `"11º"`.
 4. Copia `[10, 20, 30, 40]` usando `slice()` ou o operador `...` (spread), altera apenas a cópia (por exemplo, removendo o último elemento) e comprova que o array original se manteve igual.
 5. Dado `[5, 8, 12, 3, 9, 14]`, percorre os valores com um `for` e constrói manualmente um novo array apenas com os números pares multiplicados por 10. Não recorras a `map`/`filter` ainda.
 6. Pede 6 números ao utilizador (por exemplo, com `prompt` num ambiente de browser), guarda-os num array e no final mostra o maior e o menor valor encontrados.
