@@ -136,7 +136,7 @@ const copia = [...original]; // [5,6,7]
 
 ---
 
-## 8) Percorrer arrays
+## 7) Percorrer arrays
 
 -   Para percorrer arrays, usa `for`, `for...of` ou métodos como `forEach`, `map`, `filter`. Estes últimos serão abordados em detalhe no capítulo 11-Arrays-HighOrder.md.
 
@@ -159,7 +159,7 @@ for (let i = 0; i < frutas.length; i++) {
 
 > Com o `for...of` não podemos alterar diretamente os elementos do array original. Se precisares de modificar os valores, usa o `for` tradicional ou métodos como `map`.
 
-## 7) Boas práticas
+## 8) Boas práticas
 
 -   Não uses `for...in` em arrays (pode trazer propriedades inesperadas). Prefere `for`, `for...of` ou métodos de array.
 -   Nomeia claramente os arrays: `alunos`, `notas`, `carrinho`. Evita nomes genéricos como `arr` em código final.
@@ -168,7 +168,7 @@ for (let i = 0; i < frutas.length; i++) {
 
 ---
 
-## 8) Exercícios
+## 9) Exercícios
 
 1. Cria um array com três disciplinas favoritas e usa `console.log` para mostrar o primeiro elemento, o último (`length - 1`) e o tamanho total.
 2. Simula uma fila com `const fila = ["Ana", "Bruno"];`: usa `push`, `unshift`, `pop` e `shift` para adicionar e remover pessoas e, no fim, mostra como ficou a lista e o seu `length`.
