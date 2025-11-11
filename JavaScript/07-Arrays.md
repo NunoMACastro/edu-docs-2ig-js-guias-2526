@@ -95,7 +95,7 @@ alunos.some((a) => a.nota >= 18); // true
 
 ---
 
-## 5) Transformar (provocação para o capítulo seguinte)
+## 5) Transformar (A dar com mais detalhe no capítulo 11-Arrays-HighOrder.md)
 
 -   `map` → cria novo array transformando cada elemento.
 -   `filter` → mantém apenas os que cumprem uma condição.
