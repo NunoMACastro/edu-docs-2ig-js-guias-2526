@@ -184,21 +184,32 @@ JSON usa aspas duplas e não aceita comentários.
 
 ## 7) Exercícios
 
-1. Cria `const aluno = { nome: "Franciscano", curso: "IG", idade: 16 };` e usa `console.log` para mostrar o nome, a idade.
-2. No mesmo objeto `aluno`, adiciona a propriedade `notaFinal` com a sintaxe de ponto, altera `curso` usando `[]` com uma string e remove `idade` com `delete`. Mostra o resultado final.
-3. Declara `const campo = "media";` e cria um objeto `avaliacao` que aproveita `[campo]` para guardar a média do aluno. Acrescenta também uma propriedade `disciplina` e mostra ambas as chaves com `console.log`.
+1. Cria `const aluno = { nome: "Franciscano", curso: "IG", idade: 16 };` e usa `console.log` para mostrar o nome, a idade e o valor de `aluno.cidade` (que deverá dar undefined).
+
+> Resolução:
+
+```js
+const aluno = { nome: "Franciscano", curso: "IG", idade: 16 };
+console.log(aluno.nome); // Franciscano
+console.log(aluno.idade); // 16
+console.log(aluno.cidade); // undefined
+```
+
+2. No mesmo objeto `aluno`, adiciona a propriedade `notaFinal` com a sintáxe de ponto, altera `curso` usando `[]` com uma string e remove `idade` com `delete`. Mostra o resultado final.
+
+> Resolução:
+
+```js
+aluno.notaFinal = 19;
+aluno["curso"] = "Informática";
+delete aluno.idade;
+console.log(aluno);
+// { nome: 'Franciscano', curso: 'Informática', notaFinal: 19 }
+```
+
+3. Declara `campo = "media";` e cria um objeto `avaliacao` que aproveita `[campo]` para guardar a média do aluno. Acrescenta também uma propriedade `disciplina` e mostra ambas as chaves com `console.log`.
 4. Completa o objeto abaixo preenchendo o método `resumo` para que devolva a string indicada usando `this`:
-    ```js
-    const conta = {
-        titular: "João",
-        saldo: 150,
-        resumo() {
-            // devolve "João tem 150 EUR"
-        },
-    };
-    console.log(conta.resumo());
-    ```
-    Explica porque `this.titular` e `this.saldo` funcionam aqui.
+   Tenta explicar porque `this.titular` e `this.saldo` funcionam aqui.
 5. Com `const inventario = { canetas: 12, cadernos: 5, mochilas: 2 };`, percorre as chaves com `for...in` e ignora propriedades herdadas usando `Object.prototype.hasOwnProperty.call`. Mostra cada par `chave → valor` no ecrã.
 6. Copia `const perfil = { nome: "Sara", contactos: { email: "sara@epms.pt" } };` usando `const clone = { ...perfil, contactos: { ...perfil.contactos } };` e altera apenas `clone.contactos.email`. Confirma que `perfil` continua igual e explica o motivo.
 7. Junta `const padrao = { tema: "claro", notificacoes: true };` com `const preferenciaAluno = { notificacoes: false };` através de `const final = { ...padrao, ...preferenciaAluno };` e descreve quais valores foram sobrepostos.
