@@ -59,8 +59,12 @@ Usa sempre o literal `[]` quando possível — é mais claro.
 ```js
 const frutas = ["maçã", "banana"];
 frutas.push("cereja"); // ["maçã", "banana", "cereja"]
-frutas.splice(1, 0, "laranja"); // ["maçã", "laranja", "banana", "cereja"]
-frutas.sort(); // ["banana", "cereja", "laranja", "maçã"]
+frutas.pop(); // ["maçã", "banana"]
+frutas.shift(); // ["banana"]
+frutas.unshift("maçã"); // ["maçã", "banana"]
+frutas.splice(1, 0, "laranja"); // ["maçã", "laranja", "banana"]
+frutas.sort(); //  ["banana", "laranja", "maçã"]
+frutas.reverse(); // ["maçã", "laranja", "banana"]
 ```
 
 > Quando ordenares strings com acentos, usa `localeCompare("pt")` na função de comparação.
@@ -182,12 +186,97 @@ for (let i = 0; i < frutas.length; i++) {
 ## 9) Exercícios
 
 1. Cria um array com três disciplinas favoritas e usa `console.log` para mostrar o primeiro elemento, o último (`length - 1`) e o tamanho total.
+
+# Resolução:
+
+```js
+const disciplinas = ["Matemática", "Física", "Programação"];
+console.log(disciplinas[0]); // Primeiro elemento
+console.log(disciplinas[disciplinas.length - 1]); // Último elemento
+console.log(disciplinas.length); // Tamanho total
+```
+
 2. Simula uma fila com `const fila = ["Ana", "Bruno"];`: usa `push`, `unshift`, `pop` e `shift` para adicionar e remover pessoas e, no fim, mostra como ficou a lista e o seu `length`.
+
+# Resolução:
+
+```js
+const fila = ["Ana", "Bruno"];
+fila.push("Carla"); // Adiciona no fim
+fila.unshift("Daniel"); // Adiciona no início
+fila.pop(); // Remove do fim
+fila.shift(); // Remove do início
+console.log(fila); // Mostra a lista final
+console.log(fila.length); // Mostra o tamanho final
+```
+
 3. Cria o array `["11º", "Turma", "A"]` e usa `splice` para inserir `"EPMS"` logo após `"11º"`.
+
+# Resolução:
+
+```js
+const info = ["11º", "Turma", "A"];
+info.splice(1, 0, "EPMS"); // Insere "EPMS"
+console.log(info); // ["11º", "EPMS", "Turma", "A"]
+```
+
 4. Copia `[10, 20, 30, 40]` usando `slice()` ou o operador `...` (spread), altera apenas a cópia (por exemplo, removendo o último elemento) e comprova que o array original se manteve igual.
+
+# Resolução:
+
+```js
+const original = [10, 20, 30, 40];
+const copia = original.slice(); // Ou: const copia = [...original];
+copia.pop(); // Remove o último elemento da cópia
+console.log(original); // [10, 20, 30, 40] - original
+console.log(copia); // [10, 20, 30] - cópia alterada
+```
+
 5. Dado `[5, 8, 12, 3, 9, 14]`, percorre os valores com um `for` e constrói manualmente um novo array apenas com os números pares multiplicados por 10. Não recorras a `map`/`filter` ainda.
+
+# Resolução:
+
+```js
+const numeros = [5, 8, 12, 3, 9, 14];
+const paresMultiplicados = [];
+for (const n of numeros) {
+    if (n % 2 === 0) {
+        paresMultiplicados.push(n * 10);
+    }
+}
+console.log(paresMultiplicados); // [80, 120, 140]
+```
+
 6. Pede 6 números ao utilizador (por exemplo, com `prompt` num ambiente de browser), guarda-os num array e no final mostra o maior e o menor valor encontrados.
+
+# Resolução:
+
+```js
+const numeros = [];
+for (let i = 0; i < 6; i++) {
+    const input = prompt(`Insira o número ${i + 1}:`);
+    const num = Number(input);
+    numeros.push(num);
+}
+const maior = Math.max(...numeros);
+const menor = Math.min(...numeros);
+console.log(`Maior: ${maior}, Menor: ${menor}`);
+```
+
 7. Com `const alunos = ["Ana", "Bruno", "Carla", "Ana"];`, usa `includes`, `indexOf` e `lastIndexOf` para responder: a) se "Ana" existe, b) em que posição aparece primeiro e c) em que posição aparece pela última vez.
+
+# Resolução:
+
+```js
+const alunos = ["Ana", "Bruno", "Carla", "Ana"];
+const existeAna = alunos.includes("Ana");
+const primeiraPosicao = alunos.indexOf("Ana");
+const ultimaPosicao = alunos.lastIndexOf("Ana");
+console.log(`Existe Ana: ${existeAna}`); // true
+console.log(`Primeira posição de Ana: ${primeiraPosicao}`); // 0
+console.log(`Última posição de Ana: ${ultimaPosicao}`); // 3
+```
+
 8. Cria um array com 10 números aleatórios entre -100 e 100. Depois diz quantos são positivos, quantos são negativos e quantos são zeros.
    (Para gerar números aleatórios, podes usar `Math.floor(Math.random() * 201) - 100`.)
 
@@ -202,6 +291,32 @@ console.log(num);
 -   Multiplicamos por 201 para obter um intervalo de 0 a 200,999...
 -   O Math.floor() arredonda para baixo, dando um inteiro entre 0 e 200.
 -   Subtraímos 100 para ajustar o intervalo para -100 a 100.
+
+# Resolução:
+
+```js
+const numeros = [];
+for (let i = 0; i < 10; i++) {
+    const aleatorio = Math.floor(Math.random() * 201) - 100;
+    numeros.push(aleatorio);
+}
+let positivos = 0;
+let negativos = 0;
+let zeros = 0;
+for (const n of numeros) {
+    if (n > 0) {
+        positivos++;
+    } else if (n < 0) {
+        negativos++;
+    } else {
+        zeros++;
+    }
+}
+console.log(`Números: ${numeros}`);
+console.log(
+    `Positivos: ${positivos}, Negativos: ${negativos}, Zeros: ${zeros}`
+);
+```
 
 ## Changelog
 
