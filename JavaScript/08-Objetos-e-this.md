@@ -116,9 +116,7 @@ Se precisares de forçar `this`, existem `call`, `apply` e `bind`, mas não é n
 
 ```js
 for (const chave in conta) {
-    if (Object.prototype.hasOwnProperty.call(conta, chave)) {
-        console.log(chave, conta[chave]);
-    }
+    console.log(chave, conta[chave]);
 }
 ```
 
