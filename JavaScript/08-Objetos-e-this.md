@@ -207,7 +207,20 @@ console.log(aluno);
 // { nome: 'Franciscano', curso: 'Informática', notaFinal: 19 }
 ```
 
-3. Declara `campo = "media";` e cria um objeto `avaliacao` que aproveita `[campo]` para guardar a média do aluno. Acrescenta também uma propriedade `disciplina` e mostra ambas as chaves com `console.log`.
+3. Cria a variável `const campo = "media";` e cria um objeto `avaliacao` com a chave `media` (usando `[campo]`) e outra chave `disciplina`. Mostra ambas as chaves com `console.log`.
+
+> Resolução:
+
+```js
+const campo = "media";
+const avaliacao = {
+    [campo]: 17, // Aqui estamos a criar a chave "media" usando a variável campo
+    disciplina: "Matemática",
+};
+console.log(avaliacao.media); // 17
+console.log(avaliacao.disciplina); // Matemática
+```
+
 4. Completa o objeto abaixo preenchendo o método `resumo` para que devolva a string indicada usando `this`:
    Tenta explicar porque `this.titular` e `this.saldo` funcionam aqui.
 
