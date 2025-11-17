@@ -187,7 +187,7 @@ for (let i = 0; i < frutas.length; i++) {
 
 1. Cria um array com três disciplinas favoritas e usa `console.log` para mostrar o primeiro elemento, o último (`length - 1`) e o tamanho total.
 
-# Resolução:
+> Resolução:
 
 ```js
 const disciplinas = ["Matemática", "Física", "Programação"];
@@ -198,7 +198,7 @@ console.log(disciplinas.length); // Tamanho total
 
 2. Simula uma fila com `const fila = ["Ana", "Bruno"];`: usa `push`, `unshift`, `pop` e `shift` para adicionar e remover pessoas e, no fim, mostra como ficou a lista e o seu `length`.
 
-# Resolução:
+> Resolução:
 
 ```js
 const fila = ["Ana", "Bruno"];
@@ -212,7 +212,7 @@ console.log(fila.length); // Mostra o tamanho final
 
 3. Cria o array `["11º", "Turma", "A"]` e usa `splice` para inserir `"EPMS"` logo após `"11º"`.
 
-# Resolução:
+> Resolução:
 
 ```js
 const info = ["11º", "Turma", "A"];
@@ -222,7 +222,7 @@ console.log(info); // ["11º", "EPMS", "Turma", "A"]
 
 4. Copia `[10, 20, 30, 40]` usando `slice()` ou o operador `...` (spread), altera apenas a cópia (por exemplo, removendo o último elemento) e comprova que o array original se manteve igual.
 
-# Resolução:
+> Resolução:
 
 ```js
 const original = [10, 20, 30, 40];
@@ -234,7 +234,7 @@ console.log(copia); // [10, 20, 30] - cópia alterada
 
 5. Dado `[5, 8, 12, 3, 9, 14]`, percorre os valores com um `for` e constrói manualmente um novo array apenas com os números pares multiplicados por 10. Não recorras a `map`/`filter` ainda.
 
-# Resolução:
+> Resolução:
 
 ```js
 const numeros = [5, 8, 12, 3, 9, 14];
@@ -249,7 +249,7 @@ console.log(paresMultiplicados); // [80, 120, 140]
 
 6. Pede 6 números ao utilizador (por exemplo, com `prompt` num ambiente de browser), guarda-os num array e no final mostra o maior e o menor valor encontrados.
 
-# Resolução:
+> Resolução:
 
 ```js
 const numeros = [];
@@ -265,7 +265,7 @@ console.log(`Maior: ${maior}, Menor: ${menor}`);
 
 7. Com `const alunos = ["Ana", "Bruno", "Carla", "Ana"];`, usa `includes`, `indexOf` e `lastIndexOf` para responder: a) se "Ana" existe, b) em que posição aparece primeiro e c) em que posição aparece pela última vez.
 
-# Resolução:
+> Resolução:
 
 ```js
 const alunos = ["Ana", "Bruno", "Carla", "Ana"];
@@ -292,7 +292,7 @@ console.log(num);
 -   O Math.floor() arredonda para baixo, dando um inteiro entre 0 e 200.
 -   Subtraímos 100 para ajustar o intervalo para -100 a 100.
 
-# Resolução:
+> Resolução:
 
 ```js
 const numeros = [];
