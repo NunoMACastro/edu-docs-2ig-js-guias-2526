@@ -210,6 +210,18 @@ console.log(aluno);
 3. Declara `campo = "media";` e cria um objeto `avaliacao` que aproveita `[campo]` para guardar a média do aluno. Acrescenta também uma propriedade `disciplina` e mostra ambas as chaves com `console.log`.
 4. Completa o objeto abaixo preenchendo o método `resumo` para que devolva a string indicada usando `this`:
    Tenta explicar porque `this.titular` e `this.saldo` funcionam aqui.
+
+```js
+const contaBancaria = {
+    titular: "Carlos Silva",
+    saldo: 2500,
+    resumo() {
+        // Completa aqui
+    },
+};
+console.log(contaBancaria.resumo());
+```
+
 5. Com `const inventario = { canetas: 12, cadernos: 5, mochilas: 2 };`, percorre as chaves com `for...in` e ignora propriedades herdadas usando `Object.prototype.hasOwnProperty.call`. Mostra cada par `chave → valor` no ecrã.
 6. Copia `const perfil = { nome: "Sara", contactos: { email: "sara@epms.pt" } };` usando `const clone = { ...perfil, contactos: { ...perfil.contactos } };` e altera apenas `clone.contactos.email`. Confirma que `perfil` continua igual e explica o motivo.
 7. Junta `const padrao = { tema: "claro", notificacoes: true };` com `const preferenciaAluno = { notificacoes: false };` através de `const final = { ...padrao, ...preferenciaAluno };` e descreve quais valores foram sobrepostos.
@@ -222,3 +234,7 @@ console.log(aluno);
 -   **v1.1.0 — 2025-11-10**
     -   Secção de Exercícios ampliada com sete atividades sobre criação, cópia, `this` e utilitários `Object.*`.
     -   Changelog incluído para registar evoluções do capítulo.
+
+```
+
+```
