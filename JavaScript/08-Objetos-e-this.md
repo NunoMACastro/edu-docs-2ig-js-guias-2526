@@ -222,10 +222,11 @@ const contaBancaria = {
 console.log(contaBancaria.resumo());
 ```
 
-5. Com `const inventario = { canetas: 12, cadernos: 5, mochilas: 2 };`, percorre as chaves com `for...in` e ignora propriedades herdadas usando `Object.prototype.hasOwnProperty.call`. Mostra cada par `chave → valor` no ecrã.
+5. Cria um loop `for...in` para imprimir todas as chaves e valores do objeto `contaBancaria` do exercício anterior. Se o saldo for 0 ou negativo, imprime "ATENÇÃO: saldo insuficiente" em vez do valor do saldo.
 6. Copia `const perfil = { nome: "Sara", contactos: { email: "sara@epms.pt" } };` usando `const clone = { ...perfil, contactos: { ...perfil.contactos } };` e altera apenas `clone.contactos.email`. Confirma que `perfil` continua igual e explica o motivo.
 7. Junta `const padrao = { tema: "claro", notificacoes: true };` com `const preferenciaAluno = { notificacoes: false };` através de `const final = { ...padrao, ...preferenciaAluno };` e descreve quais valores foram sobrepostos.
-8. Transforma o array `const pares = [["id", 7], ["nome", "Ana"]];` em objeto com `Object.fromEntries`, converte-o para JSON com `JSON.stringify` e volta ao objeto original com `JSON.parse`. Mostra as três etapas.
+8. Cria um objeto `produto` com propriedades `nome`, `preco` e um método `descricao` que retorna uma string com o nome e o preço do produto usando `this`. Testa o método.
+9. Ainda no exercicio anterior, adiciona a chave `stock` ao objeto `produto`e define o seu valor para 100. No final mostra o objeto completo.
 
 ## Changelog
 
