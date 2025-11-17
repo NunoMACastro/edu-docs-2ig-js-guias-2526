@@ -184,7 +184,7 @@ JSON usa aspas duplas e não aceita comentários.
 
 ## 7) Exercícios
 
-1. Cria `const aluno = { nome: "Franciscano", curso: "IG", idade: 16 };` e usa `console.log` para mostrar o nome, a idade e o valor de `aluno.cidade` (que deverá dar undefined).
+1. Cria `const aluno = { nome: "Franciscano", curso: "IG", idade: 16 };` e usa `console.log` para mostrar o nome, a idade.
 2. No mesmo objeto `aluno`, adiciona a propriedade `notaFinal` com a sintaxe de ponto, altera `curso` usando `[]` com uma string e remove `idade` com `delete`. Mostra o resultado final.
 3. Declara `const campo = "media";` e cria um objeto `avaliacao` que aproveita `[campo]` para guardar a média do aluno. Acrescenta também uma propriedade `disciplina` e mostra ambas as chaves com `console.log`.
 4. Completa o objeto abaixo preenchendo o método `resumo` para que devolva a string indicada usando `this`:
