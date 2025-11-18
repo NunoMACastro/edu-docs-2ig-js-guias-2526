@@ -301,17 +301,22 @@ function media2casas(valores) {
 
     let soma = 0,
         cont = 0;
+
+    // Processar cada valor
     for (const v of valores) {
+        // Converter para número porque pode ser string numérica - tipo "12"
         const x = Number(v);
+        // Verificar se é NaN (não é número)
         if (Number.isNaN(x)) continue; // ignora lixo
         soma += x;
         cont += 1;
     }
     if (cont === 0) return null;
-    return Math.round((soma / cont) * 100) / 100;
+    return Math.round((soma / cont) * 100) / 100; // arredondar a 2 casas
+    // O Math.round arredonda o número para o inteiro mais próximo. Multiplicamos por 100 antes de arredondar para preservar duas casas decimais, e depois dividimos por 100 para obter o valor final arredondado.
 }
 
-console.log(media2casas([10, "12", "abc", 8])); // 10
+console.log(media2casas([10, "12", "abc", 8])); // O calculo é (10 + 12 + 8) / 3 = 10.00
 console.log(media2casas([])); // null
 ```
 
@@ -419,10 +424,11 @@ function ehPalindromo(texto) {
     // "Limpar" o texto: minúsculas, remover pontuação, trim
     const normalizado = texto
         .toLowerCase()
-        .replace(/[^\p{L}\p{N}]/gu, "") // remove pontuação e espaços
-        .trim();
+        .replace(/[^\p{L}\p{N}]/gu, "") // remove pontuação e espaços interiores
+        .trim(); // remove espaços no início/fim
     // Verificar se é igual ao reverso
-    const reverso = normalizado.split("").reverse().join("");
+    const reverso = normalizado.split("").reverse().join(""); // inverte a string
+    // O normalizado.split("") divide a string em um array de caracteres, o reverse() inverte a ordem dos caracteres no array, e o join("") junta os caracteres de volta em uma string.
     return normalizado === reverso;
 }
 
