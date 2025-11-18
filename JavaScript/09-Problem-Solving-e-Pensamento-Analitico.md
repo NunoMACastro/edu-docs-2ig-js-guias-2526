@@ -433,14 +433,14 @@ console.log(ehPalindromo("Hello")); // false
 
 ---
 
-## 9) Debugging (passo a passo)
+## 9) Debugging - Deteção de erros (passo a passo)
 
 <a id="debugging"></a>
 
 1. **Ver o que tens**: imprime entradas/saídas e variáveis intermédias (`console.log`, `console.table`).
 2. **Isolar**: põe a parte suspeita numa função pequena e testa com 2–3 inputs.
 3. **Hipótese → teste → conclusão**: “Dá `NaN` → será por strings? → converto com `Number` → problema desapareceu.”
-4. **Mini-asserts** (barato e útil):
+4. **Mini-asserts** (útil):
 
 ```js
 console.assert(Number.isNaN(Number("abc")), "Deveria ser NaN");
