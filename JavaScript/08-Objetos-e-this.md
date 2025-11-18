@@ -136,7 +136,8 @@ console.log(conta.saldo); // 150
 
 Se precisares de forçar `this`, existem `call`, `apply` e `bind`, mas não é necessário para a maioria dos exercícios introdutórios.
 
-> [4](#ex4), [8](#ex8), [9](#ex9), [10](#ex10), [11](#ex11), [12](#ex12), [13](#ex13), [14](#ex14), [15](#ex15), [16](#ex16), [17](#ex17)
+> [!NOTE]
+> Exercícios: [4](#ex4), [8](#ex8), [9](#ex9), [10](#ex10), [11](#ex11), [12](#ex12), [13](#ex13), [14](#ex14), [15](#ex15), [16](#ex16), [17](#ex17)
 
 ---
 
