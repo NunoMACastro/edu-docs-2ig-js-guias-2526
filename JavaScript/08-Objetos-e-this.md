@@ -56,6 +56,7 @@ console.log(casa.descricao()); // "Casa com 3 quartos e 120 m²"
 
 Neste exemplo, o `this` dentro do método `descricao` refere-se ao objeto `casa`, permitindo aceder às suas propriedades `quartos` e `area`.
 
+> [!NOTE]
 > Exercícios: [1](#ex1), [2](#ex2), [3](#ex3), [10](#ex10), [11](#ex11), [12](#ex12), [13](#ex13), [14](#ex14), [15](#ex15), [16](#ex16), [17](#ex17)
 
 ---
@@ -92,6 +93,7 @@ const dicionario = Object.create(null);
 dicionario.codigo = "A1";
 ```
 
+> [!NOTE]
 > Exercícios: [1](#ex1), [2](#ex2), [3](#ex3), [10](#ex10)
 
 ---
@@ -111,6 +113,7 @@ pessoa["cidade"] = "Viseu";
 delete pessoa.nome;
 ```
 
+> [!NOTE]
 > Exercícios: [2](#ex2), [9](#ex9), [13](#ex13), [17](#ex17)
 
 ---
@@ -136,7 +139,7 @@ console.log(conta.saldo); // 150
 
 Se precisares de forçar `this`, existem `call`, `apply` e `bind`, mas não é necessário para a maioria dos exercícios introdutórios.
 
-> [!NOTA]
+> [!NOTE]
 > Exercícios: [4](#ex4), [8](#ex8), [9](#ex9), [10](#ex10), [11](#ex11), [12](#ex12), [13](#ex13), [14](#ex14), [15](#ex15), [16](#ex16), [17](#ex17)
 
 ---
@@ -163,6 +166,7 @@ Object.entries(conta).forEach(([chave, valor]) => {
 
 `entries` é excelente para transformar objetos em tabelas com `console.table` ou para criar versões copiadas.
 
+> [!NOTE]
 > Exercícios: [5](#ex5), [11](#ex11), [12](#ex12), [13](#ex13), [14](#ex14), [15](#ex15), [16](#ex16), [17](#ex17)
 
 ---
@@ -202,6 +206,7 @@ const config = Object.freeze({ porta: 3000 });
 // config.porta = 4000; // não muda (em strict mode lança erro)
 ```
 
+> [!NOTE]
 > Exercícios: [6](#ex6), [7](#ex7)
 
 ---
@@ -234,6 +239,7 @@ const salvo = JSON.parse(localStorage.getItem("aluno")); // ler
 
 JSON usa aspas duplas e não aceita comentários.
 
+> [!NOTE]
 > Exercícios: nenhum por enquanto
 
 ---
