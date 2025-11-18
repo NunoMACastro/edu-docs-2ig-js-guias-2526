@@ -4,6 +4,20 @@
 
 ---
 
+**Índice**
+
+-   [0) O que é um objeto?](#objetos)
+-   [1) Criar objetos](#criar-objetos)
+-   [2) Ler, escrever e remover](#ler-escrever)
+-   [3) `this` em métodos](#this-metodos)
+-   [4) Iterar propriedades](#iterar-propriedades)
+-   [5) Copiar e atualizar](#copiar-atualizar)
+-   [6) JSON rápido](#json-rapido)
+-   [7) Exercícios](#exercicios)
+-   [Changelog](#changelog)
+
+---
+
 ## 0) O que é um objeto?
 
 <a id="objetos"></a>
@@ -42,7 +56,7 @@ console.log(casa.descricao()); // "Casa com 3 quartos e 120 m²"
 
 Neste exemplo, o `this` dentro do método `descricao` refere-se ao objeto `casa`, permitindo aceder às suas propriedades `quartos` e `area`.
 
-> Exercícios: [1], [2], [3], [10]
+> Exercícios: [1](#ex1), [2](#ex2), [3](#ex3), [10](#ex10), [11](#ex11), [12](#ex12), [13](#ex13), [14](#ex14), [15](#ex15), [16](#ex16), [17](#ex17)
 
 ---
 
@@ -78,7 +92,7 @@ const dicionario = Object.create(null);
 dicionario.codigo = "A1";
 ```
 
-> Exercícios: [1], [2], [3], [10]
+> Exercícios: [1](#ex1), [2](#ex2), [3](#ex3), [10](#ex10)
 
 ---
 
@@ -97,7 +111,7 @@ pessoa["cidade"] = "Viseu";
 delete pessoa.nome;
 ```
 
-> Exercícios: [2], [9], [10]
+> Exercícios: [2](#ex2), [9](#ex9), [13](#ex13), [17](#ex17)
 
 ---
 
@@ -122,7 +136,7 @@ console.log(conta.saldo); // 150
 
 Se precisares de forçar `this`, existem `call`, `apply` e `bind`, mas não é necessário para a maioria dos exercícios introdutórios.
 
-> Exercícios: [4], [8], [9]
+> [4](#ex4), [8](#ex8), [9](#ex9), [10](#ex10), [11](#ex11), [12](#ex12), [13](#ex13), [14](#ex14), [15](#ex15), [16](#ex16), [17](#ex17)
 
 ---
 
@@ -148,7 +162,7 @@ Object.entries(conta).forEach(([chave, valor]) => {
 
 `entries` é excelente para transformar objetos em tabelas com `console.table` ou para criar versões copiadas.
 
-> Exercício: [5], [12], [13]
+> Exercícios: [5](#ex5), [11](#ex11), [12](#ex12), [13](#ex13), [14](#ex14), [15](#ex15), [16](#ex16), [17](#ex17)
 
 ---
 
@@ -187,7 +201,7 @@ const config = Object.freeze({ porta: 3000 });
 // config.porta = 4000; // não muda (em strict mode lança erro)
 ```
 
-> Exercícios: [6], [7]
+> Exercícios: [6](#ex6), [7](#ex7)
 
 ---
 
@@ -219,31 +233,35 @@ const salvo = JSON.parse(localStorage.getItem("aluno")); // ler
 
 JSON usa aspas duplas e não aceita comentários.
 
+> Exercícios: nenhum por enquanto
+
 ---
 
 ## 7) Exercícios
 
+<a id="exercicios"></a>
+
 1. <a id="ex1"></a>Cria `const aluno = { nome: "Franciscano", curso: "IG", idade: 16 };` e usa `console.log` para mostrar o nome, a idade e o valor de `aluno.cidade` (que deverá dar undefined).
 
-   Consultar: [O que é um objeto?](#objetos) · [Criar objetos](#criar-objetos)
+    Consultar: [O que é um objeto?](#objetos) · [Criar objetos](#criar-objetos)
 
 ---
 
 2. <a id="ex2"></a>No mesmo objeto `aluno`, adiciona a propriedade `notaFinal` com a sintáxe de ponto, altera `curso` usando `[]` com uma string e remove `idade` com `delete`. Mostra o resultado final.
 
-   Consultar: [Criar objetos](#criar-objetos) · [Ler, escrever e remover](#ler-escrever)
+    Consultar: [Criar objetos](#criar-objetos) · [Ler, escrever e remover](#ler-escrever)
 
 ---
 
 3. <a id="ex3"></a>Cria a variável `const campo = "media";` e cria um objeto `avaliacao` com a chave `media` (usando `[campo]`) e outra chave `disciplina`. Mostra ambas as chaves com `console.log`.
 
-   Consultar: [Criar objetos](#criar-objetos)
+    Consultar: [Criar objetos](#criar-objetos)
 
 ---
 
 4. <a id="ex4"></a>Completa o objeto abaixo preenchendo o método `resumo` para que devolva a string indicada usando `this`: Tenta explicar porque `this.titular` e `this.saldo` funcionam aqui.
 
-   Consultar: [this em métodos](#this-metodos)
+    Consultar: [this em métodos](#this-metodos)
 
 ```js
 const contaBancaria = {
@@ -260,43 +278,97 @@ console.log(contaBancaria.resumo());
 
 5. <a id="ex5"></a>Cria um loop `for...in` para imprimir todas as chaves e valores do objeto `contaBancaria` do exercício anterior. Se o saldo for 0 ou negativo, imprime "ATENÇÃO: saldo insuficiente" em vez do valor do saldo.
 
-   Consultar: [Iterar propriedades](#iterar-propriedades)
+    Consultar: [Iterar propriedades](#iterar-propriedades)
 
 ---
 
 6. <a id="ex6"></a>Cria uma cópia do objeto `contaBancaria` chamada `contaAtualizada`, mas com o saldo aumentado em 500 (primeiro copia o objeto e depois altera o valor). Mostra ambos os objetos para comprovar que o original não foi alterado. Depois, no objeto `contaAtualizada`, altera o titular para "Carla Pereira" e mostra o resultado final.
 
-   Consultar: [Copiar e atualizar](#copiar-atualizar)
+    Consultar: [Copiar e atualizar](#copiar-atualizar)
 
 ---
 
 7. <a id="ex7"></a>Ainda no objeto `contaBancaria`, usa `Object.freeze` (linha 164 deste ficheiro) para impedir alterações. Tenta alterar o saldo para 3000 e mostra o objeto para comprovar que não mudou.
 
-   Consultar: [Copiar e atualizar](#copiar-atualizar)
+    Consultar: [Copiar e atualizar](#copiar-atualizar)
 
 ---
 
 8. <a id="ex8"></a>Cria um objeto `produto` com propriedades `nome`, `preco` e um método `descricao` que retorna uma string com o nome e o preço do produto usando `this`. Testa o método.
 
-   Consultar: [this em métodos](#this-metodos)
+    Consultar: [this em métodos](#this-metodos)
 
 ---
 
 9. <a id="ex9"></a>Ainda no exercicio anterior, adiciona a chave `stock` ao objeto `produto`e define o seu valor para 100. No final mostra o objeto completo.
 
-   Consultar: [Ler, escrever e remover](#ler-escrever) · [this em métodos](#this-metodos)
+    Consultar: [Ler, escrever e remover](#ler-escrever) · [this em métodos](#this-metodos)
 
 ---
 
-## Exercícios por seção
+10. <a id="ex10"></a>Cria um objeto para guardar as informações sobre flores. Cada flor deve ter `nome`, `cor`, `preco` e um método `detalhes` que devolve uma string com o nome, a cor e o preço da flor usando `this`. Cria pelo menos duas flores diferentes e mostra os detalhes de cada uma.
 
-- **O que é um objeto?** → Exercícios: [1](#ex1), [2](#ex2), [3](#ex3)
-- **Criar objetos** → Exercícios: [1](#ex1), [2](#ex2), [3](#ex3)
-- **Ler, escrever e remover** → Exercícios: [2](#ex2), [9](#ex9)
-- **`this` em métodos** → Exercícios: [4](#ex4), [8](#ex8), [9](#ex9)
-- **Iterar propriedades** → Exercício: [5](#ex5)
-- **Copiar e atualizar** → Exercícios: [6](#ex6), [7](#ex7)
-- **JSON rápido** → Exercícios: nenhum por enquanto
+    Consultar: [O que é um objeto?](#objetos) · [this em métodos](#this-metodos)
+
+---
+
+11. <a id="ex11"></a>Usando o objeto do exercício anterior, cria um array com várias flores. Depois, percorre o array e mostra os detalhes de cada flor usando o método `detalhes`.
+
+    Consultar: [O que é um objeto?](#objetos) · [this em métodos](#this-metodos) · [Iterar propriedades](#iterar-propriedades)
+
+---
+
+12. <a id="ex12"></a>Cria uma função `promocao(flor)` que recebe um objeto flor e reduz o preço em 10%. Usa essa função para aplicar a promoção a todas as flores do array do exercício anterior. Mostra os detalhes atualizados de cada flor.
+
+    Consultar: [O que é um objeto?](#objetos) · [this em métodos](#this-metodos) · [Iterar propriedades](#iterar-propriedades)
+
+---
+
+13. <a id="ex13"></a>Cria uma lista de objetos `autores`. Cada autor deve ter `nome`, `livros`, `data-nascimento`, `local-nascimento`. Deve também ter o método `bio` que devolve uma string com o nome, a idade, o local de nascimento e o número de livros publicados. Cria pelo menos dois autores e mostra a biografia de cada um.
+
+    Consultar: [Ler, escrever e remover](#ler-escrever) · [this em métodos](#this-metodos) · [Iterar propriedades](#iterar-propriedades)
+
+    > Para calcular a idade, incluindo os meses, podes usar o seguinte código dentro do método `bio`:
+
+    ```js
+    const hoje = new Date();
+    const nascimento = new Date(this["data-nascimento"]);
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
+    const mesDiff = hoje.getMonth() - nascimento.getMonth();
+    if (
+        mesDiff < 0 ||
+        (mesDiff === 0 && hoje.getDate() < nascimento.getDate())
+    ) {
+        idade--;
+    }
+    // idade agora tem o número correto de anos
+    ```
+
+---
+
+14. <a id="ex14"></a>Acrescenta ao exercício anterior o campo `premios`que deve ser um dicionário com o nome do prémio como chave e o ano em que foi recebido como valor. Altera o método `bio` para incluir a lista de prémios recebidos (se houver). Mostra a biografia atualizada de cada autor.
+
+    Consultar: [O que é um objeto?](#objetos) · [this em métodos](#this-metodos) · [Iterar propriedades](#iterar-propriedades)
+
+---
+
+15. <a id="ex15"></a>Precorre todo array de autores e mostra os seus dados usando o método `bio`. Usa `for...of` ou `forEach`.
+
+    Consultar: [O que é um objeto?](#objetos) · [this em métodos](#this-metodos) · [Iterar propriedades](#iterar-propriedades)
+
+---
+
+16. <a id="ex16"></a>(Díficil) Indica o autor com mais livros publicados. Mostra o nome e o número de livros.
+
+    Consultar: [O que é um objeto?](#objetos) · [this em métodos](#this-metodos) · [Iterar propriedades](#iterar-propriedades)
+
+---
+
+17. <a id="ex17"></a>(Díficil) Cria uma função `adicionarPremio(autor, nomePremio, ano)` que adiciona um prémio ao dicionário `premios` do autor passado como argumento. Testa a função com um dos autores do array.
+
+    Consultar: [O que é um objeto?](#objetos) · [this em métodos](#this-metodos) · [Iterar propriedades](#iterar-propriedades)
+
+---
 
 ## Changelog
 

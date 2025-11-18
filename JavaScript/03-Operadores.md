@@ -136,6 +136,6 @@ Usa parênteses sempre que a expressão possa gerar dúvidas.
 
 ## Changelog
 
--   **v1.1.0 — 2025-11-10**
+-   **v1.1.0 - 2025-11-10**
     -   Atualização da secção de Exercícios com sete propostas focadas em coerção e operadores lógicos.
     -   Changelog adicionado para registar futuras evoluções do capítulo.

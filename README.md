@@ -8,7 +8,7 @@ Este repositório junta os apontamentos usados nas aulas de Programação para o
 
 | Pasta/ficheiro | Conteúdo                                                                                 |
 | -------------- | ---------------------------------------------------------------------------------------- |
-| `JavaScript/`  | 17 capítulos em Markdown cobrindo o percurso completo: fundamentos → browser/intermédio. |
+| `JavaScript/`  | 18 capítulos em Markdown cobrindo o percurso completo: fundamentos → browser/intermédio. |
 | `React/`       | Materiais introdutórios de React (em evolução).                                          |
 
 > Todos os capítulos de JavaScript seguem o mesmo formato: título, objetivo, secções numeradas, exemplos comentados e desafios no fim.
@@ -27,35 +27,21 @@ Este repositório junta os apontamentos usados nas aulas de Programação para o
 6. [06 — Ciclos](JavaScript/06-Ciclos.md)
 7. [07 — Arrays](JavaScript/07-Arrays.md)
 8. [08 — Objetos e `this`](JavaScript/08-Objetos-e-this.md)
-9. [09 — Exceções](JavaScript/09-Excecoes.md)
-10. [10 — Funções](JavaScript/10-Funcoes.md)
-11. [11 — Funções de Alto Nível em Arrays](JavaScript/11-Arrays-HighOrder.md)
-12. [12 — Módulos ES](JavaScript/12-Modulos-ES.md)
+9. [09 — Problem Solving e Pensamento Analítico](JavaScript/09-Problem-Solving-e-Pensamento-Analitico.md)
+10. [10 — Exceções](JavaScript/10-Excecoes.md)
+11. [11 — Funções](JavaScript/11-Funcoes.md)
+12. [12 — Funções de Alto Nível em Arrays](JavaScript/12-Arrays-HighOrder.md)
+13. [13 — Módulos ES](JavaScript/13-Modulos-ES.md)
 
 ### Intermédio / Browser (13‑17)
 
-13. [13 — Classes e OOP](JavaScript/13-POO-Classes.md)
-14. [14 — Assíncrono e Event Loop](JavaScript/14-Assincrono-EventLoop.md)
-15. [15 — DOM Básico](JavaScript/15-DOM-Basico.md)
-16. [16 — Fetch / AJAX](JavaScript/16-Fetch-AJAX.md)
-17. [17 — Outros Tópicos Úteis](JavaScript/17-Outros-Topicos.md)
+14. [13 — Classes e OOP](JavaScript/14-POO-Classes.md)
+15. [14 — Assíncrono e Event Loop](JavaScript/15-Assincrono-EventLoop.md)
+16. [15 — DOM Básico](JavaScript/16-DOM-Basico.md)
+17. [16 — Fetch / AJAX](JavaScript/17-Fetch-AJAX.md)
+18. [17 — Outros Tópicos Úteis](JavaScript/18-Outros-Topicos.md)
 
 Cada ficheiro tem exemplos prontos a colar no DevTools/Node e termina com desafios curtos para garantir prática imediata.
-
----
-
-## Como estudar
-
-1. **Percurso recomendado**
-    - Sessão 1: capítulos 01‑04 (variáveis, operadores, strings)
-    - Sessão 2: 05‑07 (controlo, ciclos, arrays)
-    - Sessão 3: 08‑10 (objetos, exceções, funções)
-    - Sessão 4: 11‑12 (HOFs e módulos)
-    - Sessões 5‑6: 13‑17 (OOP, async, DOM, Fetch, extras)
-2. **Método**
-    - Lê o capítulo rapidamente.
-    - Executa os snippets na consola do browser ou em Node (`node ficheiro.js`).
-    - Resolve os desafios antes de avançar.
 
 ---
 

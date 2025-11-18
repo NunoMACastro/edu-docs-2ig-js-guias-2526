@@ -1,4 +1,4 @@
-# [14] Assíncrono e Event Loop (11.º ano)
+# [15] Assíncrono e Event Loop (11.º ano)
 
 > **Objetivo**: perceber, com linguagem simples e exemplos práticos, o que é **síncrono** e **assíncrono**, quem comunica com quem no JavaScript, o que é uma **Promise**, o que faz o **Event Loop** e por que razão `Promise` e `setTimeout` nem sempre correm na ordem que imaginas.
 

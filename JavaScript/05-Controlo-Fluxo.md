@@ -138,6 +138,6 @@ Dica: se o ternário tiver de fazer duas ou mais instruções, volta ao `if/else
 
 ## Changelog
 
--   **v1.1.0 — 2025-11-10**
+-   **v1.1.0 - 2025-11-10**
     -   Exercícios reformulados com sete propostas progressivas sobre decisões e guard clauses.
     -   Changelog introduzido para documentar atualizações no capítulo.

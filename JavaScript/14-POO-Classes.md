@@ -1,4 +1,4 @@
-# [13] Classes e OOP (11.º ano)
+# [14] Classes e OOP (11.º ano)
 
 > **Objetivo**: entender, com linguagem simples e muitos exemplos, o que são **classes** e **objetos** em JavaScript, como usar **constructor**, **métodos**, **getters/setters**, **campos privados `#`**, **métodos/variáveis estáticas**, **herança (`extends/super`)**, e quando faz sentido **preferir composição**. No fim tens desafios para praticar.
 

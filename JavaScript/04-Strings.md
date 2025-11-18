@@ -155,6 +155,6 @@ Explica passo a passo aos alunos antes de copiarem; aproveita para falar de rege
 
 ## Changelog
 
--   **v1.1.0 — 2025-11-10**
+-   **v1.1.0 - 2025-11-10**
     -   Nova secção de Exercícios com sete propostas focadas em manipulação de strings.
     -   Adicionada secção de changelog para acompanhar futuras revisões.

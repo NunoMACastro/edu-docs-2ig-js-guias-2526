@@ -1,4 +1,4 @@
-# [12] Módulos ES (11.º ano)
+# [13] Módulos ES (11.º ano)
 
 > **Objetivo**: dividir o código por ficheiros (`módulos`), exportar valores e importá-los noutros sítios, percebendo a diferença entre `default` e `named` exports tanto no browser como em Node.js.
 

@@ -97,7 +97,7 @@ rl.close();
 -   Converte entradas para o tipo certo logo após leres (números, booleanos, etc.).
 -   Usa `console.log` para mensagens normais e `console.error` para erros; ajuda muito quando o projeto crescer.
 -   Limpa `console.log` supérfluos antes de entregar trabalhos finais.
--   Nunca assumas que o utilizador escreveu algo válido — valida sempre.
+-   Nunca assumas que o utilizador escreveu algo válido - valida sempre.
 
 ---
 
