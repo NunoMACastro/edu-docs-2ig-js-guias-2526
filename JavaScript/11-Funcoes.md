@@ -221,13 +221,15 @@ console.log(calcular(4, 2, produto)); // 8
 
 ## 8) Mini desafios
 
-1. Escreve uma função `saudacao(nome, hora)` que devolve uma saudação diferente consoante a hora do dia (manhã, tarde, noite). Usa valores por defeito para `hora` (hora atual).
-2. Cria uma função `contador(inicio)`que faz uma contagem decrescente desde o argumento `inicio` até 0, imprimindo cada número.
-3. Cria uma função que recebe um array de números e diz quantos são pares e quantos são ímpares. Usa `for...of`.
-4. Cria uma função que recebe um nome, uma idade e peso e devolve true se a pessoa poder doar sangue (idade entre 18 e 65 e peso ≥ 50kg) e false caso contrário.
-5. Cria uma arrow `function` que recebe um array de strings e devolve um novo array com todas as strings em maiúsculas.
-6. Cria uma função que recebe 2 números e um callback `operacao`. A função deve aplicar a operação aos dois números e devolver o resultado. Testa com operações de soma, subtração, multiplicação e divisão.
-7. Cria uma função recursiva `contarVogais(palavra)` que conta o número de vogais numa palavra.
+1. Escreve uma função que recebe dois números e devolve o maior.
+2. Cria uma função que recebe um array de números e devolve quantos são maiores que 10.
+3. Cria uma função `aprovarAluno(nota)` que devolve "Aprovado" se a nota for ≥ 10 e "Reprovado" caso contrário. Usa uma guard clause.
+4. Escreve uma função `saudacao(nome, hora)` que devolve uma saudação diferente consoante a hora do dia (manhã, tarde, noite). Usa valores por defeito para `hora` (hora atual).
+5. Cria uma função `contador(inicio)`que faz uma contagem decrescente desde o argumento `inicio` até 0, imprimindo cada número.
+6. Cria uma função que recebe um array de números e diz quantos são pares e quantos são ímpares. Usa `for...of`.
+7. Cria uma função que recebe um nome, uma idade e peso e devolve true se a pessoa poder doar sangue (idade entre 18 e 65 e peso ≥ 50kg) e false caso contrário.
+8. Cria uma arrow `function` que recebe um array de strings e devolve um novo array com todas as strings em maiúsculas.
+9. Cria uma função que recebe 2 números e um callback `operacao`. A função deve aplicar a operação aos dois números e devolver o resultado. Testa com operações de soma, subtração, multiplicação e divisão.
 
 ## Changelog
 

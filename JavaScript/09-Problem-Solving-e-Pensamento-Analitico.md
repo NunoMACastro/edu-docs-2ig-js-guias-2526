@@ -491,6 +491,53 @@ console.assert(Number.isNaN(Number("abc")), "Deveria ser NaN");
 <a id="desafios"></a>
 
 1. **Conta ocorrências** Cria uma função que recebe uma frase e devolve quantas letras "a" (maiúsculas e minúsculas) tem.
+    > Resolução:
+
+Tabela E/S
+
+| Entrada       | Exemplo            | Observações                                                      |
+| ------------- | ------------------ | ---------------------------------------------------------------- |
+| frase: string | "Ana ama a aranha" | pode ter maiúsculas/minúsculas, pode ser vazio, pode não ter "a" |
+
+| Saída  | Exemplo | Observações              |
+| ------ | ------- | ------------------------ |
+| number | 5       | número de letras "a"/"A" |
+
+**Casos especiais:** string vazia → 0; sem "a" → 0.
+
+** Pseudocódigo**
+
+```text
+1) Cria função contarAs(frase)
+2) Se frase vazia → 0
+3) Normalizar para minúsculas
+4) Inicializar contador a 0
+5) Para cada caractere na frase:
+    Se for "a" → incrementar contador
+6) Devolver contador
+7) Pedir frase ao utilizador e mostrar resultado
+```
+
+**Solução**
+
+```js
+function contarAs(frase) {
+    if (!frase) return 0;
+    const normalizada = frase.toLowerCase();
+    let contador = 0;
+    for (const char of normalizada) {
+        if (char === "a") {
+            contador += 1;
+        }
+    }
+    return contador;
+}
+const inputFrase = prompt("Escreve uma frase:");
+console.log(`Número de letras "a": ${contarAs(inputFrase)}`);
+```
+
+---
+
 2. **Números pares** Cria uma função que recebe um array de números e devolve um novo array só com os números pares.
 3. **Top N palavras**: dada uma frase, devolve as N palavras mais frequentes com suas contagens.
 4. **União de listas**: Pede dois arrays de 5 números ao utilizador e devolve um array com os números únicos de cada array.
