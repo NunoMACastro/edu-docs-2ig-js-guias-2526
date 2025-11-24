@@ -201,7 +201,7 @@ Arrow functions capturam o `this` exterior, portanto são ótimas para callbacks
 
 ---
 
-## 9) Funções de Callback
+## 8) Funções de Callback
 
 Funções que são passadas como argumentos para outras funções.
 
@@ -219,7 +219,71 @@ console.log(calcular(4, 2, produto)); // 8
 
 -   Normalmente usam-se em funções como `map`, `filter`, `reduce`, ou em operações assíncronas como `setTimeout` ou `fetch`. Ver os capítulos 11-Arrays-HighOrder.md e 14-Assincrono-EventLoop.md para mais detalhes.
 
-## 8) Exercícios
+---
+
+## 9) Quantidade variável de argumentos (estilo `*args` / `**kwargs` do Python)
+
+Em Python, temos:
+
+-   `*args` → recebe uma quantidade variável de argumentos posicionais.
+-   `**kwargs` → recebe argumentos “nomeados” num dicionário.
+
+Em JavaScript não existem literalmente `*args`/`**kwargs`, mas usamos dois padrões muito próximos:
+
+-   `...rest` para vários argumentos posicionais.
+-   Um **objeto de opções** (com desestruturação) para simular argumentos nomeados.
+
+### `...rest` → parecido com `*args`
+
+```js
+function juntarNomes(...nomes) {
+    // "nomes" é um array com todos os argumentos recebidos
+    return nomes.join(", ");
+}
+
+console.log(juntarNomes("Ana", "Bruno")); // "Ana, Bruno"
+console.log(juntarNomes("Ana", "Bruno", "Carla")); // "Ana, Bruno, Carla"
+```
+
+Isto é a mesma ideia de:
+
+```python
+def juntar_nomes(*nomes):
+    return ", ".join(nomes)
+```
+
+### Objeto de opções → parecido com `**kwargs`
+
+Para evitar ter muitos parâmetros soltos e para poder “nomear” argumentos na chamada, passamos um objeto:
+
+```js
+function criarUtilizador({ nome, idade = 0, premium = false }) {
+    console.log(`Nome: ${nome}`);
+    console.log(`Idade: ${idade}`);
+    console.log(`Premium: ${premium}`);
+}
+
+// Ordem das propriedades não interessa (tal como kwargs em Python)
+criarUtilizador({ nome: "Ana", premium: true });
+criarUtilizador({ idade: 20, nome: "Bruno" });
+```
+
+Aqui:
+
+-   Usamos um **objeto** em vez de vários parâmetros separados.
+-   A desestruturação no parâmetro permite:
+    -   Tirar logo `nome`, `idade`, `premium` para variáveis.
+    -   Definir valores por defeito (`idade = 0`, `premium = false`).
+-   O `= {}` no fim (`} = {}`) garante que a função não rebenta se for chamada sem argumentos.
+
+Este padrão é muito usado em código real porque:
+
+-   Torna as chamadas mais legíveis (`criarUtilizador({ nome: "Ana", premium: true })`).
+-   É fácil adicionar campos novos sem partir chamadas antigas.
+
+---
+
+## 10) Exercícios
 
 1. Escreve uma função que recebe dois números e devolve o maior.
 2. Cria uma função que recebe um array de números e devolve quantos são maiores que 10.
