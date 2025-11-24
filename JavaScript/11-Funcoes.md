@@ -219,7 +219,7 @@ console.log(calcular(4, 2, produto)); // 8
 
 -   Normalmente usam-se em funções como `map`, `filter`, `reduce`, ou em operações assíncronas como `setTimeout` ou `fetch`. Ver os capítulos 11-Arrays-HighOrder.md e 14-Assincrono-EventLoop.md para mais detalhes.
 
-## 8) Mini desafios
+## 8) Exercícios
 
 1. Escreve uma função que recebe dois números e devolve o maior.
 2. Cria uma função que recebe um array de números e devolve quantos são maiores que 10.
