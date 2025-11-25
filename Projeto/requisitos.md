@@ -138,10 +138,11 @@ Papéis (podem rodar): Coordenação/Docs · UI/Estilos · Lógica/Estado · Tes
 
 ## 7) Entregáveis
 
+1. **Primeira fase** Entregar um **documento md** com: tema, objetivo, lista de funcionalidades e ideia de estrutura visual da aplicação.
 1. **Repositório Git** com código e mensagens de commit claras.
-2. **README** com: tema, como correr, funcionalidades (MVP + extras), **como os dados são guardados**, capturas/GIF.
-3. **Ficheiro de seeds** (`src/data/seed.js` ou `.json`) se usarem dados iniciais.
-4. **Apresentação** (3–5 min): demo + quem fez o quê.
+1. **README** com: tema, como correr, funcionalidades (MVP + extras), **como os dados são guardados**, capturas/GIF.
+1. **Ficheiro de seeds** (`src/data/seed.js` ou `.json`) se usarem dados iniciais.
+1. **Apresentação** (3–5 min): demo + quem fez o quê.
 
 ---
 
