@@ -8,10 +8,20 @@ Este repositório junta os apontamentos usados nas aulas de Programação para o
 
 | Pasta/ficheiro | Conteúdo                                                                                 |
 | -------------- | ---------------------------------------------------------------------------------------- |
+| `Projeto/`     | Guias para o projeto final: requisitos, planeamento, boas práticas.                      |
 | `JavaScript/`  | 18 capítulos em Markdown cobrindo o percurso completo: fundamentos → browser/intermédio. |
 | `React/`       | Materiais introdutórios de React (em evolução).                                          |
 
 > Todos os capítulos de JavaScript seguem o mesmo formato: título, objetivo, secções numeradas, exemplos comentados e desafios no fim.
+
+---
+
+## Projeto Final (11.º ano)
+
+Os guias do projeto final estão na pasta `Projeto/`. Incluem:
+
+-   `requisitos.md`: requisitos, temas sugeridos, mini-planeamento.
+-   `markdown.md`: guia prático de Markdown (usado para escrever o README do projeto).
 
 ---
 
