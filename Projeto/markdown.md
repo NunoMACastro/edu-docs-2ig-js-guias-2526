@@ -1,4 +1,12 @@
-# [19] Markdown — Guia Prático (11.º ano)
+# Markdown — Guia Prático (11.º ano)
+
+## Este cabeçalho é mais pequenino que o anterior
+
+### Este cabeçalho é mais pequenino que o anterior
+
+#### Este cabeçalho é mais pequenino que o anterior
+
+##### Este cabeçalho é mais pequenino que o anterior
 
 > **Objetivo:** aprender a escrever documentos claros e bem formatados usando **Markdown** (MD).  
 > Vamos cobrir **o essencial**, **boas práticas**, **modelos prontos** e **exercícios**. O foco é poderes escrever README.md, relatórios de exercícios e apontamentos de aula.
