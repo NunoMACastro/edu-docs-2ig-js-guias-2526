@@ -22,6 +22,9 @@ try {
 }
 ```
 
+O objeto `erro` é criado automaticamente pelo motor e tem propriedades como `name`, `message` e `stack`.
+Por exemplo, podemos aceder a `erro.name` para saber o tipo de erro.
+
 Exemplo:
 
 ```js
@@ -65,7 +68,17 @@ try {
 }
 ```
 
----
+Lista de erros que podes usar:
+
+-   `Error` (geral)
+-   `EvalError` (erro em `eval()`)
+-   `RangeError` (valor fora do intervalo permitido)
+-   `ReferenceError` (referência a variável inexistente)
+-   `SyntaxError` (erro de sintaxe)
+-   `TypeError` (tipo de dado incorreto)
+-   `URIError` (erro em funções de codificação/decodificação URI)
+
+## Mais detalhes: [MDN - Error](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Error)
 
 ## 3) Erros personalizados
 
@@ -120,6 +133,9 @@ try {
 ---
 
 ## 5) Erros em código assíncrono
+
+> Consultar o ficheiro relativo a enventos assíncronos para mais detalhes.
+> [15 - Assincrono e Event Loop](15-Assincrono-EventLoop.md)
 
 ### Promises com `.then/.catch/.finally`
 
@@ -185,12 +201,9 @@ function lerJSONSeguro(texto, fallback = {}) {
 ## 7) Mini desafios
 
 1. Cria uma função `lerNumero(promptMsg)` que usa `prompt`, converte para número e lança `TypeError` se for inválido. Apanha o erro fora da função.
-2. Implementa `fetchAluno(id)` que simula `fetch` com `setTimeout` e trata erros dentro da Promise.
-3. Faz uma mini utilidade que recebe uma função `async` e volta a tentar até 3 vezes antes de desistir (com mensagens no `console`).
-4. Define uma classe `SaldoInsuficienteError` e usa-a num método `levantar` que recusa levantamentos maiores que o saldo.
-5. Escreve `executarComRetry(fn, tentativas)` que volta a tentar funções síncronas e devolve `{ ok, valor/erro, tentativasUsadas }`.
-6. Cria um `try/catch/finally` que abre um recurso simulado (`const recurso = { aberto: true }`), lança erro propositado e garante no `finally` que `recurso.aberto = false`.
-7. Usa `Promise.allSettled` para correr três Promises, duas que resolvem e uma que rejeita. Faz pós-processamento que identifica quais falharam.
+2. Cria uma função `calcularRaizQuadrada(x)` que lança `RangeError` se `x` for negativo. Testa com valores válidos e inválidos.
+3. Cria uma classe de erro personalizada `DivisaoPorZeroError` e usa-a numa função `dividir(a, b)`.
+4. Usa `finally` para garantir que um ficheiro (simulado) é sempre fechado, mesmo que haja erro na leitura.
 
 ## Changelog
 
