@@ -1,4 +1,4 @@
-# [11] Funções (11.º ano)
+# [10] Funções (11.º ano)
 
 > **Objetivo**: criar funções claras, escolher a forma certa (declaração, expressão ou arrow), trabalhar com parâmetros, entender escopos/closures e saber quando usar `return` cedo.
 

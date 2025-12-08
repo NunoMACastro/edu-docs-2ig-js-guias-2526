@@ -9,8 +9,18 @@
 -   Separas responsabilidades (ex.: `math.js`, `alunos.js`).
 -   Evitas poluir o escopo global.
 -   Facilita testes e reutilização.
+-   Ajuda-te a reutilizar o mesmo código em vários projetos (copias só o ficheiro do módulo).
 
-Cada ficheiro com `import` ou `export` passa a ser um módulo com o seu próprio escopo.
+Cada ficheiro com `import` ou `export` passa a ser um módulo com o seu próprio escopo.  
+Organiza pastas simples, por exemplo:
+
+```
+/app
+ ├─ index.html
+ ├─ main.js        ← ponto de entrada
+ └─ utils/
+     └─ math.js    ← exporta funções de matemática
+```
 
 ---
 
@@ -27,6 +37,7 @@ Notas importantes:
 -   Os módulos são carregados de forma assíncrona (como se tivessem `defer`).
 -   Usa caminhos relativos com extensão (`./utils/math.js`).
 -   Abre o projeto via servidor local (Live Server, Vite, etc.) para evitar erros de CORS ao usar `file://`.
+-   Se precisares de vários `script type="module"`, todos podem importar/exportar entre si.
 
 ---
 
@@ -87,7 +98,52 @@ export { default as title } from "./texto.js";
 
 ---
 
-## 3) Live bindings
+## 3) Exemplo completo no browser
+
+1. Cria `utils/math.js`:
+
+```js
+export function soma(a, b) {
+    return a + b;
+}
+export const PI = 3.14;
+```
+
+2. Cria `main.js`:
+
+```js
+import { PI, soma } from "./utils/math.js";
+
+const raio = 5;
+const perimetro = 2 * PI * raio;
+const total = soma(perimetro, 10);
+
+console.log("Perímetro", perimetro);
+console.log("Total", total);
+```
+
+3. No `index.html`, garante que usas `type="module"`:
+
+```html
+<!doctype html>
+<html lang="pt">
+    <head>
+        <meta charset="utf-8" />
+        <title>Módulos</title>
+    </head>
+    <body>
+        <h1>Demo</h1>
+        <script type="module" src="./main.js"></script>
+    </body>
+</html>
+```
+
+Abre com um servidor local (Live Server) e vê os `console.log`.  
+Este mini-projeto resume todo o fluxo: cada ficheiro cuida de uma responsabilidade, importas só o que precisas e manténs o código organizado.
+
+---
+
+## 4) Live bindings
 
 Imports não são cópias; apontam para o valor exportado.
 
@@ -111,7 +167,7 @@ Não podes fazer `total = 5` fora do módulo original — só o ficheiro que exp
 
 ---
 
-## 4) Top-level `await`
+## 5) Top-level `await`
 
 Dentro de módulos podes usar `await` sem estar numa função `async`.
 
@@ -124,7 +180,7 @@ O módulo que importar `cfg` só corre depois de a Promise terminar, garantindo 
 
 ---
 
-## 5) `import()` dinâmico
+## 6) `import()` dinâmico
 
 Carrega módulos apenas quando precisares (retorna uma Promise).
 
@@ -140,7 +196,7 @@ btn.addEventListener("click", async () => {
 
 ---
 
-## 6) Node.js: ESM vs CommonJS
+## 7) Node.js: ESM vs CommonJS
 
 ### Ativar ESM
 
@@ -168,14 +224,18 @@ No Node moderno podes usar `import dados from "./dados.json" assert { type: "jso
 
 ---
 
-## 7) Boas práticas
+## 8) Boas práticas
 
 -   Cada módulo deve ter uma responsabilidade clara.
 -   Evita defaults quando exportas muitas coisas do mesmo ficheiro — `named exports` tornam o autocompletar mais fácil.
 -   Usa index/barrel apenas quando realmente simplifica (demasiadas camadas podem confundir).
 -   Documenta no topo do ficheiro o que ele expõe (`// Exporta: getAluno, salvarAluno`).
+-   Mantém nomes de ficheiro que descrevam o conteúdo (`alunosStore.js`, `formatarTexto.js`).
+-   Sempre que importares muita coisa, considera agrupar funções relacionadas num objeto exportado para evitar dezenas de imports soltos.
 
-## 8) Mini desafios
+---
+
+## 9) Mini desafios
 
 1. Cria `alunos.js` com `export const alunos = [...]` e `export function media()`; em `main.js`, importa ambos e mostra a média na consola.
 2. Faz `cores.js` com um `export default function hex(r, g, b)` e usa-o noutro ficheiro para gerar `#FFA500`.
@@ -187,6 +247,9 @@ No Node moderno podes usar `import dados from "./dados.json" assert { type: "jso
 
 ## Changelog
 
+-   **v1.3.0 — 2025-11-18**
+    -   Adicionado exemplo completo passo a passo no browser e checklist de boas práticas mais detalhada.
+    -   Reforçados contextos introdutórios para explicar estrutura de pastas e fluxo de imports ao nível do 11.º ano.
 -   **v1.2.0 — 2025-11-10**
     -   Mini desafios simplificados e agora focados em cenários de browser (sem Node CLI).
 -   **v1.1.0 — 2025-11-10**

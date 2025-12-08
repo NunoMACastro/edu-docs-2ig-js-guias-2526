@@ -1,4 +1,4 @@
-# [12] Funções de Alto Nível em Arrays (11.º ano)
+# [11] Funções de Alto Nível em Arrays (11.º ano)
 
 > **Objetivo**: deixar os ciclos manuais de lado e usar métodos como `map`, `filter`, `reduce` e `find` para escrever código mais declarativo e fácil de ler.
 

@@ -38,9 +38,9 @@ Os guias do projeto final estão na pasta `Projeto/`. Incluem:
 7. [07 — Arrays](JavaScript/07-Arrays.md)
 8. [08 — Objetos e `this`](JavaScript/08-Objetos-e-this.md)
 9. [09 — Problem Solving e Pensamento Analítico](JavaScript/09-Problem-Solving-e-Pensamento-Analitico.md)
-10. [10 — Exceções](JavaScript/10-Excecoes.md)
-11. [11 — Funções](JavaScript/11-Funcoes.md)
-12. [12 — Funções de Alto Nível em Arrays](JavaScript/12-Arrays-HighOrder.md)
+10. [10 — Funções](JavaScript/10-Funcoes.md)
+11. [11 — Funções de Alto Nível em Arrays](JavaScript/11-Arrays-HighOrder.md)
+12. [12 — Exceções](JavaScript/12-Excecoes.md)
 13. [13 — Módulos ES](JavaScript/13-Modulos-ES.md)
 
 ### Intermédio / Browser (13‑17)
