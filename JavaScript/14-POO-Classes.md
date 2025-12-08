@@ -10,6 +10,8 @@
 -   **Objeto (instância)**: o **bolo** feito a partir do molde / receita. Cada bolo tem os **seus próprios valores**.
 -   **Propriedades** = dados (ex.: `nome`, `idade`). **Métodos** = ações (ex.: `apresentar()`).
 -   Em JavaScript, **classes** são uma forma prática de escrever algo que por baixo funciona com **protótipos** (vamos ver mais tarde).
+-   Este capítulo assume que já dominas **objetos e `this`** (capítulo 8) e **funções** (capítulos 10/11). Vamos construir em cima disso com calma.
+-   Lembra-te: uma classe **não é magia nova**; é apenas uma forma organizada de juntar dados + comportamento que já usaste.
 
 ---
 
@@ -41,6 +43,8 @@ console.log(ana.apresentar()); // "Olá, eu sou a/o Ana..."
 
 -   `new` cria um **novo objeto** e corre o `constructor`.
 -   `this` dentro dos métodos da classe refere‑se ao **objeto atual**. O `this`é um “atalho” para o objeto e é um dos principais conceitos de OOP pois permite associar o objeto aos seus dados e comportamentos.
+-   Podes definir **valores por defeito** para propriedades logo na classe (`idade = 18;`) ou nos parâmetros do `constructor` (`constructor(nome, idade = 18)`).
+-   Se não precisares de um `constructor` personalizado, podes omitir; o JavaScript cria um vazio (`constructor() {}`) automaticamente.
 
 ---
 
@@ -274,15 +278,124 @@ class Botao {
 }
 ```
 
+**B) Usar campos de classe com arrow functions**
+
+```js
+class Botao {
+    handleClick = () => {
+        console.log("this aponta sempre para a instância.");
+    };
+}
+```
+
+Ao declarar o método como propriedade (`handleClick = () => { ... }`), o `this` fica automaticamente “preso” à instância porque arrow functions não criam `this` próprio. É a abordagem mais simples para eventos no browser.
+
+> Regra rápida: se um método vai ser passado como callback, define-o como arrow (`metodo = () => { ... }`) ou faz `bind` no `constructor`.
+
 ---
 
-## 8) JSON e classes (nota útil)
+## 8) Estudo guiado: sistema simples de alunos
+
+Vamos juntar vários conceitos num mini‑projeto. Objetivo: gerir uma turma com alunos, validar notas e calcular média/aprovados.
+
+1. **Classe base (`Pessoa`)** — só guarda nome e apresenta.
+
+```js
+class Pessoa {
+    constructor(nome) {
+        this.nome = nome;
+    }
+    apresentar() {
+        return `Sou ${this.nome}`;
+    }
+}
+```
+
+2. **Subclasse (`Aluno`)** — herda de `Pessoa`, adiciona nota privada + validação (get/set).
+
+```js
+class Aluno extends Pessoa {
+    #nota = 0;
+    constructor(nome, nota) {
+        super(nome);
+        this.nota = nota; // usa setter
+    }
+    get nota() {
+        return this.#nota;
+    }
+    set nota(valor) {
+        if (typeof valor !== "number" || valor < 0 || valor > 20) {
+            throw new RangeError("Nota inválida.");
+        }
+        this.#nota = valor;
+    }
+    apresentar() {
+        return `${super.apresentar()} e tenho ${this.nota} valores.`;
+    }
+}
+```
+
+3. **Classe compositora (`Turma`)** — possui um array privado com alunos e métodos utilitários.
+
+```js
+class Turma {
+    #alunos = [];
+    adicionarAluno(aluno) {
+        if (!(aluno instanceof Aluno)) {
+            throw new TypeError("Preciso de um Aluno.");
+        }
+        this.#alunos.push(aluno);
+    }
+    media() {
+        if (this.#alunos.length === 0) return 0;
+        const soma = this.#alunos.reduce((acc, aluno) => acc + aluno.nota, 0);
+        return Math.round((soma / this.#alunos.length) * 10) / 10;
+    }
+    aprovados() {
+        return this.#alunos.filter((aluno) => aluno.nota >= 10);
+    }
+    listar() {
+        console.table(
+            this.#alunos.map((aluno) => ({
+                nome: aluno.nome,
+                nota: aluno.nota,
+            }))
+        );
+    }
+}
+```
+
+4. **Usar tudo junto**
+
+```js
+const turma = new Turma();
+turma.adicionarAluno(new Aluno("Ana", 18));
+turma.adicionarAluno(new Aluno("Bruno", 9));
+turma.listar();
+console.log("Média:", turma.media());
+console.log("Aprovados:", turma.aprovados().map((a) => a.nome));
+```
+
+Este exemplo mostra:
+
+-   Herança (`Aluno extends Pessoa`).
+-   Encapsulamento (`#nota`, `#alunos`).
+-   Validação com setters.
+-   Composição (Turma **tem** Alunos).
+-   Uso de métodos utilitários de array vistos no capítulo 11.
+
+Usa-o como referência para os teus próprios projetos: define a classe base, cria subclasses quando fizer sentido e encapsula coleções em classes “gestoras”.
+
+---
+
+## 9) JSON e classes (nota útil)
 
 -   Converter para JSON **não inclui** métodos nem campos privados. Normalmente só os **dados públicos** são serializados.
 -   Se precisares, cria um método que devolve um **objeto simples** pronto para `JSON.stringify`:
 
 ```js
 class Pessoa {
+    #idade;
     constructor(nome, idade) {
         this.nome = nome;
         this.#idade = idade;
@@ -296,7 +409,7 @@ class Pessoa {
 
 ---
 
-## 9) Fábricas vs Classes (quando usar cada uma)
+## 10) Fábricas vs Classes (quando usar cada uma)
 
 **Fábrica**: função que devolve um objeto, muitas vezes com **estado privado por closure** (sem `new`).  
 **Classe**: quando queres **herdar**, usar **`instanceof`** e uma API de OOP clara para a turma.
@@ -335,7 +448,7 @@ class Termometro {
 
 ---
 
-## 10) Boas práticas e armadilhas
+## 11) Boas práticas e armadilhas
 
 -   **Valida** dados nos **setters** ou em métodos que mudam estado.
 -   Usa **`#privado`** para proteger o que não deve ser alterado de fora.
@@ -345,7 +458,7 @@ class Termometro {
 
 ---
 
-## 11) Dicionário rápido
+## 12) Dicionário rápido
 
 -   **Classe**: molde/receita de como os objetos são.
 -   **Objeto/Instância**: “coisa” criada a partir da classe.
@@ -360,7 +473,7 @@ class Termometro {
 
 ---
 
-## 12) Mini desafios
+## 13) Mini desafios
 
 1. **Saudação** — cria `class Saudacao` com `mensagem` no constructor e um método `falar()` que devolve `Olá + mensagem`. Instancia duas versões e mostra o texto no `console`.
 2. **Contador simples** — cria `class Contador` com uma propriedade `valor = 0` e um método `incrementar()` que soma 1. Mostra o valor após três chamadas.
@@ -375,7 +488,7 @@ class Termometro {
 11. **JSON** — adiciona `toJSON()` a `class Aluno` para devolver `{ nome, turma }` e confirma com `JSON.stringify` que só esses campos aparecem.
 12. **Fábrica x Classe** — escreve uma função `criarContador()` (fábrica) e `class Contador`. Usa ambos para mostrar que guardam estado.
 
-## 13) Resumo final
+## 14) Resumo final
 
 -   **Classe** = molde; **objeto** = instância do molde.
 -   **Encapsula** com `#privado` e valida com **getters/setters**.
@@ -385,6 +498,10 @@ class Termometro {
 
 ## Changelog
 
+-   **v1.5.0 — 2025-11-18**
+    -   Incluído estudo guiado “Turma” combinando herança, encapsulamento e composição.
+    -   Secção sobre `this` em callbacks agora cobre também arrow functions como classe field.
+    -   Mais contexto introdutório e notas sobre valores por defeito no `constructor`.
 -   **v1.4.0 — 2025-11-10**
     -   Adicionados dois desafios introdutórios específicos para getters e setters antes do exercício de validação.
 -   **v1.3.0 — 2025-11-10**
