@@ -10,7 +10,7 @@
 -   **Objeto (instância)**: o **bolo** feito a partir do molde / receita. Cada bolo tem os **seus próprios valores**.
 -   **Propriedades** = dados (ex.: `nome`, `idade`). **Métodos** = ações (ex.: `apresentar()`).
 -   Em JavaScript, **classes** são uma forma prática de escrever algo que por baixo funciona com **protótipos** (vamos ver mais tarde).
--   Este capítulo assume que já dominas **objetos e `this`** (capítulo 8) e **funções** (capítulos 10/11). Se o `this` ainda causar estranheza, guarda em mente a §7 para um refresco enquanto fores lendo.
+-   Este capítulo assume que já dominas **objetos e `this`** (capítulo 8) e **funções** (capítulos 10/11). Vamos construir em cima disso com calma.
 -   Lembra-te: uma classe **não é magia nova**; é apenas uma forma organizada de juntar dados + comportamento que já usaste.
 
 ---
@@ -265,42 +265,14 @@ class Relogio {
 ## 7) `this` em classes e callbacks
 
 -   Dentro de um **método**, `this` é a **instância**.
--   O valor de `this` é **dinâmico**: depende de **quem chama** a função. Quando fazemos `inst.metodo()`, o `this` aponta para `inst`, mas se guardarmos uma referência `const ref = inst.metodo; ref();`, o `this` deixa de apontar para a instância e passa a ser `undefined` (modo estrito) ou `window`/`globalThis`.
--   Ao passar métodos como **callback** (eventos do DOM, `setTimeout`, `map`, listeners de Node.js...), essa mudança de contexto acontece automaticamente — daí “perdermos” o `this`.
+-   Ao passar métodos como **callback** (ex.: para um evento), podes **perder** o `this`. Duas soluções comuns:
 
-```js
-class Contador {
-    valor = 0;
-    incrementar() {
-        this.valor++;
-    }
-}
-const contador = new Contador();
-const botao = document.querySelector("button");
-// BUG: dentro de incrementar, this === botao
-botao.addEventListener("click", contador.incrementar);
-```
-
-### Manter o `this` com `bind`
-
-`Function.prototype.bind` cria uma **nova função** onde o `this` fica preso ao valor que indicarmos. Assim podemos continuar a partilhar o mesmo método no protótipo sem perder o contexto.
-
-```js
-botao.addEventListener("click", contador.incrementar.bind(contador));
-```
-
-> Lembra-te: `bind` não executa a função — apenas devolve outra função com o `this` definido. Se quiseres executar na hora, usa `metodo.call(instancia, arg1, arg2)` ou `metodo.apply(instancia, [arg1, arg2])`.
-
-### Fazer `bind` no `constructor`
-
-Para não repetires `bind` sempre que adicionas o listener, cria a versão “presa” assim que a instância nasce:
+**A) Fazer `bind` no constructor**
 
 ```js
 class Botao {
-    constructor(elemento) {
-        this.elemento = elemento;
-        this.handleClick = this.handleClick.bind(this); // prende o this uma vez
-        this.elemento.addEventListener("click", this.handleClick);
+    constructor() {
+        this.handleClick = this.handleClick.bind(this);
     }
     handleClick() {
         console.log("this é a instância:", this);
@@ -308,25 +280,19 @@ class Botao {
 }
 ```
 
-### Arrow functions como campos de classe
-
-Outra abordagem é declarar o método como propriedade usando uma **arrow function**. Arrow functions **não criam um `this` próprio**; herdam o `this` do contexto exterior (a instância), logo o método mantém sempre o contexto correto.
+**B) Usar campos de classe com arrow functions**
 
 ```js
 class Botao {
-    constructor(elemento) {
-        this.elemento = elemento;
-        this.elemento.addEventListener("click", this.handleClick);
-    }
     handleClick = () => {
         console.log("this aponta sempre para a instância.");
     };
 }
 ```
 
-**Desvantagem**: cada instância recebe a **sua própria cópia** da função arrow. Em cenários com milhares de instâncias, podes preferir o `bind` para manter uma única função partilhada.
+Ao declarar o método como propriedade (`handleClick = () => { ... }`), o `this` fica automaticamente “preso” à instância porque arrow functions não criam `this` próprio. É a abordagem mais simples para eventos no browser.
 
-> Regra rápida: se um método vai ser passado como callback, define-o como arrow (`metodo = () => { ... }`) ou faz `bind` no `constructor`. Assim o `this` não se perde e evitas bugs difíceis de detetar.
+> Regra rápida: se um método vai ser passado como callback, define-o como arrow (`metodo = () => { ... }`) ou faz `bind` no `constructor`.
 
 ---
 
@@ -450,16 +416,13 @@ class Pessoa {
 
 ## 10) Fábricas vs Classes (quando usar cada uma)
 
-Há duas formas populares de criar objetos reutilizáveis:
-
--   **Fábricas**: funções normais que devolvem objetos. Aproveitam **closures** para guardar estado privado sem `#` e não precisam de `new`.
--   **Classes**: sintaxe dedicada a OOP. Funcionam com `new`, suportam `extends`, `instanceof`, campos privados `#`, `static`, etc.
-
-### Como pensar em fábricas
+**Fábrica**: função que devolve um objeto, muitas vezes com **estado privado por closure** (sem `new`).  
+**Classe**: quando queres **herdar**, usar **`instanceof`** e uma API de OOP clara para a turma.
 
 ```js
+// FÁBRICA (leve, sem herança)
 function criarTermometro() {
-    let c = 20; // variável privada dentro da closure
+    let c = 20;
     return {
         aquecer() {
             c++;
@@ -472,17 +435,8 @@ function criarTermometro() {
         },
     };
 }
-const t1 = criarTermometro();
-const t2 = criarTermometro();
-```
 
--   Cada chamada cria **novas funções** e um novo “pacote” de variáveis privadas (`c`).
--   Útil quando queres algo muito simples, rápido de escrever e não precisas de herança ou `new`.
--   Dá jeito quando estás a criar utilitários e queres evitar `this`. Lembra-te de que métodos definidos dentro da fábrica **não partilham protótipo**, logo o custo de memória é um pouco superior (cada instância tem as suas funções).
-
-### Como pensar em classes
-
-```js
+// CLASSE (quando pedes OOP explícito)
 class Termometro {
     #c = 20;
     aquecer() {
@@ -495,22 +449,7 @@ class Termometro {
         return this.#c;
     }
 }
-const t1 = new Termometro();
-const t2 = new Termometro();
 ```
-
--   Métodos no corpo da classe vivem no **protótipo**, logo todas as instâncias partilham o mesmo código (mais eficiente quando crias muitas).
--   Podes usar `extends`, `super`, `static`, `instanceof` e integrar melhor com bibliotecas que esperam classes.
--   O `#c` privado só funciona com classes; se precisares de compatibilidade com código muito antigo, fábricas com closure são alternativa.
-
-### Quando usar cada uma?
-
--   **Fábricas** brilham quando: queres encapsular estado de forma rápida, preferes evitar `this`, vais devolver objetos muito flexíveis (ex.: opções para uma função) ou precisas de algo configurável antes de criar o objeto final (fábricas que devolvem outras fábricas).
--   **Classes** brilham quando: o modelo mental “molde → instância” faz sentido, vais criar várias instâncias, precisas de herança, tens de verificar `obj instanceof Tipo`, ou queres expor uma API familiar a quem já aprendeu OOP.
-
-> Dica de exame/entrevista: fábricas são funções, por isso não precisas de `new`. Se esqueceres do `new` numa classe (`Termometro()`), o `this` fica `undefined` e rebenta; numa fábrica nada de mal acontece.
-
-Em aplicações reais podes até **combinar** ambas. Ex.: uma classe `Jogador` pode receber objetos criados por fábricas (`criarInventario()`), ou podes expor uma fábrica `criarPessoa()` que internamente faz `return new Pessoa(...)` para esconder detalhes de implementação.
 
 ---
 
