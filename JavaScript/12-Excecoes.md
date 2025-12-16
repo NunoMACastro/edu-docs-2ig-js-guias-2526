@@ -24,7 +24,7 @@
 
 <a id="sec0"></a>
 
-Uma **exceção** é o grito do motor JavaScript a dizer: “Não consigo continuar, há aqui algo que não fez sentido”.  
+Uma **exceção** é o motor JavaScript a dizer: “Não consigo continuar, há aqui algo que não fez sentido”.  
 Alguns exemplos que já viste nas aulas anteriores:
 
 -   `JSON.parse("isto não é JSON")` → `SyntaxError`.
