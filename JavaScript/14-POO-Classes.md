@@ -10,8 +10,7 @@
 -   **Objeto (instância)**: o **bolo** feito a partir do molde / receita. Cada bolo tem os **seus próprios valores**.
 -   **Propriedades** = dados (ex.: `nome`, `idade`). **Métodos** = ações (ex.: `apresentar()`).
 -   Em JavaScript, **classes** são uma forma prática de escrever algo que por baixo funciona com **protótipos** (vamos ver mais tarde).
--   Este capítulo assume que já dominas **objetos e `this`** (capítulo 8) e **funções** (capítulos 10/11). Vamos construir em cima disso com calma.
--   Lembra-te: uma classe **não é magia nova**; é apenas uma forma organizada de juntar dados + comportamento que já usaste.
+-   Este capítulo assume que já dominas **objetos e `this`** (capítulo 8) e **funções** (capítulos 10/11). Vamos construir em cima disso com calma, mas sempre lembrando que o valor de `this` **depende de como a função é chamada**: com `new` aponta para a instância, solta (ex.: `const fn = pessoa.apresentar; fn();`) fica `undefined` em modo strict, e com `.call/.apply/.bind` podemos forçar um objeto específico. Esta ideia volta várias vezes ao longo do capítulo.
 
 ---
 
@@ -264,14 +263,29 @@ class Relogio {
 
 ## 7) `this` em classes e callbacks
 
--   Dentro de um **método**, `this` é a **instância**.
--   Ao passar métodos como **callback** (ex.: para um evento), podes **perder** o `this`. Duas soluções comuns:
+-   Dentro de um **método**, `this` é a **instância** criada com `new`.
+-   Fora de uma chamada normal `instancia.metodo()`, o `this` **deixa de apontar** para a instância. Isto acontece muito quando usamos esse método como callback de eventos/temporizadores, ou quando fazemos `const func = instancia.metodo; func();`.
+-   Ao passar métodos como **callback** (ex.: para um evento), podes **perder** o `this`. Quando isso acontece em modo strict, o valor fica `undefined` e acabas com erros do género “Cannot read properties of undefined”. Duas soluções comuns:
+
+```js
+class Timer {
+    nome = "Timer oficial";
+    iniciar() {
+        // ERRO: this.iniciar é passado "solto" para setTimeout
+        setTimeout(this.reportar, 1000);
+    }
+    reportar() {
+        console.log(`Sou ${this.nome}`); // this === undefined, rebenta
+    }
+}
+```
 
 **A) Fazer `bind` no constructor**
 
 ```js
 class Botao {
     constructor() {
+        // bind cria uma NOVA função cujo this fica preso à instância
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick() {
@@ -293,6 +307,12 @@ class Botao {
 Ao declarar o método como propriedade (`handleClick = () => { ... }`), o `this` fica automaticamente “preso” à instância porque arrow functions não criam `this` próprio. É a abordagem mais simples para eventos no browser.
 
 > Regra rápida: se um método vai ser passado como callback, define-o como arrow (`metodo = () => { ... }`) ou faz `bind` no `constructor`.
+
+**Resumo rápido**
+
+-   `bind` devolve uma nova função **fixando** o `this`. Usa-se quando queres manter o método como função normal mas garantir a ligação (`document.addEventListener("click", this.handleClick.bind(this))`).
+-   Arrow functions como campos de classe já “capturam” o `this` lexical, por isso dispensam `bind`.
+-   Métodos normais **sem** `bind` só funcionam enquanto são chamados diretamente da instância. Assim que lhes retiras o contexto (`const fn = instancia.metodo;`), perdes o `this`.
 
 ---
 
@@ -419,6 +439,11 @@ class Pessoa {
 **Fábrica**: função que devolve um objeto, muitas vezes com **estado privado por closure** (sem `new`).  
 **Classe**: quando queres **herdar**, usar **`instanceof`** e uma API de OOP clara para a turma.
 
+-   Usa **fábricas** quando precisas de algo super rápido, sem herança e onde `this` só vai baralhar. O “estado” fica guardado em variáveis normais dentro da função.
+-   Usa **classes** quando precisas de comunicar explicitamente que existe um tipo, quando vais compor heranças ou quando queres aproveitar ferramentas do ecossistema que fazem `obj instanceof MinhaClasse`.
+-   Ambas podem ter encapsulamento: fábricas usam **closures** (variáveis internas), classes usam `#privado`. A principal diferença é mesmo o modo de criação e a possibilidade de herdar.
+-   Não há certo/errado — escolhe o que tornar a intenção mais clara para a tua equipa/colegas.
+
 ```js
 // FÁBRICA (leve, sem herança)
 function criarTermometro() {
@@ -450,6 +475,21 @@ class Termometro {
     }
 }
 ```
+
+Fábricas também podem receber dependências e devolver métodos pré‑configurados, por exemplo:
+
+```js
+function criarBotao(texto, onClick) {
+    return {
+        texto,
+        clicar() {
+            onClick?.(texto);
+        },
+    };
+}
+```
+
+Neste caso não tocamos em `new` nem precisamos de `this`. Para objetos que vivem pouco tempo ou são altamente personalizados, este estilo é mais direto. Já quando precisas de algo reutilizável com herança (`class TermometroBluetooth extends Termometro`), a classe dá-te uma fundação formal.
 
 ---
 
@@ -503,6 +543,8 @@ class Termometro {
 
 ## Changelog
 
+-   **v.1.6.0 - 2025-11-16**
+    -   Simplificação de conceitos
 -   **v1.5.0 — 2025-11-18**
     -   Incluído estudo guiado “Turma” combinando herança, encapsulamento e composição.
     -   Secção sobre `this` em callbacks agora cobre também arrow functions como classe field.
