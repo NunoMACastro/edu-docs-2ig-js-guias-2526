@@ -129,7 +129,7 @@ Quando a cadeia crescer demasiado, guarda resultados intermédios em variáveis 
 ## 9) Mini desafios
 
 1. Com `[1, 2, 3, 4, 5]`, usa `map` para devolver um array com o dobro de cada valor.
-2. Recebe `[15, 8, 20, 9, 18]` e usa `filter` para ficar apenas com notas ≥ 10.
+2. Cria a lista com `[15, 8, 20, 9, 18]` e usa `filter` para ficar apenas com notas ≥ 10.
 3. A partir de `[{ nome: "Ana", nota: 18 }, ...]`, usa `map` seguido de `join(", ")` para gerar a frase `"Alunos: Ana, Bruno"`.
 4. Com `["Ana", "Álvaro", "Bruno"]`, mostra qual o primeiro nome que começa por "A" usando `find` (ignora acentos com `toLowerCase`).
 5. Verifica se há algum valor maior que 50 com `some` e se todos são positivos com `every` num array à tua escolha.
