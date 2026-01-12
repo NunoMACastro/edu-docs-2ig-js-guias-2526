@@ -81,6 +81,14 @@ Regras importantes:
 -   O `finally` corre sempre, exista erro ou não. É opcional, mas útil.
 -   Podes ter `try/catch` dentro de funções e chamar essas funções noutros sítios. Tudo o que aprendeste sobre organização de código continua a aplicar-se aqui.
 
+Propriedades úteis do objeto `erro` no `catch`:
+
+-   `name`: tipo do erro (`TypeError`, `RangeError`, ...).
+-   `message`: mensagem curta com o problema.
+-   `stack`: rastreio das funções chamadas (debugging).
+-   `cause`: erro original, se tiver sido definido ao criar o erro.
+-   Campos extra que tu adicionares (`codigo`, `valor`, `url`, ...).
+
 Exemplo básico:
 
 ```js
