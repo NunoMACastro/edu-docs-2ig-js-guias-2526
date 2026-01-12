@@ -141,10 +141,15 @@ try {
 
 Preferências:
 
--   Cria objetos com `new Error("mensagem")` ou tipos específicos:
-    -   `TypeError` → tipo errado.
-    -   `RangeError` → valor fora do intervalo.
-    -   `SyntaxError`, `ReferenceError`, `URIError`, …
+-   Cria objetos com `new Error("mensagem")` ou tipos específicos (os principais):
+    -   `Error` → genérico, quando não há um tipo melhor.
+    -   `TypeError` → tipo errado (ex.: passar string quando era número).
+    -   `RangeError` → valor fora do intervalo esperado (ex.: índice negativo).
+    -   `ReferenceError` → variável não declarada ou inexistente.
+    -   `SyntaxError` → erro de sintaxe (normalmente do motor ao interpretar código).
+    -   `URIError` → problema com `encodeURI`/`decodeURI` em strings inválidas.
+    -   `EvalError` → reservado para `eval` (quase não aparece hoje em dia).
+    -   `AggregateError` → vários erros agrupados (ex.: `Promise.any`).
 -   Personaliza a mensagem e, se precisares, adiciona dados extra:
 
 ```js
