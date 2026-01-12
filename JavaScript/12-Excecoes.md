@@ -113,13 +113,30 @@ try {
 
 Se a divisão falhar, o `catch` mostra uma mensagem simpática e o `finally` corre na mesma.
 
+Podemos usar o prompt e converter para número:
+
+```js
+try {
+    const entradaA = prompt("Dividendo (a):");
+    const entradaB = prompt("Divisor (b):");
+    const a = Number(entradaA);
+    const b = Number(entradaB);
+    const resultado = dividir(a, b);
+    console.log(`Resultado: ${resultado}`);
+} catch (erro) {
+    console.warn("Não foi possível dividir:", erro.message);
+} finally {
+    console.log("Operação terminada.");
+}
+```
+
 ---
 
 ## 3) `throw`
 
 <a id="sec3"></a>
 
-`throw` serve para dizer explicitamente que algo está inválido.  
+`throw` serve para dizer explicitamente que algo está inválido.
 É como levantar a mão e dizer: “a partir daqui não posso continuar”.
 
 O que acontece quando usas `throw`:
