@@ -107,7 +107,7 @@ Se a divisão falhar, o `catch` mostra uma mensagem simpática e o `finally` cor
 
 ---
 
-## 3) `throw`: avisar cedo e bem
+## 3) `throw`
 
 <a id="sec3"></a>
 
