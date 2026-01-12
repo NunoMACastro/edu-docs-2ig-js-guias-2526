@@ -267,6 +267,7 @@ Outros usos comuns: fechar animações, mostrar uma mensagem “processo termina
 function lerNumero(promptMsg) {
     const resposta = prompt(promptMsg);
     const numero = Number(resposta);
+    // o isNaN verifica se é NaN (não um número)
     if (Number.isNaN(numero)) {
         const erro = new TypeError("Preciso de um número válido.");
         erro.valor = resposta;
