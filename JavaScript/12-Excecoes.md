@@ -426,6 +426,39 @@ function executarComSeguranca(fn) {
 
 1. **Leitor seguro**  
    Cria uma função `lerInteiro(mensagem)` que pede um número com `prompt`, valida com `Number.isInteger` e volta a pedir enquanto o utilizador insistir em valores inválidos. Usa `try/catch` para tratar a conversão e mostra mensagens claras.
+
+> Resolução:
+
+```js
+function lerInteiro(mensagem) {
+    while (true) {
+        try {
+            const entrada = prompt(mensagem);
+            // Se carregou em Cancelar
+            if (entrada === null) {
+                throw new Error("Operação cancelada pelo utilizador.");
+            }
+            // Converter para número
+            const numero = Number(entrada);
+            // Number("abc") dá NaN; Number.isNaN(...) valida isso
+            if (Number.isNaN(numero)) {
+                throw new TypeError("Isso não é um número.");
+            }
+            // Validar inteiro (por exemplo 10 é ok, 10.5 não é)
+            if (!Number.isInteger(numero)) {
+                throw new TypeError("Moço, introduz um número inteiro!");
+            }
+            return numero;
+        } catch (erro) {
+            console.warn("Entrada inválida:", erro.message);
+        }
+    }
+}
+
+const idade = lerInteiro("Introduz a tua idade:");
+console.log(idade);
+```
+
 2. **Média protegida**  
    Cria uma função que recebe um array e calcula a sua média. Adiciona `throw` quando:
     - o array vem vazio;
