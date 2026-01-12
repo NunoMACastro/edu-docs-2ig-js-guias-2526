@@ -440,8 +440,6 @@ function executarComSeguranca(fn) {
 6. **Nota rápida**  
    Cria `validarNota(nota)` que aceita apenas números entre 0 e 20. Se falhar, lança erro e no `catch` mostra “Nota inválida”. Testa com `-1`, `10` e `"15"`.
 
-> Antes de começar cada exercício faz o teu ritual: tabela E/S, pseudocódigo e testes (capítulo 9!).
-
 ---
 
 ## Changelog
