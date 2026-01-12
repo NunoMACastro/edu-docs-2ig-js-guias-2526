@@ -8,7 +8,7 @@
 
 -   [0) Quando é que “rebenta”?](#sec0)
 -   [1) Anatomia de um erro (stack trace)](#sec1)
--   [2) `try / catch / finally` com calma](#sec2)
+-   [2) `try / catch / finally`](#sec2)
 -   [3) `throw`: avisar cedo e bem](#sec3)
 -   [4) Erros personalizados sem classes](#sec4)
 -   [5) `finally`: arrumar a casa](#sec5)
@@ -58,7 +58,7 @@ Ordem dos acontecimentos:
 
 ---
 
-## 2) `try / catch / finally` com calma
+## 2) `try / catch / finally`
 
 <a id="sec2"></a>
 
@@ -70,7 +70,7 @@ try {
 } catch (erro) {
     console.error("Ups:", erro.message);
 } finally {
-    // limpa recursos, mostra logs finais, fecha ficheiros simulados, etc.
+    // limpa recursos, mostra logs finais, fecha ficheiros, etc.
 }
 ```
 
@@ -112,6 +112,33 @@ Se a divisão falhar, o `catch` mostra uma mensagem simpática e o `finally` cor
 <a id="sec3"></a>
 
 `throw` serve para dizer explicitamente que algo está inválido.  
+É como levantar a mão e dizer: “a partir daqui não posso continuar”.
+
+O que acontece quando usas `throw`:
+
+1. O valor é “lançado” (normalmente um objeto `Error`).
+2. A execução **para imediatamente** nessa linha.
+3. O motor procura o `catch` mais próximo na stack.
+4. Se não encontrar, o programa termina e o erro aparece na consola.
+
+Exemplo curto (vê como o código pára):
+
+```js
+function validarIdade(idade) {
+    if (typeof idade !== "number") {
+        throw new TypeError("Idade tem de ser número");
+    }
+    console.log("Esta linha só corre se a idade for número");
+}
+
+try {
+    validarIdade("17");
+    console.log("Nunca chego aqui");
+} catch (erro) {
+    console.warn("Erro:", erro.message);
+}
+```
+
 Preferências:
 
 -   Cria objetos com `new Error("mensagem")` ou tipos específicos:
@@ -133,6 +160,23 @@ function lerIdade(texto) {
 ```
 
 -   Evita lançar strings soltas (`throw "falhou"`). Perdes o `stack` e confundes quem lê.
+-   Lembra-te: **não precisas de classes** para isto. Um objeto `Error` normal já resolve.
+
+### Guard clause = erro cedo
+
+Uma forma pedagógica de usar `throw` é validar logo à entrada:
+
+```js
+function calcularPrecoFinal(preco, desconto) {
+    if (typeof preco !== "number" || typeof desconto !== "number") {
+        throw new TypeError("Preço e desconto devem ser números");
+    }
+    if (desconto < 0 || desconto > 1) {
+        throw new RangeError("Desconto deve estar entre 0 e 1");
+    }
+    return preco * (1 - desconto);
+}
+```
 
 ### Encadear causa (quando fizer sentido)
 
@@ -352,7 +396,7 @@ function executarComSeguranca(fn) {
 1. **Leitor seguro**  
    Cria uma função `lerInteiro(mensagem)` que pede um número com `prompt`, valida com `Number.isInteger` e volta a pedir enquanto o utilizador insistir em valores inválidos. Usa `try/catch` para tratar a conversão e mostra mensagens claras.
 2. **Média protegida**  
-   Reaproveita o exercício de médias dos capítulos anteriores e adiciona `throw` quando:
+   Cria uma função que recebe um array e calcula a sua média. Adiciona `throw` quando:
     - o array vem vazio;
     - algum elemento não é número.
       No código que chama a função, usa `try/catch` para mostrar “Dados incompletos” e termina o programa com `return`.
@@ -360,8 +404,10 @@ function executarComSeguranca(fn) {
    Escreve uma função `carregarConfig(texto)` que tenta fazer `JSON.parse`. Se falhar, devolve `{ tema: "claro", linguagem: "pt" }` e regista o erro com `console.warn`.
 4. **Divisão segura com relatório**  
    Cria `dividirSeguro(a, b)` que devolve um objeto `{ ok: true, resultado }` ou `{ ok: false, erro }`. Usa `throw` dentro da função, apanha no final e devolve o relatório. Testa com valores válidos, strings e divisão por zero.
-5. **Extra (quando chegares ao capítulo 15)**  
-   Faz um `fetch` a um URL qualquer (mesmo que dê erro, usa `https://httpstat.us/404`), trata com `.catch` e garante que `finally` escreve “pedido terminado”.
+5. **Senha mínima**  
+   Cria `validarSenha(senha)` que lança erro se a senha tiver menos de 6 caracteres. No `catch`, mostra uma mensagem simples e pede novamente (podes simular com uma variável).
+6. **Nota rápida**  
+   Cria `validarNota(nota)` que aceita apenas números entre 0 e 20. Se falhar, lança erro e no `catch` mostra “Nota inválida”. Testa com `-1`, `10` e `"15"`.
 
 > Antes de começar cada exercício faz o teu ritual: tabela E/S, pseudocódigo e testes (capítulo 9!).
 
@@ -371,6 +417,9 @@ function executarComSeguranca(fn) {
 
 <a id="changelog"></a>
 
+-   **v1.2.1 — 2025-11-25**
+    -   Explicação expandida de `throw` com passo a passo e exemplos pedagógicos.
+    -   Exercícios adicionados (validação de senha e nota).
 -   **v1.2.0 — 2025-11-18**
     -   Reescrita completa sem classes, com mais exemplos comentados e exercícios graduais.
     -   Secções novas sobre leitura de stack trace, padrões e checklist.
