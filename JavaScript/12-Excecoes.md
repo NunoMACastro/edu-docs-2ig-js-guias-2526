@@ -464,8 +464,55 @@ console.log(idade);
     - o array vem vazio;
     - algum elemento não é número.
       No código que chama a função, usa `try/catch` para mostrar “Dados incompletos” e termina o programa com `return`.
+
+> Resolução:
+
+```js
+function calcularMedia(valores) {
+    if (!Array.isArray(valores) || valores.length === 0) {
+        throw new RangeError("Preciso de pelo menos um valor.");
+    }
+    let soma = 0;
+    for (const v of valores) {
+        const numero = Number(v);
+        if (Number.isNaN(numero)) {
+            throw new TypeError(`Valor inválido: ${v}`);
+        }
+        soma += numero;
+    }
+    return soma / valores.length;
+}
+
+// Exemplo de uso
+try {
+    const media = calcularMedia([10, 20, "abc"]);
+    console.log("Média:", media);
+} catch (erro) {
+    console.warn("Dados incompletos:", erro.message);
+    return; // Termina o programa
+}
+```
+
 3. **JSON ou padrão**  
    Escreve uma função `carregarConfig(texto)` que tenta fazer `JSON.parse`. Se falhar, devolve `{ tema: "claro", linguagem: "pt" }` e regista o erro com `console.warn`.
+
+> Resolução:
+
+```js
+function carregarConfig(texto) {
+    try {
+        return JSON.parse(texto);
+    } catch (erro) {
+        console.warn("JSON inválido. A usar dados padrão.");
+        return { tema: "claro", linguagem: "pt" };
+    }
+}
+
+// Exemplo de uso
+const config = carregarConfig("{ inválido }");
+console.log("Configuração:", config);
+```
+
 4. **Divisão segura com relatório**  
    Cria `dividirSeguro(a, b)` que devolve um objeto `{ ok: true, resultado }` ou `{ ok: false, erro }`. Usa `throw` dentro da função, apanha no final e devolve o relatório. Testa com valores válidos, strings e divisão por zero.
 5. **Senha mínima**  
