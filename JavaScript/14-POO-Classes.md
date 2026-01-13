@@ -76,6 +76,12 @@ class Aluno {
         this.#nota = v;
     }
 }
+
+// Exemplo de utilização
+const aluno = new Aluno("Bruno", 15);
+console.log(aluno.nota); // usa o getter → 15
+aluno.nota = 18; // usa o setter
+console.log(aluno.nota); // 18
 ```
 
 > Usamos o # no `set` em `this.#nota` para indicar que é um campo privado (ver §3).
@@ -142,6 +148,13 @@ class Conta {
         return this.#saldo;
     } // só leitura
 }
+
+// Exemplo de não poder aceder
+const c = new Conta();
+c.depositar(100);
+console.log(c.saldo); // 100
+c.#saldo = 1000; // ERRO: campo privado
+c.#registar("DEP", 50); // ERRO: método privado
 ```
 
 > Em JS **não existe** o modificador “protegido” (protected). Se precisares que subclasses interajam, expõe **métodos públicos** específicos em vez de abrir o estado.

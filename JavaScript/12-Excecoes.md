@@ -515,6 +515,30 @@ console.log("Configuração:", config);
 
 4. **Divisão segura com relatório**  
    Cria `dividirSeguro(a, b)` que devolve um objeto `{ ok: true, resultado }` ou `{ ok: false, erro }`. Usa `throw` dentro da função, apanha no final e devolve o relatório. Testa com valores válidos, strings e divisão por zero.
+
+> Resolução:
+
+```js
+function dividirSeguro(a, b) {
+    try {
+        if (typeof a !== "number" || typeof b !== "number") {
+            throw new TypeError("Ambos os valores devem ser números.");
+        }
+        if (b === 0) {
+            throw new RangeError("Divisão por zero não é permitida.");
+        }
+        return { ok: true, resultado: a / b };
+    } catch (erro) {
+        return { ok: false, erro };
+    }
+}
+
+// Exemplo de uso
+console.log(dividirSeguro(10, 2)); // { ok: true, resultado: 5 }
+console.log(dividirSeguro(10, 0)); // { ok: false, erro: RangeError }
+console.log(dividirSeguro(10, "a")); // { ok: false, erro: TypeError }
+```
+
 5. **Senha mínima**  
    Cria `validarSenha(senha)` que lança erro se a senha tiver menos de 6 caracteres. No `catch`, mostra uma mensagem simples e pede novamente (podes simular com uma variável).
 6. **Nota rápida**  
