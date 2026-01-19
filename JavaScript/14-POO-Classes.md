@@ -6,11 +6,11 @@
 
 ## 0) Classes: molde → objeto
 
--   **Classe**: Pensa numa receita ou molde (ex.: **bolo**). Define como são os objetos (ex.: **ingredientes** e **passos**).
--   **Objeto (instância)**: o **bolo** feito a partir do molde / receita. Cada bolo tem os **seus próprios valores**.
--   **Propriedades** = dados (ex.: `nome`, `idade`). **Métodos** = ações (ex.: `apresentar()`).
--   Em JavaScript, **classes** são uma forma prática de escrever algo que por baixo funciona com **protótipos** (vamos ver mais tarde).
--   Este capítulo assume que já dominas **objetos e `this`** (capítulo 8) e **funções** (capítulos 10/11). Vamos construir em cima disso com calma, mas sempre lembrando que o valor de `this` **depende de como a função é chamada**: com `new` aponta para a instância, solta (ex.: `const fn = pessoa.apresentar; fn();`) fica `undefined` em modo strict, e com `.call/.apply/.bind` podemos forçar um objeto específico. Esta ideia volta várias vezes ao longo do capítulo.
+- **Classe**: Pensa numa receita ou molde (ex.: **bolo**). Define como são os objetos (ex.: **ingredientes** e **passos**).
+- **Objeto (instância)**: o **bolo** feito a partir do molde / receita. Cada bolo tem os **seus próprios valores**.
+- **Propriedades** = dados (ex.: `nome`, `idade`). **Métodos** = ações (ex.: `apresentar()`).
+- Em JavaScript, **classes** são uma forma prática de escrever algo que por baixo funciona com **protótipos** (vamos ver mais tarde).
+- Este capítulo assume que já dominas **objetos e `this`** (capítulo 8) e **funções** (capítulos 10/11). Vamos construir em cima disso com calma, mas sempre lembrando que o valor de `this` **depende de como a função é chamada**: com `new` aponta para a instância, solta (ex.: `const fn = pessoa.apresentar; fn();`) fica `undefined` em modo strict, e com `.call/.apply/.bind` podemos forçar um objeto específico. Esta ideia volta várias vezes ao longo do capítulo.
 
 ---
 
@@ -40,10 +40,10 @@ console.log(ana.apresentar()); // "Olá, eu sou a/o Ana..."
 
 **Pontos‑chave**
 
--   `new` cria um **novo objeto** e corre o `constructor`.
--   `this` dentro dos métodos da classe refere‑se ao **objeto atual**. O `this`é um “atalho” para o objeto e é um dos principais conceitos de OOP pois permite associar o objeto aos seus dados e comportamentos.
--   Podes definir **valores por defeito** para propriedades logo na classe (`idade = 18;`) ou nos parâmetros do `constructor` (`constructor(nome, idade = 18)`).
--   Se não precisares de um `constructor` personalizado, podes omitir; o JavaScript cria um vazio (`constructor() {}`) automaticamente.
+- `new` cria um **novo objeto** e corre o `constructor`.
+- `this` dentro dos métodos da classe refere‑se ao **objeto atual**. O `this`é um “atalho” para o objeto e é um dos principais conceitos de OOP pois permite associar o objeto aos seus dados e comportamentos.
+- Podes definir **valores por defeito** para propriedades logo na classe (`idade = 18;`) ou nos parâmetros do `constructor` (`constructor(nome, idade = 18)`).
+- Se não precisares de um `constructor` personalizado, podes omitir; o JavaScript cria um vazio (`constructor() {}`) automaticamente.
 
 ---
 
@@ -51,8 +51,8 @@ console.log(ana.apresentar()); // "Olá, eu sou a/o Ana..."
 
 Às vezes, antes de **guardar** um valor, queremos **validar** ou definir como e em que condições pode ser acedido. Para isso, usamos `get` e `set`.
 
--   `get` define um **método de leitura**.
--   `set` define um **método de escrita**.
+- `get` define um **método de leitura**.
+- `set` define um **método de escrita**.
 
 ```js
 class Aluno {
@@ -121,8 +121,8 @@ class Conta_Bancaria {
 
 ## 3) Encapsulamento: campos **privados `#`**
 
--   Um campo que começa por `#` é **privado**: **só** pode ser usado dentro da própria classe.
--   Ajuda a **proteger o estado** de alterações acidentais.
+- Um campo que começa por `#` é **privado**: **só** pode ser usado dentro da própria classe.
+- Ajuda a **proteger o estado** de alterações acidentais.
 
 ```js
 class Conta {
@@ -153,19 +153,21 @@ class Conta {
 const c = new Conta();
 c.depositar(100);
 console.log(c.saldo); // 100
-c.#saldo = 1000; // ERRO: campo privado
-c.#registar("DEP", 50); // ERRO: método privado
+c.#saldo = 1000; // ERRO: campo privado (não executar)
+c.#registar("DEP", 50); // ERRO: método privado (não executar)
 ```
 
 > Em JS **não existe** o modificador “protegido” (protected). Se precisares que subclasses interajam, expõe **métodos públicos** específicos em vez de abrir o estado.
 
 > Se precisares **MESMO** de algo acessível só dentro da classe e subclasses, considera usar **WeakMap** ou **Symbol** (avançado, não é comum).
 
+> Nota de compatibilidade: campos privados `#` e class fields exigem um JavaScript moderno. Em ambientes antigos podem falhar; nesse caso, prefere padrões com `function` + `prototype` ou transpila com Babel.
+
 ---
 
 ## 4) Métodos e campos **estáticos** (da classe, não do objeto)
 
--   `static` vive na **classe**, não nas instâncias. Útil para **constantes** e **utilitários** comuns.
+- `static` vive na **classe**, não nas instâncias. Útil para **constantes** e **utilitários** comuns.
 
 ```js
 class Util {
@@ -228,8 +230,8 @@ console.log(c.apresentar());
 
 **Notas rápidas**
 
--   Tem de chamar `super(...)` antes de usar `this` no `constructor`.
--   Podes chamar `super.metodo()` para **reaproveitar** lógica da classe‑pai.
+- Tem de chamar `super(...)` antes de usar `this` no `constructor`.
+- Podes chamar `super.metodo()` para **reaproveitar** lógica da classe‑pai.
 
 ---
 
@@ -269,16 +271,16 @@ class Relogio {
 
 **Regra prática**
 
--   **Herança**: quando a subclasse **cumpre o contrato** da classe‑base.
--   **Composição**: quando queres **juntar capacidades** sem criar uma árvore de heranças difícil de manter.
+- **Herança**: quando a subclasse **cumpre o contrato** da classe‑base.
+- **Composição**: quando queres **juntar capacidades** sem criar uma árvore de heranças difícil de manter.
 
 ---
 
 ## 7) `this` em classes e callbacks
 
--   Dentro de um **método**, `this` é a **instância** criada com `new`.
--   Fora de uma chamada normal `instancia.metodo()`, o `this` **deixa de apontar** para a instância. Isto acontece muito quando usamos esse método como callback de eventos/temporizadores, ou quando fazemos `const func = instancia.metodo; func();`.
--   Ao passar métodos como **callback** (ex.: para um evento), podes **perder** o `this`. Quando isso acontece em modo strict, o valor fica `undefined` e acabas com erros do género “Cannot read properties of undefined”. Duas soluções comuns:
+- Dentro de um **método**, `this` é a **instância** criada com `new`.
+- Fora de uma chamada normal `instancia.metodo()`, o `this` **deixa de apontar** para a instância. Isto acontece muito quando usamos esse método como callback de eventos/temporizadores, ou quando fazemos `const func = instancia.metodo; func();`.
+- Ao passar métodos como **callback** (ex.: para um evento), podes **perder** o `this`. Quando isso acontece em modo strict, o valor fica `undefined` e acabas com erros do género “Cannot read properties of undefined”. Duas soluções comuns:
 
 ```js
 class Timer {
@@ -323,9 +325,9 @@ Ao declarar o método como propriedade (`handleClick = () => { ... }`), o `this`
 
 **Resumo rápido**
 
--   `bind` devolve uma nova função **fixando** o `this`. Usa-se quando queres manter o método como função normal mas garantir a ligação (`document.addEventListener("click", this.handleClick.bind(this))`).
--   Arrow functions como campos de classe já “capturam” o `this` lexical, por isso dispensam `bind`.
--   Métodos normais **sem** `bind` só funcionam enquanto são chamados diretamente da instância. Assim que lhes retiras o contexto (`const fn = instancia.metodo;`), perdes o `this`.
+- `bind` devolve uma nova função **fixando** o `this`. Usa-se quando queres manter o método como função normal mas garantir a ligação (`document.addEventListener("click", this.handleClick.bind(this))`).
+- Arrow functions como campos de classe já “capturam” o `this` lexical, por isso dispensam `bind`.
+- Métodos normais **sem** `bind` só funcionam enquanto são chamados diretamente da instância. Assim que lhes retiras o contexto (`const fn = instancia.metodo;`), perdes o `this`.
 
 ---
 
@@ -394,7 +396,7 @@ class Turma {
             this.#alunos.map((aluno) => ({
                 nome: aluno.nome,
                 nota: aluno.nota,
-            }))
+            })),
         );
     }
 }
@@ -410,17 +412,17 @@ turma.listar();
 console.log("Média:", turma.media());
 console.log(
     "Aprovados:",
-    turma.aprovados().map((a) => a.nome)
+    turma.aprovados().map((a) => a.nome),
 );
 ```
 
 Este exemplo mostra:
 
--   Herança (`Aluno extends Pessoa`).
--   Encapsulamento (`#nota`, `#alunos`).
--   Validação com setters.
--   Composição (Turma **tem** Alunos).
--   Uso de métodos utilitários de array vistos no capítulo 11.
+- Herança (`Aluno extends Pessoa`).
+- Encapsulamento (`#nota`, `#alunos`).
+- Validação com setters.
+- Composição (Turma **tem** Alunos).
+- Uso de métodos utilitários de array vistos no capítulo 11.
 
 Usa-o como referência para os teus próprios projetos: define a classe base, cria subclasses quando fizer sentido e encapsula coleções em classes “gestoras”.
 
@@ -428,8 +430,8 @@ Usa-o como referência para os teus próprios projetos: define a classe base, cr
 
 ## 9) JSON e classes (nota útil)
 
--   Converter para JSON **não inclui** métodos nem campos privados. Normalmente só os **dados públicos** são serializados.
--   Se precisares, cria um método que devolve um **objeto simples** pronto para `JSON.stringify`:
+- Converter para JSON **não inclui** métodos nem campos privados. Normalmente só os **dados públicos** são serializados.
+- Se precisares, cria um método que devolve um **objeto simples** pronto para `JSON.stringify`:
 
 ```js
 class Pessoa {
@@ -452,10 +454,10 @@ class Pessoa {
 **Fábrica**: função que devolve um objeto, muitas vezes com **estado privado por closure** (sem `new`).  
 **Classe**: quando queres **herdar**, usar **`instanceof`** e uma API de OOP clara para a turma.
 
--   Usa **fábricas** quando precisas de algo super rápido, sem herança e onde `this` só vai baralhar. O “estado” fica guardado em variáveis normais dentro da função.
--   Usa **classes** quando precisas de comunicar explicitamente que existe um tipo, quando vais compor heranças ou quando queres aproveitar ferramentas do ecossistema que fazem `obj instanceof MinhaClasse`.
--   Ambas podem ter encapsulamento: fábricas usam **closures** (variáveis internas), classes usam `#privado`. A principal diferença é mesmo o modo de criação e a possibilidade de herdar.
--   Não há certo/errado — escolhe o que tornar a intenção mais clara para a tua equipa/colegas.
+- Usa **fábricas** quando precisas de algo super rápido, sem herança e onde `this` só vai baralhar. O “estado” fica guardado em variáveis normais dentro da função.
+- Usa **classes** quando precisas de comunicar explicitamente que existe um tipo, quando vais compor heranças ou quando queres aproveitar ferramentas do ecossistema que fazem `obj instanceof MinhaClasse`.
+- Ambas podem ter encapsulamento: fábricas usam **closures** (variáveis internas), classes usam `#privado`. A principal diferença é mesmo o modo de criação e a possibilidade de herdar.
+- Não há certo/errado — escolhe o que tornar a intenção mais clara para a tua equipa/colegas.
 
 ```js
 // FÁBRICA (leve, sem herança)
@@ -508,26 +510,26 @@ Neste caso não tocamos em `new` nem precisamos de `this`. Para objetos que vive
 
 ## 11) Boas práticas e armadilhas
 
--   **Valida** dados nos **setters** ou em métodos que mudam estado.
--   Usa **`#privado`** para proteger o que não deve ser alterado de fora.
--   **Não abuses** da herança; **composição** é mais flexível na maioria dos casos.
--   Lembra‑te do `new` ao criar instâncias (sem `new` não corre o `constructor`).
--   Em callbacks, **garante** o `this` (ver §7).
+- **Valida** dados nos **setters** ou em métodos que mudam estado.
+- Usa **`#privado`** para proteger o que não deve ser alterado de fora.
+- **Não abuses** da herança; **composição** é mais flexível na maioria dos casos.
+- Lembra‑te do `new` ao criar instâncias (sem `new` não corre o `constructor`).
+- Em callbacks, **garante** o `this` (ver §7).
 
 ---
 
 ## 12) Dicionário rápido
 
--   **Classe**: molde/receita de como os objetos são.
--   **Objeto/Instância**: “coisa” criada a partir da classe.
--   **Propriedade**: dado (ex.: `nome`).
--   **Método**: ação (ex.: `apresentar()`).
--   **Constructor**: função especial que corre ao criar um objeto.
--   **Getter/Setter**: ler/escrever com controlo/validação.
--   **`#privado`**: campo só acessível dentro da classe.
--   **`static`**: pertence à classe, não às instâncias.
--   **Herança**: uma classe “filha” aproveita e ajusta a lógica da “mãe”.
--   **Composição**: construir por peças (tem‑um).
+- **Classe**: molde/receita de como os objetos são.
+- **Objeto/Instância**: “coisa” criada a partir da classe.
+- **Propriedade**: dado (ex.: `nome`).
+- **Método**: ação (ex.: `apresentar()`).
+- **Constructor**: função especial que corre ao criar um objeto.
+- **Getter/Setter**: ler/escrever com controlo/validação.
+- **`#privado`**: campo só acessível dentro da classe.
+- **`static`**: pertence à classe, não às instâncias.
+- **Herança**: uma classe “filha” aproveita e ajusta a lógica da “mãe”.
+- **Composição**: construir por peças (tem‑um).
 
 ---
 
@@ -548,26 +550,26 @@ Neste caso não tocamos em `new` nem precisamos de `this`. Para objetos que vive
 
 ## 14) Resumo final
 
--   **Classe** = molde; **objeto** = instância do molde.
--   **Encapsula** com `#privado` e valida com **getters/setters**.
--   Usa **`static`** para utilitários e informação da classe.
--   **Herança** só quando for claramente “**é‑um**”; caso contrário, **composição**.
--   Cuida do **`this`** quando passares métodos como callbacks.
+- **Classe** = molde; **objeto** = instância do molde.
+- **Encapsula** com `#privado` e valida com **getters/setters**.
+- Usa **`static`** para utilitários e informação da classe.
+- **Herança** só quando for claramente “**é‑um**”; caso contrário, **composição**.
+- Cuida do **`this`** quando passares métodos como callbacks.
 
 ## Changelog
 
--   **v.1.6.0 - 2025-11-16**
-    -   Simplificação de conceitos
--   **v1.5.0 — 2025-11-18**
-    -   Incluído estudo guiado “Turma” combinando herança, encapsulamento e composição.
-    -   Secção sobre `this` em callbacks agora cobre também arrow functions como classe field.
-    -   Mais contexto introdutório e notas sobre valores por defeito no `constructor`.
--   **v1.4.0 — 2025-11-10**
-    -   Adicionados dois desafios introdutórios específicos para getters e setters antes do exercício de validação.
--   **v1.3.0 — 2025-11-10**
-    -   Mini desafios reorganizados para começarem com exercícios muito simples e progressivos (Saudação e Contador) antes dos tópicos avançados.
--   **v1.2.0 — 2025-11-10**
-    -   Mini desafios simplificados para focar em padrões básicos (classes, getters/setters, estáticos e herança direta).
--   **v1.1.0 — 2025-11-10**
-    -   Secção de desafios renomeada para Mini desafios para reforçar o caráter avançado.
-    -   Adicionado changelog inicial para registar futuras alterações no capítulo.
+- **v1.6.0 — 2025-11-18**
+    - Simplificação de conceitos
+- **v1.5.0 — 2025-11-16**
+    - Incluído estudo guiado “Turma” combinando herança, encapsulamento e composição.
+    - Secção sobre `this` em callbacks agora cobre também arrow functions como classe field.
+    - Mais contexto introdutório e notas sobre valores por defeito no `constructor`.
+- **v1.4.0 — 2025-11-10**
+    - Adicionados dois desafios introdutórios específicos para getters e setters antes do exercício de validação.
+- **v1.3.0 — 2025-11-10**
+    - Mini desafios reorganizados para começarem com exercícios muito simples e progressivos (Saudação e Contador) antes dos tópicos avançados.
+- **v1.2.0 — 2025-11-10**
+    - Mini desafios simplificados para focar em padrões básicos (classes, getters/setters, estáticos e herança direta).
+- **v1.1.0 — 2025-11-10**
+    - Secção de desafios renomeada para Mini desafios para reforçar o caráter avançado.
+    - Adicionado changelog inicial para registar futuras alterações no capítulo.
