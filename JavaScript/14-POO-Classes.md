@@ -18,7 +18,7 @@
 
 ```js
 class Pessoa {
-    // (opcional) campos declarados aqui ajudam a ver o que existe
+    // Campos declarados aqui ajudam a ver o que existe
     nome;
     idade;
 
@@ -41,9 +41,13 @@ console.log(ana.apresentar()); // "Olá, eu sou a/o Ana..."
 **Pontos‑chave**
 
 - `new` cria um **novo objeto** e corre o `constructor`.
-- `this` dentro dos métodos da classe refere‑se ao **objeto atual**. O `this`é um “atalho” para o objeto e é um dos principais conceitos de OOP pois permite associar o objeto aos seus dados e comportamentos.
+- `this` dentro dos métodos da classe refere‑se ao **objeto atual**. O `this` é um “atalho” para o objeto e é um dos principais conceitos de OOP pois permite associar o objeto aos seus dados e comportamentos.
 - Podes definir **valores por defeito** para propriedades logo na classe (`idade = 18;`) ou nos parâmetros do `constructor` (`constructor(nome, idade = 18)`).
 - Se não precisares de um `constructor` personalizado, podes omitir; o JavaScript cria um vazio (`constructor() {}`) automaticamente.
+
+> **Nota rápida (hoisting)**: classes não são “hoisted” como funções.  
+> Usar `new Pessoa()` antes de `class Pessoa { ... }` dá erro.  
+> Resultado típico: `ReferenceError: Cannot access 'Pessoa' before initialization`.
 
 ---
 
@@ -88,10 +92,10 @@ console.log(aluno.nota); // 18
 
 **Ideia**: o **setter** bloqueia valores errados e o **getter** expõe o valor com segurança.
 
-Um exemplo mais pratico e útil:
+Um exemplo mais prático e útil:
 
 ```js
-class Conta_Bancaria {
+class ContaBancaria {
     #saldo = 0;
 
     depositar(valor) {
@@ -279,8 +283,9 @@ class Relogio {
 ## 7) `this` em classes e callbacks
 
 - Dentro de um **método**, `this` é a **instância** criada com `new`.
+- O corpo de uma `class` corre em **strict mode** por defeito. Por isso, quando perdes o contexto, o `this` tende a ficar `undefined` e rebenta.
 - Fora de uma chamada normal `instancia.metodo()`, o `this` **deixa de apontar** para a instância. Isto acontece muito quando usamos esse método como callback de eventos/temporizadores, ou quando fazemos `const func = instancia.metodo; func();`.
-- Ao passar métodos como **callback** (ex.: para um evento), podes **perder** o `this`. Quando isso acontece em modo strict, o valor fica `undefined` e acabas com erros do género “Cannot read properties of undefined”. Duas soluções comuns:
+- Ao passar métodos como **callback** (ex.: para um evento), podes **perder** o `this`. Quando isso acontece, o valor fica `undefined` e acabas com erros do género “Cannot read properties of undefined”. Duas soluções comuns:
 
 ```js
 class Timer {
@@ -321,6 +326,14 @@ class Botao {
 
 Ao declarar o método como propriedade (`handleClick = () => { ... }`), o `this` fica automaticamente “preso” à instância porque arrow functions não criam `this` próprio. É a abordagem mais simples para eventos no browser.
 
+**Trade-off rápido**
+
+- Método normal: fica no `prototype`, uma função partilhada por todas as instâncias (mais leve).
+- Arrow como class field: cria uma função por instância (mais memória), mas mantém o `this` preso.
+- Regra prática: começa com método normal.
+- Usa arrow quando precisas de passar o método como callback muitas vezes.
+- Se não precisas, evita o custo extra por instância.
+
 > Regra rápida: se um método vai ser passado como callback, define-o como arrow (`metodo = () => { ... }`) ou faz `bind` no `constructor`.
 
 **Resumo rápido**
@@ -330,6 +343,8 @@ Ao declarar o método como propriedade (`handleClick = () => { ... }`), o `this`
 - Métodos normais **sem** `bind` só funcionam enquanto são chamados diretamente da instância. Assim que lhes retiras o contexto (`const fn = instancia.metodo;`), perdes o `this`.
 
 ---
+
+> **Nota sobre timers**: `setTimeout`/`setInterval` são assíncronos; o tempo é aproximado; lembra-te de parar com `clearInterval`. Ver [15] §7 e §8.
 
 ## 8) Estudo guiado: sistema simples de alunos
 
@@ -536,17 +551,134 @@ Neste caso não tocamos em `new` nem precisamos de `this`. Para objetos que vive
 ## 13) Mini desafios
 
 1. **Saudação** — cria `class Saudacao` com `mensagem` no constructor e um método `falar()` que devolve `Olá + mensagem`. Instancia duas versões e mostra o texto no `console`.
-2. **Contador simples** — cria `class Contador` com uma propriedade `valor = 0` e um método `incrementar()` que soma 1. Mostra o valor após três chamadas.
+
+> Resolução
+
+```js
+class Saudacao {
+    mensagem;
+    constructor(mensagem) {
+        this.mensagem = mensagem;
+    }
+    falar() {
+        return `Olá ${this.mensagem}`;
+    }
+}
+
+// Teste
+
+const s1 = new Saudacao("Mundo");
+console.log(s1.falar()); // "Olá Mundo"
+
+const s2 = new Saudacao("Ana");
+console.log(s2.falar()); // "Olá Ana"
+```
+
+2. **Contador simples** — cria `class Contador` com um atributo `valor = 0` e um método `incrementar()` que soma 1. Mostra o valor após três chamadas.
+
+> Resolução
+
+```js
+class Contador {
+    valor = 0;
+    incrementar() {
+        this.valor++;
+    }
+}
+
+// Teste
+const c = new Contador();
+c.incrementar();
+c.incrementar();
+c.incrementar();
+console.log(c.valor); // 3
+```
+
 3. **Pessoa básica** — cria `class Pessoa` com `nome` e `apresentar()`. Cria 3 pessoas e imprime as apresentações.
+
+> Resolução
+
+```js
+class Pessoa {
+    nome;
+    constructor(nome) {
+        this.nome = nome;
+    }
+    apresentar() {
+        return `Olá, eu sou ${this.nome}.`;
+    }
+}
+
+// Teste
+
+const p1 = new Pessoa("João");
+const p2 = new Pessoa("Maria");
+const p3 = new Pessoa("Carlos");
+console.log(p1.apresentar()); // "Olá, eu sou João."
+console.log(p2.apresentar()); // "Olá, eu sou Maria."
+console.log(p3.apresentar()); // "Olá, eu sou Carlos."
+```
+
 4. **Getter introdutório** — cria `class Termometro` com um campo privado `#celsius` e um getter `fahrenheit` que devolve `#celsius * 1.8 + 32`. Mostra ambos os valores.
+
+> Resolução
+
+```js
+class Termometro {
+    #celsius;
+    constructor(celsius) {
+        this.#celsius = celsius;
+    }
+    get fahrenheit() {
+        return this.#celsius * 1.8 + 32;
+    }
+}
+
+// Teste
+
+const t = new Termometro(25);
+console.log(`Fahrenheit: ${t.fahrenheit}`); // 77
+```
+
+Podemos fazer um getter para os celsius também:
+
+```js
+get celsius() {
+    return this.#celsius;
+}
+```
+
+Depois podemos aceder a ambos:
+
+```js
+console.log(`Celsius: ${t.celsius}`); // 25
+console.log(`Fahrenheit: ${t.fahrenheit}`); // 77
+```
+
 5. **Setter introdutório** — cria `class Produto` com `#preco` e um setter `preco` que rejeita valores negativos (lança `RangeError`). Usa o getter correspondente para ler o valor atual.
 6. **Validação** — cria `class Aluno` com `#nota` e um `set nota(v)` que só aceita 0–20 (lança `RangeError` caso contrário).
-7. **Conta bancária** — implementa `depositar`, `levantar` e `get saldo`; lança erro se tentar levantar mais do que o saldo.
-8. **Estáticos** — cria `class Conversor` com `static eurParaUsd(valor)` e `static usdParaEur(valor)` e usa-os em dois exemplos.
-9. **Herança** — `class Pessoa` → `class Professor` (com `disciplina`). Sobrepõe `apresentar()` para incluir a disciplina mas chama `super.apresentar()`.
-10. **Composição** — `class Relogio` que usa internamente `setInterval` para contar segundos e expõe `iniciar()`, `parar()` e `get segundos`.
-11. **JSON** — adiciona `toJSON()` a `class Aluno` para devolver `{ nome, turma }` e confirma com `JSON.stringify` que só esses campos aparecem.
-12. **Fábrica x Classe** — escreve uma função `criarContador()` (fábrica) e `class Contador`. Usa ambos para mostrar que guardam estado.
+7. **Turma de alunos** — cria `class Turma` que guarda um array privado de `Aluno`. Adiciona método `adicionarAluno(aluno)` (verifica se é instância de `Aluno`), `media()` e `aprovados()` (nota ≥ 10).
+8. **Escola** — cria `class Escola` que tem várias `Turma`. Adiciona método `adicionarTurma(turma)` e `mediaGeral()` que calcula a média de todas as turmas.
+9. **Cria um Relógio** — cria `class Cronometro` com um campo privado `#segundos` e métodos `iniciar()`, `parar()` e `get segundos`. Usa `setInterval` para contar segundos.
+10. **Conta bancária** — implementa `depositar`, `levantar` e `get saldo`; lança erro se tentar levantar mais do que o saldo.
+11. **`this` em callbacks** — cria `class Alarme` com `segundos` e método `tick()` que incrementa e mostra na `console`. Em `iniciar()`, usa `setInterval` e garante que `this` aponta para a instância (usa `bind` ou um método em arrow).
+12. **Método privado** — cria `class Cofre` com `#codigo` e um método privado `#validar(c)`. O método público `abrir(c)` deve devolver `"Aberto"` se o código estiver correto e `"Código errado"` caso contrário. Limita o número de tentativas a 3.
+13. **Estáticos** — cria `class Conversor` com `static eurParaUsd(valor)` e `static usdParaEur(valor)` e usa-os em dois exemplos.
+14. **Herança** — cria `class Pessoa` com `nome` e `apresentar()` (frase simples). Cria `class Professor extends Pessoa` com `disciplina`. No `constructor`, chama `super(nome)`. Reescreve `apresentar()` para incluir a disciplina e usa `super.apresentar()` para reaproveitar a frase base. Cria pelo menos 2 professores e mostra o resultado na `console`.
+15. **Herança (animais)** — cria `class Animal` com `nome` e `som` e um método `falar()`. Cria `class Cao` e `class Gato` que chamam `super(nome, "au")` / `super(nome, "miau")`. Instancia um de cada e chama `falar()`.
+16. **Herança (veículos)** — cria `class Veiculo` com `marca` e método `mover()` que devolve `"<marca> está a mover-se"`. Cria `class Bicicleta extends Veiculo` com `tipo` e reescreve `mover()` para incluir o tipo, chamando `super.mover()`.
+17. **Composição (casa/porta)** — cria `class Porta` com estado `aberta` e métodos `abrir()`/`fechar()`. Cria `class Casa` que **tem uma** `Porta` e expõe `abrirPorta()`/`fecharPorta()`. Testa a sequência abrir → fechar.
+18. **Composição (playlist)** — cria `class Musica` com `titulo`. Cria `class Playlist` que guarda um array de `Musica`, método `adicionar(musica)` (verifica `instanceof`) e `listar()` que devolve os títulos.
+19. **Composição** — cria `class Motor` com estado `ligado` e métodos `ligar()`/`desligar()`. Cria `class Carro` que **tem um** `Motor` (cria no `constructor`). O carro deve expor `ligar()` e `desligar()` que chamam o motor e um `get estado` que devolve se o motor está ligado. Testa com um carro.
+20. **JSON** — adiciona `toJSON()` a `class Aluno` para devolver apenas `{ nome, turma }` (não inclui `#nota`). Cria um aluno, faz `JSON.stringify(aluno)` e confirma que o resultado só tem `nome` e `turma`.
+21. **Fábrica x Classe** — escreve uma função `criarContador()` que devolve `{ inc(), valor() }` e guarda `let n = 0` no closure. Depois cria `class Contador` com `#n`, métodos `inc()` e `get valor()`. Cria duas instâncias de cada e mostra que cada uma guarda o seu próprio estado.
+
+### Repetição espaçada (revisão rápida)
+
+- Hoje: explica a diferença entre classe e instância com um exemplo simples.
+- Amanhã: reescreve o exercício 14 sem olhar.
+- Em 1 semana: refaz o exercício 17 e explica porque é composição.
+- Em 1 mês: repete os exercícios 9 e 11 e justifica o `this` e os timers.
 
 ## 14) Resumo final
 
@@ -558,6 +690,12 @@ Neste caso não tocamos em `new` nem precisamos de `this`. Para objetos que vive
 
 ## Changelog
 
+- **v1.7.0 — 2026-01-19**
+    - Atualização e expansão dos Mini desafios (1–21) + repetição espaçada.
+    - Normalização de naming (ContaBancaria).
+    - Reforço do strict mode nas classes (`this` indefinido em callbacks).
+    - Nota sobre hoisting de classes.
+    - Callout de timers com referência ao cap. 15.
 - **v1.6.0 — 2025-11-18**
     - Simplificação de conceitos
 - **v1.5.0 — 2025-11-16**

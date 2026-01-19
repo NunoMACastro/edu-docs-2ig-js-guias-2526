@@ -24,20 +24,20 @@ Pensa assim:
 (voltamos ao teu JS mais tarde)
 ```
 
--   **API** (lê-se “ei-pi-ai”): conjunto de **botões** e **alavancas** que o browser/Node te dão para pedires coisas (ex.: `setTimeout`, `fetch`, eventos de clique). De uma forma genérica, uma API é uma forma de **interagir com algo** (ex.: rede, disco, rato/teclado). É a forma de comunicação entre 2 sistemas, neste caso o teu código JS e o ambiente onde ele corre.
+- **API** (lê-se “ei-pi-ai”): conjunto de **botões** e **alavancas** que o browser/Node te dão para pedires coisas (ex.: `setTimeout`, `fetch`, eventos de clique). De uma forma genérica, uma API é uma forma de **interagir com algo** (ex.: rede, disco, rato/teclado). É a forma de comunicação entre 2 sistemas, neste caso o teu código JS e o ambiente onde ele corre.
 
 ---
 
 ## 1) Síncrono vs Assíncrono (com analogia da cozinha)
 
-Existem 2 formas de trabalhar com código em JavaScript, sincrono e assíncrono. Isto define a forma como o JavaScript lida com tarefas que demoram tempo a completar (ex.: esperar 2 segundos, ir buscar dados à internet). O que faz enquanto espera?
+Existem 2 formas de trabalhar com código em JavaScript, síncrono e assíncrono. Isto define a forma como o JavaScript lida com tarefas que demoram tempo a completar (ex.: esperar 2 segundos, ir buscar dados à internet). O que faz enquanto espera?
 
 Imagina um cozinheiro a preparar uma pizza:
 
--   **Síncrono** (bloqueante): o cozinheiro pára tudo e **fica a olhar** para o forno até a pizza ficar pronta. O restaurante **para**.
-    -   Em código: chamar uma função que **calcula já** e só **depois** devolve o resultado.
--   **Assíncrono** (não bloqueante): o cozinheiro **mete a pizza no forno**, **marca um alarme** e **continua** a fazer saladas. Quando o alarme toca, ele volta à pizza.
-    -   Em código: `setTimeout` (alarme), `fetch` (pedido à internet), eventos de clique (o cliente levanta a mão).
+- **Síncrono** (bloqueante): o cozinheiro pára tudo e **fica a olhar** para o forno até a pizza ficar pronta. O restaurante **para**.
+    - Em código: chamar uma função que **calcula já** e só **depois** devolve o resultado.
+- **Assíncrono** (não bloqueante): o cozinheiro **mete a pizza no forno**, **marca um alarme** e **continua** a fazer saladas. Quando o alarme toca, ele volta à pizza.
+    - Em código: `setTimeout` (alarme), `fetch` (pedido à internet), eventos de clique (o cliente levanta a mão).
 
 Se dependes de **tempo, rede, disco ou interação do utilizador**, usa **assíncrono**.
 
@@ -45,16 +45,16 @@ Se dependes de **tempo, rede, disco ou interação do utilizador**, usa **assín
 
 ## 2) As peças com nomes simples
 
--   **Call Stack** (“pilha de trabalho”): lista do que o JS está a **executar agora** (a pilha vai ficando vazia e cheia com funções).
--   **Evento**: algo que **aconteceu** (o tempo passou, chegou resposta da internet, alguém clicou).
--   **Callback** (“função‑para‑chamar‑depois”): função que **entregas** para ser chamada quando o evento acontecer.
--   **Promise** (“promessa”): um **papel** que diz “no futuro vais ter um valor ou um erro”. Tem 3 estados: _pendente_ → _resolvida_ **ou** _rejeitada_.
--   **Event Loop**: o **maestro** que coordena quando é que as funções‑para‑chamar‑depois entram outra vez no teu JS.
--   **Filas** (caixas de espera):
-    -   **Fila Rápida** (microtarefas): Promises (`then/catch/finally`), `queueMicrotask`.
-    -   **Fila Normal** (tarefas): `setTimeout`, `setInterval`, eventos de clique, I/O.
+- **Call Stack** (“pilha de trabalho”): lista do que o JS está a **executar agora** (a pilha vai ficando vazia e cheia com funções).
+- **Evento**: algo que **aconteceu** (o tempo passou, chegou resposta da internet, alguém clicou).
+- **Callback** (“função‑para‑chamar‑depois”): função que **entregas** para ser chamada quando o evento acontecer.
+- **Promise** (“promessa”): um **papel** que diz “no futuro vais ter um valor ou um erro”. Tem 3 estados: _pendente_ → _resolvida_ **ou** _rejeitada_.
+- **Event Loop**: o **maestro** que coordena quando é que as funções‑para‑chamar‑depois entram outra vez no teu JS.
+- **Filas** (caixas de espera):
+    - **Fila Rápida** (microtarefas): Promises (`then/catch/finally`), `queueMicrotask`.
+    - **Fila Normal** (tarefas): `setTimeout`, `setInterval`, eventos de clique, I/O.
 
-**Regra de ouro:** sempre que a pilha fica **vazia**, o Event Loop **esvazia primeiro a Fila Rápida toda**; só depois pega **uma** da Fila Normal.
+**Regra:** sempre que a pilha fica **vazia**, o Event Loop **esvazia primeiro a Fila Rápida toda**; só depois pega **uma** da Fila Normal.
 
 ---
 
@@ -85,7 +85,8 @@ Imagina que vais fazer análises ao sangue:
 
 Para isso, usamos o construtor `Promise`:
 
-```jsconst p = new Promise((resolve, reject) => {
+```js
+const p = new Promise((resolve, reject) => {
     // faz algo assíncrono
     if (/* correu bem */) {
         resolve(valor); // promessa cumprida
@@ -97,11 +98,11 @@ Para isso, usamos o construtor `Promise`:
 
 **Consumir uma Promise**
 
-Consumir uma promisse significa dizer o que fazer quando ela for resolvida ou rejeitada. Para isso, usamos os métodos:
+Consumir uma Promise significa dizer o que fazer quando ela for resolvida ou rejeitada. Para isso, usamos os métodos:
 
--   **`then`** recebe o valor;
--   **`catch`** recebe o erro;
--   **`finally`** corre sempre (para limpezas).
+- **`then`** recebe o valor;
+- **`catch`** recebe o erro;
+- **`finally`** corre sempre (para limpezas).
 
 ```js
 function esperar(ms, valor) {
@@ -126,15 +127,15 @@ Promise.all([p1, p2]) // espera as duas
 
 **Regras práticas**
 
--   Usa **`then/catch`** se estiveres confortável; caso contrário…
+- Usa **`then/catch`** se estiveres confortável; caso contrário…
 
 ---
 
 ## 5) `async/await` — ler código assíncrono como se fosse “passo a passo”
 
--   Marca a função com `async` → ela **devolve uma Promise**.
--   Usa `await` para **esperar** pela Promise **sem bloquear a app**.
--   Envolve em `try/catch` para tratar erros.
+- Marca a função com `async` → ela **devolve uma Promise**.
+- Usa `await` para **esperar** pela Promise **sem bloquear a app**.
+- Envolve em `try/catch` para tratar erros.
 
 ```js
 async function exemplo() {
@@ -171,10 +172,46 @@ async function somaRapida() {
 
 ---
 
+**Anti-erro obrigatório: `try/catch` e callbacks assíncronos**
+
+```js
+try {
+    setTimeout(() => {
+        throw new Error("Falhou");
+    }, 0);
+} catch (e) {
+    console.log("Nunca chega aqui");
+}
+```
+
+O `try/catch` só apanha erros **síncronos** do bloco onde está.  
+O callback do `setTimeout` corre mais tarde, por isso o erro não é apanhado.
+
+Forma correta: trata o erro **dentro** do callback **ou** usa `Promise`/`async` com `reject/catch`.
+
+```js
+setTimeout(() => {
+    try {
+        throw new Error("Falhou");
+    } catch (e) {
+        console.warn(e.message);
+    }
+}, 0);
+```
+
+```js
+function falharDepois() {
+    return new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Falhou")), 0),
+    );
+}
+falharDepois().catch((e) => console.warn(e.message));
+```
+
 ## 6) `fetch` (buscar dados na internet) de forma segura
 
--   `fetch(url)` pede ao browser que **vá buscar** dados. Quando vier a resposta, tu continuas.
--   `response.ok` é `true` entre 200–299. Se não for, **lança um erro** para os teus `catch` apanharem.
+- `fetch(url)` pede ao browser que **vá buscar** dados. Quando vier a resposta, tu continuas.
+- `response.ok` é `true` entre 200–299. Se não for, **lança um erro** para os teus `catch` apanharem.
 
 ```js
 async function getJSON(url) {
@@ -193,7 +230,9 @@ async function carregarAlunos() {
 }
 ```
 
-**Bónus (opcional): timeout com `AbortController`**
+**Timeout com `AbortController` (boa prática)**
+
+Quando fazes `fetch`, define um tempo limite para não deixar a app presa indefinidamente.
 
 ```js
 async function getComTimeout(url, ms = 4000) {
@@ -213,8 +252,8 @@ async function getComTimeout(url, ms = 4000) {
 
 ## 7) Timers: `setTimeout` e `setInterval`
 
--   **`setTimeout(fn, ms)`**: corre **uma vez** passado `ms` milissegundos.
--   **`setInterval(fn, ms)`**: corre **várias vezes**, de `ms` em `ms`. Usa `clearInterval(id)` para parar.
+- **`setTimeout(fn, ms)`**: corre **uma vez** passado `ms` milissegundos.
+- **`setInterval(fn, ms)`**: corre **várias vezes**, de `ms` em `ms`. Usa `clearInterval(id)` para parar.
 
 ```js
 const id = setInterval(() => console.log("tic"), 1000);
@@ -241,35 +280,39 @@ Imagina que tens uma fila de pessoas (callbacks) à espera de serem atendidas. O
 ## 9) Mini desafios
 
 1. **Tempo de espera** — cria `esperar(ms)` que devolve uma Promise resolvida após `ms`. Usa `then` para escrever “Já passou!” ao fim de 1 segundo.
+   Observa: o `console.log` só deve aparecer depois de ~1s.
 2. **Mensagem sequencial** — escreve uma função `async` que lança duas Promises em paralelo com `Promise.all` e mostra a soma dos valores quando ambas terminarem.
 3. **Relógio simples** — usa `setInterval` para atualizar um `<span>` com horas:min:seg. Adiciona um botão “Parar” que usa `clearInterval`.
+   Observa: guardas o `id` do intervalo e paras com `clearInterval`.
 4. **Ordem dos logs** — corre o snippet do capítulo (A, D, C, B) e descreve num parágrafo a ordem observada e o motivo.
+   Observa: a ordem depende de microtarefas (Promise) e tarefas (timeout).
 5. **Loading fictício** — mostra “A carregar…” num `<p>`, chama `esperar(1500)` e depois troca o texto para “Pronto”. Em caso de erro (simula lançando `throw`), mostra “Ups”.
 6. **Fetch simulado** — cria `fakeFetch(url)` que devolve uma Promise resolvida com `{ ok: true, dados: [...] }` após 700 ms e usa `async/await` para tratar sucesso e erro (lança manualmente um erro para praticar o `catch`).
+   Observa: testa o caminho de sucesso e o caminho de erro.
 
 ## 10) Dicionário rápido
 
--   **API**: “botões” que o ambiente te dá para pedires coisas (tempo, internet, ficheiros).
--   **Callback**: função que entregas para ser chamada **mais tarde**.
--   **Promise**: promessa de um **resultado futuro** (valor ou erro).
--   **Event Loop**: o **maestro** que decide quando entram as próximas funções.
--   **Microtarefas**: fila **rápida** (Promises).
--   **Tarefas**: fila **normal** (`setTimeout`, cliques, I/O).
--   **Call Stack**: o que está a ser executado **agora**.
+- **API**: “botões” que o ambiente te dá para pedires coisas (tempo, internet, ficheiros).
+- **Callback**: função que entregas para ser chamada **mais tarde**.
+- **Promise**: promessa de um **resultado futuro** (valor ou erro).
+- **Event Loop**: o **maestro** que decide quando entram as próximas funções.
+- **Microtarefas**: fila **rápida** (Promises).
+- **Tarefas**: fila **normal** (`setTimeout`, cliques, I/O).
+- **Call Stack**: o que está a ser executado **agora**.
 
 ---
 
 ## 11) Resumo final
 
--   Usa **assíncrono** sempre que atravessas **tempo/rede/disco/UI**.
--   **Promises** e **`async/await`** tornam fácil trabalhar com resultados que **chegam depois**.
--   O **Event Loop** dá **prioridade** às **Promises** (microtarefas) antes dos **timeouts/cliques** (tarefas).
--   Pensa se queres fazer **em paralelo** (`Promise.all`) para não perder tempo.
+- Usa **assíncrono** sempre que atravessas **tempo/rede/disco/UI**.
+- **Promises** e **`async/await`** tornam fácil trabalhar com resultados que **chegam depois**.
+- O **Event Loop** dá **prioridade** às **Promises** (microtarefas) antes dos **timeouts/cliques** (tarefas).
+- Pensa se queres fazer **em paralelo** (`Promise.all`) para não perder tempo.
 
 ## Changelog
 
--   **v1.2.0 — 2025-11-10**
-    -   Mini desafios simplificados para focar em esperas simples, `Promise.all`, `setInterval` e simulações sem APIs externas.
--   **v1.1.0 — 2025-11-10**
-    -   Mini desafios atualizados (agora com sete propostas). Inclui exercícios de retry, timeout e ordem de execução.
-    -   Changelog introduzido para acompanhar evoluções futuras do capítulo.
+- **v1.2.0 — 2025-11-10**
+    - Mini desafios simplificados para focar em esperas simples, `Promise.all`, `setInterval` e simulações sem APIs externas.
+- **v1.1.0 — 2025-11-10**
+    - Mini desafios atualizados (agora com sete propostas). Inclui exercícios de retry, timeout e ordem de execução.
+    - Changelog introduzido para acompanhar evoluções futuras do capítulo.
