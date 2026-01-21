@@ -22,12 +22,13 @@ Os guias do projeto final estão na pasta `Projeto/`. Incluem:
 
 -   `requisitos.md`: requisitos, temas sugeridos, mini-planeamento.
 -   `markdown.md`: guia prático de Markdown (usado para escrever o README do projeto).
+-   `planeamento-fase-inicial.md`: checklist e passos para organizar a primeira fase.
 
 ---
 
 ## JavaScript — Capítulos
 
-### Fundamentos (01‑12)
+### Fundamentos (01‑13)
 
 1. [01 — Variáveis e Tipos](JavaScript/01-Variaveis-Tipos.md)
 2. [02 — Input/Output Básico](JavaScript/02-IO-Basico.md)
@@ -43,13 +44,13 @@ Os guias do projeto final estão na pasta `Projeto/`. Incluem:
 12. [12 — Exceções](JavaScript/12-Excecoes.md)
 13. [13 — Módulos ES](JavaScript/13-Modulos-ES.md)
 
-### Intermédio / Browser (13‑17)
+### Intermédio / Browser (14‑18)
 
-14. [13 — Classes e OOP](JavaScript/14-POO-Classes.md)
-15. [14 — Assíncrono e Event Loop](JavaScript/15-Assincrono-EventLoop.md)
-16. [15 — DOM Básico](JavaScript/16-DOM-Basico.md)
-17. [16 — Fetch / AJAX](JavaScript/17-Fetch-AJAX.md)
-18. [17 — Outros Tópicos Úteis](JavaScript/18-Outros-Topicos.md)
+14. [14 — Classes e OOP](JavaScript/14-POO-Classes.md)
+15. [15 — Assíncrono e Event Loop](JavaScript/15-Assincrono-EventLoop.md)
+16. [16 — DOM Básico](JavaScript/16-DOM-Basico.md)
+17. [17 — Fetch / AJAX](JavaScript/17-Fetch-AJAX.md)
+18. [18 — Outros Tópicos Úteis](JavaScript/18-Outros-Topicos.md)
 
 Cada ficheiro tem exemplos prontos a colar no DevTools/Node e termina com desafios curtos para garantir prática imediata.
 
