@@ -6,10 +6,10 @@
 
 ## 0) Porque módulos?
 
--   Separas responsabilidades (ex.: `math.js`, `alunos.js`).
--   Evitas poluir o escopo global.
--   Facilita testes e reutilização.
--   Ajuda-te a reutilizar o mesmo código em vários projetos (copias só o ficheiro do módulo).
+- Separas responsabilidades (ex.: `math.js`, `alunos.js`).
+- Evitas poluir o escopo global.
+- Facilita testes e reutilização.
+- Ajuda-te a reutilizar o mesmo código em vários projetos (copias só o ficheiro do módulo).
 
 Cada ficheiro com `import` ou `export` passa a ser um módulo com o seu próprio escopo.  
 Organiza pastas simples, por exemplo:
@@ -34,10 +34,10 @@ No HTML usa `type="module"`:
 
 Notas importantes:
 
--   Os módulos são carregados de forma assíncrona (como se tivessem `defer`).
--   Usa caminhos relativos com extensão (`./utils/math.js`).
--   Abre o projeto via servidor local (Live Server, Vite, etc.) para evitar erros de CORS ao usar `file://`.
--   Se precisares de vários `script type="module"`, todos podem importar/exportar entre si.
+- Os módulos são carregados de forma assíncrona (como se tivessem `defer`).
+- Usa caminhos relativos com extensão (`./utils/math.js`).
+- Abre o projeto via servidor local (Live Server, Vite, etc.) para evitar erros de CORS ao usar `file://`.
+- Se precisares de vários `script type="module"`, todos podem importar/exportar entre si.
 
 ---
 
@@ -163,7 +163,7 @@ inc();
 console.log(total); // 1 (reflete a atualização)
 ```
 
-Não podes fazer `total = 5` fora do módulo original — só o ficheiro que exporta é que pode reatribuir.
+Não podes fazer `total = 5` fora do módulo original - só o ficheiro que exporta é que pode reatribuir.
 
 ---
 
@@ -200,7 +200,7 @@ btn.addEventListener("click", async () => {
 
 ### Ativar ESM
 
--   Define `"type": "module"` no `package.json`, **ou** usa extensão `.mjs`.
+- Define `"type": "module"` no `package.json`, **ou** usa extensão `.mjs`.
 
 ```json
 {
@@ -226,12 +226,12 @@ No Node moderno podes usar `import dados from "./dados.json" assert { type: "jso
 
 ## 8) Boas práticas
 
--   Cada módulo deve ter uma responsabilidade clara.
--   Evita defaults quando exportas muitas coisas do mesmo ficheiro — `named exports` tornam o autocompletar mais fácil.
--   Usa index/barrel apenas quando realmente simplifica (demasiadas camadas podem confundir).
--   Documenta no topo do ficheiro o que ele expõe (`// Exporta: getAluno, salvarAluno`).
--   Mantém nomes de ficheiro que descrevam o conteúdo (`alunosStore.js`, `formatarTexto.js`).
--   Sempre que importares muita coisa, considera agrupar funções relacionadas num objeto exportado para evitar dezenas de imports soltos.
+- Cada módulo deve ter uma responsabilidade clara.
+- Evita defaults quando exportas muitas coisas do mesmo ficheiro - `named exports` tornam o autocompletar mais fácil.
+- Usa index/barrel apenas quando realmente simplifica (demasiadas camadas podem confundir).
+- Documenta no topo do ficheiro o que ele expõe (`// Exporta: getAluno, salvarAluno`).
+- Mantém nomes de ficheiro que descrevam o conteúdo (`alunosStore.js`, `formatarTexto.js`).
+- Sempre que importares muita coisa, considera agrupar funções relacionadas num objeto exportado para evitar dezenas de imports soltos.
 
 ---
 
@@ -247,11 +247,11 @@ No Node moderno podes usar `import dados from "./dados.json" assert { type: "jso
 
 ## Changelog
 
--   **v1.3.0 — 2025-11-18**
-    -   Adicionado exemplo completo passo a passo no browser e checklist de boas práticas mais detalhada.
-    -   Reforçados contextos introdutórios para explicar estrutura de pastas e fluxo de imports ao nível do 11.º ano.
--   **v1.2.0 — 2025-11-10**
-    -   Mini desafios simplificados e agora focados em cenários de browser (sem Node CLI).
--   **v1.1.0 — 2025-11-10**
-    -   Separação entre boas práticas e mini desafios, com quatro novos desafios avançados.
-    -   Changelog adicionado para registar alterações ao capítulo.
+- **v1.3.0 - 2025-11-18**
+    - Adicionado exemplo completo passo a passo no browser e checklist de boas práticas mais detalhada.
+    - Reforçados contextos introdutórios para explicar estrutura de pastas e fluxo de imports ao nível do 11.º ano.
+- **v1.2.0 - 2025-11-10**
+    - Mini desafios simplificados e agora focados em cenários de browser (sem Node CLI).
+- **v1.1.0 - 2025-11-10**
+    - Separação entre boas práticas e mini desafios, com quatro novos desafios avançados.
+    - Changelog adicionado para registar alterações ao capítulo.

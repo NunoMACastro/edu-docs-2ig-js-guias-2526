@@ -8,9 +8,9 @@
 
 > Funções são blocos de código reutilizáveis que executam tarefas específicas e têm um nome. Depois de definidas, podem ser chamadas várias vezes ao longo do programa.
 
--   Agrupam passos que pertencem juntos.
--   Podem receber **parâmetros** e devolver **valores**.
--   Evitam repetir código e facilitam testes.
+- Agrupam passos que pertencem juntos.
+- Podem receber **parâmetros** e devolver **valores**.
+- Evitam repetir código e facilitam testes.
 
 ```js
 function somar(a, b) {
@@ -25,8 +25,8 @@ console.log(somar(2, 3)); // 5
 
 ### Declaração (Function Declaration)
 
--   Içada (podes chamar antes da linha em que está escrita).
--   Ótima para utilitários principais do ficheiro.
+- Içada (podes chamar antes da linha em que está escrita).
+- Ótima para utilitários principais do ficheiro.
 
 ```js
 saudar("Ana"); // funciona
@@ -37,8 +37,8 @@ function saudar(nome) {
 
 ### Expressão (Function Expression)
 
--   Guardada numa variável `const` ou `let`.
--   Só fica disponível depois da linha onde é criada.
+- Guardada numa variável `const` ou `let`.
+- Só fica disponível depois da linha onde é criada.
 
 ```js
 const dobro = function (n) {
@@ -48,8 +48,8 @@ const dobro = function (n) {
 
 ### Arrow function (`=>`)
 
--   Sintaxe curta, ideal para callbacks.
--   Não cria `this` nem `arguments` próprios.
+- Sintaxe curta, ideal para callbacks.
+- Não cria `this` nem `arguments` próprios.
 
 ```js
 const soma = (a, b) => a + b;
@@ -103,9 +103,9 @@ function dividir(a, b) {
 
 ## 3) Hoisting
 
--   Declarações de função ficam disponíveis em todo o escopo onde vivem.
--   `var` é içada mas inicializada com `undefined`.
--   `let/const` ficam na **TDZ** até à linha onde aparecem (não podes usar antes).
+- Declarações de função ficam disponíveis em todo o escopo onde vivem.
+- `var` é içada mas inicializada com `undefined`.
+- `let/const` ficam na **TDZ** até à linha onde aparecem (não podes usar antes).
 
 ```js
 hoisted(); // OK
@@ -119,8 +119,8 @@ let valor = 5;
 
 ## 4) Escopo e closures
 
--   Cada função cria o seu próprio **escopo**.
--   Funções internas conseguem “lembrar-se” de variáveis externas → isto é um **closure**.
+- Cada função cria o seu próprio **escopo**.
+- Funções internas conseguem “lembrar-se” de variáveis externas → isto é um **closure**.
 
 ```js
 function criarContador(inicial = 0) {
@@ -217,7 +217,7 @@ console.log(calcular(4, 2, soma)); // 6
 console.log(calcular(4, 2, produto)); // 8
 ```
 
--   Normalmente usam-se em funções como `map`, `filter`, `reduce`, ou em operações assíncronas como `setTimeout` ou `fetch`. Ver os capítulos 11-Arrays-HighOrder.md e 14-Assincrono-EventLoop.md para mais detalhes.
+- Normalmente usam-se em funções como `map`, `filter`, `reduce`, ou em operações assíncronas como `setTimeout` ou `fetch`. Ver os capítulos 11-Arrays-HighOrder.md e 14-Assincrono-EventLoop.md para mais detalhes.
 
 ---
 
@@ -225,13 +225,13 @@ console.log(calcular(4, 2, produto)); // 8
 
 Em Python, temos:
 
--   `*args` → recebe uma quantidade variável de argumentos posicionais.
--   `**kwargs` → recebe argumentos “nomeados” num dicionário.
+- `*args` → recebe uma quantidade variável de argumentos posicionais.
+- `**kwargs` → recebe argumentos “nomeados” num dicionário.
 
 Em JavaScript não existem literalmente `*args`/`**kwargs`, mas usamos dois padrões muito próximos:
 
--   `...rest` para vários argumentos posicionais.
--   Um **objeto de opções** (com desestruturação) para simular argumentos nomeados.
+- `...rest` para vários argumentos posicionais.
+- Um **objeto de opções** (com desestruturação) para simular argumentos nomeados.
 
 ### `...rest` → parecido com `*args`
 
@@ -270,16 +270,16 @@ criarUtilizador({ idade: 20, nome: "Bruno" });
 
 Aqui:
 
--   Usamos um **objeto** em vez de vários parâmetros separados.
--   A desestruturação no parâmetro permite:
-    -   Tirar logo `nome`, `idade`, `premium` para variáveis.
-    -   Definir valores por defeito (`idade = 0`, `premium = false`).
--   O `= {}` no fim (`} = {}`) garante que a função não rebenta se for chamada sem argumentos.
+- Usamos um **objeto** em vez de vários parâmetros separados.
+- A desestruturação no parâmetro permite:
+    - Tirar logo `nome`, `idade`, `premium` para variáveis.
+    - Definir valores por defeito (`idade = 0`, `premium = false`).
+- O `= {}` no fim (`} = {}`) garante que a função não rebenta se for chamada sem argumentos.
 
 Este padrão é muito usado em código real porque:
 
--   Torna as chamadas mais legíveis (`criarUtilizador({ nome: "Ana", premium: true })`).
--   É fácil adicionar campos novos sem partir chamadas antigas.
+- Torna as chamadas mais legíveis (`criarUtilizador({ nome: "Ana", premium: true })`).
+- É fácil adicionar campos novos sem partir chamadas antigas.
 
 ---
 
@@ -297,9 +297,9 @@ Este padrão é muito usado em código real porque:
 
 ## Changelog
 
--   **v1.1.0 — 2025-11-10**
-    -   Mini desafios ampliados com mais quatro propostas sobre closures e composição de funções.
-    -   Changelog adicionado para acompanhar futuras melhorias do capítulo.
+- **v1.1.0 — 2025-11-10**
+    - Mini desafios ampliados com mais quatro propostas sobre closures e composição de funções.
+    - Changelog adicionado para acompanhar futuras melhorias do capítulo.
 
 ```
 

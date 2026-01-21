@@ -350,7 +350,7 @@ Ao declarar o método como propriedade (`handleClick = () => { ... }`), o `this`
 
 Vamos juntar vários conceitos num mini‑projeto. Objetivo: gerir uma turma com alunos, validar notas e calcular média/aprovados.
 
-1. **Classe base (`Pessoa`)** — só guarda nome e apresenta.
+1. **Classe base (`Pessoa`)** - só guarda nome e apresenta.
 
 ```js
 class Pessoa {
@@ -363,7 +363,7 @@ class Pessoa {
 }
 ```
 
-2. **Subclasse (`Aluno`)** — herda de `Pessoa`, adiciona nota privada + validação (get/set).
+2. **Subclasse (`Aluno`)** - herda de `Pessoa`, adiciona nota privada + validação (get/set).
 
 ```js
 class Aluno extends Pessoa {
@@ -387,7 +387,7 @@ class Aluno extends Pessoa {
 }
 ```
 
-3. **Classe compositora (`Turma`)** — possui um array privado com alunos e métodos utilitários.
+3. **Classe compositora (`Turma`)** - possui um array privado com alunos e métodos utilitários.
 
 ```js
 class Turma {
@@ -472,7 +472,7 @@ class Pessoa {
 - Usa **fábricas** quando precisas de algo super rápido, sem herança e onde `this` só vai baralhar. O “estado” fica guardado em variáveis normais dentro da função.
 - Usa **classes** quando precisas de comunicar explicitamente que existe um tipo, quando vais compor heranças ou quando queres aproveitar ferramentas do ecossistema que fazem `obj instanceof MinhaClasse`.
 - Ambas podem ter encapsulamento: fábricas usam **closures** (variáveis internas), classes usam `#privado`. A principal diferença é mesmo o modo de criação e a possibilidade de herdar.
-- Não há certo/errado — escolhe o que tornar a intenção mais clara para a tua equipa/colegas.
+- Não há certo/errado - escolhe o que tornar a intenção mais clara para a tua equipa/colegas.
 
 ```js
 // FÁBRICA (leve, sem herança)
@@ -550,7 +550,7 @@ Neste caso não tocamos em `new` nem precisamos de `this`. Para objetos que vive
 
 ## 13) Mini desafios
 
-1. **Saudação** — cria `class Saudacao` com `mensagem` no constructor e um método `falar()` que devolve `Olá + mensagem`. Instancia duas versões e mostra o texto no `console`.
+1. **Saudação** - cria `class Saudacao` com `mensagem` no constructor e um método `falar()` que devolve `Olá + mensagem`. Instancia duas versões e mostra o texto no `console`.
 
 > Resolução
 
@@ -574,7 +574,7 @@ const s2 = new Saudacao("Ana");
 console.log(s2.falar()); // "Olá Ana"
 ```
 
-2. **Contador simples** — cria `class Contador` com um atributo `valor = 0` e um método `incrementar()` que soma 1. Mostra o valor após três chamadas.
+2. **Contador simples** - cria `class Contador` com um atributo `valor = 0` e um método `incrementar()` que soma 1. Mostra o valor após três chamadas.
 
 > Resolução
 
@@ -594,7 +594,7 @@ c.incrementar();
 console.log(c.valor); // 3
 ```
 
-3. **Pessoa básica** — cria `class Pessoa` com `nome` e `apresentar()`. Cria 3 pessoas e imprime as apresentações.
+3. **Pessoa básica** - cria `class Pessoa` com `nome` e `apresentar()`. Cria 3 pessoas e imprime as apresentações.
 
 > Resolução
 
@@ -619,7 +619,7 @@ console.log(p2.apresentar()); // "Olá, eu sou Maria."
 console.log(p3.apresentar()); // "Olá, eu sou Carlos."
 ```
 
-4. **Getter introdutório** — cria `class Termometro` com um campo privado `#celsius` e um getter `fahrenheit` que devolve `#celsius * 1.8 + 32`. Mostra ambos os valores.
+4. **Getter introdutório** - cria `class Termometro` com um campo privado `#celsius` e um getter `fahrenheit` que devolve `#celsius * 1.8 + 32`. Mostra ambos os valores.
 
 > Resolução
 
@@ -655,23 +655,184 @@ console.log(`Celsius: ${t.celsius}`); // 25
 console.log(`Fahrenheit: ${t.fahrenheit}`); // 77
 ```
 
-5. **Setter introdutório** — cria `class Produto` com `#preco` e um setter `preco` que rejeita valores negativos (lança `RangeError`). Usa o getter correspondente para ler o valor atual.
-6. **Validação** — cria `class Aluno` com `#nota` e um `set nota(v)` que só aceita 0–20 (lança `RangeError` caso contrário).
-7. **Turma de alunos** — cria `class Turma` que guarda um array privado de `Aluno`. Adiciona método `adicionarAluno(aluno)` (verifica se é instância de `Aluno`), `media()` e `aprovados()` (nota ≥ 10).
-8. **Escola** — cria `class Escola` que tem várias `Turma`. Adiciona método `adicionarTurma(turma)` e `mediaGeral()` que calcula a média de todas as turmas.
-9. **Cria um Relógio** — cria `class Cronometro` com um campo privado `#segundos` e métodos `iniciar()`, `parar()` e `get segundos`. Usa `setInterval` para contar segundos.
-10. **Conta bancária** — implementa `depositar`, `levantar` e `get saldo`; lança erro se tentar levantar mais do que o saldo.
-11. **`this` em callbacks** — cria `class Alarme` com `segundos` e método `tick()` que incrementa e mostra na `console`. Em `iniciar()`, usa `setInterval` e garante que `this` aponta para a instância (usa `bind` ou um método em arrow).
-12. **Método privado** — cria `class Cofre` com `#codigo` e um método privado `#validar(c)`. O método público `abrir(c)` deve devolver `"Aberto"` se o código estiver correto e `"Código errado"` caso contrário. Limita o número de tentativas a 3.
-13. **Estáticos** — cria `class Conversor` com `static eurParaUsd(valor)` e `static usdParaEur(valor)` e usa-os em dois exemplos.
-14. **Herança** — cria `class Pessoa` com `nome` e `apresentar()` (frase simples). Cria `class Professor extends Pessoa` com `disciplina`. No `constructor`, chama `super(nome)`. Reescreve `apresentar()` para incluir a disciplina e usa `super.apresentar()` para reaproveitar a frase base. Cria pelo menos 2 professores e mostra o resultado na `console`.
-15. **Herança (animais)** — cria `class Animal` com `nome` e `som` e um método `falar()`. Cria `class Cao` e `class Gato` que chamam `super(nome, "au")` / `super(nome, "miau")`. Instancia um de cada e chama `falar()`.
-16. **Herança (veículos)** — cria `class Veiculo` com `marca` e método `mover()` que devolve `"<marca> está a mover-se"`. Cria `class Bicicleta extends Veiculo` com `tipo` e reescreve `mover()` para incluir o tipo, chamando `super.mover()`.
-17. **Composição (casa/porta)** — cria `class Porta` com estado `aberta` e métodos `abrir()`/`fechar()`. Cria `class Casa` que **tem uma** `Porta` e expõe `abrirPorta()`/`fecharPorta()`. Testa a sequência abrir → fechar.
-18. **Composição (playlist)** — cria `class Musica` com `titulo`. Cria `class Playlist` que guarda um array de `Musica`, método `adicionar(musica)` (verifica `instanceof`) e `listar()` que devolve os títulos.
-19. **Composição** — cria `class Motor` com estado `ligado` e métodos `ligar()`/`desligar()`. Cria `class Carro` que **tem um** `Motor` (cria no `constructor`). O carro deve expor `ligar()` e `desligar()` que chamam o motor e um `get estado` que devolve se o motor está ligado. Testa com um carro.
-20. **JSON** — adiciona `toJSON()` a `class Aluno` para devolver apenas `{ nome, turma }` (não inclui `#nota`). Cria um aluno, faz `JSON.stringify(aluno)` e confirma que o resultado só tem `nome` e `turma`.
-21. **Fábrica x Classe** — escreve uma função `criarContador()` que devolve `{ inc(), valor() }` e guarda `let n = 0` no closure. Depois cria `class Contador` com `#n`, métodos `inc()` e `get valor()`. Cria duas instâncias de cada e mostra que cada uma guarda o seu próprio estado.
+5. **Setter introdutório** - cria `class Produto` com `#preco` e um setter `preco` que rejeita valores negativos (lança `RangeError`). Usa o getter correspondente para ler o valor atual.
+
+> Resolução
+
+```js
+class Produto {
+    #preco = 0;
+    get preco() {
+        return this.#preco;
+    }
+    set preco(v) {
+        if (v < 0) {
+            throw new RangeError("Preço não pode ser negativo.");
+        }
+        this.#preco = v;
+    }
+}
+
+// Teste
+
+const p = new Produto();
+
+try {
+    p.preco = 50; // usa o setter
+    console.log(p.preco); // usa o getter → 50
+    p.preco = -10; // força erro
+} catch (e) {
+    console.log(e.message);
+}
+```
+
+6. **Validação** - cria `class Aluno` com `#nota` e um `set nota(v)` que só aceita 0–20 (lança `RangeError` caso contrário).
+
+> Resolução com nome e nota
+
+```js
+class Aluno {
+    nome;
+    #nota = 0;
+    constructor(nome, nota) {
+        this.nome = nome;
+        this.nota = nota; // usa o setter
+    }
+    get nota() {
+        return this.#nota;
+    }
+    set nota(v) {
+        if (typeof v !== "number" || v < 0 || v > 20) {
+            throw new RangeError("Nota inválida (0–20).");
+        }
+        this.#nota = v;
+    }
+}
+// Teste
+const aluno = new Aluno("Pedro", 15);
+console.log(aluno.nome, aluno.nota); // Pedro 15
+try {
+    aluno.nota = 25; // força erro
+} catch (e) {
+    console.log(e.message); // "Nota inválida (0–20)."
+}
+```
+
+7. **Turma de alunos** - cria `class Turma` que guarda um array privado de `Aluno`. Adiciona método `adicionarAluno(aluno)` (verifica se é instância de `Aluno`), `media()` e `aprovados()` (nota ≥ 10).
+
+> Resolução
+
+```js
+class Turma {
+    #alunos = [];
+    adicionarAluno(aluno) {
+        if (!(aluno instanceof Aluno)) {
+            throw new TypeError("Preciso de um Aluno.");
+        }
+        this.#alunos.push(aluno);
+    }
+    media() {
+        if (this.#alunos.length === 0) return 0;
+        const soma = this.#alunos.reduce((acc, aluno) => acc + aluno.nota, 0);
+        /*
+        Sem usar o reduce: 
+        let soma = 0;
+        for (const aluno of this.#alunos) {
+            soma += aluno.nota;
+        }
+
+        */
+        return Math.round((soma / this.#alunos.length) * 10) / 10;
+    }
+    aprovados() {
+        return this.#alunos.filter((aluno) => aluno.nota >= 10);
+    }
+}
+
+// Teste
+
+const turma = new Turma();
+turma.adicionarAluno(new Aluno("Ana", 18));
+turma.adicionarAluno(new Aluno("Bruno", 9));
+console.log("Média:", turma.media()); // 13.5
+// Aprovados mais organizado e bonito do género:
+
+// Aluno: nota
+
+console.log(
+    "Aprovados:",
+    turma.aprovados().map((a) => `${a.nome}: ${a.nota}`),
+);
+```
+
+8. **Escola** - cria `class Escola` que tem várias `Turma`. Adiciona método `adicionarTurma(turma)` e `mediaGeral()` que calcula a média de todas as turmas.
+
+> Resolução
+
+```js
+class Escola {
+    #turmas = [];
+    adicionarTurma(turma) {
+        if (!(turma instanceof Turma)) {
+            throw new TypeError("Preciso de uma Turma.");
+        }
+        this.#turmas.push(turma);
+    }
+    // Media geral sem reduce
+    mediaGeral() {
+        if (this.#turmas.length === 0) return 0;
+        let soma = 0;
+        let totalAlunos = 0;
+        for (const turma of this.#turmas) {
+            for (const aluno of turma.#alunos) {
+                soma += aluno.nota;
+                totalAlunos++;
+            }
+        }
+        return Math.round((soma / totalAlunos) * 10) / 10;
+    }
+    // Media geral sem reduce e usando a função media() da Turma
+    /*
+    mediaGeral() {
+        if (this.#turmas.length === 0) return 0;
+        let soma = 0;
+        let totalAlunos = 0;
+        for (const turma of this.#turmas) {
+            soma += turma.media() * turma.#alunos.length;
+            totalAlunos += turma.#alunos.length;
+        }
+        return Math.round((soma / totalAlunos) * 10) / 10;
+    }
+    */
+}
+
+// Teste
+
+const escola = new Escola();
+const turma1 = new Turma();
+turma1.adicionarAluno(new Aluno("Ana", 18));
+turma1.adicionarAluno(new Aluno("Bruno", 9));
+const turma2 = new Turma();
+turma2.adicionarAluno(new Aluno("Carla", 15));
+turma2.adicionarAluno(new Aluno("David", 12));
+escola.adicionarTurma(turma1);
+escola.adicionarTurma(turma2);
+console.log("Média Geral:", escola.mediaGeral()); // 13.5
+```
+
+9. **Cria um Relógio** - cria `class Cronometro` com um campo privado `#segundos` e métodos `iniciar()`, `parar()` e `get segundos`. Usa `setInterval` para contar segundos.
+10. **Conta bancária** - implementa `depositar`, `levantar` e `get saldo`; lança erro se tentar levantar mais do que o saldo.
+11. **`this` em callbacks** - cria `class Alarme` com `segundos` e método `tick()` que incrementa e mostra na `console`. Em `iniciar()`, usa `setInterval` e garante que `this` aponta para a instância (usa `bind` ou um método em arrow).
+12. **Método privado** - cria `class Cofre` com `#codigo` e um método privado `#validar(c)`. O método público `abrir(c)` deve devolver `"Aberto"` se o código estiver correto e `"Código errado"` caso contrário. Limita o número de tentativas a 3.
+13. **Estáticos** - cria `class Conversor` com `static eurParaUsd(valor)` e `static usdParaEur(valor)` e usa-os em dois exemplos.
+14. **Herança** - cria `class Pessoa` com `nome` e `apresentar()` (frase simples). Cria `class Professor extends Pessoa` com `disciplina`. No `constructor`, chama `super(nome)`. Reescreve `apresentar()` para incluir a disciplina e usa `super.apresentar()` para reaproveitar a frase base. Cria pelo menos 2 professores e mostra o resultado na `console`.
+15. **Herança (animais)** - cria `class Animal` com `nome` e `som` e um método `falar()`. Cria `class Cao` e `class Gato` que chamam `super(nome, "au")` / `super(nome, "miau")`. Instancia um de cada e chama `falar()`.
+16. **Herança (veículos)** - cria `class Veiculo` com `marca` e método `mover()` que devolve `"<marca> está a mover-se"`. Cria `class Bicicleta extends Veiculo` com `tipo` e reescreve `mover()` para incluir o tipo, chamando `super.mover()`.
+17. **Composição (casa/porta)** - cria `class Porta` com estado `aberta` e métodos `abrir()`/`fechar()`. Cria `class Casa` que **tem uma** `Porta` e expõe `abrirPorta()`/`fecharPorta()`. Testa a sequência abrir → fechar.
+18. **Composição (playlist)** - cria `class Musica` com `titulo`. Cria `class Playlist` que guarda um array de `Musica`, método `adicionar(musica)` (verifica `instanceof`) e `listar()` que devolve os títulos.
+19. **Composição** - cria `class Motor` com estado `ligado` e métodos `ligar()`/`desligar()`. Cria `class Carro` que **tem um** `Motor` (cria no `constructor`). O carro deve expor `ligar()` e `desligar()` que chamam o motor e um `get estado` que devolve se o motor está ligado. Testa com um carro.
+20. **JSON** - adiciona `toJSON()` a `class Aluno` para devolver apenas `{ nome, turma }` (não inclui `#nota`). Cria um aluno, faz `JSON.stringify(aluno)` e confirma que o resultado só tem `nome` e `turma`.
+21. **Fábrica x Classe** - escreve uma função `criarContador()` que devolve `{ inc(), valor() }` e guarda `let n = 0` no closure. Depois cria `class Contador` com `#n`, métodos `inc()` e `get valor()`. Cria duas instâncias de cada e mostra que cada uma guarda o seu próprio estado.
 
 ### Repetição espaçada (revisão rápida)
 
@@ -690,24 +851,28 @@ console.log(`Fahrenheit: ${t.fahrenheit}`); // 77
 
 ## Changelog
 
-- **v1.7.0 — 2026-01-19**
+- **v1.7.0 - 2026-01-19**
     - Atualização e expansão dos Mini desafios (1–21) + repetição espaçada.
     - Normalização de naming (ContaBancaria).
     - Reforço do strict mode nas classes (`this` indefinido em callbacks).
     - Nota sobre hoisting de classes.
     - Callout de timers com referência ao cap. 15.
-- **v1.6.0 — 2025-11-18**
+- **v1.6.0 - 2025-11-18**
     - Simplificação de conceitos
-- **v1.5.0 — 2025-11-16**
+- **v1.5.0 - 2025-11-16**
     - Incluído estudo guiado “Turma” combinando herança, encapsulamento e composição.
     - Secção sobre `this` em callbacks agora cobre também arrow functions como classe field.
     - Mais contexto introdutório e notas sobre valores por defeito no `constructor`.
-- **v1.4.0 — 2025-11-10**
+- **v1.4.0 - 2025-11-10**
     - Adicionados dois desafios introdutórios específicos para getters e setters antes do exercício de validação.
-- **v1.3.0 — 2025-11-10**
+- **v1.3.0 - 2025-11-10**
     - Mini desafios reorganizados para começarem com exercícios muito simples e progressivos (Saudação e Contador) antes dos tópicos avançados.
-- **v1.2.0 — 2025-11-10**
+- **v1.2.0 - 2025-11-10**
     - Mini desafios simplificados para focar em padrões básicos (classes, getters/setters, estáticos e herança direta).
-- **v1.1.0 — 2025-11-10**
+- **v1.1.0 - 2025-11-10**
     - Secção de desafios renomeada para Mini desafios para reforçar o caráter avançado.
     - Adicionado changelog inicial para registar futuras alterações no capítulo.
+
+```
+
+```

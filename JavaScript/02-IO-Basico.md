@@ -6,8 +6,8 @@
 
 ## 0) Onde está o nosso código?
 
--   **Browser** → usas a consola das DevTools (`F12` ou `Ctrl+Shift+I`) e tens `prompt/alert/confirm` à disposição.
--   **Node.js** → corres ficheiros `.js` no terminal. Não existe `prompt`, por isso usamos módulos como `readline`.
+- **Browser** → usas a consola das DevTools (`F12` ou `Ctrl+Shift+I`) e tens `prompt/alert/confirm` à disposição.
+- **Node.js** → corres ficheiros `.js` no terminal. Não existe `prompt`, por isso usamos módulos como `readline`.
 
 Começa sempre por abrir a consola para veres erros e mensagens.
 
@@ -34,9 +34,9 @@ console.table([
 
 ## 2) Entrada no browser (`prompt`, `confirm`, `alert`)
 
--   `prompt(mensagem, valorInicial?)` → devolve **string** ou `null` (se clicares Cancelar).
--   `confirm(mensagem)` → devolve **boolean** (`true` se OK).
--   `alert(mensagem)` → só mostra texto.
+- `prompt(mensagem, valorInicial?)` → devolve **string** ou `null` (se clicares Cancelar).
+- `confirm(mensagem)` → devolve **boolean** (`true` se OK).
+- `alert(mensagem)` → só mostra texto.
 
 ```js
 const nome = prompt("Como te chamas?", "aluno");
@@ -93,11 +93,11 @@ rl.close();
 
 ## 4) Boas práticas para I/O nesta fase
 
--   Prefere o **browser** nos primeiros exercícios: feedback imediato e menos configuração.
--   Converte entradas para o tipo certo logo após leres (números, booleanos, etc.).
--   Usa `console.log` para mensagens normais e `console.error` para erros; ajuda muito quando o projeto crescer.
--   Limpa `console.log` supérfluos antes de entregar trabalhos finais.
--   Nunca assumas que o utilizador escreveu algo válido - valida sempre.
+- Prefere o **browser** nos primeiros exercícios: feedback imediato e menos configuração.
+- Converte entradas para o tipo certo logo após leres (números, booleanos, etc.).
+- Usa `console.log` para mensagens normais e `console.error` para erros; ajuda muito quando o projeto crescer.
+- Limpa `console.log` supérfluos antes de entregar trabalhos finais.
+- Nunca assumas que o utilizador escreveu algo válido - valida sempre.
 
 ---
 
@@ -113,6 +113,6 @@ rl.close();
 
 ## Changelog
 
--   **v1.1.0 — 2025-11-10**
-    -   Acrescentados sete exercícios cobrindo browser e Node para treinar I/O.
-    -   Passa a existir secção de changelog para acompanhar futuras revisões.
+- **v1.1.0 — 2025-11-10**
+    - Acrescentados sete exercícios cobrindo browser e Node para treinar I/O.
+    - Passa a existir secção de changelog para acompanhar futuras revisões.

@@ -6,15 +6,15 @@
 
 **Índice**
 
--   [0) O que é um objeto?](#objetos)
--   [1) Criar objetos](#criar-objetos)
--   [2) Ler, escrever e remover](#ler-escrever)
--   [3) `this` em métodos](#this-metodos)
--   [4) Iterar propriedades](#iterar-propriedades)
--   [5) Copiar e atualizar](#copiar-atualizar)
--   [6) JSON rápido](#json-rapido)
--   [7) Exercícios](#exercicios)
--   [Changelog](#changelog)
+- [0) O que é um objeto?](#objetos)
+- [1) Criar objetos](#criar-objetos)
+- [2) Ler, escrever e remover](#ler-escrever)
+- [3) `this` em métodos](#this-metodos)
+- [4) Iterar propriedades](#iterar-propriedades)
+- [5) Copiar e atualizar](#copiar-atualizar)
+- [6) JSON rápido](#json-rapido)
+- [7) Exercícios](#exercicios)
+- [Changelog](#changelog)
 
 ---
 
@@ -22,11 +22,11 @@
 
 <a id="objetos"></a>
 
--   É o mesmo que um dicionário, mapa ou tabela hash noutras linguagens.
--   Coleção dinâmica de pares `chave: valor`.
--   Chaves são sempre **strings** ou `Symbol` (até números são convertidos para string).
--   Se leres uma chave inexistente, recebes `undefined`.
--   Dois objetos com o mesmo conteúdo não são iguais (`===`) porque vivem em sítios diferentes da memória.
+- É o mesmo que um dicionário, mapa ou tabela hash noutras linguagens.
+- Coleção dinâmica de pares `chave: valor`.
+- Chaves são sempre **strings** ou `Symbol` (até números são convertidos para string).
+- Se leres uma chave inexistente, recebes `undefined`.
+- Dois objetos com o mesmo conteúdo não são iguais (`===`) porque vivem em sítios diferentes da memória.
 
 ```js
 const aluno = { nome: "Ana", idade: 17 };
@@ -37,10 +37,10 @@ aluno.altura; // undefined
 
 ### O que é o `this`?
 
--   Palavra-chave especial que aparece em métodos de objetos.
--   Aponta para o objeto usado na chamada do método.
--   Ou seja, o this representa "o objeto atual" que está a usar o método ou a aceder à propriedade.
--   Imagina uma planta de uma casa. Imagina agora que várias casas estão a ser construídas, ao mesmo tempo, com a mesma planta. O `this` é como se fosse a "casa atual" que está a ser construída, permitindo que cada casa use a planta para construir-se corretamente, sem confundir-se com as outras casas.
+- Palavra-chave especial que aparece em métodos de objetos.
+- Aponta para o objeto usado na chamada do método.
+- Ou seja, o this representa "o objeto atual" que está a usar o método ou a aceder à propriedade.
+- Imagina uma planta de uma casa. Imagina agora que várias casas estão a ser construídas, ao mesmo tempo, com a mesma planta. O `this` é como se fosse a "casa atual" que está a ser construída, permitindo que cada casa use a planta para construir-se corretamente, sem confundir-se com as outras casas.
 
 ```js
 const casa = {
@@ -86,7 +86,7 @@ const aluno = { nome: "Bruno", [campo]: 18 }; // cria a chave "nota"
 
 ### `Object.create(null)` (quando queres um "dicionário puro")
 
-Remove a herança padrão — útil para guardar pares simples sem métodos herdados.
+Remove a herança padrão - útil para guardar pares simples sem métodos herdados.
 
 ```js
 const dicionario = Object.create(null);
@@ -102,9 +102,9 @@ dicionario.codigo = "A1";
 
 <a id="ler-escrever"></a>
 
--   `obj.chave` → quando a chave é um identificador simples.
--   `obj[expressao]` → quando tens espaços, hífen ou queres usar variáveis.
--   `delete obj.chave` → remove.
+- `obj.chave` → quando a chave é um identificador simples.
+- `obj[expressao]` → quando tens espaços, hífen ou queres usar variáveis.
+- `delete obj.chave` → remove.
 
 ```js
 const pessoa = { nome: "Marta" };
@@ -122,8 +122,8 @@ delete pessoa.nome;
 
 <a id="this-metodos"></a>
 
--   Dentro de um método normal (`metodo() { ... }`), `this` aponta para o objeto usado na chamada (`obj.metodo()`).
--   Arrow functions **não** criam `this` próprio, por isso evita-as em métodos que precisam de `this`.
+- Dentro de um método normal (`metodo() { ... }`), `this` aponta para o objeto usado na chamada (`obj.metodo()`).
+- Arrow functions **não** criam `this` próprio, por isso evita-as em métodos que precisam de `this`.
 
 ```js
 const conta = {
@@ -213,14 +213,14 @@ const config = Object.freeze({ porta: 3000 });
 
 ## 6) JSON rápido
 
--   Podemos converter objetos para strings JSON e vice-versa.
--   Depois de converter para string, o objeto original e a string são independentes.
--   Útil para guardar dados ou enviar via rede.
+- Podemos converter objetos para strings JSON e vice-versa.
+- Depois de converter para string, o objeto original e a string são independentes.
+- Útil para guardar dados ou enviar via rede.
 
 <a id="json-rapido"></a>
 
--   `JSON.stringify(obj)` → transforma em string (para guardar/envio).
--   `JSON.parse(texto)` → volta a objeto (desde que o texto seja JSON válido).
+- `JSON.stringify(obj)` → transforma em string (para guardar/envio).
+- `JSON.parse(texto)` → volta a objeto (desde que o texto seja JSON válido).
 
 ```js
 const aluno = { nome: "Ana", nota: 18 };
@@ -379,8 +379,8 @@ console.log(contaBancaria.resumo());
 
 ## Changelog
 
--   **v1.1.1 — 2025-11-11**
-    -   Exercícios reorganizados com progressão suave, evitando funções independentes e focando numa tarefa por conceito.
--   **v1.1.0 — 2025-11-10**
-    -   Secção de Exercícios ampliada com sete atividades sobre criação, cópia, `this` e utilitários `Object.*`.
-    -   Changelog incluído para registar evoluções do capítulo.
+- **v1.1.1 - 2025-11-11**
+    - Exercícios reorganizados com progressão suave, evitando funções independentes e focando numa tarefa por conceito.
+- **v1.1.0 - 2025-11-10**
+    - Secção de Exercícios ampliada com sete atividades sobre criação, cópia, `this` e utilitários `Object.*`.
+    - Changelog incluído para registar evoluções do capítulo.

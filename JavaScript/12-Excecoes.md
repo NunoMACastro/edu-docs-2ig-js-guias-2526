@@ -1,4 +1,4 @@
-# [12] Exceções (11.º ano) — guia prático e sem classes
+# [12] Exceções (11.º ano) - guia prático e sem classes
 
 > **Objetivo**: entender o que é uma exceção, ler mensagens de erro, impedir que o programa morra de repente e criar estratégias simples para tratar problemas síncronos e assíncronos **com as ferramentas que já conheces** (funções, objetos, ciclos, arrays).
 
@@ -6,17 +6,17 @@
 
 **Índice**
 
--   [0) Quando é que “rebenta”?](#sec0)
--   [1) Anatomia de um erro (stack trace)](#sec1)
--   [2) `try / catch / finally`](#sec2)
--   [3) `throw`: avisar cedo e bem](#sec3)
--   [4) Erros personalizados sem classes](#sec4)
--   [5) `finally`: arrumar a casa](#sec5)
--   [6) Casos reais (JSON, divisões, inputs)](#sec6)
--   [7) Erros assíncronos (promessas e `async/await`)](#sec7)
--   [8) Padrões e checklist rápida](#sec8)
--   [9) Exercícios](#sec9)
--   [Changelog](#changelog)
+- [0) Quando é que “rebenta”?](#sec0)
+- [1) Anatomia de um erro (stack trace)](#sec1)
+- [2) `try / catch / finally`](#sec2)
+- [3) `throw`: avisar cedo e bem](#sec3)
+- [4) Erros personalizados sem classes](#sec4)
+- [5) `finally`: arrumar a casa](#sec5)
+- [6) Casos reais (JSON, divisões, inputs)](#sec6)
+- [7) Erros assíncronos (promessas e `async/await`)](#sec7)
+- [8) Padrões e checklist rápida](#sec8)
+- [9) Exercícios](#sec9)
+- [Changelog](#changelog)
 
 ---
 
@@ -27,10 +27,10 @@
 Uma **exceção** é o motor JavaScript a dizer: “Não consigo continuar, há aqui algo que não fez sentido”.  
 Alguns exemplos que já viste nas aulas anteriores:
 
--   `JSON.parse("isto não é JSON")` → `SyntaxError`.
--   Aceder a `obj.algo.outra` quando `obj.algo` é `undefined` → `TypeError`.
--   Dividir por zero numa função mal validada → erro lançado por ti com `throw`.
--   Usar uma variável não declarada → `ReferenceError`.
+- `JSON.parse("isto não é JSON")` → `SyntaxError`.
+- Aceder a `obj.algo.outra` quando `obj.algo` é `undefined` → `TypeError`.
+- Dividir por zero numa função mal validada → erro lançado por ti com `throw`.
+- Usar uma variável não declarada → `ReferenceError`.
 
 Sem tratamento o navegador/Node mostra um **stack trace** e pára ali. Com tratamento consegues mostrar mensagens amigáveis, repetir pedidos ao utilizador ou seguir com valores por defeito.
 
@@ -42,9 +42,9 @@ Sem tratamento o navegador/Node mostra um **stack trace** e pára ali. Com trata
 
 Quando surge um erro, o motor constrói um **objeto `Error`** com:
 
--   `name`: tipo (`TypeError`, `RangeError`, …).
--   `message`: descrição curta (tu escreves ou o motor escreve).
--   `stack`: lista das funções chamadas até ao erro (útil para debugging).
+- `name`: tipo (`TypeError`, `RangeError`, …).
+- `message`: descrição curta (tu escreves ou o motor escreve).
+- `stack`: lista das funções chamadas até ao erro (útil para debugging).
 
 Ordem dos acontecimentos:
 
@@ -76,18 +76,18 @@ try {
 
 Regras importantes:
 
--   Só o código **dentro do `try`** é protegido. Coloca lá dentro apenas aquilo que pode falhar.
--   O `catch (erro)` recebe automaticamente o objeto criado pelo motor.
--   O `finally` corre sempre, exista erro ou não. É opcional, mas útil.
--   Podes ter `try/catch` dentro de funções e chamar essas funções noutros sítios. Tudo o que aprendeste sobre organização de código continua a aplicar-se aqui.
+- Só o código **dentro do `try`** é protegido. Coloca lá dentro apenas aquilo que pode falhar.
+- O `catch (erro)` recebe automaticamente o objeto criado pelo motor.
+- O `finally` corre sempre, exista erro ou não. É opcional, mas útil.
+- Podes ter `try/catch` dentro de funções e chamar essas funções noutros sítios. Tudo o que aprendeste sobre organização de código continua a aplicar-se aqui.
 
 Propriedades úteis do objeto `erro` no `catch`:
 
--   `name`: tipo do erro (`TypeError`, `RangeError`, ...).
--   `message`: mensagem curta com o problema.
--   `stack`: rastreio das funções chamadas (debugging).
--   `cause`: erro original, se tiver sido definido ao criar o erro.
--   Campos extra que tu adicionares (`codigo`, `valor`, `url`, ...).
+- `name`: tipo do erro (`TypeError`, `RangeError`, ...).
+- `message`: mensagem curta com o problema.
+- `stack`: rastreio das funções chamadas (debugging).
+- `cause`: erro original, se tiver sido definido ao criar o erro.
+- Campos extra que tu adicionares (`codigo`, `valor`, `url`, ...).
 
 Exemplo básico:
 
@@ -166,16 +166,16 @@ try {
 
 Preferências:
 
--   Cria objetos com `new Error("mensagem")` ou tipos específicos (os principais):
-    -   `Error` → genérico, quando não há um tipo melhor.
-    -   `TypeError` → tipo errado (ex.: passar string quando era número).
-    -   `RangeError` → valor fora do intervalo esperado (ex.: índice negativo).
-    -   `ReferenceError` → variável não declarada ou inexistente.
-    -   `SyntaxError` → erro de sintaxe (normalmente do motor ao interpretar código).
-    -   `URIError` → problema com `encodeURI`/`decodeURI` em strings inválidas.
-    -   `EvalError` → reservado para `eval` (quase não aparece hoje em dia).
-    -   `AggregateError` → vários erros agrupados (ex.: `Promise.any`).
--   Personaliza a mensagem e, se precisares, adiciona dados extra:
+- Cria objetos com `new Error("mensagem")` ou tipos específicos (os principais):
+    - `Error` → genérico, quando não há um tipo melhor.
+    - `TypeError` → tipo errado (ex.: passar string quando era número).
+    - `RangeError` → valor fora do intervalo esperado (ex.: índice negativo).
+    - `ReferenceError` → variável não declarada ou inexistente.
+    - `SyntaxError` → erro de sintaxe (normalmente do motor ao interpretar código).
+    - `URIError` → problema com `encodeURI`/`decodeURI` em strings inválidas.
+    - `EvalError` → reservado para `eval` (quase não aparece hoje em dia).
+    - `AggregateError` → vários erros agrupados (ex.: `Promise.any`).
+- Personaliza a mensagem e, se precisares, adiciona dados extra:
 
 ```js
 function lerIdade(texto) {
@@ -189,8 +189,8 @@ function lerIdade(texto) {
 }
 ```
 
--   Evita lançar strings soltas (`throw "falhou"`). Perdes o `stack` e confundes quem lê.
--   Lembra-te: **não precisas de classes** para isto. Um objeto `Error` normal já resolve.
+- Evita lançar strings soltas (`throw "falhou"`). Perdes o `stack` e confundes quem lê.
+- Lembra-te: **não precisas de classes** para isto. Um objeto `Error` normal já resolve.
 
 ### Guard clause = erro cedo
 
@@ -396,15 +396,15 @@ async function carregarDados() {
 
 <a id="sec8"></a>
 
--   **Valida cedo** (guard clauses): poupa-te dores de cabeça.
--   **Lança erros informativos** (`throw new TypeError("...")`).
--   **Decide o que devolver** quando algo falha:
-    -   `null`, `undefined`, valores de fallback, objetos `{ ok: false, erro }`.
--   **Não engulas erros**: se não sabes o que fazer, volta a lançar (`throw erro;`).
--   **Regista contexto útil** (`erro.valor`, `erro.url`).  
-    Ajuda-te a reproduzir o bug.
--   **Limpa sempre** recursos temporários no `finally`.
--   **Testa** com 3 casos: normal, inválido e extremo (como aprendeste no capítulo 9).
+- **Valida cedo** (guard clauses): poupa-te dores de cabeça.
+- **Lança erros informativos** (`throw new TypeError("...")`).
+- **Decide o que devolver** quando algo falha:
+    - `null`, `undefined`, valores de fallback, objetos `{ ok: false, erro }`.
+- **Não engulas erros**: se não sabes o que fazer, volta a lançar (`throw erro;`).
+- **Regista contexto útil** (`erro.valor`, `erro.url`).  
+  Ajuda-te a reproduzir o bug.
+- **Limpa sempre** recursos temporários no `finally`.
+- **Testa** com 3 casos: normal, inválido e extremo (como aprendeste no capítulo 9).
 
 Snippet “utilitário”:
 
@@ -550,12 +550,12 @@ console.log(dividirSeguro(10, "a")); // { ok: false, erro: TypeError }
 
 <a id="changelog"></a>
 
--   **v1.2.1 — 2025-11-25**
-    -   Explicação expandida de `throw` com passo a passo e exemplos pedagógicos.
-    -   Exercícios adicionados (validação de senha e nota).
--   **v1.2.0 — 2025-11-18**
-    -   Reescrita completa sem classes, com mais exemplos comentados e exercícios graduais.
-    -   Secções novas sobre leitura de stack trace, padrões e checklist.
--   **v1.1.0 — 2025-11-10**
-    -   Mini desafios expandidos para sete propostas cobrindo erros síncronos e assíncronos.
-    -   Changelog inaugurado para seguir alterações do capítulo.
+- **v1.2.1 - 2025-11-25**
+    - Explicação expandida de `throw` com passo a passo e exemplos pedagógicos.
+    - Exercícios adicionados (validação de senha e nota).
+- **v1.2.0 - 2025-11-18**
+    - Reescrita completa sem classes, com mais exemplos comentados e exercícios graduais.
+    - Secções novas sobre leitura de stack trace, padrões e checklist.
+- **v1.1.0 - 2025-11-10**
+    - Mini desafios expandidos para sete propostas cobrindo erros síncronos e assíncronos.
+    - Changelog inaugurado para seguir alterações do capítulo.

@@ -6,9 +6,9 @@
 
 ## 0) O que é o DOM (explicado simples)
 
--   Quando o browser abre uma página, transforma o HTML numa **árvore de nós** (o **DOM**).
--   Cada tag HTML (ex.: `<h1>`, `<p>`, `<button>`) torna‑se num **elemento** dessa árvore.
--   O JavaScript consegue **ver e modificar** essa árvore: ler texto, criar elementos, reagir a cliques, etc.
+- Quando o browser abre uma página, transforma o HTML numa **árvore de nós** (o **DOM**).
+- Cada tag HTML (ex.: `<h1>`, `<p>`, `<button>`) torna‑se num **elemento** dessa árvore.
+- O JavaScript consegue **ver e modificar** essa árvore: ler texto, criar elementos, reagir a cliques, etc.
 
 ```
 <html>
@@ -71,14 +71,14 @@ document.getElementsByClassName("btn"); // HTMLCollection
 document.getElementsByTagName("li");
 ```
 
-> **Dica**: usa **`querySelector`/`querySelectorAll`** (com CSS selectors) — são consistentes e fáceis de ler.
+> **Dica**: usa **`querySelector`/`querySelectorAll`** (com CSS selectors) - são consistentes e fáceis de ler.
 
 ---
 
 ## 3) Ler e alterar conteúdo (texto vs HTML)
 
--   `textContent` → **texto simples** (seguro).
--   `innerHTML` → interpreta **HTML** (pode ser perigoso com dados do utilizador).
+- `textContent` → **texto simples** (seguro).
+- `innerHTML` → interpreta **HTML** (pode ser perigoso com dados do utilizador).
 
 ```js
 titulo.textContent = "Catálogo de Produtos"; // muda o texto
@@ -109,8 +109,8 @@ console.log(input.value); // texto que o utilizador escreveu
 
 ## 4) Classes e estilos (preferir classes)
 
--   **`classList`**: `add`, `remove`, `toggle`, `contains`.
--   **Evita** alterar muitos estilos via `element.style`; guarda estilos no **CSS** e liga/desliga **classes**.
+- **`classList`**: `add`, `remove`, `toggle`, `contains`.
+- **Evita** alterar muitos estilos via `element.style`; guarda estilos no **CSS** e liga/desliga **classes**.
 
 ```js
 app.classList.add("ativo");
@@ -158,8 +158,8 @@ ul.append(frag); // injeta tudo de uma vez
 
 ## 6) Eventos (reagir a ações do utilizador)
 
--   Usa `addEventListener(evento, handler)`.
--   Alguns eventos comuns: `click`, `input`, `change`, `submit`, `keydown`.
+- Usa `addEventListener(evento, handler)`.
+- Alguns eventos comuns: `click`, `input`, `change`, `submit`, `keydown`.
 
 ```html
 <input id="q" placeholder="Pesquisar..." />
@@ -232,38 +232,35 @@ lista.addEventListener("click", (e) => {
 
 ## 8) Pequena “caixa de ferramentas”
 
--   **Selecionar**: `querySelector`, `querySelectorAll`.
--   **Conteúdo**: `textContent` (seguro), `innerHTML` (cuidado).
--   **Atributos**: `getAttribute`, `setAttribute`, `dataset`.
--   **Classes**: `classList.add/remove/toggle/contains`.
--   **Criar**: `createElement`, `append/prepend/before/after`, `remove`.
--   **Eventos**: `addEventListener`; em formulários usa `preventDefault`.
--   **Delegação**: `e.target.closest(seletor)` para descobrir o elemento certo.
+- **Selecionar**: `querySelector`, `querySelectorAll`.
+- **Conteúdo**: `textContent` (seguro), `innerHTML` (cuidado).
+- **Atributos**: `getAttribute`, `setAttribute`, `dataset`.
+- **Classes**: `classList.add/remove/toggle/contains`.
+- **Criar**: `createElement`, `append/prepend/before/after`, `remove`.
+- **Eventos**: `addEventListener`; em formulários usa `preventDefault`.
+- **Delegação**: `e.target.closest(seletor)` para descobrir o elemento certo.
 
 ---
 
 ## 9) Boas práticas (nível iniciante, mas importantes)
 
--   **Segurança**: quando inseres texto vindo do utilizador, usa **`textContent`** (evita código malicioso).
--   **Separação**: estilos no **CSS**; no JS liga/desliga **classes**.
--   **Performance**: se vais inserir muitos elementos, monta primeiro num **`DocumentFragment`** e depois injeta.
--   **Acessibilidade (A11y)**: associa `<label for="id">` aos inputs; usa `aria-label` quando não houver texto visível.
+- **Segurança**: quando inseres texto vindo do utilizador, usa **`textContent`** (evita código malicioso).
+- **Separação**: estilos no **CSS**; no JS liga/desliga **classes**.
+- **Performance**: se vais inserir muitos elementos, monta primeiro num **`DocumentFragment`** e depois injeta.
+- **Acessibilidade (A11y)**: associa `<label for="id">` aos inputs; usa `aria-label` quando não houver texto visível.
 
 ---
 
 ## 10) Mini‑projetos guiados
 
 1. **Lista dinâmica simples**
-
     - Input + botão “Adicionar”: cria `<li>` com `textContent` e mete na `<ul>`.
     - Botão “Limpar” remove todos os `<li>`.
 
 2. **Pesquisa ao digitar**
-
     - Ao escrever no input, filtra os `<li>` (mostrar/esconder) cujo texto **inclui** a query.
 
 3. **Carrinho mínimo**
-
     - Ao clicar “+” num produto, cria uma linha no carrinho (`<ul>`).
     - Delegação para remover itens no carrinho.
 
@@ -274,27 +271,27 @@ lista.addEventListener("click", (e) => {
 
 ## 11) Mini desafios
 
-1. **Selecionar & alterar** — muda o texto de um `<h1>` para “Bem‑vindo/a!” e adiciona uma classe `destacado`.
-2. **Criar itens** — a partir de um array `["Ana","Bruno","Carla"]`, cria `<li>` e injeta numa `<ul>` usando `DocumentFragment`.
-3. **Tema escuro** — ao clicar num botão “Alternar tema”, faz `document.body.classList.toggle("escuro")` e altera o texto do botão para “Tema claro”/“Tema escuro”.
-4. **Form + validação** — lê um formulário com `FormData`, verifica campos vazios e mostra mensagens diferentes num `<p>` usando `textContent`.
-5. **Delegação** — cria uma lista onde cada `<li>` tem um botão “remover”. Usa um único `addEventListener` no `<ul>` e remove o item correto com `closest`.
-6. **Filtro** — ao escrever num input, mostra só os `<li>` que contêm esse texto (case‑insensitive) e destaca o termo encontrado com uma classe.
-7. **Contador com `setInterval`** — cria um botão “Iniciar contador” que adiciona `<li>` numerados a cada segundo até clicar em “Parar”. Limpa o intervalo corretamente.
+1. **Selecionar & alterar** - muda o texto de um `<h1>` para “Bem‑vindo/a!” e adiciona uma classe `destacado`.
+2. **Criar itens** - a partir de um array `["Ana","Bruno","Carla"]`, cria `<li>` e injeta numa `<ul>` usando `DocumentFragment`.
+3. **Tema escuro** - ao clicar num botão “Alternar tema”, faz `document.body.classList.toggle("escuro")` e altera o texto do botão para “Tema claro”/“Tema escuro”.
+4. **Form + validação** - lê um formulário com `FormData`, verifica campos vazios e mostra mensagens diferentes num `<p>` usando `textContent`.
+5. **Delegação** - cria uma lista onde cada `<li>` tem um botão “remover”. Usa um único `addEventListener` no `<ul>` e remove o item correto com `closest`.
+6. **Filtro** - ao escrever num input, mostra só os `<li>` que contêm esse texto (case‑insensitive) e destaca o termo encontrado com uma classe.
+7. **Contador com `setInterval`** - cria um botão “Iniciar contador” que adiciona `<li>` numerados a cada segundo até clicar em “Parar”. Limpa o intervalo corretamente.
 
 ---
 
 ## 12) Resumo
 
--   O **DOM** é a **árvore** que representa o HTML.
--   Usa **seletores** para encontrar elementos e **classes** para alterar aparência.
--   Cria e injeta elementos com **`createElement` + `append`**.
--   Reage a eventos com **`addEventListener`** e usa **delegação** para listas grandes.
--   Em formulários, usa **`FormData`** e **`preventDefault`** para controlar o envio.
--   Lembra‑te de **segurança** (`textContent`) e **acessibilidade** (labels).
+- O **DOM** é a **árvore** que representa o HTML.
+- Usa **seletores** para encontrar elementos e **classes** para alterar aparência.
+- Cria e injeta elementos com **`createElement` + `append`**.
+- Reage a eventos com **`addEventListener`** e usa **delegação** para listas grandes.
+- Em formulários, usa **`FormData`** e **`preventDefault`** para controlar o envio.
+- Lembra‑te de **segurança** (`textContent`) e **acessibilidade** (labels).
 
 ## Changelog
 
--   **v1.1.0 — 2025-11-10**
-    -   Exercícios promovidos a Mini desafios e expandidos para sete cenários de manipulação do DOM.
-    -   Adicionada secção de changelog para acompanhar evoluções do capítulo.
+- **v1.1.0 - 2025-11-10**
+    - Exercícios promovidos a Mini desafios e expandidos para sete cenários de manipulação do DOM.
+    - Adicionada secção de changelog para acompanhar evoluções do capítulo.

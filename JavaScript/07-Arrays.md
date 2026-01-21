@@ -6,9 +6,9 @@
 
 ## 0) Relembrar: o que é um array?
 
--   Lista ordenada onde cada elemento tem um **índice** (começa em 0).
--   Guarda qualquer tipo: números, strings, objetos, outros arrays.
--   `length` diz-te quantos elementos existem (pode ser alterado, mas evita mexer diretamente).
+- Lista ordenada onde cada elemento tem um **índice** (começa em 0).
+- Guarda qualquer tipo: números, strings, objetos, outros arrays.
+- `length` diz-te quantos elementos existem (pode ser alterado, mas evita mexer diretamente).
 
 ```js
 const numeros = [10, 20, 30];
@@ -29,7 +29,7 @@ const copia = Array.of(1, 2, 3);
 const sequencia = Array.from({ length: 5 }, (_, i) => i + 1); // [1..5]
 ```
 
-Usa sempre o literal `[]` quando possível — é mais claro.
+Usa sempre o literal `[]` quando possível - é mais claro.
 
 ---
 
@@ -37,10 +37,10 @@ Usa sempre o literal `[]` quando possível — é mais claro.
 
 > Usa-os quando queres mesmo mudar a lista original.
 
--   `push` / `pop` → fim.
--   `unshift` / `shift` → início.
--   `splice(índice, nRemover, ...itens)` → remove/inserir em qualquer posição. Indice -> onde começar, nRemover -> quantos remover, itens -> o que inserir.
-    Exemplo:
+- `push` / `pop` → fim.
+- `unshift` / `shift` → início.
+- `splice(índice, nRemover, ...itens)` → remove/inserir em qualquer posição. Indice -> onde começar, nRemover -> quantos remover, itens -> o que inserir.
+  Exemplo:
     ```js
     const arr = [1, 2, 3];
     // Adicionar
@@ -50,11 +50,11 @@ Usa sempre o literal `[]` quando possível — é mais claro.
     // Adicionar e remover
     arr.splice(0, 2, 0); // [0, 3]
     ```
--   `sort(compareFn)` → ordena (muta o array!).
--   `reverse()` → inverte (muta o array!).
--   `fill(valor, inicio?, fim?)` → preenche intervalo.
+- `sort(compareFn)` → ordena (muta o array!).
+- `reverse()` → inverte (muta o array!).
+- `fill(valor, inicio?, fim?)` → preenche intervalo.
 
--   Exemplos detalhados:
+- Exemplos detalhados:
 
 ```js
 const frutas = ["maçã", "banana"];
@@ -75,10 +75,10 @@ frutas.reverse(); // ["maçã", "laranja", "banana"]
 
 > Ótimos quando queres preservar o array original e evitar efeitos inesperados.
 
--   `slice(inicio, fimExclusivo?)` → recorta sem alterar o original.
--   `concat(...itens)` → junta arrays/valores e devolve novo array.
--   `spread` `[...]` → cria cópias rápidas.
--   Versões modernas (`toSorted`, `toReversed`, `toSpliced`) fazem o mesmo que `sort/reverse/splice` mas devolvem cópia (Node 20+/browsers recentes).
+- `slice(inicio, fimExclusivo?)` → recorta sem alterar o original.
+- `concat(...itens)` → junta arrays/valores e devolve novo array.
+- `spread` `[...]` → cria cópias rápidas.
+- Versões modernas (`toSorted`, `toReversed`, `toSpliced`) fazem o mesmo que `sort/reverse/splice` mas devolvem cópia (Node 20+/browsers recentes).
 
 ```js
 const base = [3, 1, 2];
@@ -92,12 +92,12 @@ Se `toSorted` ainda não existir no ambiente dos alunos, explica como usar `slic
 
 ## 4) Procurar e verificar
 
--   `includes(valor)` → `true/false`.
--   `indexOf(valor)` / `lastIndexOf(valor)` → posição ou `-1`.
--   `find(callback)` → devolve o primeiro elemento que passa no teste.
--   `findIndex(callback)` → devolve o índice.
--   `some(callback)` → `true` se **algum** elemento passar.
--   `every(callback)` → `true` se **todos** passarem.
+- `includes(valor)` → `true/false`.
+- `indexOf(valor)` / `lastIndexOf(valor)` → posição ou `-1`.
+- `find(callback)` → devolve o primeiro elemento que passa no teste.
+- `findIndex(callback)` → devolve o índice.
+- `some(callback)` → `true` se **algum** elemento passar.
+- `every(callback)` → `true` se **todos** passarem.
 
 ```js
 const alunos = [
@@ -112,10 +112,10 @@ alunos.some((a) => a.nota >= 18); // true
 
 ## 5) Transformar (A dar com mais detalhe no capítulo 11-Arrays-HighOrder.md)
 
--   `map` → cria novo array transformando cada elemento.
--   `filter` → mantém apenas os que cumprem uma condição.
--   `reduce` → acumula num valor.
--   `flat` / `flatMap` → achatam arrays.
+- `map` → cria novo array transformando cada elemento.
+- `filter` → mantém apenas os que cumprem uma condição.
+- `reduce` → acumula num valor.
+- `flat` / `flatMap` → achatam arrays.
 
 Vamos aprofundar isto no capítulo `[8] Funções de Alto Nível`. Usa estes métodos sempre que quiseres evitar `for` manuais para tarefas simples.
 
@@ -136,7 +136,7 @@ const combinado = [0, ...resto, 50]; // [0,30,40,50]
 
 Desestruturação permite extrair valores por posição com sintaxe concisa.
 
--   Exemplo de spread:
+- Exemplo de spread:
 
 ```js
 const arr1 = [1, 2];
@@ -153,9 +153,9 @@ const copia = [...original]; // [5,6,7]
 
 ## 7) Percorrer arrays
 
--   Para percorrer arrays, usa `for`, `for...of` ou métodos como `forEach`, `map`, `filter`. Estes últimos serão abordados em detalhe no capítulo 11-Arrays-HighOrder.md.
+- Para percorrer arrays, usa `for`, `for...of` ou métodos como `forEach`, `map`, `filter`. Estes últimos serão abordados em detalhe no capítulo 11-Arrays-HighOrder.md.
 
--   Com o `for...of`:
+- Com o `for...of`:
 
 ```js
 const frutas = ["maçã", "banana", "cereja"];
@@ -164,7 +164,7 @@ for (const fruta of frutas) {
 }
 ```
 
--   Com o `for` tradicional:
+- Com o `for` tradicional:
 
 ```js
 for (let i = 0; i < frutas.length; i++) {
@@ -176,10 +176,10 @@ for (let i = 0; i < frutas.length; i++) {
 
 ## 8) Boas práticas
 
--   Não uses `for...in` em arrays (pode trazer propriedades inesperadas). Prefere `for`, `for...of` ou métodos de array.
--   Nomeia claramente os arrays: `alunos`, `notas`, `carrinho`. Evita nomes genéricos como `arr` em código final.
--   Se precisares de partilhar um array entre várias funções/componentes, cria cópias imutáveis antes de mexer.
--   Lembra-te que `length = 0` apaga todo o conteúdo — usa apenas se souberes o que fazes.
+- Não uses `for...in` em arrays (pode trazer propriedades inesperadas). Prefere `for`, `for...of` ou métodos de array.
+- Nomeia claramente os arrays: `alunos`, `notas`, `carrinho`. Evita nomes genéricos como `arr` em código final.
+- Se precisares de partilhar um array entre várias funções/componentes, cria cópias imutáveis antes de mexer.
+- Lembra-te que `length = 0` apaga todo o conteúdo - usa apenas se souberes o que fazes.
 
 ---
 
@@ -287,10 +287,10 @@ const num = Math.floor(Math.random() * 201) - 100;
 console.log(num);
 ```
 
--   O Math.random() gera um número decimal entre 0 (inclusivo) e 1 (exclusivo).
--   Multiplicamos por 201 para obter um intervalo de 0 a 200,999...
--   O Math.floor() arredonda para baixo, dando um inteiro entre 0 e 200.
--   Subtraímos 100 para ajustar o intervalo para -100 a 100.
+- O Math.random() gera um número decimal entre 0 (inclusivo) e 1 (exclusivo).
+- Multiplicamos por 201 para obter um intervalo de 0 a 200,999...
+- O Math.floor() arredonda para baixo, dando um inteiro entre 0 e 200.
+- Subtraímos 100 para ajustar o intervalo para -100 a 100.
 
 > Resolução:
 
@@ -314,14 +314,14 @@ for (const n of numeros) {
 }
 console.log(`Números: ${numeros}`);
 console.log(
-    `Positivos: ${positivos}, Negativos: ${negativos}, Zeros: ${zeros}`
+    `Positivos: ${positivos}, Negativos: ${negativos}, Zeros: ${zeros}`,
 );
 ```
 
 ## Changelog
 
--   **v1.1.1 — 2025-11-11**
-    -   Exercícios reorganizados com progressão gradual e sem depender de criação de funções.
--   **v1.1.0 — 2025-11-10**
-    -   Secção de Exercícios expandida para sete desafios sobre mutação, cópia e pesquisa.
-    -   Changelog adicionado para manter histórico de alterações do capítulo.
+- **v1.1.1 - 2025-11-11**
+    - Exercícios reorganizados com progressão gradual e sem depender de criação de funções.
+- **v1.1.0 - 2025-11-10**
+    - Secção de Exercícios expandida para sete desafios sobre mutação, cópia e pesquisa.
+    - Changelog adicionado para manter histórico de alterações do capítulo.

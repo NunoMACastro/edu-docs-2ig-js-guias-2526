@@ -58,7 +58,7 @@ Se dependes de **tempo, rede, disco ou interação do utilizador**, usa **assín
 
 ---
 
-## 3) A ordem real — microtarefas primeiro, depois tarefas
+## 3) A ordem real - microtarefas primeiro, depois tarefas
 
 ```js
 console.log("A");
@@ -131,7 +131,7 @@ Promise.all([p1, p2]) // espera as duas
 
 ---
 
-## 5) `async/await` — ler código assíncrono como se fosse “passo a passo”
+## 5) `async/await` - ler código assíncrono como se fosse “passo a passo”
 
 - Marca a função com `async` → ela **devolve uma Promise**.
 - Usa `await` para **esperar** pela Promise **sem bloquear a app**.
@@ -279,15 +279,15 @@ Imagina que tens uma fila de pessoas (callbacks) à espera de serem atendidas. O
 
 ## 9) Mini desafios
 
-1. **Tempo de espera** — cria `esperar(ms)` que devolve uma Promise resolvida após `ms`. Usa `then` para escrever “Já passou!” ao fim de 1 segundo.
+1. **Tempo de espera** - cria `esperar(ms)` que devolve uma Promise resolvida após `ms`. Usa `then` para escrever “Já passou!” ao fim de 1 segundo.
    Observa: o `console.log` só deve aparecer depois de ~1s.
-2. **Mensagem sequencial** — escreve uma função `async` que lança duas Promises em paralelo com `Promise.all` e mostra a soma dos valores quando ambas terminarem.
-3. **Relógio simples** — usa `setInterval` para atualizar um `<span>` com horas:min:seg. Adiciona um botão “Parar” que usa `clearInterval`.
+2. **Mensagem sequencial** - escreve uma função `async` que lança duas Promises em paralelo com `Promise.all` e mostra a soma dos valores quando ambas terminarem.
+3. **Relógio simples** - usa `setInterval` para atualizar um `<span>` com horas:min:seg. Adiciona um botão “Parar” que usa `clearInterval`.
    Observa: guardas o `id` do intervalo e paras com `clearInterval`.
-4. **Ordem dos logs** — corre o snippet do capítulo (A, D, C, B) e descreve num parágrafo a ordem observada e o motivo.
+4. **Ordem dos logs** - corre o snippet do capítulo (A, D, C, B) e descreve num parágrafo a ordem observada e o motivo.
    Observa: a ordem depende de microtarefas (Promise) e tarefas (timeout).
-5. **Loading fictício** — mostra “A carregar…” num `<p>`, chama `esperar(1500)` e depois troca o texto para “Pronto”. Em caso de erro (simula lançando `throw`), mostra “Ups”.
-6. **Fetch simulado** — cria `fakeFetch(url)` que devolve uma Promise resolvida com `{ ok: true, dados: [...] }` após 700 ms e usa `async/await` para tratar sucesso e erro (lança manualmente um erro para praticar o `catch`).
+5. **Loading fictício** - mostra “A carregar…” num `<p>`, chama `esperar(1500)` e depois troca o texto para “Pronto”. Em caso de erro (simula lançando `throw`), mostra “Ups”.
+6. **Fetch simulado** - cria `fakeFetch(url)` que devolve uma Promise resolvida com `{ ok: true, dados: [...] }` após 700 ms e usa `async/await` para tratar sucesso e erro (lança manualmente um erro para praticar o `catch`).
    Observa: testa o caminho de sucesso e o caminho de erro.
 
 ## 10) Dicionário rápido
@@ -311,8 +311,8 @@ Imagina que tens uma fila de pessoas (callbacks) à espera de serem atendidas. O
 
 ## Changelog
 
-- **v1.2.0 — 2025-11-10**
+- **v1.2.0 - 2025-11-10**
     - Mini desafios simplificados para focar em esperas simples, `Promise.all`, `setInterval` e simulações sem APIs externas.
-- **v1.1.0 — 2025-11-10**
+- **v1.1.0 - 2025-11-10**
     - Mini desafios atualizados (agora com sete propostas). Inclui exercícios de retry, timeout e ordem de execução.
     - Changelog introduzido para acompanhar evoluções futuras do capítulo.

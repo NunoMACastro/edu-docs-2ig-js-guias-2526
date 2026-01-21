@@ -18,7 +18,7 @@ A maior parte destes métodos devolve **novo array** ou um novo valor, sem alter
 
 ---
 
-## 1) `map` — transformar
+## 1) `map` - transformar
 
 Aplica a callback a cada elemento e devolve um novo array com os resultados.
 
@@ -27,12 +27,12 @@ const notas = [10, 12, 18];
 const comBónus = notas.map((nota) => nota + 1);
 ```
 
--   Mantém o mesmo tamanho.
--   Ótimo para extrair campos (`aluno => aluno.nome`).
+- Mantém o mesmo tamanho.
+- Ótimo para extrair campos (`aluno => aluno.nome`).
 
 ---
 
-## 2) `filter` — selecionar
+## 2) `filter` - selecionar
 
 Mantém apenas os elementos cuja callback devolve `true`.
 
@@ -44,7 +44,7 @@ Usa quando queres remover valores nulos, procurar pares, etc.
 
 ---
 
-## 3) `reduce` — acumular
+## 3) `reduce` - acumular
 
 Recebe um acumulador (`acc`) e o elemento atual (`valor`). Serve para somas, contagens, médias, objetos agregados…
 
@@ -53,12 +53,12 @@ const soma = notas.reduce((acc, nota) => acc + nota, 0);
 const media = notas.length ? soma / notas.length : 0;
 ```
 
--   Passa **sempre** um valor inicial (`0`, `{}`, `[]`, ...). Evita surpresas com arrays vazios.
--   Pensa no `acc` como o "estado" que vais atualizando.
+- Passa **sempre** um valor inicial (`0`, `{}`, `[]`, ...). Evita surpresas com arrays vazios.
+- Pensa no `acc` como o "estado" que vais atualizando.
 
 ---
 
-## 4) `find` e `findIndex` — primeiro que passa
+## 4) `find` e `findIndex` - primeiro que passa
 
 ```js
 const alunos = [
@@ -75,8 +75,8 @@ Quando só queres saber se existe, `some` pode ser mais direto.
 
 ## 5) `some` e `every`
 
--   `some` → `true` se **algum** elemento passar.
--   `every` → `true` se **todos** passarem.
+- `some` → `true` se **algum** elemento passar.
+- `every` → `true` se **todos** passarem.
 
 ```js
 notas.some((nota) => nota === 20); // procura nota máxima
@@ -87,8 +87,8 @@ notas.every((nota) => nota >= 10); // verifica se todos aprovam
 
 ## 6) `flat` e `flatMap`
 
--   `flat(n)` → achata `n` níveis de arrays aninhados.
--   `flatMap` → faz `map` seguido de `flat(1)`.
+- `flat(n)` → achata `n` níveis de arrays aninhados.
+- `flatMap` → faz `map` seguido de `flat(1)`.
 
 ```js
 const grupos = [["Ana", "Bia"], ["Carlos"]];
@@ -99,7 +99,7 @@ const duplicado = ["a", "b"].flatMap((letra) => [letra, letra.toUpperCase()]);
 
 ---
 
-## 7) `forEach` — efeitos colaterais
+## 7) `forEach` - efeitos colaterais
 
 Quando queres apenas **fazer algo** para cada elemento (escrever no ecrã, guardar na base de dados), usa `forEach`. Não devolve nada.
 
@@ -137,8 +137,8 @@ Quando a cadeia crescer demasiado, guarda resultados intermédios em variáveis 
 
 ## Changelog
 
--   **v1.2.0 — 2025-11-10**
-    -   Mini desafios simplificados para focar em `map`, `filter`, `reduce`, `find`, `some/every` sem padrões avançados.
--   **v1.1.0 — 2025-11-10**
-    -   Mini desafios reforçados com duas novas propostas (`groupBy` e pipeline encadeado).
-    -   Nova secção de changelog para documentar revisões futuras.
+- **v1.2.0 - 2025-11-10**
+    - Mini desafios simplificados para focar em `map`, `filter`, `reduce`, `find`, `some/every` sem padrões avançados.
+- **v1.1.0 - 2025-11-10**
+    - Mini desafios reforçados com duas novas propostas (`groupBy` e pipeline encadeado).
+    - Nova secção de changelog para documentar revisões futuras.

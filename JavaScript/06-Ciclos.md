@@ -6,10 +6,10 @@
 
 ## 0) Qual ciclo escolher?
 
--   **`for` clássico** → precisas de um contador controlado (`i = 0; i < n; i++`).
--   **`while` / `do...while`** → tens apenas uma condição que decide se continuas.
--   **`for...of`** → percorres **valores** de arrays, strings, `Set`, `Map`…
--   **`for...in`** → percorre chaves de objetos (usa com cuidado).
+- **`for` clássico** → precisas de um contador controlado (`i = 0; i < n; i++`).
+- **`while` / `do...while`** → tens apenas uma condição que decide se continuas.
+- **`for...of`** → percorres **valores** de arrays, strings, `Set`, `Map`…
+- **`for...in`** → percorre chaves de objetos (usa com cuidado).
 
 ---
 
@@ -23,9 +23,9 @@ for (let i = 0; i < 3; i++) {
 
 Boas práticas:
 
--   Usa `let` para o contador (escopo só dentro do ciclo).
--   Prefere `i < limite` a `i <= limite - 1`.
--   Se o limite não mudar, podes guardá-lo numa constante. Para exercícios simples não é necessário otimizar.
+- Usa `let` para o contador (escopo só dentro do ciclo).
+- Prefere `i < limite` a `i <= limite - 1`.
+- Se o limite não mudar, podes guardá-lo numa constante. Para exercícios simples não é necessário otimizar.
 
 Armadilhas: `<=` quando querias `<`, ou esquecer de atualizar `i` (loop infinito).
 
@@ -46,8 +46,8 @@ do {
 } while (Number.isNaN(numero) || numero <= 0);
 ```
 
--   `while` testa **antes** de entrar.
--   `do...while` executa pelo menos **uma vez** e testa no fim.
+- `while` testa **antes** de entrar.
+- `do...while` executa pelo menos **uma vez** e testa no fim.
 
 Certifica-te de que mudas a variável que participa na condição; caso contrário, o ciclo nunca termina.
 
@@ -80,8 +80,8 @@ Funciona também com `Map` e `Set`.
 
 ## 4) `break` e `continue`
 
--   `break` sai imediatamente do ciclo.
--   `continue` salta para a próxima iteração.
+- `break` sai imediatamente do ciclo.
+- `continue` salta para a próxima iteração.
 
 ```js
 for (let i = 0; i < 10; i++) {
@@ -167,6 +167,6 @@ Isto ajuda a compreender o que `map`/`filter` fazem nos capítulos seguintes.
 
 ## Changelog
 
--   **v1.1.0 — 2025-11-10**
-    -   Secção de Exercícios ampliada para sete propostas cobrindo `for`, `while`, `do...while` e padrões comuns.
-    -   Adicionado changelog para registar futuras alterações do capítulo.
+- **v1.1.0 — 2025-11-10**
+    - Secção de Exercícios ampliada para sete propostas cobrindo `for`, `while`, `do...while` e padrões comuns.
+    - Adicionado changelog para registar futuras alterações do capítulo.

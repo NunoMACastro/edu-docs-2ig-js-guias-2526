@@ -6,11 +6,11 @@
 
 ## 0) O que é HTTP? O que é uma API? (versão simples)
 
--   **HTTP** é o “idioma” que o navegador usa para **pedir** e **receber** informação de um **servidor** (outra máquina).  
-    Exemplo: “Dá‑me a lista de alunos” → o servidor responde com texto, normalmente **JSON**.
--   **API** é um **conjunto de regras/endereços** (URLs) que dizem: “se fizeres um pedido **assim**, eu devolvo **isto**”.  
-    Pensa numa **máquina de bilhetes**: tem **botões** (endpoints) e regras claras de uso.
--   **JSON** é **texto estruturado** (chave/valor) muito usado para trocar dados:
+- **HTTP** é o “idioma” que o navegador usa para **pedir** e **receber** informação de um **servidor** (outra máquina).  
+  Exemplo: “Dá‑me a lista de alunos” → o servidor responde com texto, normalmente **JSON**.
+- **API** é um **conjunto de regras/endereços** (URLs) que dizem: “se fizeres um pedido **assim**, eu devolvo **isto**”.  
+  Pensa numa **máquina de bilhetes**: tem **botões** (endpoints) e regras claras de uso.
+- **JSON** é **texto estruturado** (chave/valor) muito usado para trocar dados:
     ```json
     { "nome": "Ana", "nota": 18 }
     ```
@@ -19,7 +19,7 @@
 
 ---
 
-## 1) `fetch` — o pedido mais simples
+## 1) `fetch` - o pedido mais simples
 
 `fetch(url)` **pede** ao browser que vá buscar a URL. Ele **não bloqueia** o JS; quando a resposta chega, tu continuas.
 
@@ -36,10 +36,10 @@ async function exemploGET() {
 
 **Métodos mais comuns**
 
--   **GET** — ler dados
--   **POST** — criar/enviar dados
--   **PUT/PATCH** — atualizar
--   **DELETE** — remover
+- **GET** - ler dados
+- **POST** - criar/enviar dados
+- **PUT/PATCH** - atualizar
+- **DELETE** - remover
 
 ---
 
@@ -104,8 +104,8 @@ const data = await getJSON(url);
 
 ## 4) Tratar erros (rede vs HTTP)
 
--   **Erros de rede**: sem internet, servidor em baixo, CORS bloqueado → `fetch` lança um **TypeError**.
--   **Erros HTTP**: 404, 500, 401… `fetch` **não lança** por si; tens de verificar `response.ok` e **lançar tu**.
+- **Erros de rede**: sem internet, servidor em baixo, CORS bloqueado → `fetch` lança um **TypeError**.
+- **Erros HTTP**: 404, 500, 401… `fetch` **não lança** por si; tens de verificar `response.ok` e **lançar tu**.
 
 ```js
 async function carregar() {
@@ -122,9 +122,9 @@ async function carregar() {
 
 **Códigos úteis**
 
--   `2xx` sucesso (200 OK, 201 Created)
--   `4xx` erro do cliente (400 Bad Request, 401 Unauthorized, 404 Not Found)
--   `5xx` erro no servidor (500, 503)
+- `2xx` sucesso (200 OK, 201 Created)
+- `4xx` erro do cliente (400 Bad Request, 401 Unauthorized, 404 Not Found)
+- `5xx` erro no servidor (500, 503)
 
 ---
 
@@ -183,8 +183,8 @@ export async function getComRetry(url, tentativas = 3) {
 
 ## 7) Enviar dados: JSON vs `FormData`
 
--   **JSON**: quando queres enviar **dados “normais”** (strings, números, objetos).
--   **`FormData`**: quando queres enviar **ficheiros** ou um formulário “como o browser faz por defeito” (multipart/form-data).
+- **JSON**: quando queres enviar **dados “normais”** (strings, números, objetos).
+- **`FormData`**: quando queres enviar **ficheiros** ou um formulário “como o browser faz por defeito” (multipart/form-data).
 
 **POST JSON**
 
@@ -215,8 +215,8 @@ await uploadFoto("/api/upload", file);
 
 ## 8) Autenticação (nota curta, nível básico)
 
--   Alguns endpoints exigem **login**. Normalmente o servidor devolve um **token** (por exemplo, JWT) após `POST /login`.
--   Depois, envias o token em cada pedido, num header `Authorization: Bearer <token>`:
+- Alguns endpoints exigem **login**. Normalmente o servidor devolve um **token** (por exemplo, JWT) após `POST /login`.
+- Depois, envias o token em cada pedido, num header `Authorization: Bearer <token>`:
 
 ```js
 async function getPrivado(url, token) {
@@ -228,34 +228,30 @@ async function getPrivado(url, token) {
 }
 ```
 
--   **Cuidados**: não publiques tokens; evita guardar tokens sensíveis em `localStorage` em apps reais; para projetos escolares serve para perceber o fluxo.
+- **Cuidados**: não publiques tokens; evita guardar tokens sensíveis em `localStorage` em apps reais; para projetos escolares serve para perceber o fluxo.
 
 ---
 
 ## 9) CORS (explicação simples)
 
--   Por segurança, o browser só deixa uma página pedir dados ao **mesmo domínio/porta/protocolo**.
--   Se queres pedir a outro domínio (ex.: `http://localhost:3000` → `http://api.local:4000`), o servidor tem de **autorizar** com headers CORS (ex.: `Access-Control-Allow-Origin`).
--   Isto configura‑se **no servidor**. Em ambiente escolar, usa‑se muitas vezes um **proxy** de desenvolvimento.
+- Por segurança, o browser só deixa uma página pedir dados ao **mesmo domínio/porta/protocolo**.
+- Se queres pedir a outro domínio (ex.: `http://localhost:3000` → `http://api.local:4000`), o servidor tem de **autorizar** com headers CORS (ex.: `Access-Control-Allow-Origin`).
+- Isto configura‑se **no servidor**. Em ambiente escolar, usa‑se muitas vezes um **proxy** de desenvolvimento.
 
 ---
 
 ## 10) Mini‑projetos guiados
 
 1. **Lista de alunos (GET + erro)**
-
     - Botão “Carregar”. Faz `getJSON("/api/alunos")`, mostra com `console.table` (ou `<ul>`). Em erro, mostra mensagem “Tenta mais tarde”.
 
 2. **Criar aluno (POST JSON)**
-
     - Formulário com `nome` e `nota`. No `submit`, `preventDefault`, lê com `FormData`, envia com `postJSON`. Depois faz refresh da lista.
 
 3. **Pesquisa com query string**
-
     - Input “Pesquisar por nome…”. Ao clicar “Pesquisar”, constrói URL com `page` e `q` e chama `getJSON`.
 
 4. **Timeout + retry**
-
     - Usa `getComTimeout` com 3 segundos. Se falhar, tenta `getComRetry` com 3 tentativas.
 
 5. **Upload de imagem (FormData)**
@@ -265,28 +261,28 @@ async function getPrivado(url, token) {
 
 ## 11) Mini desafios
 
-1. **Botão Carregar** — cria um botão que, ao clicar, usa `fetch("alunos.json")`, chama `response.json()` e mostra os nomes numa `<ul>`.
-2. **Mensagem de erro** — altera o desafio anterior para mostrar “Tenta mais tarde” num `<p>` se o `fetch` falhar (simula trocando o URL por um inexistente).
-3. **Pesquisa simples** — cria um formulário com `<input name="q">`. No `submit`, usa `urlComParams` para montar `/api/alunos?q=valor` (pode ser apenas `console.log` da URL) e limpa o formulário.
-4. **Loader** — antes de fazer `fetch`, mostra “A carregar…”; quando termina, troca para “Concluído” ou “Erro”. Usa `try/catch` com `await`.
-5. **POST fictício** — cria um formulário com `nome` e `nota`, lê com `FormData` e envia para `https://jsonplaceholder.typicode.com/posts` com `fetch` (método `POST`). Mostra o `id` devolvido.
-6. **Abortar pedido** — usa `AbortController` para cancelar um `fetch` após 2 segundos (`setTimeout`). Mostra no `console` se foi cancelado ou concluído.
+1. **Botão Carregar** - cria um botão que, ao clicar, usa `fetch("alunos.json")`, chama `response.json()` e mostra os nomes numa `<ul>`.
+2. **Mensagem de erro** - altera o desafio anterior para mostrar “Tenta mais tarde” num `<p>` se o `fetch` falhar (simula trocando o URL por um inexistente).
+3. **Pesquisa simples** - cria um formulário com `<input name="q">`. No `submit`, usa `urlComParams` para montar `/api/alunos?q=valor` (pode ser apenas `console.log` da URL) e limpa o formulário.
+4. **Loader** - antes de fazer `fetch`, mostra “A carregar…”; quando termina, troca para “Concluído” ou “Erro”. Usa `try/catch` com `await`.
+5. **POST fictício** - cria um formulário com `nome` e `nota`, lê com `FormData` e envia para `https://jsonplaceholder.typicode.com/posts` com `fetch` (método `POST`). Mostra o `id` devolvido.
+6. **Abortar pedido** - usa `AbortController` para cancelar um `fetch` após 2 segundos (`setTimeout`). Mostra no `console` se foi cancelado ou concluído.
 
 ---
 
 ## 12) Resumo
 
--   Usa `fetch` para comunicar com **APIs**: **GET** para ler, **POST/PUT/PATCH** para enviar/atualizar, **DELETE** para remover.
--   Lê JSON com `await r.json()` e **verifica `r.ok`** para lançar erro em HTTP 4xx/5xx.
--   Para **timeout/cancelamento**, usa `AbortController`.
--   Envia **JSON** com `Content-Type: application/json`; para **ficheiros**, usa `FormData`.
--   **CORS** precisa de configuração **no servidor** (ou proxy de desenvolvimento).
--   Cria **utilitários** (`getJSON`, `postJSON`, `urlComParams`) para escreveres menos e com menos erros.
+- Usa `fetch` para comunicar com **APIs**: **GET** para ler, **POST/PUT/PATCH** para enviar/atualizar, **DELETE** para remover.
+- Lê JSON com `await r.json()` e **verifica `r.ok`** para lançar erro em HTTP 4xx/5xx.
+- Para **timeout/cancelamento**, usa `AbortController`.
+- Envia **JSON** com `Content-Type: application/json`; para **ficheiros**, usa `FormData`.
+- **CORS** precisa de configuração **no servidor** (ou proxy de desenvolvimento).
+- Cria **utilitários** (`getJSON`, `postJSON`, `urlComParams`) para escreveres menos e com menos erros.
 
 ## Changelog
 
--   **v1.2.0 — 2025-11-10**
-    -   Mini desafios simplificados para cenários de browser com `fetch` a ficheiros locais ou APIs públicas.
--   **v1.1.0 — 2025-11-10**
-    -   Exercícios renomeados para Mini desafios e revistos para cobrir o ciclo completo de pedidos.
-    -   Changelog adicionado para acompanhar futuras melhorias do capítulo.
+- **v1.2.0 - 2025-11-10**
+    - Mini desafios simplificados para cenários de browser com `fetch` a ficheiros locais ou APIs públicas.
+- **v1.1.0 - 2025-11-10**
+    - Exercícios renomeados para Mini desafios e revistos para cobrir o ciclo completo de pedidos.
+    - Changelog adicionado para acompanhar futuras melhorias do capítulo.

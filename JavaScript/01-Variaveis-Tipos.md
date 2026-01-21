@@ -10,8 +10,8 @@
 "use strict";
 ```
 
--   Acrescenta esta linha no topo de cada ficheiro ou `<script>`.
--   O motor deixa de aceitar variáveis criadas "por acidente" e avisa mais cedo quando algo corre mal.
+- Acrescenta esta linha no topo de cada ficheiro ou `<script>`.
+- O motor deixa de aceitar variáveis criadas "por acidente" e avisa mais cedo quando algo corre mal.
 
 ---
 
@@ -23,8 +23,8 @@
 | `let`         | ✅                  | Bloco `{}` | Quando precisas de atualizar a variável (contadores, acumuladores…) |
 | `var`         | ✅                  | Função     | Evita em novo código → ignora blocos e traz bugs difíceis           |
 
--   **TDZ** (_Temporal Dead Zone_): intervalo entre o início do bloco e a linha da declaração. Se leres a variável antes de `let/const`, recebes `ReferenceError`.
--   `const` impede mudar a referência, **não** o conteúdo interno. Objetos/arrays podem ter campos alterados.
+- **TDZ** (_Temporal Dead Zone_): intervalo entre o início do bloco e a linha da declaração. Se leres a variável antes de `let/const`, recebes `ReferenceError`.
+- `const` impede mudar a referência, **não** o conteúdo interno. Objetos/arrays podem ter campos alterados.
 
 ```js
 {
@@ -41,9 +41,9 @@ aluno.nome = "Rita"; // OK
 
 ## 2) Escopos e shadowing
 
--   **Global**: tudo o que declaras fora de funções/blocos (evita acumular globais).
--   **Função**: cada `function ... { }` cria um "mundo" novo.
--   **Bloco `{}`**: `let/const` vivem apenas aqui (if, for, while, ...).
+- **Global**: tudo o que declaras fora de funções/blocos (evita acumular globais).
+- **Função**: cada `function ... { }` cria um "mundo" novo.
+- **Bloco `{}`**: `let/const` vivem apenas aqui (if, for, while, ...).
 
 ```js
 let mensagem = "fora";
@@ -74,9 +74,9 @@ const grande = 9007199254740993n; // bigint (inteiros gigantes)
 
 Ferramentas úteis:
 
--   `typeof valor` → devolve uma string com o tipo (`typeof null` devolve `"object"` por motivos históricos).
--   `Number.isNaN(x)` → confirma se o valor é **precisamente** `NaN`.
--   Para números com vírgulas, lembra-te do erro clássico: `0.1 + 0.2` não é exatamente `0.3`. Compara sempre com tolerância quando trabalhas com floats.
+- `typeof valor` → devolve uma string com o tipo (`typeof null` devolve `"object"` por motivos históricos).
+- `Number.isNaN(x)` → confirma se o valor é **precisamente** `NaN`.
+- Para números com vírgulas, lembra-te do erro clássico: `0.1 + 0.2` não é exatamente `0.3`. Compara sempre com tolerância quando trabalhas com floats.
 
 ---
 
@@ -93,8 +93,8 @@ if ("0") {
 }
 ```
 
--   **Coerção implícita**: o motor tenta converter automaticamente (`"2" * 3` → `6`).
--   **Coerção explícita**: tu decides (`Number("2")`). Prefere esta opção.
+- **Coerção implícita**: o motor tenta converter automaticamente (`"2" * 3` → `6`).
+- **Coerção explícita**: tu decides (`Number("2")`). Prefere esta opção.
 
 ```js
 "2" + 3; // "23" (concatena strings)
@@ -108,8 +108,8 @@ Number("2"); // 2 (conversão explícita)
 
 ## 5) Igualdade segura: `===` e `!==`
 
--   `===` e `!==` **não** fazem coerção → comparam tipo + valor.
--   `==` e `!=` fazem coerção automática → evitamos para não termos surpresas (`"" == 0` é `true`).
+- `===` e `!==` **não** fazem coerção → comparam tipo + valor.
+- `==` e `!=` fazem coerção automática → evitamos para não termos surpresas (`"" == 0` é `true`).
 
 ```js
 2 === "2"; // false
@@ -132,11 +132,11 @@ a === c; // true
 
 ## 6) Guião rápido de boas práticas
 
--   Usa `"use strict"` e corre o código no modo módulo (`<script type="module">` ou ficheiros `.mjs`).
--   Começa sempre com `const`; troca para `let` apenas quando fizer sentido.
--   Nomes descritivos em `camelCase`. Guarda maiúsculas (`UPPER_SNAKE_CASE`) para constantes verdadeiramente globais.
--   Converte entradas (prompt, formulários) **antes** de fazer contas.
--   Quando precisares de valores por defeito, usa `??` em vez de `||` se quiseres preservar `0`, `""` ou `false`.
+- Usa `"use strict"` e corre o código no modo módulo (`<script type="module">` ou ficheiros `.mjs`).
+- Começa sempre com `const`; troca para `let` apenas quando fizer sentido.
+- Nomes descritivos em `camelCase`. Guarda maiúsculas (`UPPER_SNAKE_CASE`) para constantes verdadeiramente globais.
+- Converte entradas (prompt, formulários) **antes** de fazer contas.
+- Quando precisares de valores por defeito, usa `??` em vez de `||` se quiseres preservar `0`, `""` ou `false`.
 
 ---
 
@@ -152,6 +152,6 @@ a === c; // true
 
 ## Changelog
 
--   **v1.1.0 — 2025-11-10**
-    -   Secção de Exercícios expandida para sete propostas práticas.
-    -   Adicionada a primeira entrada de changelog para registar futuras alterações.
+- **v1.1.0 — 2025-11-10**
+    - Secção de Exercícios expandida para sete propostas práticas.
+    - Adicionada a primeira entrada de changelog para registar futuras alterações.
