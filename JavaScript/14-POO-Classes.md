@@ -833,6 +833,78 @@ console.log("Média Geral:", escola.mediaGeral()); // 13.5
 19. **Composição** - cria `class Motor` com estado `ligado` e métodos `ligar()`/`desligar()`. Cria `class Carro` que **tem um** `Motor` (cria no `constructor`). O carro deve expor `ligar()` e `desligar()` que chamam o motor e um `get estado` que devolve se o motor está ligado. Testa com um carro.
 20. **JSON** - adiciona `toJSON()` a `class Aluno` para devolver apenas `{ nome, turma }` (não inclui `#nota`). Cria um aluno, faz `JSON.stringify(aluno)` e confirma que o resultado só tem `nome` e `turma`.
 21. **Fábrica x Classe** - escreve uma função `criarContador()` que devolve `{ inc(), valor() }` e guarda `let n = 0` no closure. Depois cria `class Contador` com `#n`, métodos `inc()` e `get valor()`. Cria duas instâncias de cada e mostra que cada uma guarda o seu próprio estado.
+22. **Projeto completo** — Sistema de Gestão de Utilizadores (OOP)
+
+**Objetivo:** criar um sistema de gestão de utilizadores usando classes em JavaScript. Deves aplicar **encapsulamento**, **herança**, **composição**, **abstração** e **polimorfismo**. O sistema deve permitir criar diferentes tipos de utilizadores e gerir permissões e ações.
+
+**Requisitos obrigatórios**
+
+**1) Abstração (classe base)**
+
+- Cria uma classe **abstrata** `Utilizador`.
+- Deve ter:
+    - `#id`, `#email`, `#password`, `#ativo`, `#criadoEm` (privados)
+    - `nome` (público)
+- O `constructor` deve **impedir instanciação direta** de `Utilizador` (ex.: lançar `Error`).
+- Métodos:
+    - `get id()`, `get email()`, `set email(v)` (valida formato)
+    - `set password(v)` (mínimo 6 caracteres)
+    - `get ativo()`, `desativar()`, `ativar()`
+    - `resumo()` (método a **sobrescrever** nas subclasses)
+
+**2) Herança**
+
+- Cria subclasses:
+    - `Admin`
+    - `Moderador`
+    - `Visitante`
+- Cada subclasse deve:
+    - Definir um `role` próprio
+    - Sobrescrever `resumo()` para devolver uma frase diferente (polimorfismo)
+
+**3) Composição**
+
+- Cria uma classe `Perfil` com:
+    - `bio`, `avatarUrl`, `website` (com validação simples)
+- Cada `Utilizador` deve **ter um Perfil** (composição).
+
+**4) Permissões**
+
+- Cria uma classe `Permissao` com:
+    - `acao` (ex.: `"criar_post"`, `"apagar_utilizador"`)
+- `Admin` tem todas as permissões.
+- `Moderador` tem permissões específicas (pelo menos 2).
+- `Visitante` tem permissões mínimas.
+- Implementa `pode(acao)` em `Utilizador` e **sobrescreve** conforme o tipo (polimorfismo).
+
+**5) Gestão central**
+
+- Cria uma classe `SistemaUtilizadores` que:
+    - Guarda um array privado `#utilizadores`.
+    - Métodos:
+        - `adicionar(user)` (valida tipo)
+        - `removerPorId(id)`
+        - `listarAtivos()`
+        - `buscarPorEmail(email)`
+        - `contarPorRole(role)`
+
+**6) Estáticos**
+
+- Em `Utilizador`, cria um método `static validarEmail(email)`.
+
+**Requisitos de teste (mínimo)**
+
+- Cria pelo menos:
+    - 1 `Admin`, 1 `Moderador`, 1 `Visitante`
+- Mostra:
+    - `resumo()` de cada um (polimorfismo)
+    - Pelo menos 3 verificações com `pode(acao)`
+    - Uso de `SistemaUtilizadores` (adicionar, remover, listar, contar)
+
+**Extra (opcional)**
+
+- Implementa `toJSON()` em `Utilizador` para não expor `#password`
+- Cria logs de ações no sistema (ex.: `#logs`)
 
 ### Repetição espaçada (revisão rápida)
 
