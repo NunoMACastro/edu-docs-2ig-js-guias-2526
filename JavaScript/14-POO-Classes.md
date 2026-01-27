@@ -833,7 +833,35 @@ console.log("Média Geral:", escola.mediaGeral()); // 13.5
 19. **Composição** - cria `class Motor` com estado `ligado` e métodos `ligar()`/`desligar()`. Cria `class Carro` que **tem um** `Motor` (cria no `constructor`). O carro deve expor `ligar()` e `desligar()` que chamam o motor e um `get estado` que devolve se o motor está ligado. Testa com um carro.
 20. **JSON** - adiciona `toJSON()` a `class Aluno` para devolver apenas `{ nome, turma }` (não inclui `#nota`). Cria um aluno, faz `JSON.stringify(aluno)` e confirma que o resultado só tem `nome` e `turma`.
 21. **Fábrica x Classe** - escreve uma função `criarContador()` que devolve `{ inc(), valor() }` e guarda `let n = 0` no closure. Depois cria `class Contador` com `#n`, métodos `inc()` e `get valor()`. Cria duas instâncias de cada e mostra que cada uma guarda o seu próprio estado.
-22. **Projeto completo** — Sistema de Gestão de Utilizadores (OOP)
+22. **Fatura profissional (get/set com regras reais)**
+
+**Objetivo:** demonstrar getters/setters que **calculam**, **validam**, **normalizam** e **disparam efeitos colaterais**, mantendo sintaxe de propriedade.
+
+**Requisitos**
+
+- `itens` (array de `{ descricao, qtd, precoUnit }`)
+- `estado` (`"RASCUNHO" | "EMITIDA" | "PAGA"`)
+- `descontoPct`, `nifCliente`, `emitidaEm`, `pagaEm`, `atualizadoEm`
+
+**Getters**
+
+- `subtotal` → soma dos itens (`qtd * precoUnit`)
+- `total` → subtotal − desconto + IVA (23%), arredondado a 2 casas
+- `podeEditar` → `true` apenas se `estado === "RASCUNHO"`
+- `resumo` → string pronta para UI/relatório (ex.: “Fatura #X – TOTAL: Y€ – ESTADO: Z”)
+
+**Setters**
+
+- `descontoPct(v)` → valida 0–20; só permite se `estado === "RASCUNHO"`; atualiza `atualizadoEm`
+- `estado(v)` → só permite transições `RASCUNHO → EMITIDA → PAGA`; ao mudar:
+    - se `EMITIDA`, define `emitidaEm = new Date()`
+    - se `PAGA`, define `pagaEm = new Date()`
+    - atualiza `atualizadoEm`
+- `nifCliente(v)` → normaliza (remove espaços/pontos) e valida 9 dígitos
+
+**Teste mínimo**: cria uma fatura, adiciona itens, altera desconto, emite e paga, e mostra `total` e `resumo`.
+
+23. **Projeto completo** — Sistema de Gestão de Utilizadores (OOP)
 
 **Objetivo:** criar um sistema de gestão de utilizadores usando classes em JavaScript. Deves aplicar **encapsulamento**, **herança**, **composição**, **abstração** e **polimorfismo**. O sistema deve permitir criar diferentes tipos de utilizadores e gerir permissões e ações.
 
