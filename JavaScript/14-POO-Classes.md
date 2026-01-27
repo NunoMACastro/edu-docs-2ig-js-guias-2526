@@ -574,6 +574,8 @@ const s2 = new Saudacao("Ana");
 console.log(s2.falar()); // "Olá Ana"
 ```
 
+---
+
 2. **Contador simples** - cria `class Contador` com um atributo `valor = 0` e um método `incrementar()` que soma 1. Mostra o valor após três chamadas.
 
 > Resolução
@@ -593,6 +595,8 @@ c.incrementar();
 c.incrementar();
 console.log(c.valor); // 3
 ```
+
+---
 
 3. **Pessoa básica** - cria `class Pessoa` com `nome` e `apresentar()`. Cria 3 pessoas e imprime as apresentações.
 
@@ -618,6 +622,8 @@ console.log(p1.apresentar()); // "Olá, eu sou João."
 console.log(p2.apresentar()); // "Olá, eu sou Maria."
 console.log(p3.apresentar()); // "Olá, eu sou Carlos."
 ```
+
+---
 
 4. **Getter introdutório** - cria `class Termometro` com um campo privado `#celsius` e um getter `fahrenheit` que devolve `#celsius * 1.8 + 32`. Mostra ambos os valores.
 
@@ -655,6 +661,8 @@ console.log(`Celsius: ${t.celsius}`); // 25
 console.log(`Fahrenheit: ${t.fahrenheit}`); // 77
 ```
 
+---
+
 5. **Setter introdutório** - cria `class Produto` com `#preco` e um setter `preco` que rejeita valores negativos (lança `RangeError`). Usa o getter correspondente para ler o valor atual.
 
 > Resolução
@@ -685,6 +693,8 @@ try {
     console.log(e.message);
 }
 ```
+
+---
 
 6. **Validação** - cria `class Aluno` com `#nota` e um `set nota(v)` que só aceita 0–20 (lança `RangeError` caso contrário).
 
@@ -717,6 +727,8 @@ try {
     console.log(e.message); // "Nota inválida (0–20)."
 }
 ```
+
+---
 
 7. **Turma de alunos** - cria `class Turma` que guarda um array privado de `Aluno`. Adiciona método `adicionarAluno(aluno)` (verifica se é instância de `Aluno`), `media()` e `aprovados()` (nota ≥ 10).
 
@@ -765,6 +777,8 @@ console.log(
 );
 ```
 
+---
+
 8. **Escola** - cria `class Escola` que tem várias `Turma`. Adiciona método `adicionarTurma(turma)` e `mediaGeral()` que calcula a média de todas as turmas.
 
 > Resolução
@@ -778,7 +792,7 @@ class Escola {
         }
         this.#turmas.push(turma);
     }
-    // Media geral sem reduce
+    // Média geral sem reduce
     mediaGeral() {
         if (this.#turmas.length === 0) return 0;
         let soma = 0;
@@ -791,7 +805,7 @@ class Escola {
         }
         return Math.round((soma / totalAlunos) * 10) / 10;
     }
-    // Media geral sem reduce e usando a função media() da Turma
+    // Média geral sem reduce e usando a função media() da Turma
     /*
     mediaGeral() {
         if (this.#turmas.length === 0) return 0;
@@ -820,22 +834,328 @@ escola.adicionarTurma(turma2);
 console.log("Média Geral:", escola.mediaGeral()); // 13.5
 ```
 
-9. **Cria um Relógio** - cria `class Cronometro` com um campo privado `#segundos` e métodos `iniciar()`, `parar()` e `get segundos`. Usa `setInterval` para contar segundos.
-10. **Conta bancária** - implementa `depositar`, `levantar` e `get saldo`; lança erro se tentar levantar mais do que o saldo.
-11. **`this` em callbacks** - cria `class Alarme` com `segundos` e método `tick()` que incrementa e mostra na `console`. Em `iniciar()`, usa `setInterval` e garante que `this` aponta para a instância (usa `bind` ou um método em arrow).
-12. **Método privado** - cria `class Cofre` com `#codigo` e um método privado `#validar(c)`. O método público `abrir(c)` deve devolver `"Aberto"` se o código estiver correto e `"Código errado"` caso contrário. Limita o número de tentativas a 3.
-13. **Estáticos** - cria `class Conversor` com `static eurParaUsd(valor)` e `static usdParaEur(valor)` e usa-os em dois exemplos.
-14. **Herança** - cria `class Pessoa` com `nome` e `apresentar()` (frase simples). Cria `class Professor extends Pessoa` com `disciplina`. No `constructor`, chama `super(nome)`. Reescreve `apresentar()` para incluir a disciplina e usa `super.apresentar()` para reaproveitar a frase base. Cria pelo menos 2 professores e mostra o resultado na `console`.
-15. **Herança (animais)** - cria `class Animal` com `nome` e `som` e um método `falar()`. Cria `class Cao` e `class Gato` que chamam `super(nome, "au")` / `super(nome, "miau")`. Instancia um de cada e chama `falar()`.
-16. **Herança (veículos)** - cria `class Veiculo` com `marca` e método `mover()` que devolve `"<marca> está a mover-se"`. Cria `class Bicicleta extends Veiculo` com `tipo` e reescreve `mover()` para incluir o tipo, chamando `super.mover()`.
-17. **Composição (casa/porta)** - cria `class Porta` com estado `aberta` e métodos `abrir()`/`fechar()`. Cria `class Casa` que **tem uma** `Porta` e expõe `abrirPorta()`/`fecharPorta()`. Testa a sequência abrir → fechar.
-18. **Composição (playlist)** - cria `class Musica` com `titulo`. Cria `class Playlist` que guarda um array de `Musica`, método `adicionar(musica)` (verifica `instanceof`) e `listar()` que devolve os títulos.
-19. **Composição** - cria `class Motor` com estado `ligado` e métodos `ligar()`/`desligar()`. Cria `class Carro` que **tem um** `Motor` (cria no `constructor`). O carro deve expor `ligar()` e `desligar()` que chamam o motor e um `get estado` que devolve se o motor está ligado. Testa com um carro.
-20. **JSON** - adiciona `toJSON()` a `class Aluno` para devolver apenas `{ nome, turma }` (não inclui `#nota`). Cria um aluno, faz `JSON.stringify(aluno)` e confirma que o resultado só tem `nome` e `turma`.
-21. **Fábrica x Classe** - escreve uma função `criarContador()` que devolve `{ inc(), valor() }` e guarda `let n = 0` no closure. Depois cria `class Contador` com `#n`, métodos `inc()` e `get valor()`. Cria duas instâncias de cada e mostra que cada uma guarda o seu próprio estado.
-22. **Fatura profissional (get/set com regras reais)**
+---
 
-**Objetivo:** demonstrar getters/setters que **calculam**, **validam**, **normalizam** e **disparam efeitos colaterais**, mantendo sintaxe de propriedade.
+9. **Cria um cronómetro (timer)**  
+   **Enunciado**: Vais construir um **cronómetro** que conta segundos. No fim, deves conseguir **iniciar**, **parar** e **consultar** o tempo. O objetivo é praticar `setInterval`, getters e campos privados.
+
+**Explicação curta (setInterval)**  
+`setInterval` repete uma função a cada X milissegundos.  
+Exemplo: contar segundos de 1 em 1 segundo.
+
+```js
+let s = 0;
+const id = setInterval(() => {
+    s++;
+    console.log("segundos:", s);
+}, 1000);
+
+// parar quando já não precisas
+clearInterval(id);
+```
+
+Repara que o setInterval recebe uma arrow function que é chamada repetidamente. A isto chamamos um callback.
+
+**Passos**
+
+1. Cria `class Cronometro`.
+2. Campo privado `#segundos = 0`.
+3. Campo privado `#id = null` para guardar o intervalo.
+4. Método `iniciar()` que começa a contar 1 em 1 segundo.
+5. Método `parar()` que faz `clearInterval`.
+6. Getter `segundos` para ler o valor atual.
+
+---
+
+10. **Conta bancária (com validação simples)**  
+    **Enunciado**: Cria uma conta com saldo privado. A conta deve permitir **depositar**, **levantar** e **consultar** o saldo, mas nunca deve permitir levantar mais do que existe.
+
+**Explicação curta**  
+Validar dados evita estados inválidos (ex.: saldo negativo sem querer).
+
+**Passos**
+
+1. Cria `class ContaBancaria` com `#saldo = 0`.
+2. `depositar(valor)` só aceita `valor > 0`.
+3. `levantar(valor)` só permite se houver saldo suficiente.
+4. Getter `saldo` para consultar.
+
+**Teste mínimo**
+
+```js
+const conta = new ContaBancaria();
+conta.depositar(50);
+conta.levantar(20);
+console.log(conta.saldo); // 30
+```
+
+---
+
+11. **`this` em callbacks (alarme)**  
+    **Enunciado**: Vais criar um alarme que imprime o número de segundos. Como `setInterval` chama a função sem "dono", tens de garantir que o `this` continua a apontar para a instância.
+
+**Explicação curta**  
+Quando passas um método diretamente para `setInterval`, ele perde o contexto.
+
+**Passos**
+
+1. Cria `class Alarme` com `segundos = 0`.
+2. Método `tick()` que incrementa e faz `console.log`.
+3. Método `iniciar()` que chama `setInterval`.
+4. Garante que `this` aponta para a instância (usa `bind` ou arrow).
+
+**Teste mínimo**
+
+```js
+const a = new Alarme();
+a.iniciar();
+// deve imprimir 1, 2, 3, ...
+```
+
+---
+
+12. **Método privado (cofre)**  
+    **Enunciado**: Vais criar um cofre com código secreto. O código só deve ser validado **dentro** da classe, e o cofre bloqueia após 3 tentativas falhadas.
+
+**Explicação curta**  
+Campos e métodos privados (`#`) escondem detalhes internos e protegem o estado.
+
+**Passos**
+
+1. Cria `class Cofre` com `#codigo` e `#tentativas = 0`.
+2. Cria método privado `#validar(c)` que devolve `true/false`.
+3. Método público `abrir(c)`:
+    - se acertar → `"Aberto"`
+    - se falhar → `"Código errado"`
+    - após 3 falhas → `"Bloqueado"`
+
+**Teste mínimo**
+
+```js
+const cofre = new Cofre("1234");
+console.log(cofre.abrir("0000")); // Código errado
+console.log(cofre.abrir("1111")); // Código errado
+console.log(cofre.abrir("2222")); // Bloqueado
+console.log(cofre.abrir("1234")); // Bloqueado
+```
+
+---
+
+13. **Estáticos (conversor simples)**  
+    **Enunciado**: Vais criar um conversor de moedas com métodos que pertencem à **classe**, não às instâncias. O objetivo é praticar `static`.
+
+**Explicação curta**  
+Métodos `static` são usados diretamente na classe, sem `new`.
+
+**Passos**
+
+1. Cria `class Conversor`.
+2. `static eurParaUsd(valor)` e `static usdParaEur(valor)` (usa 2 taxas simples).
+3. Chama direto pela classe, sem `new`.
+
+**Teste mínimo**
+
+```js
+console.log(Conversor.eurParaUsd(10));
+console.log(Conversor.usdParaEur(10));
+```
+
+---
+
+14. **Herança (pessoas)**  
+    **Enunciado**: Vais criar uma classe base `Pessoa` e uma classe `Professor` que herda dela. O objetivo é praticar `extends` e `super`.
+
+**Explicação curta**  
+Subclasses reaproveitam o que já existe na classe base.
+
+**Passos**
+
+1. `class Pessoa` com `nome` e `apresentar()`.
+2. `class Professor extends Pessoa` com `disciplina`.
+3. No `constructor`, chama `super(nome)`.
+4. Reescreve `apresentar()` e reutiliza `super.apresentar()`.
+
+**Teste mínimo**
+
+```js
+const p1 = new Professor("Ana", "Matemática");
+const p2 = new Professor("Luís", "Física");
+console.log(p1.apresentar());
+console.log(p2.apresentar());
+```
+
+---
+
+15. **Herança (animais)**  
+    **Enunciado**: Vais criar animais com sons diferentes. O objetivo é praticar herança com valores fixos no `constructor`.
+
+**Explicação curta**  
+A classe base guarda o comportamento comum, as subclasses só ajustam detalhes.
+
+**Passos**
+
+1. `class Animal` com `nome`, `som` e `falar()`.
+2. `class Cao` chama `super(nome, "au")`.
+3. `class Gato` chama `super(nome, "miau")`.
+4. Instancia um de cada e chama `falar()`.
+
+**Teste mínimo**
+
+```js
+const cao = new Cao("Rex");
+const gato = new Gato("Mimi");
+console.log(cao.falar());
+console.log(gato.falar());
+```
+
+---
+
+16. **Herança (veículos)**  
+    **Enunciado**: Vais criar um veículo e uma bicicleta que herda desse veículo. O objetivo é praticar sobrescrita de métodos.
+
+**Explicação curta**  
+Quando sobrescreves um método, podes chamar o original com `super.metodo()`.
+
+**Passos**
+
+1. `class Veiculo` com `marca` e `mover()`.
+2. `class Bicicleta extends Veiculo` com `tipo`.
+3. Reescreve `mover()` para incluir o tipo e chama `super.mover()`.
+
+**Teste mínimo**
+
+```js
+const b = new Bicicleta("Trek", "BTT");
+console.log(b.mover());
+```
+
+---
+
+17. **Composição (casa/porta)**  
+    **Enunciado**: Vais modelar uma casa que **tem** uma porta. O objetivo é praticar composição em vez de herança.
+
+**Explicação curta**  
+Composição significa juntar objetos: "tem-um".
+
+**Passos**
+
+1. `class Porta` com `aberta = false`, `abrir()` e `fechar()`.
+2. `class Casa` que **tem uma** `Porta`.
+3. `abrirPorta()` e `fecharPorta()` chamam a porta.
+
+**Teste mínimo**
+
+```js
+const casa = new Casa();
+casa.abrirPorta();
+casa.fecharPorta();
+```
+
+---
+
+18. **Composição (playlist)**  
+    **Enunciado**: Vais criar uma playlist que guarda músicas. O objetivo é praticar composição e validação com `instanceof`.
+
+**Explicação curta**  
+A playlist **tem** várias músicas, não é uma música.
+
+**Passos**
+
+1. `class Musica` com `titulo`.
+2. `class Playlist` com array privado e `adicionar(musica)` com `instanceof`.
+3. `listar()` devolve só os títulos.
+
+**Teste mínimo**
+
+```js
+const p = new Playlist();
+p.adicionar(new Musica("Tema 1"));
+p.adicionar(new Musica("Tema 2"));
+console.log(p.listar());
+```
+
+---
+
+19. **Composição (carro/motor)**  
+    **Enunciado**: Vais criar um carro que controla um motor interno. O objetivo é praticar delegação de responsabilidades.
+
+**Explicação curta**  
+O carro expõe métodos que chamam o motor.
+
+**Passos**
+
+1. `class Motor` com `ligado = false`, `ligar()` e `desligar()`.
+2. `class Carro` cria `this.motor = new Motor()` no `constructor`.
+3. `ligar()` e `desligar()` chamam o motor.
+4. Getter `estado` devolve se o motor está ligado.
+
+**Teste mínimo**
+
+```js
+const carro = new Carro();
+carro.ligar();
+console.log(carro.estado); // true
+carro.desligar();
+console.log(carro.estado); // false
+```
+
+---
+
+20. **JSON (esconder dados privados)**  
+    **Enunciado**: Vais controlar o que aparece em `JSON.stringify`. O objetivo é praticar `toJSON()` e proteger dados privados.
+
+**Explicação curta**  
+`JSON.stringify` usa `toJSON()` se existir.
+
+**Passos**
+
+1. Na `class Aluno`, cria `toJSON()` que devolve `{ nome, turma }`.
+2. Cria um aluno e usa `JSON.stringify(aluno)`.
+3. Confirma que `#nota` não aparece.
+
+**Teste mínimo**
+
+```js
+const a = new Aluno("Inês", 16);
+a.turma = "11.º A";
+console.log(JSON.stringify(a)); // {"nome":"Inês","turma":"11.º A"}
+```
+
+---
+
+21. **Fábrica x Classe (estado isolado)**  
+    **Enunciado**: Vais comparar dois estilos: **fábrica** com closure e **classe** com campos privados. O objetivo é perceber como cada instância mantém o seu próprio estado.
+
+**Explicação curta**  
+Fábricas usam variáveis internas; classes usam `#privado`.
+
+**Passos**
+
+1. `criarContador()` devolve `{ inc(), valor() }` e usa `let n = 0`.
+2. `class Contador` com `#n`, `inc()` e `get valor()`.
+3. Cria **duas instâncias** de cada e confirma que não misturam o estado.
+
+**Teste mínimo**
+
+```js
+const c1 = criarContador();
+const c2 = criarContador();
+c1.inc();
+console.log(c1.valor(), c2.valor()); // 1, 0
+
+const k1 = new Contador();
+const k2 = new Contador();
+k1.inc();
+console.log(k1.valor, k2.valor); // 1, 0
+```
+
+---
+
+22. **Fatura profissional (get/set com regras reais)**  
+    **Enunciado**: Vais criar uma classe `Fatura` com regras reais de negócio. O objetivo é treinar getters/setters que **calculam**, **validam**, **normalizam** e **disparam efeitos colaterais**.
+
+**Explicação curta**  
+Getters parecem propriedades mas executam cálculos; setters permitem validar antes de guardar.
 
 **Requisitos**
 
@@ -845,21 +1165,24 @@ console.log("Média Geral:", escola.mediaGeral()); // 13.5
 
 **Getters**
 
-- `subtotal` → soma dos itens (`qtd * precoUnit`)
-- `total` → subtotal − desconto + IVA (23%), arredondado a 2 casas
-- `podeEditar` → `true` apenas se `estado === "RASCUNHO"`
-- `resumo` → string pronta para UI/relatório (ex.: “Fatura #X – TOTAL: Y€ – ESTADO: Z”)
+- `subtotal` -> soma dos itens (`qtd * precoUnit`)
+- `total` -> subtotal - desconto + IVA (23%), arredondado a 2 casas
+- `podeEditar` -> `true` apenas se `estado === "RASCUNHO"`
+- `resumo` -> string pronta para UI/relatório (ex.: "Fatura #X - TOTAL: YEUR - ESTADO: Z")
 
 **Setters**
 
-- `descontoPct(v)` → valida 0–20; só permite se `estado === "RASCUNHO"`; atualiza `atualizadoEm`
-- `estado(v)` → só permite transições `RASCUNHO → EMITIDA → PAGA`; ao mudar:
+- `descontoPct(v)` -> valida 0-20; só permite se `estado === "RASCUNHO"`; atualiza `atualizadoEm`
+- `estado(v)` -> só permite transições `RASCUNHO -> EMITIDA -> PAGA`; ao mudar:
     - se `EMITIDA`, define `emitidaEm = new Date()`
     - se `PAGA`, define `pagaEm = new Date()`
     - atualiza `atualizadoEm`
-- `nifCliente(v)` → normaliza (remove espaços/pontos) e valida 9 dígitos
+- `nifCliente(v)` -> normaliza (remove espaços/pontos) e valida 9 dígitos
 
-**Teste mínimo**: cria uma fatura, adiciona itens, altera desconto, emite e paga, e mostra `total` e `resumo`.
+**Teste mínimo**  
+Cria uma fatura, adiciona itens, altera desconto, emite e paga, e mostra `total` e `resumo`.
+
+---
 
 23. **Projeto completo** — Sistema de Gestão de Utilizadores (OOP)
 
