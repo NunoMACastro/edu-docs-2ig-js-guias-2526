@@ -978,27 +978,55 @@ O que é o `bind`? Consulta o capitulo 7, sobre `this` em callbacks. Mas aqui fi
 
 - `bind(this)` cria uma nova função com o `this` fixo. Ou seja, mesmo que a função seja chamada fora do contexto original, o `this` continua a apontar para o objeto correto.
 
+> Resolução
+
+```js
+class Prefixador {
+    prefixo;
+    constructor(prefixo) {
+        this.prefixo = prefixo;
+        // Opção A: bind no constructor
+        this.formatar = this.formatar.bind(this);
+    }
+    // Opção B: método como arrow function (descomenta esta linha e comenta a anterior)
+    /*
+    formatar = (texto) => {
+        return this.prefixo + texto;
+    };
+    */
+    formatar(texto) {
+        return this.prefixo + texto;
+    }
+}
+
+// Teste
+const p = new Prefixador("Olá, ");
+const nomes = ["Ana", "Bruno", "Carla"];
+const formatados = nomes.map(p.formatar); // sem bind, rebenta
+console.log(formatados); // ["Olá, Ana", "Olá, Bruno", "Olá, Carla"]
+```
+
 ---
 
 12. **Método privado (cofre)**
-    **Enunciado**: Vais criar um cofre com código secreto. O código só deve ser validado **dentro** da classe, e o cofre bloqueia após 3 tentativas falhadas.
+    **Enunciado**: Vais criar um cofre com código secreto. O código só deve ser validado **dentro** da classe, e o cofre bloqueia após 3 tentativas falhadas. O código deve ter um segredo que é revelado se o código estiver correto.
 
 **Explicação curta**
 Campos e métodos privados (`#`) escondem detalhes internos e protegem o estado.
 
 **Passos**
 
-1. Cria `class Cofre` com `#codigo` e `#tentativas = 0`.
+1. Cria `class Cofre` com `#segredo`, `#codigo` e `#tentativas = 0`.
 2. Cria método privado `#validar(c)` que devolve `true/false`.
 3. Método público `abrir(c)`:
-    - se acertar → `"Aberto"`
+    - se acertar → `"Aberto"` e mostra o segredo.
     - se falhar → `"Código errado"`
     - após 3 falhas → `"Bloqueado"`
 
 **Teste mínimo**
 
 ```js
-const cofre = new Cofre("1234");
+const cofre = new Cofre("1234", "O tesouro está aqui!");
 console.log(cofre.abrir("0000")); // Código errado
 console.log(cofre.abrir("1111")); // Código errado
 console.log(cofre.abrir("2222")); // Bloqueado
@@ -1007,10 +1035,10 @@ console.log(cofre.abrir("1234")); // Bloqueado
 
 ---
 
-13. **Estáticos (conversor simples)**  
+13. **Estáticos (conversor simples)**
     **Enunciado**: Vais criar um conversor de moedas com métodos que pertencem à **classe**, não às instâncias. O objetivo é praticar `static`.
 
-**Explicação curta**  
+**Explicação curta**
 Métodos `static` são usados diretamente na classe, sem `new`.
 
 **Passos**
