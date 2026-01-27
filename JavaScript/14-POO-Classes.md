@@ -865,6 +865,43 @@ Repara que o setInterval recebe uma arrow function que é chamada repetidamente.
 5. Método `parar()` que faz `clearInterval`.
 6. Getter `segundos` para ler o valor atual.
 
+> Resolução
+
+```js
+class Cronometro {
+    #segundos = 0;
+    #id = null;
+
+    iniciar() {
+        if (this.#id !== null) return; // já está a contar
+        this.#id = setInterval(() => {
+            this.#segundos++;
+        }, 1000);
+    }
+
+    parar() {
+        if (this.#id !== null) {
+            clearInterval(this.#id);
+            this.#id = null;
+        }
+    }
+
+    get segundos() {
+        return this.#segundos;
+    }
+}
+
+// teste
+const cron = new Cronometro();
+// Pedir ao user quantos segundos quer com prompt e Number:
+let tempo = Number(prompt("Quantos segundos queres contar?"));
+cron.iniciar();
+setTimeout(() => {
+    cron.parar();
+    console.log(`Contaste ${cron.segundos} segundos.`);
+}, tempo * 1000);
+```
+
 ---
 
 10. **Conta bancária (com validação simples)**  
@@ -889,35 +926,64 @@ conta.levantar(20);
 console.log(conta.saldo); // 30
 ```
 
----
-
-11. **`this` em callbacks (alarme)**  
-    **Enunciado**: Vais criar um alarme que imprime o número de segundos. Como `setInterval` chama a função sem "dono", tens de garantir que o `this` continua a apontar para a instância.
-
-**Explicação curta**  
-Quando passas um método diretamente para `setInterval`, ele perde o contexto.
-
-**Passos**
-
-1. Cria `class Alarme` com `segundos = 0`.
-2. Método `tick()` que incrementa e faz `console.log`.
-3. Método `iniciar()` que chama `setInterval`.
-4. Garante que `this` aponta para a instância (usa `bind` ou arrow).
-
-**Teste mínimo**
+> Resolução
 
 ```js
-const a = new Alarme();
-a.iniciar();
-// deve imprimir 1, 2, 3, ...
+class ContaBancaria {
+    #saldo = 0;
+    depositar(valor) {
+        if (valor <= 0) throw new RangeError("Valor inválido.");
+        this.#saldo += valor;
+    }
+    levantar(valor) {
+        if (valor <= 0 || valor > this.#saldo)
+            throw new RangeError("Saldo insuficiente.");
+        this.#saldo -= valor;
+    }
+    get saldo() {
+        return this.#saldo;
+    }
+}
+
+// Teste com try
+
+const conta = new ContaBancaria();
+try {
+    conta.depositar(50);
+    conta.levantar(20);
+    console.log(conta.saldo); // 30
+    conta.levantar(40); // força erro
+} catch (e) {
+    console.log(e.message); // "Saldo insuficiente."
+}
 ```
 
 ---
 
-12. **Método privado (cofre)**  
+11. **`this` em callbacks (lista formatada)**  
+    **Enunciado**: Vais criar um objeto que **acrescenta um prefixo** a palavras.
+
+    Por exemplo, com prefixo `"Olá, "` e palavra `"Ana"`, o resultado é `"Olá, Ana"`.
+
+    Depois vais usar esse método num `map` para formatar várias palavras que se encontram num array.
+
+**Passos**
+
+1. Cria `class Prefixador` com `prefixo`.
+2. Cria o método `formatar(texto)` que devolve `prefixo + texto`.
+3. Usa `map` num array de palavras.
+4. Garante o `this` com `bind` ou com método em arrow.
+
+O que é o `bind`? Consulta o capitulo 7, sobre `this` em callbacks. Mas aqui fica um resumo rápido:
+
+- `bind(this)` cria uma nova função com o `this` fixo. Ou seja, mesmo que a função seja chamada fora do contexto original, o `this` continua a apontar para o objeto correto.
+
+---
+
+12. **Método privado (cofre)**
     **Enunciado**: Vais criar um cofre com código secreto. O código só deve ser validado **dentro** da classe, e o cofre bloqueia após 3 tentativas falhadas.
 
-**Explicação curta**  
+**Explicação curta**
 Campos e métodos privados (`#`) escondem detalhes internos e protegem o estado.
 
 **Passos**
