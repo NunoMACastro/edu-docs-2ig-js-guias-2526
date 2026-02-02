@@ -974,7 +974,7 @@ try {
 3. Usa `map` num array de palavras.
 4. Garante o `this` com `bind` ou com método em arrow.
 
-O que é o `bind`? Consulta o capitulo 7, sobre `this` em callbacks. Mas aqui fica um resumo rápido:
+O que é o `bind`? Consulta o capítulo 7, sobre `this` em callbacks. Mas aqui fica um resumo rápido:
 
 - `bind(this)` cria uma nova função com o `this` fixo. Ou seja, mesmo que a função seja chamada fora do contexto original, o `this` continua a apontar para o objeto correto.
 
@@ -1176,70 +1176,125 @@ console.log(cao.falar());
 console.log(gato.falar());
 ```
 
----
-
-16. **Herança (veículos)**  
-    **Enunciado**: Vais criar um veículo e uma bicicleta que herda desse veículo. O objetivo é praticar sobrescrita de métodos.
-
-**Explicação curta**  
-Quando sobrescreves um método, podes chamar o original com `super.metodo()`.
-
-**Passos**
-
-1. `class Veiculo` com `marca` e `mover()`.
-2. `class Bicicleta extends Veiculo` com `tipo`.
-3. Reescreve `mover()` para incluir o tipo e chama `super.mover()`.
-
-**Teste mínimo**
+> Resolução
 
 ```js
-const b = new Bicicleta("Trek", "BTT");
-console.log(b.mover());
+class Animal {
+    nome;
+    constructor(nome) {
+        this.nome = nome;
+    }
+    falar() {
+        return `${this.nome}`;
+    }
+}
+
+class Cao extends Animal {
+    constructor(nome) {
+        super(nome);
+    }
+    falar() {
+        return `${this.super()} diz: Au Au!`;
+    }
+}
+class Gato extends Animal {
+    constructor(nome) {
+        super(nome);
+    }
+    falar() {
+        return `${this.super()} diz: Miau!`;
+    }
+}
+
+// Teste
+const cao = new Cao("Rex");
+const gato = new Gato("Mimi");
+console.log(cao.falar()); // "Rex diz: Au Au!"
+console.log(gato.falar()); // "Mimi diz: Miau!"
 ```
 
 ---
 
-17. **Composição (casa/porta)**  
-    **Enunciado**: Vais modelar uma casa que **tem** uma porta. O objetivo é praticar composição em vez de herança.
-
-**Explicação curta**  
-Composição significa juntar objetos: "tem-um".
+16. **Herança**
+    **Enunciado**: Cria uma classe para um dispositivo genérico e uma segunda classe smartphone que herda de dispositivo.
 
 **Passos**
 
-1. `class Porta` com `aberta = false`, `abrir()` e `fechar()`.
-2. `class Casa` que **tem uma** `Porta`.
-3. `abrirPorta()` e `fecharPorta()` chamam a porta.
+1. `class Dispositivo` com `marca`, `ligado = false` e métodos `ligar()` / `desligar()` que atualizam o estado e retornam uma mensagem.
 
-**Teste mínimo**
+- A `marca` é definida no `constructor`.
+- O atributo `ligado` é inicializado como `false` antes do construtor.
+- As funções `ligar()` e `desligar()` atualizam o estado e retornam uma mensagem indicando o novo estado do dispositivo.
+
+2. `class Smartphone extends Dispositivo` adiciona `modelo`, `numeroSerie` e `ativarWifi()` que só funciona quando `ligado`.
+
+- O `modelo` e o `numeroSerie` são definidos no `constructor`.
+- O método `ativarWifi()` verifica se o dispositivo está ligado antes de ativar o Wi-Fi, retornando uma mensagem apropriada.
+
+3. Sobrescreve `ligar()` para ligar o dispositivo e registar um log (ex.: `console.log(`${this.marca} ${this.modelo} ligado.`);`) antes de chamar `super.ligar()`.
+
+**Teste**
 
 ```js
-const casa = new Casa();
-casa.abrirPorta();
-casa.fecharPorta();
+const telefone = new Smartphone("Apple", "iPhone 29", "SN123456");
+console.log(telefone.ligar());
+console.log(telefone.ativarWifi());
+console.log(telefone.desligar());
+console.log(telefone.ativarWifi());
 ```
 
 ---
 
-18. **Composição (playlist)**  
-    **Enunciado**: Vais criar uma playlist que guarda músicas. O objetivo é praticar composição e validação com `instanceof`.
-
-**Explicação curta**  
-A playlist **tem** várias músicas, não é uma música.
+17. **Herança (serviço de subscrições)**
+    **Enunciado**: Vais criar um serviço de subscrições com duas camadas: base para todos os planos e uma subclasse que aplica descontos especiais. O foco é herdar comportamento e acrescentar regras específicas.
 
 **Passos**
 
-1. `class Musica` com `titulo`.
-2. `class Playlist` com array privado e `adicionar(musica)` com `instanceof`.
-3. `listar()` devolve só os títulos.
+1. `class Subscricao` com `nome`, `precoBase`, `ativada = false` e métodos `ativar()` / `cancelar()`.
+
+- O `nome` e o `precoBase` são definidos no `constructor`.
+- O atributo `ativada` é inicializado como `false` antes do construtor.
+- O método `ativar()` define `ativada` como `true` e retorna uma mensagem indicando que a subscrição foi ativada.
+- O método `cancelar()` define `ativada` como `false` e retorna uma mensagem indicando que a subscrição foi cancelada.
+
+2. `class Premium extends Subscricao` adiciona `bonus` e sobrescreve `ativar()` para registar o bônus (ex.: `console.log`) antes de chamar `super.ativar()`.
+
+- O `bonus` é definido no `constructor`.
+- O método `ativar()` regista o bónus (ex.: `console.log(`Bónus de ${this.bonus} aplicado.`);`) antes de chamar `super.ativar()`
+
+3. Adiciona getter `valorAtual` que devolve `precoBase - bonus`.
+
+**Teste**
+
+```js
+const plano = new Premium("Pro", 30, 5);
+plano.ativar();
+console.log(plano.valorAtual);
+```
+
+---
+
+18. **Composição (biblioteca e livros)**  
+    **Enunciado**: Vais modelar uma biblioteca que **tem** livros e controla empréstimos, praticando composição e delegação de responsabilidades.
+
+**Explicação curta**  
+Bibliotecas não são livros; elas guardam e expõem operações sobre coleções.
+
+**Passos**
+
+1. `class Livro` com `titulo`, `autor` e `emprestado = false`.
+2. `class Biblioteca` com array privado `#livros`. Métodos `adicionar(livro)`, `emprestar(titulo)` e `devolver(titulo)`, cada um validando `instanceof Livro`.
+3. `emprestar` deve marcar o livro como emprestado e `devolver` revertê-lo, devolvendo um booleano para indicar sucesso.
+4. Getter `disponiveis` devolve os títulos livres.
 
 **Teste mínimo**
 
 ```js
-const p = new Playlist();
-p.adicionar(new Musica("Tema 1"));
-p.adicionar(new Musica("Tema 2"));
-console.log(p.listar());
+const biblioteca = new Biblioteca();
+const livro = new Livro("A Odisséia", "Homero");
+biblioteca.adicionar(livro);
+biblioteca.emprestar("A Odisséia");
+console.log(biblioteca.disponiveis);
 ```
 
 ---
