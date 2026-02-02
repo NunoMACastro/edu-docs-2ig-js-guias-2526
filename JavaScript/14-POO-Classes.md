@@ -1033,6 +1033,56 @@ console.log(cofre.abrir("2222")); // Bloqueado
 console.log(cofre.abrir("1234")); // Bloqueado
 ```
 
+> Resolução
+
+```js
+class Cofre {
+    #segredo;
+    #codigo;
+    #tentativas = 0;
+
+    constructor(codigo, segredo) {
+        this.codigo = codigo;
+        this.segredo = segredo;
+    }
+
+    get codigo() {
+        return this.#codigo;
+    }
+
+    set codigo(c) {
+        this.#codigo = c;
+    }
+
+    get segredo() {
+        return this.#segredo;
+    }
+
+    set segredo(s) {
+        this.#segredo = s;
+    }
+
+    #validar(c) {
+        return c === this.#codigo;
+    }
+
+    abrir(c) {
+        if (this.#tentativas >= 3) {
+            return "Bloqueado";
+        }
+        if (this.#validar(c)) {
+            return `Aberto! Segredo: ${this.#segredo}`;
+        } else {
+            this.#tentativas++;
+            if (this.#tentativas >= 3) {
+                return "Bloqueado";
+            }
+            return "Código errado";
+        }
+    }
+}
+```
+
 ---
 
 13. **Estáticos (conversor simples)**
@@ -1078,6 +1128,30 @@ console.log(p1.apresentar());
 console.log(p2.apresentar());
 ```
 
+> Resolução
+
+```js
+class Pessoa {
+    nome;
+    constructor(nome) {
+        this.nome = nome;
+    }
+    apresentar() {
+        return `Sou ${this.nome}`;
+    }
+}
+class Professor extends Pessoa {
+    disciplina;
+    constructor(nome, disciplina) {
+        super(nome);
+        this.disciplina = disciplina;
+    }
+    apresentar() {
+        return `${super.apresentar()} e ensino ${this.disciplina}.`;
+    }
+}
+```
+
 ---
 
 15. **Herança (animais)**  
@@ -1088,9 +1162,9 @@ A classe base guarda o comportamento comum, as subclasses só ajustam detalhes.
 
 **Passos**
 
-1. `class Animal` com `nome`, `som` e `falar()`.
-2. `class Cao` chama `super(nome, "au")`.
-3. `class Gato` chama `super(nome, "miau")`.
+1. `class Animal` com `nome` e `falar()`.
+2. `class Cao` chama `super(nome)`.
+3. `class Gato` chama `super(nome)`.
 4. Instancia um de cada e chama `falar()`.
 
 **Teste mínimo**
