@@ -1243,6 +1243,53 @@ console.log(telefone.desligar());
 console.log(telefone.ativarWifi());
 ```
 
+> Resolução
+
+```js
+class Dispositivo {
+    marca;
+    ligado = false;
+    constructor(marca) {
+        this.marca = marca;
+    }
+    ligar() {
+        this.ligado = true;
+        return `${this.marca} está ligado.`;
+    }
+    desligar() {
+        this.ligado = false;
+        return `${this.marca} está desligado.`;
+    }
+}
+
+class Smartphone extends Dispositivo {
+    modelo;
+    numeroSerie;
+    constructor(marca, modelo, numeroSerie) {
+        super(marca);
+        this.modelo = modelo;
+        this.numeroSerie = numeroSerie;
+    }
+    ligar() {
+        console.log(`${this.marca} ${this.modelo} ligado.`);
+        return super.ligar();
+    }
+    ativarWifi() {
+        if (!this.ligado) {
+            return "Dispositivo desligado. Não é possível ativar o Wi-Fi.";
+        }
+        return "Wi-Fi ativado.";
+    }
+}
+
+// Teste
+const telefone = new Smartphone("Apple", "iPhone 29", "SN123456");
+console.log(telefone.ligar());
+console.log(telefone.ativarWifi());
+console.log(telefone.desligar());
+console.log(telefone.ativarWifi());
+```
+
 ---
 
 17. **Herança (serviço de subscrições)**
@@ -1277,52 +1324,33 @@ console.log(plano.valorAtual);
 18. **Composição (biblioteca e livros)**  
     **Enunciado**: Vais modelar uma biblioteca que **tem** livros e controla empréstimos, praticando composição e delegação de responsabilidades.
 
-**Explicação curta**  
-Bibliotecas não são livros; elas guardam e expõem operações sobre coleções.
-
 **Passos**
 
-1. `class Livro` com `titulo`, `autor` e `emprestado = false`.
-2. `class Biblioteca` com array privado `#livros`. Métodos `adicionar(livro)`, `emprestar(titulo)` e `devolver(titulo)`, cada um validando `instanceof Livro`.
-3. `emprestar` deve marcar o livro como emprestado e `devolver` revertê-lo, devolvendo um booleano para indicar sucesso.
-4. Getter `disponiveis` devolve os títulos livres.
+1. Cria `class Livro` com `titulo`, `autor` e `disponivel = true`.
 
-**Teste mínimo**
+- O `titulo` e o `autor` são definidos no `constructor`.
+- O atributo `disponivel` é inicializado como `true` antes do construtor.
+
+2. Cria `class Biblioteca` com `#livros = []`.
+
+- Método `adicionar(livro)` adiciona um livro ao array.
+- Método `emprestar(titulo)` procura o livro pelo título, verifica se está disponível, marca como indisponível e devolve o livro; se não estiver disponível, lança um erro.
+- Getter `disponiveis` devolve uma lista de títulos dos livros disponíveis.
+
+**Teste**
 
 ```js
-const biblioteca = new Biblioteca();
-const livro = new Livro("A Odisséia", "Homero");
-biblioteca.adicionar(livro);
-biblioteca.emprestar("A Odisséia");
-console.log(biblioteca.disponiveis);
+const biblio = new Biblioteca();
+biblio.adicionar(new Livro("1984", "George Orwell"));
+biblio.adicionar(new Livro("O Senhor dos Anéis", "J.R.R. Tolkien"));
+const livro = biblio.emprestar("1984");
+console.log(livro.titulo); // "1984"
+console.log(biblio.disponiveis); // ["O Senhor dos Anéis"]
 ```
 
 ---
 
-19. **Composição (carro/motor)**  
-    **Enunciado**: Vais criar um carro que controla um motor interno. O objetivo é praticar delegação de responsabilidades.
-
-**Explicação curta**  
-O carro expõe métodos que chamam o motor.
-
-**Passos**
-
-1. `class Motor` com `ligado = false`, `ligar()` e `desligar()`.
-2. `class Carro` cria `this.motor = new Motor()` no `constructor`.
-3. `ligar()` e `desligar()` chamam o motor.
-4. Getter `estado` devolve se o motor está ligado.
-
-**Teste mínimo**
-
-```js
-const carro = new Carro();
-carro.ligar();
-console.log(carro.estado); // true
-carro.desligar();
-console.log(carro.estado); // false
-```
-
----
+19. \*\*Composição
 
 20. **JSON (esconder dados privados)**  
     **Enunciado**: Vais controlar o que aparece em `JSON.stringify`. O objetivo é praticar `toJSON()` e proteger dados privados.
