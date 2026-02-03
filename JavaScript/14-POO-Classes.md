@@ -1350,7 +1350,43 @@ console.log(biblio.disponiveis); // ["O Senhor dos Anéis"]
 
 ---
 
-19. \*\*Composição
+19. **Composição e Herança**
+    **Enunciado**: Vamos criar uma aplicação para gerir profissionais num hospital.
+
+**Passos**
+
+1. Cria `class Profissional` com `nome`, `especialidade`, `#salario` (privado) e métodos `get salario()` e `set salario(v)` (valida `v > 0`). Adiciona também o método `apresentar()` que devolve uma string com o nome e especialidade.
+
+- O `nome` e a `especialidade` são definidos no `constructor`.
+- O atributo `#salario` é privado e inicializado como `0` antes do construtor.
+- O método `get salario()` devolve o valor do salário.
+- O método `set salario(v)` valida se `v > 0` antes de definir o salário.
+- O método `apresentar()` devolve uma string com o nome e especialidade do profissional.
+
+2. Cria `class Hospital` com `#profissionais = []`.
+
+- Método `adicionarProfissional(profissional)` adiciona um profissional ao array.
+- Método `listarProfissionais()` devolve uma lista de apresentações de todos os profissionais.
+- Método `calcularDespesaSalarial()` soma os salários de todos os profissionais e devolve o total.
+
+3. Cria subclasses `Medico` e `Enfermeiro` que herdam de `Profissional`. A classe `Medico` deve ter o atributo `especialidade` e a classe `Enfermeiro` deve ter o atributo `turno`. Ambas devem ter o método `apresentar()` sobrescrito para incluir essas informações adicionais.
+
+- O `especialidade` do `Medico` e o `turno` do `Enfermeiro` são definidos no `constructor`.
+- O método `apresentar()` de ambas as subclasses deve incluir essas informações adicionais na string
+
+**Teste**
+
+```js
+const hospital = new Hospital();
+const medico = new Medico("Dr. Silva", "Cardiologia");
+medico.salario = 5000;
+const enfermeiro = new Enfermeiro("Ana", "Noite");
+enfermeiro.salario = 3000;
+hospital.adicionarProfissional(medico);
+hospital.adicionarProfissional(enfermeiro);
+console.log(hospital.listarProfissionais());
+console.log("Despesa Salarial:", hospital.calcularDespesaSalarial());
+```
 
 20. **JSON (esconder dados privados)**  
     **Enunciado**: Vais controlar o que aparece em `JSON.stringify`. O objetivo é praticar `toJSON()` e proteger dados privados.
