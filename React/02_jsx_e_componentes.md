@@ -1,77 +1,119 @@
-# React.js (11.º Ano) - 02 · JSX e componentes
+# React.js (12.º Ano) - 02 · JSX e componentes
 
 > **Objetivo deste ficheiro**
-> Perceber o que é JSX e porque é diferente de HTML.
-> Aprender as regras essenciais do JSX e criar componentes funcionais.
-> Organizar pequenos componentes para montar uma página.
+>
+> - Perceber o que é **JSX** e porque é diferente de HTML.
+> - Aprender as regras essenciais do JSX (expressões, atributos, eventos, fragmentos).
+> - Criar **componentes funcionais** e organizá-los por ficheiros.
+> - Montar uma página com **composição** (vários componentes pequenos a trabalhar juntos).
 
 ---
 
 ## Índice
 
--   [0. Como usar este ficheiro](#sec-0)
--   [1. [ESSENCIAL] O que é JSX](#sec-1)
--   [2. [ESSENCIAL] Regras importantes do JSX](#sec-2)
--   [3. [ESSENCIAL] Componentes funcionais e exportação](#sec-3)
--   [4. [EXTRA] Componentes pequenos e composição visual](#sec-4)
--   [Exercícios - JSX e componentes](#exercicios)
--   [Changelog](#changelog)
+- [0. Como usar este ficheiro](#sec-0)
+- [1. [ESSENCIAL] O que é JSX](#sec-1)
+- [2. [ESSENCIAL] Regras importantes do JSX](#sec-2)
+- [3. [ESSENCIAL] Componentes funcionais e exportação](#sec-3)
+- [4. [EXTRA] Componentes pequenos e composição visual](#sec-4)
+- [Exercícios - JSX e componentes](#exercicios)
+- [Changelog](#changelog)
 
 <a id="sec-0"></a>
 
 ## 0. Como usar este ficheiro
 
--   **ESSENCIAL vs EXTRA:** foca primeiro as secções [ESSENCIAL]; usa [EXTRA] para consolidar.
--   **Como estudar:** escreve o JSX, testa, muda valores e observa o resultado.
--   **Ligações:** se não tens o projeto criado, volta a `01_fundamentos_e_setup.md`.
+- **ESSENCIAL vs EXTRA:** começa pelas secções [ESSENCIAL]. O [EXTRA] ajuda-te a organizar melhor e a evitar erros comuns quando o projeto cresce.
+- **Como estudar:**
+    1. Copia um exemplo para o `App.jsx`.
+    2. Guarda e vê o resultado no browser.
+    3. Muda um detalhe (texto, variável, classe, condição) e confirma o que mudou.
+    4. Se der erro, lê a mensagem do terminal e do browser (consola).
+- **Ligações:**
+    - Se ainda não tens projeto criado, volta ao `01_fundamentos_e_setup.md`.
+    - Se já estás confortável com JSX e queres passar dados entre componentes, segue depois para `03_props_e_composicao.md`.
+
+---
 
 <a id="sec-1"></a>
 
 ## 1. [ESSENCIAL] O que é JSX
 
-### Modelo mental
+### 1.1 A ideia central
 
-JSX é uma sintaxe que permite escrever uma estrutura parecida com HTML **dentro do JavaScript**. O React transforma esse JSX em chamadas JavaScript que criam elementos na página. Ou seja: **JSX não é HTML**, é uma forma mais simples e legível de criar UI.
+JSX é uma forma de escrever **estrutura de interface** (parecida com HTML) **dentro do JavaScript**.
 
-Pensa no JSX como uma **tradução automática**: tu escreves algo parecido com HTML, e a ferramenta de build converte tudo para JavaScript.
+Importante:
 
-### Sintaxe base (passo a passo)
+- **JSX não é HTML.**
+- O browser não “entende JSX” diretamente.
+- Quem trata disso é o **Vite** (a ferramenta do projeto), que converte o JSX em JavaScript antes da página correr.
 
--   **JSX é uma expressão JavaScript:** podes guardar JSX numa variável ou devolver no `return`.
--   **Parênteses para multi-linha:** quando o JSX ocupa várias linhas, envolve com `(` e `)`.
--   **Um único elemento pai (elemento raiz):** o `return` tem de devolver **uma** tag que envolve as outras. “Elemento pai” é a tag que fica por fora e engloba todas as restantes.
--   **Fragmentos para não criar `<div>` extra:** usa `<>...</>` quando não queres criar uma tag real no HTML.
--   **Chavetas `{}` para expressões:** servem para inserir variáveis, contas, chamadas simples ou valores calculados.
--   **Texto normal escreve-se direto:** só usas `{}` quando queres colocar JavaScript.
--   **Comentários no JSX:** usam `{/* comentário */}`.
--   **Tags auto-fechadas:** `<img />`, `<input />`, `<br />` precisam de `/>`.
--   **Atributos recebem valores:** strings com aspas; valores JS com `{}` (detalhado na secção 2).
+Pensa nisto assim:
 
-### JSX vs HTML (comparação rápida)
+- Tu escreves JSX porque é mais simples e legível.
+- O projeto converte isso para JavaScript que o React consegue usar para criar os elementos.
 
-| JSX                      | HTML                     | O que muda                                                        |
-| ------------------------ | ------------------------ | ----------------------------------------------------------------- |
-| `<h1>Olá</h1>`           | `<h1>Olá</h1>`           | Igual na maioria das tags de texto                                |
-| `<img src="..." />`      | `<img src="...">`        | Em JSX as tags sem conteúdo fecham com `/>`                       |
-| `{nome}`                 | _(não existe)_           | JSX permite inserir valores JS dentro do texto                    |
-| `{/* comentário */}`     | `<!-- comentário -->`    | Comentários têm sintaxe diferente                                 |
-| `<>...</>`               | `<div>...</div>`         | Fragmento evita criar uma `<div>` extra                           |
-| `<button onClick={...}>` | `<button onclick="...">` | Eventos usam `camelCase` e recebem funções, não strings           |
-| `<p className="...">`    | `<p class="...">`        | `class` é palavra reservada em JS, por isso muda para `className` |
-| `<label htmlFor="...">`  | `<label for="...">`      | `for` também é palavra reservada, por isso muda para `htmlFor`    |
+---
 
-### Exemplo
+### 1.2 O que é que o React faz com JSX (sem complicar)
+
+Tu escreves:
 
 ```jsx
-const nome = "Rita";
+<h1>Olá</h1>
+```
 
+O React acaba por criar um “elemento React” (um objeto que representa o que deve aparecer no ecrã). Não precisas de decorar o formato interno. O que interessa é:
+
+> JSX é uma forma prática de escrever “o desenho” da interface.
+
+---
+
+### 1.3 JSX é uma expressão (isto é mesmo importante)
+
+Em JavaScript, uma **expressão** é algo que produz um valor.
+
+Exemplos de expressões:
+
+- `2 + 3` (produz `5`)
+- `nome` (produz o valor da variável)
+- `condicao ? "A" : "B"` (produz um texto dependendo da condição)
+
+JSX também é uma expressão. Isso permite coisas como:
+
+- guardar JSX numa variável,
+- devolver JSX no `return`,
+- inserir JSX dentro de outro JSX.
+
+---
+
+### 1.4 Regras base de JSX (as que aparecem logo no início)
+
+- **Um único elemento “por fora” (elemento raiz)**: o `return` tem de devolver **uma** tag que envolva tudo.
+- **Fragmentos** `<>...</>`: servem para envolver sem criar uma `<div>` extra.
+- **Chavetas `{}`**: servem para colocar **expressões JavaScript** dentro do JSX.
+- **Tags sem conteúdo** fecham com `/>`: `<img />`, `<input />`, `<br />`.
+- **Comentários** no JSX: `{/* comentário */}`.
+
+---
+
+### 1.5 Experiência rápida: texto normal vs `{}`
+
+```jsx
+/**
+ * Demonstra a diferença entre texto normal e inserção de JavaScript com {}.
+ */
 function App() {
+    const nome = "Rita";
+    const idade = 17;
+
     return (
         <main>
-            {/* As chavetas permitem inserir valores JS dentro do JSX */}
             <h1>Olá, {nome}</h1>
-            {/* Podemos mostrar o resultado de uma conta */}
-            <p>2 + 3 = {2 + 3}</p>
+            <p>Idade: {idade}</p>
+            <p>Daqui a 1 ano: {idade + 1}</p>
+            <p>{"Isto também é texto, mas veio de uma expressão"}</p>
         </main>
     );
 }
@@ -79,40 +121,21 @@ function App() {
 export default App;
 ```
 
-### Mais exemplos de sintaxe
+O que deves reter:
 
-```jsx
-const nome = "Rita";
-const estaLogado = true;
+- `Olá, Rita` aparece porque `{nome}` é uma expressão.
+- `{idade + 1}` mostra o resultado da conta.
+- As chavetas não servem para “meter texto à toa”. Servem para JavaScript.
 
-function App() {
-    // JSX pode ser guardado numa variável
-    const cabecalho = (
-        <>
-            <h1>Olá, {nome}</h1>
-            {/* Expressão simples dentro de JSX */}
-            <p>2 + 3 = {2 + 3}</p>
-        </>
-    );
+---
 
-    return (
-        <section>
-            {cabecalho}
-            {/* Operador ternário para escolher texto */}
-            <p>{estaLogado ? "Bem-vinda" : "Faz login"}</p>
-        </section>
-    );
-}
-```
+### 1.6 Erros comuns nesta fase
 
-### Erros comuns
+- **Devolver dois elementos soltos** (sem elemento raiz).
+- **Esquecer `/>`** em `<img>` e `<input>`.
+- **Tentar usar `if` dentro do JSX** (o `if` é instrução, não é expressão).
 
--   **Usar `if` diretamente no JSX:** JSX aceita expressões, não instruções. Faz o `if` antes do `return` ou usa `condição ? A : B`.
--   **Devolver dois elementos “soltos”:** o `return` precisa de um elemento pai (uma tag que envolve todas as outras). Usa `<div>` ou `<>...</>`.
--   **Esquecer `/>` em tags sem conteúdo:** `<img>` e `<input>` precisam de `/>` no JSX.
--   **Colocar texto simples entre `{}`:** chavetas só para valores JS. Texto normal escreve-se direto.
-
-### Exemplo de erro e correção
+Exemplo de erro e correção:
 
 ```jsx
 // ERRADO: dois elementos soltos
@@ -123,7 +146,7 @@ return (
 ```
 
 ```jsx
-// CERTO: um elemento pai
+// CERTO: um elemento a envolver tudo
 return (
     <div>
         <h1>Olá</h1>
@@ -132,143 +155,256 @@ return (
 );
 ```
 
-### Boas práticas
+Ou com fragmento:
 
--   Mantém JSX simples e legível.
--   Se a expressão for grande, calcula antes e usa a variável.
--   Usa fragments `<>...</>` quando não precisas de uma `<div>` extra.
+```jsx
+return (
+    <>
+        <h1>Olá</h1>
+        <p>Bem-vindo</p>
+    </>
+);
+```
 
-### Checkpoint
+---
 
--   Porque é que o `return` precisa de um elemento pai?
--   Quando é que usas `{}` dentro do JSX?
+### 1.7 Boas práticas
+
+- Mantém o JSX simples e legível.
+- Se a expressão ficar grande, calcula antes do `return` e usa uma variável.
+- Usa fragmentos quando não precisas mesmo de uma `<div>` extra.
+
+### 1.8 Checkpoint
+
+- Porque é que o `return` precisa de um elemento raiz?
+- Para que servem as chavetas `{}` dentro do JSX?
+- Em que casos usas `<>...</>`?
+
+---
 
 <a id="sec-2"></a>
 
 ## 2. [ESSENCIAL] Regras importantes do JSX
 
-### Modelo mental
+JSX parece HTML, mas tem regras próprias porque está dentro de JavaScript. Estas regras evitam conflitos e deixam o código mais consistente.
 
-JSX parece HTML, mas tem regras próprias para evitar conflitos com JavaScript. Algumas palavras são diferentes, e os atributos seguem o estilo do JS (camelCase).
+### 2.1 Atributos: o que muda do HTML para JSX
 
-### Sintaxe base (mais completa)
+Alguns nomes mudam porque certas palavras têm significado em JavaScript:
 
--   **Nomes diferentes:** `className` em vez de `class`, `htmlFor` em vez de `for`.
--   **Eventos em `camelCase`:** `onClick`, `onChange`, `onMouseEnter`.
--   **Atributos JS com `{}`:** valores dinâmicos usam chavetas, por exemplo `src={fotoUrl}`.
--   **`style` é um objeto:** `style={{ backgroundColor: "tomato" }}` (chaves a dobrar).
--   **Booleans:** `disabled` ou `disabled={true}`; `checked={estado}`.
--   **`data-*` e `aria-*`:** escrevem-se igual ao HTML, por exemplo `data-id="42"`.
--   **Componentes começam por maiúscula:** `<Card />` é componente; `<card>` é visto como HTML.
+- `class` (HTML) → `className` (JSX)
+- `for` (HTML) → `htmlFor` (JSX)
 
-### HTML vs JSX (atributos comuns)
+Tabela rápida:
 
 | HTML                 | JSX                        | Nota                                 |
 | -------------------- | -------------------------- | ------------------------------------ |
-| `class="menu"`       | `className="menu"`         | `class` é palavra reservada em JS    |
-| `for="email"`        | `htmlFor="email"`          | `for` também é palavra reservada     |
-| `onclick="..."`      | `onClick={...}`            | Eventos recebem funções, não strings |
-| `tabindex="0"`       | `tabIndex={0}`             | `camelCase` e valor numérico         |
-| `style="color: red"` | `style={{ color: "red" }}` | `style` é objeto JS                  |
+| `class="menu"`       | `className="menu"`         | `class` tem significado em JS        |
+| `for="email"`        | `htmlFor="email"`          | `for` também tem significado em JS   |
+| `onclick="..."`      | `onClick={...}`            | eventos recebem funções, não strings |
+| `tabindex="0"`       | `tabIndex={0}`             | camelCase e valor numérico           |
+| `style="color: red"` | `style={{ color: "red" }}` | `style` é objeto                     |
 
-### Exemplos comentados
+---
+
+### 2.2 Eventos: `onClick`, `onChange`, …
+
+Em JSX, eventos:
+
+- usam **camelCase** (`onClick`, não `onclick`),
+- recebem **funções** (não texto).
+
+Exemplo:
 
 ```jsx
-function Card() {
+/**
+ * Demonstra um evento simples.
+ */
+function App() {
+    function dizerOla() {
+        alert("Olá!");
+    }
+
     return (
-        <section className="card">
-            {/* htmlFor liga a label ao input */}
-            <label htmlFor="email">Email</label>
-            <input id="email" type="email" />
-            {/* Eventos usam camelCase */}
-            <button onClick={() => alert("Clicaste no botão")}>Enviar</button>
-        </section>
+        <main>
+            <button onClick={dizerOla}>Clica aqui</button>
+        </main>
     );
 }
 
-export default Card;
+export default App;
 ```
 
+Repara:
+
+- `onClick={dizerOla}` passa a função (não a executa logo).
+- Se escreveres `onClick={dizerOla()}`, a função é executada imediatamente (e isso quase nunca é o que queres).
+
+---
+
+### 2.3 `style` em JSX: é um objeto
+
+No HTML podes escrever `style="color: red"`.
+No JSX, `style` recebe um **objeto**:
+
 ```jsx
+/**
+ * Demonstra style com objeto.
+ */
+function Caixa() {
+    const estilos = {
+        backgroundColor: "tomato",
+        padding: 12, // números em CSS normalmente significam px
+        borderRadius: 8,
+    };
+
+    return <div style={estilos}>Caixa com estilo</div>;
+}
+
+export default Caixa;
+```
+
+Regras práticas:
+
+- propriedades em **camelCase** (`backgroundColor`, não `background-color`)
+- valores podem ser texto (`"tomato"`) ou números (`12` → normalmente `12px`)
+
+---
+
+### 2.4 Inserir condições no JSX (sem usar `if` dentro do return)
+
+No JSX podes usar **expressões**. As duas mais comuns são:
+
+#### A) Operador ternário
+
+```jsx
+/**
+ * Mostra uma mensagem dependendo da condição.
+ */
+function App() {
+    const estaLogado = false;
+
+    return (
+        <main>
+            <p>{estaLogado ? "Bem-vindo!" : "Faz login para continuar."}</p>
+        </main>
+    );
+}
+
+export default App;
+```
+
+#### B) `&&` (mostra só se a condição for verdadeira)
+
+```jsx
+/**
+ * Mostra aviso apenas quando ativo é true.
+ */
 function Aviso({ ativo }) {
-    return (
-        <div
-            // style é objeto JS; as propriedades estão em camelCase
-            style={{ backgroundColor: "tomato", padding: "12px" }}
-            // booleano controlado por variável
-            aria-hidden={!ativo}
-        >
-            Atenção: verifica os teus dados.
-        </div>
-    );
+    return <>{ativo && <p>Atenção: verifica os teus dados.</p>}</>;
 }
+
+export default Aviso;
 ```
 
-### Erros comuns
+Regra prática:
 
--   **Usar `class` e ver que o estilo não funciona:** em JSX o certo é `className`.
--   **Escrever `onclick` em vez de `onClick`:** os eventos seguem camelCase.
--   **Escrever `style="..."` como no HTML:** em JSX tens de usar um objeto JS.
--   **Usar nome de componente em minúsculas:** o React interpreta como HTML e não como componente.
+- usa `ternário` quando tens **duas opções**
+- usa `&&` quando queres **mostrar ou não mostrar**
 
-### Boas práticas
+---
 
--   Guarda numa lista as principais diferenças de JSX.
--   Quando der erro, confirma se a tag está bem fechada e se o atributo está correto.
+### 2.5 `data-*` e `aria-*` continuam iguais
 
-### Checkpoint
+Exemplos:
 
--   Qual é a diferença entre `class` e `className`?
--   Porque é que `style` em JSX é um objeto?
+- `data-id="42"`
+- `aria-label="Fechar"`
+
+Isto é útil para acessibilidade e para testes.
+
+---
+
+### 2.6 Componentes começam por maiúscula (mesmo a sério)
+
+- `<Header />` → React entende como **componente**
+- `<header>` → browser entende como **tag HTML**
+
+Se fizeres `<meuComponente />` (minúsculas), o React vai pensar que é uma tag HTML que não existe.
+
+---
+
+### 2.7 Erros comuns (e como os reconhecer)
+
+- `class` em vez de `className` → estilos não aplicam como esperas.
+- `onclick` em vez de `onClick` → o evento não dispara.
+- `style="..."` como no HTML → dá erro ou não funciona.
+- tag mal fechada → erro no terminal a dizer que o JSX está inválido.
+
+### 2.8 Checkpoint
+
+- Porque é que `className` existe?
+- Porque é que `onClick` recebe uma função e não uma string?
+- O que significa `style={{ ... }}` (chaves a dobrar)?
+
+---
 
 <a id="sec-3"></a>
 
 ## 3. [ESSENCIAL] Componentes funcionais e exportação
 
-### Modelo mental
+### 3.1 O que é um componente funcional
 
-Componentes funcionais são **funções que devolvem JSX**. Pensa neles como **peças de LEGO**: cada peça faz uma parte da interface e depois juntas tudo no `App`.
+Um componente funcional é uma **função** que devolve JSX.
 
-### Mini-seção: render = chamar a função
+Pensa em componentes como blocos:
 
--   **Componente é função:** `function Card() { return <div />; }`
--   **Render é chamar a função:** o React chama o componente para obter o JSX.
--   **Re-render é chamar de novo:** quando o estado/props mudam, o React volta a chamar a função e recalcula o JSX.
+- um bloco para o cabeçalho,
+- um bloco para um cartão,
+- um bloco para o rodapé.
 
-Para usares um componente noutro ficheiro, tens de o **exportar** no ficheiro onde foi criado e **importar** onde o queres usar.
+Depois juntas tudo no `App`.
 
-### Sintaxe base (passo a passo)
+---
 
--   **Nome em PascalCase:** `Titulo`, `CardProduto`, `Header`. O React só trata nomes com maiúscula como componentes.
--   **Função que devolve JSX:** sem `return`, não aparece nada no ecrã.
--   **Um componente por ficheiro (recomendado):** facilita a organização.
--   **Exportação:** usa `export default` para o componente principal do ficheiro.
--   **Importação:** usa `import Nome from "./caminho"` no ficheiro que o vai usar.
--   **Uso:** escreve o componente como uma tag `<Titulo />`.
+### 3.2 Regras de nomes (para o React reconhecer)
 
-> **Nota rápida:** se o nome começar por minúscula, o React pensa que é uma tag HTML.
+- nomes de componentes em **PascalCase**: `Header`, `CartaoProduto`, `ListaLinks`
+- ficheiros costumam usar o mesmo nome: `Header.jsx`, `CartaoProduto.jsx`
 
-### Exemplo
+---
+
+### 3.3 Exportar e importar (para usar componentes noutros ficheiros)
+
+O padrão mais comum (e mais simples) é **export default**:
+
+#### Exemplo (componente num ficheiro)
 
 ```jsx
 // src/components/Title.jsx
+
+/**
+ * Mostra o título da página.
+ */
 function Title() {
-    // Um componente é uma função que devolve JSX
     return <h1>Página inicial</h1>;
 }
 
-// export default torna este componente o "principal" do ficheiro
 export default Title;
 ```
+
+#### Usar no App
 
 ```jsx
 // src/App.jsx
 import Title from "./components/Title.jsx";
 
+/**
+ * Componente principal da app.
+ */
 function App() {
     return (
         <main>
-            {/* Usamos o componente como se fosse uma tag HTML */}
             <Title />
         </main>
     );
@@ -277,49 +413,104 @@ function App() {
 export default App;
 ```
 
-### Erros comuns
+---
 
--   **Escrever o componente em minúsculas:** o React acha que é HTML e não chama a função.
--   **Esquecer o `export default`:** o `import` falha ou fica `undefined`.
--   **Não fazer `return`:** o componente não mostra nada.
--   **Caminho errado no `import`:** erro de ficheiro não encontrado.
+### 3.4 O que significa “render” aqui
 
-### Boas práticas
+- o React **chama** o componente para obter JSX.
+- quando algo muda (mais tarde: estado/props), o React volta a chamar a função.
 
--   Um componente por ficheiro (regra simples e segura).
--   Usa nomes que expliquem a função do componente.
--   Mantém o componente pequeno; quando cresce muito, divide-o.
+Não é “executar uma vez e acabou”. É normal o componente correr várias vezes.
 
-### Checkpoint
+---
 
--   Porque é que os componentes têm de começar por maiúscula?
--   O que faz o `export default`?
+### 3.5 Exportações alternativas (para quando precisares)
+
+Às vezes queres exportar mais do que uma coisa do mesmo ficheiro. Aí usas **named exports**:
+
+```jsx
+// src/components/Texto.jsx
+
+export function Titulo() {
+    return <h2>Título</h2>;
+}
+
+export function Paragrafo() {
+    return <p>Texto</p>;
+}
+```
+
+E importas assim:
+
+```jsx
+import { Titulo, Paragrafo } from "./components/Texto.jsx";
+```
+
+Para já, o mais comum no início é **um componente por ficheiro com export default**.
+
+---
+
+### 3.6 Erros comuns
+
+- componente com nome minúsculo → o React trata como HTML.
+- esquecer `export default` → o import falha.
+- caminho errado no import → erro a dizer que não encontrou o ficheiro.
+- esquecer `return` → não aparece nada no ecrã.
+
+### 3.7 Boas práticas
+
+- Um componente por ficheiro (regra simples e segura).
+- Nomes claros (evita `Teste`, `Coisa`, `Div`).
+- Se um componente crescer muito, divide em dois.
+
+### 3.8 Checkpoint
+
+- Porque é que os componentes começam por maiúscula?
+- Qual é a diferença entre `export default` e `export` (named)?
+
+---
 
 <a id="sec-4"></a>
 
 ## 4. [EXTRA] Componentes pequenos e composição visual
 
-### Modelo mental
+### 4.1 O que é “compor” uma página
 
-Criar componentes pequenos facilita a leitura e reutilização. Em vez de uma página enorme, partes em blocos e montas a página como um puzzle.
+Compor uma página é montar a interface com componentes pequenos, em vez de ter um ficheiro gigante.
 
-### Sintaxe base (passo a passo)
+Regra prática:
 
--   **Divide a página em áreas:** cabeçalho, conteúdo, rodapé, barra lateral.
--   **Cria um componente por área:** `Header`, `Main`, `Footer`.
--   **Junta tudo no `App`:** o `App` é o componente que organiza a página.
--   **Evita repetição:** se uma parte aparece várias vezes, transforma em componente.
--   **Personalização:** quando precisares de mudar conteúdo, vais usar props (ver ficheiro 03).
+- se uma parte se repete ou faz sentido como “bloco”, vira componente.
 
-### Exemplo
+Exemplos de blocos comuns:
+
+- `Header`, `Footer`
+- `Cartao`, `Botao`, `Avatar`
+- `Sidebar`, `Menu`, `ListaLinks`
+
+---
+
+### 4.2 Mini-projeto guiado: “Página de perfil” (só UI)
+
+Objetivo: criar 4 componentes e juntá-los no `App`:
+
+- `Header`
+- `Avatar`
+- `CartaoPerfil`
+- `Footer`
+
+#### A) `Header.jsx`
 
 ```jsx
 // src/components/Header.jsx
+
+/**
+ * Cabeçalho simples.
+ */
 function Header() {
-    // Componente simples para o topo da página
     return (
         <header>
-            <h1>Minha App</h1>
+            <h1>Perfil</h1>
         </header>
     );
 }
@@ -327,13 +518,67 @@ function Header() {
 export default Header;
 ```
 
+#### B) `Avatar.jsx`
+
+```jsx
+// src/components/Avatar.jsx
+
+/**
+ * Mostra uma imagem de perfil.
+ * Nota: por agora o URL é fixo. Mais tarde vais passar por props.
+ */
+function Avatar() {
+    return (
+        <img
+            src="https://i.pravatar.cc/120"
+            alt="Foto de perfil"
+            width="120"
+            height="120"
+            style={{ borderRadius: 999 }}
+        />
+    );
+}
+
+export default Avatar;
+```
+
+#### C) `CartaoPerfil.jsx`
+
+```jsx
+// src/components/CartaoPerfil.jsx
+import Avatar from "./Avatar.jsx";
+
+/**
+ * Cartão com informação de perfil.
+ */
+function CartaoPerfil() {
+    const nome = "Rita";
+    const curso = "Informática e Gestão";
+
+    return (
+        <section className="card">
+            <Avatar />
+            <h2>{nome}</h2>
+            <p>{curso}</p>
+        </section>
+    );
+}
+
+export default CartaoPerfil;
+```
+
+#### D) `Footer.jsx`
+
 ```jsx
 // src/components/Footer.jsx
+
+/**
+ * Rodapé simples.
+ */
 function Footer() {
-    // Componente simples para o rodapé
     return (
         <footer>
-            <small>© 2026 Escola X</small>
+            <small>© 2026 - React (12.º ano)</small>
         </footer>
     );
 }
@@ -341,18 +586,23 @@ function Footer() {
 export default Footer;
 ```
 
+#### E) Montar tudo no `App.jsx`
+
 ```jsx
 // src/App.jsx
 import Header from "./components/Header.jsx";
+import CartaoPerfil from "./components/CartaoPerfil.jsx";
 import Footer from "./components/Footer.jsx";
 
+/**
+ * Página composta por componentes pequenos.
+ */
 function App() {
     return (
         <div>
-            {/* A página é composta por vários componentes pequenos */}
             <Header />
             <main>
-                <p>Conteúdo principal</p>
+                <CartaoPerfil />
             </main>
             <Footer />
         </div>
@@ -362,97 +612,81 @@ function App() {
 export default App;
 ```
 
-### Erros comuns
+---
 
--   Criar componentes gigantes e difíceis de ler.
--   Criar componentes demasiado pequenos sem necessidade (ex.: um componente só para um `<span>`).
--   Repetir o mesmo bloco em vários sítios em vez de o transformar num componente.
--   Criar componentes com nomes confusos (`Coisa`, `Teste1`, `Div`).
+### 4.3 Erros comuns nesta fase
 
-### Boas práticas
+- Fazer um componente gigante com tudo lá dentro (fica difícil de ler e de corrigir).
+- Criar componentes demasiado pequenos sem necessidade (ex.: um componente só para um `<span>`).
+- Repetir blocos iguais em vários sítios em vez de criar um componente reutilizável.
 
--   Se um componente ultrapassar muitas linhas, divide.
--   Mantém cada componente focado numa única responsabilidade.
--   Usa uma pasta `components` para manter tudo organizado.
+### 4.4 Boas práticas
 
-### Checkpoint
+- Pastas e nomes consistentes: `src/components/...`
+- Cada componente com uma responsabilidade clara.
+- Se uma parte precisa de “variar”, normalmente é sinal de que vais precisar de **props** (ficheiro 03).
 
--   Que partes de uma página costumam virar componentes?
--   Qual é o benefício principal da composição?
+### 4.5 Checkpoint
+
+- Qual é a vantagem de ter componentes pequenos?
+- Quando é que faz sentido criar um componente novo?
+
+---
 
 <a id="exercicios"></a>
 
 ## Exercícios - JSX e componentes
 
-1. Cria um ficheiro novo, chamado `Saudacao.jsx`. Dentro, cria um componente chamado Saudacao, que devolve um `<h1>` com a mensagem “Olá, Mundo!”.
-2. Importa o componente `Saudacao` no `App` e coloca a tag `<Saudacao />` dentro do `return` do `App`. Abre a página e confirma que aparece.
-3. Cria um ficheiro e componente `Cartao` que devolve um `<div>` com um título `<h2>` e um parágrafo `<p>`. Importa e usa no `App`.
-4. No componente `Cartao`, adiciona uma imagem e um comentário em JSX. Garante que a imagem é uma tag auto-fechada e que o `return` continua com um único elemento pai.
-5. Escreve um `return` com dois elementos “soltos” (ex.: `<h1>` e `<p>`). Corrige a seguir colocando um elemento pai à volta.
-   Por exemplo:
+> Faz os exercícios dentro do teu projeto Vite + React. Se um exercício der erro, lê a mensagem e tenta descobrir a causa (tag mal fechada, import errado, etc.).
 
-```jsx
-return (
-    <h1>Olá</h1>
-    <p>Bem-vindo</p>
-);
-```
+1. **Chavetas `{}`**
+    - Cria `const nome = "Ana"` no `App` e mostra “Olá, Ana” no `<h1>`.
 
-Corrige para:
+2. **Elemento raiz**
+    - Escreve um `return` com `<h1>` e `<p>` soltos (para dar erro).
+    - Corrige com `<div>` ou `<>...</>`.
 
-```jsx
-return (
-    <div>
-        <h1>Olá</h1>
-        <p>Bem-vindo</p>
-    </div>
-);
-```
+3. **Tag auto-fechada**
+    - Adiciona uma imagem com `<img ... />` (garante o `/>`).
 
-6. Escolhe um componente e adiciona uma classe CSS. Troca `class` por `className` e confirma no HTML final.
-7. Cria um botão com `onClick`. Quando clicares, mostra um `alert` com o teu nome.
-   Por exemplo:
+4. **className**
+    - Cria uma `<div className="card">...</div>`.
+    - Confirma no inspector do browser que aparece `class="card"` no HTML final.
 
-```jsx
-<button onClick={() => alert("O meu nome é Ana")}>Clica aqui</button>
-```
+5. **Evento**
+    - Cria um botão com `onClick` que faz `alert("Clicaste!")`.
 
-8. Divide a página em `Header`, `Main` e `Footer` e monta tudo no `App`. Cria um ficheiro para cada componente e importa-os no `App`.
-   Por exemplo:
+6. **style como objeto**
+    - Cria um `<p>` com `style={{ color: "tomato", fontWeight: 700 }}`.
 
-```jsx
-// Header.jsx
-function Header() {
-    return (
-        <header>
-            <h1>Bem-vindo à minha página</h1>
-        </header>
-    );
-}
-export default Header;
-```
+7. **Condição com ternário**
+    - Cria `const estaLogado = true/false` e mostra uma mensagem diferente dependendo do valor.
 
-```jsx
-// App.jsx
-import Header from "./Header.jsx";
-function App() {
-    return (
-        <div>
-            <Header />
-        </div>
-    );
-}
-export default App;
-```
+8. **Criar e usar um componente**
+    - Cria `src/components/Saudacao.jsx` com `<h2>Olá!</h2>` e usa no `App`.
 
-9. Adiciona um comentário em JSX a explicar o que faz um bloco específico.
-10. Cria um componente `ListaLinks` com 3 links simples e um título antes da lista.
+9. **Header / Main / Footer**
+    - Divide a página em `Header.jsx`, `Main.jsx` e `Footer.jsx`.
+    - Importa e monta tudo no `App`.
+
+10. **Diagnóstico (import/export)**
+
+- Remove `export default` de um componente de propósito e lê o erro.
+- Corrige e confirma que volta a funcionar.
+
+11. **Mini-projeto**
+
+- Faz a “Página de perfil” da secção 4 e altera:
+    - nome,
+    - curso,
+    - texto do footer.
 
 <a id="changelog"></a>
 
 ## Changelog
 
--   2026-01-11: criação do ficheiro.
--   2026-01-12: detalhe extra nas secções 3 e 4 e exemplos adicionais.
--   2026-01-12: exercícios iniciais reescritos em formato passo a passo.
--   2026-01-12: mini-seção sobre render e re-render em componentes funcionais.
+- 2026-01-11: criação do ficheiro.
+- 2026-01-12: detalhe extra nas secções 3 e 4 e exemplos adicionais.
+- 2026-01-12: exercícios iniciais reescritos em formato passo a passo.
+- 2026-01-12: mini-seção sobre render e re-render em componentes funcionais.
+- 2026-01-26: expansão didática (JSX como expressão, condições, style como objeto com regras práticas, export default vs named export, mini-projeto guiado e exercícios com diagnóstico).

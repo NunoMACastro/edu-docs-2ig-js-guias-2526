@@ -1,82 +1,402 @@
-# React.js (11.º Ano) - 03 · Props e composição
+# React.js (12.º Ano) - 03 · Props e composição
 
 > **Objetivo deste ficheiro**
-> Aprender a passar dados para componentes através de props.
-> Usar props com vários tipos de dados e entender que são imutáveis.
-> Compor componentes usando `children`.
+>
+> - Perceber o que são **props** e como passam dados do **pai → filho**.
+> - Aprender a escrever componentes **reutilizáveis**, com uma “interface” clara (as props).
+> - Usar **children** para composição (componentes dentro de componentes).
+> - Passar **funções por props** (o filho avisa o pai) e ligar isto a eventos.
 
 ---
 
 ## Índice
 
--   [0. Como usar este ficheiro](#sec-0)
--   [1. [ESSENCIAL] Props como entradas de um componente](#sec-1)
--   [2. [ESSENCIAL] Props com tipos diferentes](#sec-2)
--   [3. [ESSENCIAL] Callbacks e fluxo de dados](#sec-3)
--   [4. [ESSENCIAL] Children e composição](#sec-4)
--   [5. [EXTRA] Props opcionais e valores por defeito](#sec-5)
--   [Exercícios - Props e composição](#exercicios)
--   [Changelog](#changelog)
+- [0. Como usar este ficheiro](#sec-0)
+- [1. [ESSENCIAL] O que são props (dados do pai para o filho)](#sec-1)
+- [2. [ESSENCIAL] Destructuring e valores por defeito](#sec-2)
+- [3. [ESSENCIAL] children e composição](#sec-3)
+- [4. [ESSENCIAL] Funções como props (o filho avisa o pai)](#sec-4)
+- [5. [EXTRA] Desenhar componentes reutilizáveis (a “API” das props)](#sec-5)
+- [6. [EXTRA] Prop drilling (quando as props passam por muitos níveis)](#sec-6)
+- [Exercícios - Props e composição](#exercicios)
+- [Changelog](#changelog)
 
 <a id="sec-0"></a>
 
 ## 0. Como usar este ficheiro
 
--   **ESSENCIAL vs EXTRA:** domina as props básicas antes de ir ao [EXTRA].
--   **Como estudar:** cria vários componentes e muda os dados passados.
--   **Ligações:** revê JSX e componentes em `02_jsx_e_componentes.md` se tiveres dúvidas.
+- **Ordem recomendada:** lê a teoria e faz logo as experiências pequenas (para veres o comportamento no browser).
+- **Regra de ouro:** props são **entradas** do componente (como parâmetros de uma função).
+- **Ligações:**
+    - JSX e criação de componentes: `02_jsx_e_componentes.md`
+    - Estado e eventos (onde vais usar callbacks): `04_estado_e_eventos.md`
+
+---
 
 <a id="sec-1"></a>
 
-## 1. [ESSENCIAL] Props como entradas de um componente
+## 1. [ESSENCIAL] O que são props (dados do pai para o filho)
 
-### Modelo mental
+### 1.1 Modelo mental (o mais importante)
 
-Props são como **entradas** de um componente, tal como os **parâmetros de uma função**. Um componente recebe valores e usa-os para desenhar a interface. A ideia principal é simples:
+Pensa num componente como uma função:
 
--   O **componente pai** decide os dados.
--   O **componente filho** recebe e usa esses dados.
--   As props são **só de leitura**: o componente não deve alterar o que recebeu.
+- **entra** informação
+- **sai** JSX (o que aparece no ecrã)
 
-Se precisares de mudar valores ao longo do tempo, isso é outra conversa (state), mas aqui queremos dominar o básico: **passar dados para o componente**.
+Em React, essa informação que entra chama-se **props**.
 
-### Sintaxe base (passo a passo)
+- O componente **pai** escreve o componente **filho** no JSX e passa-lhe props.
+- O componente **filho** recebe essas props e usa-as para calcular o seu JSX.
 
--   **Passar props no JSX:** escreves atributos no componente, por exemplo `<Card titulo="..." />`.
--   **Receber props na função:** a função recebe um objeto `props`.
--   **Usar props no JSX:** acedes com `props.nomeDaProp`.
--   **Destructuring (opcional):** podes abrir as props logo no parâmetro: `function Card({ titulo }) {}`.
--   **Nomes consistentes:** se passas `titulo`, tens de ler `titulo` (não `title`).
--   **Props são só de leitura:** não faças `props.titulo = "..."`.
+Mini-diagrama:
 
-> **Nota:** props são sensíveis a maiúsculas/minúsculas. `titulo` é diferente de `Titulo`.
+```
+Pai (tem dados) → passa props → Filho (mostra UI)
+```
 
-### Exemplo
+Regra essencial:
+
+> As props são **só de leitura** no filho. O filho **não deve** alterar props.
+
+Porquê?
+
+- Porque o dono dos dados é o **pai**.
+- O React funciona muito bem quando os dados têm “dono” claro.
+
+---
+
+### 1.2 Exemplo mínimo: `Saudacao`
+
+#### A) Filho: recebe props
+
+Cria `src/components/Saudacao.jsx`:
+
+```jsx
+// src/components/Saudacao.jsx
+
+/**
+ * Saudacao
+ * Mostra uma mensagem de boas-vindas.
+ *
+ * @param {Object} props
+ * @param {string} props.nome - Nome da pessoa.
+ * @returns {JSX.Element}
+ */
+function Saudacao(props) {
+    return <p>Olá, {props.nome}!</p>;
+}
+
+export default Saudacao;
+```
+
+#### B) Pai: passa props
+
+No `src/App.jsx`:
+
+```jsx
+// src/App.jsx
+import Saudacao from "./components/Saudacao.jsx";
+
+/**
+ * App
+ * Componente principal onde usamos o componente Saudacao.
+ */
+function App() {
+    return (
+        <main>
+            <h1>Props a funcionar</h1>
+            <Saudacao nome="Rita" />
+            <Saudacao nome="Diogo" />
+        </main>
+    );
+}
+
+export default App;
+```
+
+O que estás a fazer:
+
+- O `App` está a dizer: “Saudacao, mostra ‘Olá’ para esta pessoa.”
+- O `Saudacao` usa `props.nome` para escrever no ecrã.
+
+---
+
+### 1.3 Experiência rápida: props mudam → UI muda
+
+Muda no `App`:
+
+```jsx
+<Saudacao nome="Rita" />
+```
+
+para
+
+```jsx
+<Saudacao nome="Rita Silva" />
+```
+
+Guarda. O ecrã muda imediatamente.
+Isto mostra a ideia central: a UI é calculada a partir dos dados.
+
+---
+
+### 1.4 Props podem ser textos, números, booleanos, objetos…
+
+**Atenção às chavetas `{}`**:
+
+- texto direto: `"Rita"` (fica entre aspas)
+- número/boolean/expressão: `{17}`, `{true}`, `{2 + 3}`
+
+Exemplo:
+
+```jsx
+import Saudacao from "./components/Saudacao.jsx";
+
+/**
+ * App
+ * Demonstra props com diferentes tipos.
+ */
+function App() {
+    const idade = 17;
+    const estaOnline = true;
+
+    return (
+        <main>
+            <Saudacao nome="Rita" />
+            <p>Idade: {idade}</p>
+            <p>Online: {estaOnline ? "Sim" : "Não"}</p>
+        </main>
+    );
+}
+
+export default App;
+```
+
+Erro comum:
+
+```jsx
+// ERRADO: isto é texto "17" e não número 17
+<Aluno idade="17" />
+```
+
+Certo:
+
+```jsx
+<Aluno idade={17} />
+```
+
+---
+
+### 1.5 Erros comuns (para reconhecer rápido)
+
+- **Esquecer aspas em texto:** `<Saudacao nome=Rita />` (erro) → deve ser `"Rita"`
+- **Escrever uma expressão sem `{}`:** `nome + "!"` tem de estar dentro de `{}`
+- **Tentar alterar props no filho:** `props.nome = "..."` (não faças isto)
+
+### 1.6 Checkpoint
+
+- O que são props?
+- Quem é “dono” dos dados: pai ou filho?
+- Porque é que props não devem ser alteradas no filho?
+
+---
+
+<a id="sec-2"></a>
+
+## 2. [ESSENCIAL] Destructuring e valores por defeito
+
+Quando um componente usa várias props, escrever `props.algo` muitas vezes torna-se chato.
+Uma forma comum é usar **destructuring**.
+
+### 2.1 Destructuring (forma mais usada)
+
+Em vez de:
+
+```jsx
+function Aluno(props) {
+    return (
+        <p>
+            {props.nome} - {props.idade}
+        </p>
+    );
+}
+```
+
+Fazes:
+
+```jsx
+/**
+ * Aluno
+ *
+ * @param {Object} props
+ * @param {string} props.nome
+ * @param {number} props.idade
+ */
+function Aluno({ nome, idade }) {
+    return (
+        <p>
+            {nome} - {idade}
+        </p>
+    );
+}
+
+export default Aluno;
+```
+
+Isto significa:
+
+- “vai buscar `nome` e `idade` lá de dentro das props”
+- e cria variáveis com esses nomes
+
+---
+
+### 2.2 Valores por defeito (default)
+
+Às vezes uma prop é opcional. Podes dar um valor por defeito na própria assinatura:
+
+```jsx
+/**
+ * Badge
+ * Mostra um rótulo pequeno.
+ *
+ * @param {Object} props
+ * @param {string} [props.texto="Novo"] - Texto do badge.
+ */
+function Badge({ texto = "Novo" }) {
+    return <span className="badge">{texto}</span>;
+}
+
+export default Badge;
+```
+
+Uso:
+
+```jsx
+<Badge />              // mostra "Novo"
+<Badge texto="Urgente" />  // mostra "Urgente"
+```
+
+Regra prática:
+
+- usa default quando existe um “comportamento normal” se a prop não vier.
+
+---
+
+### 2.3 Props “existe / não existe” (booleanos)
+
+Em JSX, podes passar `true` só por escrever a prop:
+
+```jsx
+<Cartao destacado />
+```
+
+Isto é o mesmo que:
+
+```jsx
+<Cartao destacado={true} />
+```
+
+E no componente:
+
+```jsx
+function Cartao({ destacado = false }) {
+    return (
+        <div className={destacado ? "card card--destacado" : "card"}>
+            Conteúdo
+        </div>
+    );
+}
+```
+
+Erro comum:
+
+- pensar que `destacado="false"` é falso… mas é texto, e texto conta como verdadeiro.
+- se quiseres falso, faz `destacado={false}` ou não passes a prop.
+
+---
+
+### 2.4 Checkpoint
+
+- O que é destructuring de props?
+- Para que servem valores por defeito?
+- Qual é a diferença entre `destacado` e `destacado="false"`?
+
+---
+
+<a id="sec-3"></a>
+
+## 3. [ESSENCIAL] children e composição
+
+### 3.1 O que é `children`
+
+Quando escreves isto:
+
+```jsx
+<Cartao>
+    <p>Olá!</p>
+</Cartao>
+```
+
+Tudo o que está entre a abertura e o fecho (`<p>Olá!</p>`) chama-se **children**.
+
+Ou seja:
+
+- `children` é o “conteúdo” que o pai mete dentro do componente.
+
+Isto é super útil para criar componentes tipo:
+
+- `Card`, `Modal`, `Layout`, `Painel`, `Botao`
+
+---
+
+### 3.2 Exemplo: `Card` reutilizável
+
+Cria `src/components/Card.jsx`:
 
 ```jsx
 // src/components/Card.jsx
-function Card(props) {
-    // O componente usa props para mostrar dados dinâmicos
-    return (
-        <article>
-            <h2>{props.titulo}</h2>
-            <p>{props.descricao}</p>
-        </article>
-    );
+
+/**
+ * Card
+ * Um contentor reutilizável que mostra o que estiver lá dentro.
+ *
+ * @param {Object} props
+ * @param {React.ReactNode} props.children - Conteúdo colocado dentro do Card.
+ */
+function Card({ children }) {
+    return <section className="card">{children}</section>;
 }
 
 export default Card;
 ```
 
+E no `App.jsx`:
+
 ```jsx
-// src/App.jsx
 import Card from "./components/Card.jsx";
 
+/**
+ * App
+ * Demonstra composição com children.
+ */
 function App() {
     return (
         <main>
-            {/* Passamos os dados para o componente */}
-            <Card titulo="Curso Profissional" descricao="Módulo de React" />
+            <h1>children e composição</h1>
+
+            <Card>
+                <h2>Primeiro card</h2>
+                <p>Este conteúdo veio do pai.</p>
+            </Card>
+
+            <Card>
+                <h2>Segundo card</h2>
+                <ul>
+                    <li>Item A</li>
+                    <li>Item B</li>
+                </ul>
+            </Card>
         </main>
     );
 }
@@ -84,374 +404,314 @@ function App() {
 export default App;
 ```
 
-```jsx
-// src/components/Card.jsx
-function Card({ titulo, descricao }) {
-    // Destructuring: escreves as props diretamente
-    return (
-        <article>
-            <h2>{titulo}</h2>
-            <p>{descricao}</p>
-        </article>
-    );
-}
-```
+O que aprendeste aqui:
 
-### Erros comuns
+- O `Card` não precisa de saber que conteúdo tem.
+- Ele só dá a “moldura” (o container).
+- O pai decide o conteúdo.
 
--   **Tentar alterar `props.titulo`:** props são só de leitura.
--   **Passar uma prop e ler outra:** `titulo` não é o mesmo que `title`.
--   **Esquecer de passar props:** o componente recebe `undefined`.
--   **Esquecer as chavetas:** ao mostrar a prop, tem de ser `{props.titulo}`.
+---
 
-### Boas práticas
+### 3.3 Experiência rápida: o `Card` serve para tudo
 
--   Usa nomes de props claros e consistentes.
--   Mantém o componente focado em mostrar os dados.
--   Se uma prop tiver um nome estranho, renomeia no pai e no filho ao mesmo tempo.
+Troca o conteúdo dentro do `<Card>...</Card>`.
+O `Card` continua a funcionar porque ele não depende do conteúdo.
+Isto é reutilização a sério.
 
-### Checkpoint
+---
 
--   Porque é que props são só de leitura?
--   Quando é que faz sentido usar destructuring?
+### 3.4 Erros comuns
 
-<a id="sec-2"></a>
+- Esquecer o `children` no componente e depois “não aparece nada”.
+- Confundir `children` com props normais (children é só um nome especial para conteúdo interno).
 
-## 2. [ESSENCIAL] Props com tipos diferentes
+### 3.5 Checkpoint
 
-### Modelo mental
+- O que é `children`?
+- Qual é a vantagem de `Card` usar `children` em vez de ter texto fixo?
 
-Props não são só texto. Podes passar **números**, **booleanos**, **arrays**, **objetos** e até **funções**. A regra principal é:
-
--   Strings vão entre aspas.
--   Tudo o que é JavaScript vai entre chavetas `{}`.
-
-### Sintaxe base (passo a passo)
-
--   **Texto:** `titulo="React"` (aspas).
--   **Número:** `idade={17}` (chavetas).
--   **Booleano:** `ativo={true}` ou só `ativo` (equivale a true).
--   **Array:** `notas={[14, 16, 18]}`.
--   **Objeto:** `endereco={{ cidade: "Lisboa" }}`.
--   **Função:** `onClicar={handleClick}` (vamos aprofundar em eventos mais à frente).
-
-### Tabela rápida de tipos
-
-| Tipo de prop | Como passar no JSX                | Exemplo                      |
-| ------------ | --------------------------------- | ---------------------------- |
-| Texto        | `nome="Ana"`                      | `titulo="React"`             |
-| Número       | `idade={17}`                      | `preco={9.99}`               |
-| Booleano     | `ativo={true}`                    | `inscrito`                   |
-| Array        | `notas={[14, 16]}`                | `tags={["UI", "JSX"]}`       |
-| Objeto       | `endereco={{ cidade: "Lisboa" }}` | `config={{ tema: "claro" }}` |
-
-### Exemplo
-
-```jsx
-// src/components/Perfil.jsx
-function Perfil(props) {
-    // Usamos vários tipos de props no mesmo componente
-    return (
-        <section>
-            <h2>{props.nome}</h2>
-            <p>Idade: {props.idade}</p>
-            {/* Booleanos podem controlar texto */}
-            <p>Inscrito: {props.inscrito ? "Sim" : "Não"}</p>
-            {/* Arrays podem ser mostrados com join */}
-            <p>Tags: {props.tags.join(", ")}</p>
-        </section>
-    );
-}
-
-export default Perfil;
-```
-
-```jsx
-// src/App.jsx
-import Perfil from "./components/Perfil.jsx";
-
-function App() {
-    return (
-        <main>
-            {/* Passamos número, booleano e array com chavetas */}
-            <Perfil
-                nome="Marco"
-                idade={17}
-                inscrito={true}
-                tags={["React", "JSX"]}
-            />
-        </main>
-    );
-}
-
-export default App;
-```
-
-### Erros comuns
-
--   **Esquecer as chavetas em números e booleanos:** `idade="17"` vira texto.
--   **Passar um objeto e alterar dentro do componente:** continua a ser alteração de props.
--   **Usar `true/false` como texto:** `ativo="true"` é texto, não booleano.
-
-### Boas práticas
-
--   Confirma sempre o nome e o tipo de cada prop.
--   Quando a prop é opcional, garante um valor seguro.
--   Se o dado for complexo, passa só o que é necessário (evita objetos gigantes).
-
-### Checkpoint
-
--   Em que casos usas chavetas `{}` ao passar props?
--   O que acontece se passares `ativo="true"`?
-
-<a id="sec-3"></a>
-
-## 3. [ESSENCIAL] Callbacks e fluxo de dados
-
-### Modelo mental
-
-No React, **dados descem** por props e **ações sobem** por callbacks.
-
--   **Dados descem:** o pai passa informação para o filho.
--   **Ações sobem:** o filho chama uma função do pai para pedir mudanças.
--   **Levantar estado:** se dois filhos precisam do mesmo dado, o estado sobe para o pai.
-
-Pensa assim: o componente pai controla o estado, e os filhos pedem mudanças através de funções.
-
-### Sintaxe base (passo a passo)
-
--   **O pai guarda o estado.**
--   **O pai cria uma função que altera o estado.**
--   **O pai passa a função ao filho como prop.**
--   **O filho chama a função quando o utilizador interage.**
-
-### Exemplo (levantar estado)
-
-```jsx
-// src/App.jsx
-import { useState } from "react";
-import Editor from "./components/Editor.jsx";
-import Preview from "./components/Preview.jsx";
-
-function App() {
-    const [texto, setTexto] = useState("");
-
-    function atualizarTexto(novoTexto) {
-        setTexto(novoTexto);
-    }
-
-    return (
-        <main>
-            {/* Dados descem */}
-            <Editor texto={texto} onTextoChange={atualizarTexto} />
-            <Preview texto={texto} />
-        </main>
-    );
-}
-
-export default App;
-```
-
-```jsx
-// src/components/Editor.jsx
-function Editor({ texto, onTextoChange }) {
-    return (
-        <div>
-            <label htmlFor="texto">Texto</label>
-            <input
-                id="texto"
-                value={texto}
-                onChange={(e) => onTextoChange(e.target.value)}
-            />
-        </div>
-    );
-}
-
-export default Editor;
-```
-
-```jsx
-// src/components/Preview.jsx
-function Preview({ texto }) {
-    return <p>Pré-visualização: {texto || "—"}</p>;
-}
-
-export default Preview;
-```
-
-### Erros comuns
-
--   Tentar alterar uma prop diretamente no filho.
--   Criar estado duplicado em dois componentes que precisam do mesmo dado.
--   Esquecer de passar o callback e ficar sem resposta ao clicar/escrever.
-
-### Boas práticas
-
--   Mantém o estado no componente mais alto que precisa dele.
--   Dá nomes claros aos callbacks (`onTextoChange`, `onGuardar`, `onSelecionar`).
-
-### Checkpoint
-
--   O que significa “dados descem, ações sobem”?
--   Quando é que faz sentido levantar o estado?
+---
 
 <a id="sec-4"></a>
 
-## 4. [ESSENCIAL] Children e composição
+## 4. [ESSENCIAL] Funções como props (o filho avisa o pai)
 
-### Modelo mental
+Até agora, props foram “dados” (texto, números).
+Mas também podes passar **funções** por props.
 
-`children` é o **conteúdo que colocas dentro de um componente**. Isto permite criar componentes “contentores” que envolvem outros, por exemplo cartões, painéis ou secções.
+Isto é uma das ideias mais importantes do React:
 
-Imagina um componente `<Painel>` que desenha uma caixa com sombra. Tudo o que estiver entre `<Painel> ... </Painel>` é o `children`.
+- o pai passa uma função,
+- o filho chama essa função quando acontece algo (ex.: clique).
 
-### Sintaxe base (passo a passo)
+Mini-diagrama:
 
--   **No componente:** usa `props.children` para mostrar o conteúdo interno.
--   **No JSX:** escreve o conteúdo entre as tags do componente.
--   **O conteúdo pode ser texto, JSX ou outros componentes.**
--   **Se não passares nada, `children` é `undefined`.**
-
-### Exemplo
-
-```jsx
-// src/components/Painel.jsx
-function Painel(props) {
-    return (
-        <section className="painel">
-            {/* Aqui entram os elementos colocados dentro do componente */}
-            {props.children}
-        </section>
-    );
-}
-
-export default Painel;
+```
+Pai cria função → passa ao filho → filho chama → pai reage (muda estado, etc.)
 ```
 
-```jsx
-// src/App.jsx
-import Painel from "./components/Painel.jsx";
+> Isto liga diretamente ao ficheiro 04 (estado e eventos), porque normalmente o pai vai fazer `setState(...)` dentro da função.
 
-function App() {
-    return (
-        <main>
-            {/* Tudo o que está dentro vira children */}
-            <Painel>
-                <h2>Notícias</h2>
-                <p>Conteúdo dentro do painel.</p>
-            </Painel>
-        </main>
-    );
-}
+---
 
-export default App;
-```
+### 4.1 Exemplo: botão que “avisa” o pai
+
+Cria `src/components/Botao.jsx`:
 
 ```jsx
 // src/components/Botao.jsx
-function Botao(props) {
-    return (
-        <button className="botao">
-            {/* children permite escolher o texto do botão ao usar o componente */}
-            {props.children}
-        </button>
-    );
-}
-```
 
-### Erros comuns
-
--   **Esquecer de renderizar `props.children`:** o conteúdo passado não aparece.
--   **Usar `children` quando o componente devia ter props específicas:** por exemplo, um `Avatar` precisa de `foto` e `nome`.
--   **Misturar responsabilidades:** usar `children` para tudo torna o componente confuso.
-
-### Boas práticas
-
--   Usa `children` para componentes genéricos (ex.: Card, Painel).
--   Mantém o conteúdo interno simples e organizado.
--   Se precisares de algo fixo + conteúdo, combina props com `children`.
-
-### Checkpoint
-
--   O que é `children` numa frase?
--   Quando é que `children` é melhor do que uma prop específica?
-
-<a id="sec-5"></a>
-
-## 5. [EXTRA] Props opcionais e valores por defeito
-
-### Modelo mental
-
-Algumas props podem ser opcionais. Quando faltam, o componente deve mostrar algo aceitável para evitar `undefined` no ecrã.
-
-### Sintaxe base (passo a passo)
-
--   **Valor por defeito no parâmetro:** `function Botao({ texto = "Clicar" }) { ... }`
--   **Fallback simples no JSX:** `const textoFinal = texto ?? "Clicar"`
--   **Evita esconder erros:** usa defaults quando faz sentido, não para tudo.
-
-### Exemplo
-
-```jsx
-// src/components/Botão.jsx
-function Botao({ texto = "Clicar" }) {
-    // Se não vier texto, usa o valor por defeito
-    return <button>{texto}</button>;
+/**
+ * Botao
+ * Um botão reutilizável que chama a função onAcao quando é clicado.
+ *
+ * @param {Object} props
+ * @param {string} props.texto - Texto do botão.
+ * @param {Function} props.onAcao - Função chamada no clique.
+ */
+function Botao({ texto, onAcao }) {
+    return <button onClick={onAcao}>{texto}</button>;
 }
 
 export default Botao;
 ```
 
+E no `App.jsx`:
+
 ```jsx
-// src/components/Avatar.jsx
-function Avatar({ nome, foto }) {
-    // Se não vier foto, usamos uma imagem genérica
-    const fotoFinal = foto ?? "https://via.placeholder.com/80";
+import Botao from "./components/Botao.jsx";
+
+/**
+ * App
+ * Demonstra uma função passada por props.
+ */
+function App() {
+    function dizerOla() {
+        alert("Olá!");
+    }
 
     return (
-        <figure>
-            <img src={fotoFinal} alt={`Avatar de ${nome}`} />
-            <figcaption>{nome}</figcaption>
-        </figure>
+        <main>
+            <h1>Funções como props</h1>
+            <Botao texto="Dizer olá" onAcao={dizerOla} />
+        </main>
+    );
+}
+
+export default App;
+```
+
+Repara no detalhe mais importante:
+
+- `onAcao={dizerOla}` → passa a função
+- não é `onAcao={dizerOla()}` (isso executava logo)
+
+---
+
+### 4.2 Exemplo mais real: o filho envia um valor ao pai
+
+Agora o filho vai chamar a função e mandar um valor (por exemplo, o nome selecionado).
+
+`src/components/AlunoItem.jsx`:
+
+```jsx
+// src/components/AlunoItem.jsx
+
+/**
+ * AlunoItem
+ * Mostra um aluno e avisa o pai quando é escolhido.
+ *
+ * @param {Object} props
+ * @param {string} props.nome - Nome do aluno.
+ * @param {Function} props.onEscolher - Função chamada com o nome.
+ */
+function AlunoItem({ nome, onEscolher }) {
+    return <button onClick={() => onEscolher(nome)}>{nome}</button>;
+}
+
+export default AlunoItem;
+```
+
+E no `App.jsx`:
+
+```jsx
+import { useState } from "react";
+import AlunoItem from "./components/AlunoItem.jsx";
+
+/**
+ * App
+ * Pai guarda o aluno escolhido em estado.
+ */
+function App() {
+    const [escolhido, setEscolhido] = useState("");
+
+    function escolherAluno(nome) {
+        setEscolhido(nome);
+    }
+
+    return (
+        <main>
+            <h1>Escolher aluno</h1>
+
+            <AlunoItem nome="Rita" onEscolher={escolherAluno} />
+            <AlunoItem nome="Diogo" onEscolher={escolherAluno} />
+
+            {escolhido && <p>Escolheste: {escolhido}</p>}
+        </main>
+    );
+}
+
+export default App;
+```
+
+O que aconteceu:
+
+- O pai passou a função `escolherAluno`.
+- O filho chamou essa função com o valor `nome`.
+- O pai guardou o valor em estado e a UI atualizou.
+
+Isto é **comunicação filho → pai** (mas a decisão e o estado ficam no pai).
+
+---
+
+### 4.3 Erros comuns
+
+- `onClick={minhaFuncao()}` → executa logo.
+- Esquecer de passar a função e depois `onAcao` é `undefined`.
+- Passar uma função que muda props diretamente (não faças isso; muda estado no pai).
+
+### 4.4 Checkpoint
+
+- Porque é que passamos funções por props?
+- Qual a diferença entre `onClick={f}` e `onClick={f()}`?
+- Quem deve guardar o estado: pai ou filho? (depende, mas neste padrão o dono é o pai)
+
+---
+
+<a id="sec-5"></a>
+
+## 5. [EXTRA] Desenhar componentes reutilizáveis (a “API” das props)
+
+Quando um componente é reutilizável, ele é como uma peça de LEGO:
+
+- tem uma forma (JSX)
+- e tem “entradas” bem definidas (props)
+
+### 5.1 Regras simples para props bem escolhidas
+
+- Usa nomes claros: `titulo`, `subtitulo`, `onFechar`, `ativo`.
+- Se a prop é um “evento”, começa por `on...`: `onEscolher`, `onRemover`, `onGuardar`.
+- Se a prop é booleana, usa nome “sim/não”: `ativo`, `visivel`, `destacado`.
+- Evita props que fazem muita coisa ao mesmo tempo (fica confuso).
+
+### 5.2 Exemplo: `Botao` mais completo (sem ficar complicado)
+
+```jsx
+/**
+ * Botao
+ * @param {Object} props
+ * @param {string} props.texto
+ * @param {Function} props.onAcao
+ * @param {boolean} [props.desativado=false]
+ */
+function Botao({ texto, onAcao, desativado = false }) {
+    return (
+        <button onClick={onAcao} disabled={desativado}>
+            {texto}
+        </button>
     );
 }
 ```
 
-### Erros comuns
+Uso:
 
--   Assumir que a prop existe e depois ter `undefined` no ecrã.
--   Usar `||` quando o valor pode ser `0` ou `""` (o fallback aparece sem querer).
+```jsx
+<Botao texto="Guardar" onAcao={guardar} />
+<Botao texto="Apagar" onAcao={apagar} desativado />
+```
 
-### Boas práticas
+---
 
--   Define valores por defeito para props opcionais.
--   Evita muitos defaults para não esconder erros.
--   Se uma prop é obrigatória, deixa claro no nome e na documentação.
+<a id="sec-6"></a>
 
-### Checkpoint
+## 6. [EXTRA] Prop drilling (quando as props passam por muitos níveis)
 
--   Porque é que `||` pode falhar com `0` ou `""`?
--   Que vantagem tem um valor por defeito no parâmetro?
+### 6.1 O que é
+
+Prop drilling é quando um dado tem de passar por vários componentes “pelo meio”, mesmo que esses componentes não precisem desse dado.
+Eles só fazem “ponte” para chegar a outro componente mais abaixo.
+
+Exemplo mental:
+
+```
+App
+  ↓ passa props
+Pagina
+  ↓ passa props
+Painel
+  ↓ passa props
+Botao (é aqui que o valor é usado)
+```
+
+Isto não é “proibido”. Em projetos pequenos é normal.
+Mas quando começa a ficar demasiado longo, fica chato e aumenta a chance de erros.
+
+### 6.2 Soluções comuns (sem entrares já a fundo)
+
+- Reorganizar componentes (meter o dono do estado mais perto de quem usa).
+- Criar componentes que recebem `children` (reduz a necessidade de passar coisas).
+- Usar **Context** quando for mesmo necessário (vais ver no `12_context_api_estado_global.md`).
+
+---
 
 <a id="exercicios"></a>
 
 ## Exercícios - Props e composição
 
-1. Cria um componente `Produto`. No `return`, mostra o `nome` e o `preco` recebidos por props.
-2. No `App`, importa `Produto` e usa-o três vezes com dados diferentes.
-3. Cria um componente `Aluno` com props `nome`, `curso` e `ano`. Mostra tudo num cartão simples.
-4. Dentro do componente `Aluno`, adiciona uma prop `aprovado` e mostra “Aprovado” ou “Reprovado” com um ternário.
-5. Cria um componente `Painel` que usa `props.children` para mostrar o conteúdo interno.
-6. No `App`, usa o `Painel` e coloca dentro um título e uma lista com 3 itens.
-7. Adiciona uma prop `cor` a um componente e usa-a num `style` para mudar a cor de fundo.
-8. Corrige um erro de nome de prop (ex: passa `titulo` e lê `title`).
-9. Cria um componente `Mensagem` com prop opcional `texto`.
-10. Usa valores por defeito em pelo menos uma prop.
+1. **Saudacao com props**
+    - Cria `Saudacao.jsx` e usa 3 vezes no `App` com nomes diferentes.
+
+2. **Tipos de props**
+    - Cria `Aluno.jsx` com `nome` e `idade`.
+    - Usa no `App` com `idade={17}` (sem aspas).
+
+3. **Destructuring**
+    - Reescreve o `Aluno` para receber `{ nome, idade }`.
+
+4. **Default**
+    - Cria `Badge.jsx` com prop `texto="Novo"` por defeito.
+    - Usa `<Badge />` e `<Badge texto="Urgente" />`.
+
+5. **Booleanos**
+    - Cria `Cartao.jsx` com prop `destacado`.
+    - Se `destacado` for true, mostra um texto extra “Destaque”.
+
+6. **children**
+    - Cria `Card.jsx` com `children`.
+    - Usa o `Card` para envolver conteúdos diferentes (texto, lista, etc.).
+
+7. **Funções como props**
+    - Cria `Botao.jsx` que recebe `texto` e `onAcao`.
+    - No `App`, cria duas funções diferentes e dois botões.
+
+8. **Filho envia valor ao pai**
+    - Cria `AlunoItem.jsx` que chama `onEscolher(nome)`.
+    - No pai, guarda o escolhido em `useState` e mostra no ecrã.
+
+9. **Diagnóstico**
+    - Faz `onClick={minhaFuncao()}` de propósito, vê o que acontece, e corrige para `onClick={minhaFuncao}`.
+
+10. **Mini-projeto (composição + props)**
+
+- Faz um `CardPerfil` que recebe:
+    - `nome`
+    - `curso`
+- Usa `children` para permitir que o pai meta conteúdo extra (ex.: lista de hobbies).
 
 <a id="changelog"></a>
 
 ## Changelog
 
--   2026-01-11: criação do ficheiro.
--   2026-01-12: explicações detalhadas, exemplos extra e exercícios em formato passo a passo.
--   2026-01-12: secção ESSENCIAL sobre callbacks, fluxo de dados e levantar estado.
+- 2026-01-11: criação do ficheiro.
+- 2026-01-26: reforço do modelo mental de props como “entradas do componente”.
+- 2026-01-26: expansão didática (destructuring, defaults, booleanos, children, funções como props, exemplos com estado no pai e nota de prop drilling).

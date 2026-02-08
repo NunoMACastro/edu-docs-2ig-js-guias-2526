@@ -1304,7 +1304,7 @@ console.log(telefone.ativarWifi());
 - O método `ativar()` define `ativada` como `true` e retorna uma mensagem indicando que a subscrição foi ativada.
 - O método `cancelar()` define `ativada` como `false` e retorna uma mensagem indicando que a subscrição foi cancelada.
 
-2. `class Premium extends Subscricao` adiciona `bonus` e sobrescreve `ativar()` para registar o bônus (ex.: `console.log`) antes de chamar `super.ativar()`.
+2. `class Premium extends Subscricao` adiciona `bonus` e sobrescreve `ativar()` para registar o bónus (ex.: `console.log`) antes de chamar `super.ativar()`.
 
 - O `bonus` é definido no `constructor`.
 - O método `ativar()` regista o bónus (ex.: `console.log(`Bónus de ${this.bonus} aplicado.`);`) antes de chamar `super.ativar()`
@@ -1317,6 +1317,49 @@ console.log(telefone.ativarWifi());
 const plano = new Premium("Pro", 30, 5);
 plano.ativar();
 console.log(plano.valorAtual);
+```
+
+> Resolução
+
+```js
+class Subscricao {
+    nome;
+    precoBase;
+    ativada = false;
+
+    constructor(nome, precoBase) {
+        this.nome = nome;
+        this.precoBase = precoBase;
+    }
+    ativar() {
+        this.ativada = true;
+        return `Subscrição ${this.nome} ativada.`;
+    }
+    cancelar() {
+        this.ativada = false;
+        return `Subscrição ${this.nome} cancelada.`;
+    }
+}
+
+class Premium extends Subscricao {
+    bonus;
+    constructor(nome, precoBase, bonus) {
+        super(nome, precoBase);
+        this.bonus = bonus;
+    }
+    ativar() {
+        console.log(`Bónus de ${this.bonus} aplicado.`);
+        return super.ativar();
+    }
+    get valorAtual() {
+        return this.precoBase - this.bonus;
+    }
+}
+
+// Teste
+const plano = new Premium("Pro", 30, 5);
+plano.ativar();
+console.log(plano.valorAtual); // 25
 ```
 
 ---
@@ -1348,16 +1391,75 @@ console.log(livro.titulo); // "1984"
 console.log(biblio.disponiveis); // ["O Senhor dos Anéis"]
 ```
 
----
+> Resolução
+
+```js
+class Livro {
+    titulo;
+    autor;
+    disponivel = true;
+
+    constructor(titulo, autor) {
+        this.titulo = titulo;
+        this.autor = autor;
+    }
+}
+
+class Biblioteca {
+    #livros = [];
+
+    adicionar(livro) {
+        this.#livros.push(livro);
+    }
+
+    emprestar(titulo) {
+        const livro = this.#livros.find((l) => l.titulo === titulo);
+        // Com for:
+        /*
+        let livro = null;
+        for (const l of this.#livros) {
+            if (l.titulo === titulo) {
+                livro = l;
+                break;
+            }
+        }
+        */
+
+        if (!livro) {
+            throw new Error("Livro não encontrado.");
+        }
+        if (!livro.disponivel) {
+            throw new Error("Livro indisponível.");
+        }
+        livro.disponivel = false;
+        return livro;
+    }
+
+    get disponiveis() {
+        return this.#livros.filter((l) => l.disponivel).map((l) => l.titulo);
+        // Estamos a usar um filter para obter só os livros disponíveis, e depois um map para extrair os títulos desses livros.
+        // Alternativa sem filter/map:
+        /*
+        const titulos = [];
+        for (const l of this.#livros) {
+            if (l.disponivel) {
+                titulos.push(l.titulo);
+            }
+        }
+        return titulos;
+        */
+    }
+}
+```
 
 19. **Composição e Herança**
     **Enunciado**: Vamos criar uma aplicação para gerir profissionais num hospital.
 
 **Passos**
 
-1. Cria `class Profissional` com `nome`, `especialidade`, `#salario` (privado) e métodos `get salario()` e `set salario(v)` (valida `v > 0`). Adiciona também o método `apresentar()` que devolve uma string com o nome e especialidade.
+1. Cria `class Profissional` com `nome`, `#salario` (privado) e métodos `get salario()` e `set salario(v)` (valida `v > 0`). Adiciona também o método `apresentar()` que devolve uma string com o nome e especialidade.
 
-- O `nome` e a `especialidade` são definidos no `constructor`.
+- O `nome` é definidos no `constructor`.
 - O atributo `#salario` é privado e inicializado como `0` antes do construtor.
 - O método `get salario()` devolve o valor do salário.
 - O método `set salario(v)` valida se `v > 0` antes de definir o salário.
@@ -1380,7 +1482,77 @@ console.log(biblio.disponiveis); // ["O Senhor dos Anéis"]
 const hospital = new Hospital();
 const medico = new Medico("Dr. Silva", "Cardiologia");
 medico.salario = 5000;
-const enfermeiro = new Enfermeiro("Ana", "Noite");
+const enfermeiro = new Enfermeiro("Enf. Costa", "Noite");
+enfermeiro.salario = 3000;
+hospital.adicionarProfissional(medico);
+hospital.adicionarProfissional(enfermeiro);
+console.log(hospital.listarProfissionais());
+console.log("Despesa Salarial:", hospital.calcularDespesaSalarial());
+```
+
+> Resolução
+
+```js
+class Profissional {
+    nome;
+    #salario = 0;
+    constructor(nome) {
+        this.nome = nome;
+    }
+    get salario() {
+        return this.#salario;
+    }
+    set salario(v) {
+        if (v <= 0) {
+            throw new RangeError("Salário inválido.");
+        }
+        this.#salario = v;
+    }
+    apresentar() {
+        return `Nome: ${this.nome}`;
+    }
+}
+
+class Medico extends Profissional {
+    especialidade;
+    constructor(nome, especialidade) {
+        super(nome);
+        this.especialidade = especialidade;
+    }
+    apresentar() {
+        return `${super.apresentar()}, Especialidade: ${this.especialidade}`;
+    }
+}
+
+class Enfermeiro extends Profissional {
+    turno;
+    constructor(nome, turno) {
+        super(nome);
+        this.turno = turno;
+    }
+    apresentar() {
+        return `${super.apresentar()}, Turno: ${this.turno}`;
+    }
+}
+
+class Hospital {
+    #profissionais = [];
+    adicionarProfissional(profissional) {
+        this.#profissionais.push(profissional);
+    }
+    listarProfissionais() {
+        return this.#profissionais.map((p) => p.apresentar());
+    }
+    calcularDespesaSalarial() {
+        return this.#profissionais.reduce((acc, p) => acc + p.salario, 0);
+    }
+}
+
+// Teste
+const hospital = new Hospital();
+const medico = new Medico("Dr. Silva", "Cardiologia");
+medico.salario = 5000;
+const enfermeiro = new Enfermeiro("Enf. Costa", "Noite");
 enfermeiro.salario = 3000;
 hospital.adicionarProfissional(medico);
 hospital.adicionarProfissional(enfermeiro);

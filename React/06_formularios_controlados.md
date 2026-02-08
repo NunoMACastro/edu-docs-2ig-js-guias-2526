@@ -1,88 +1,124 @@
-# React.js (11.º Ano) - 06 · Formulários controlados
+# React.js (12.º Ano) - 06 · Formulários controlados
 
 > **Objetivo deste ficheiro**
-> Criar inputs ligados ao estado (formulários controlados).
-> Lidar com `onChange` e `onSubmit` de forma correta.
-> Aplicar validações simples no lado do cliente.
+>
+> - Construir **inputs controlados** (o valor vem do estado).
+> - Ligar corretamente `onChange`, `onBlur` e `onSubmit`.
+> - Fazer **validação simples no cliente** com feedback claro (erros por campo).
+> - Aprender padrões “profissionais” (mas acessíveis) para formulários: **fonte de verdade**, **estado do ecrã**, **erros/touched**, e armadilhas típicas.
 
 ---
 
 ## Índice
 
--   [0. Como usar este ficheiro](#sec-0)
--   [1. [ESSENCIAL] Input controlado e onChange](#sec-1)
--   [2. [ESSENCIAL] Checkbox, select e textarea](#sec-2)
--   [3. [ESSENCIAL] Submissão e validação simples](#sec-3)
--   [4. [EXTRA] Agrupar estado de formulário](#sec-4)
--   [Exercícios - Formulários controlados](#exercicios)
--   [Changelog](#changelog)
+- [0. Como usar este ficheiro](#sec-0)
+- [1. [ESSENCIAL] Input controlado e onChange](#sec-1)
+- [2. [ESSENCIAL] Checkbox, radio, select e textarea](#sec-2)
+- [3. [ESSENCIAL] Submissão e validação simples](#sec-3)
+- [4. [EXTRA] Agrupar estado de formulário (objeto)](#sec-4)
+- [5. [EXTRA] Armadilhas comuns e diagnóstico rápido](#sec-5)
+- [Exercícios - Formulários controlados](#exercicios)
+- [Changelog](#changelog)
+
+---
 
 <a id="sec-0"></a>
 
 ## 0. Como usar este ficheiro
 
--   **ESSENCIAL vs EXTRA:** domina o input controlado antes de agrupar estado.
--   **Como estudar:** escreve formulários pequenos e testa cada campo.
--   **Ligações:** usa `useState` como em `04_estado_e_eventos.md`.
+- **ESSENCIAL vs EXTRA:** domina bem as secções **1–3** antes de ires para o estado em objeto (secção 4) e armadilhas (secção 5).
+- **Como estudar:** escreve formulários pequenos e observa:
+    - se o valor do input **segue sempre o estado**,
+    - se o `onChange` atualiza o estado corretamente,
+    - e se a validação dá feedback claro ao utilizador.
+- **Ligações úteis:**
+    - estado e eventos: `04_estado_e_eventos.md`
+    - listas e condicionais: `05_listas_e_condicionais.md` (mostrar erros, listas de opções, etc.)
+
+---
 
 <a id="sec-1"></a>
 
 ## 1. [ESSENCIAL] Input controlado e onChange
 
-### Modelo mental
+### 1.1 A ideia central: “o estado manda no input”
 
-Um input controlado é um input cujo **valor vem do estado**. Isso significa que o React é a "fonte de verdade": o input mostra exatamente o que está no estado.
+Um **input controlado** é um input cujo valor **vem do estado**.
 
-O ciclo é sempre este:
+Isto quer dizer:
 
-1. O utilizador escreve no input.
-2. O `onChange` é chamado.
-3. O estado é atualizado com o novo valor.
-4. O React re-renderiza o componente.
-5. O input mostra o novo valor.
+- o **React** é a **fonte de verdade** (o valor “real” está no estado)
+- o input apenas **mostra** esse valor
+- quando o utilizador escreve, tu atualizas o estado → e o React volta a desenhar o input com o novo valor
 
-Se esqueceres o `onChange`, o input fica "bloqueado", porque o React não permite alterar um valor que ele próprio controla.
+Modelo mental (ciclo):
 
-Em contraste, um input **não controlado** guarda o valor internamente (no DOM). Aqui vamos usar sempre controlados porque dão mais controlo e previsibilidade.
+1. utilizador escreve
+2. dispara `onChange`
+3. tu lês `e.target.value`
+4. fazes `setState(...)`
+5. o componente re-renderiza
+6. o input recebe `value={estado}` com o valor novo
 
-### Sintaxe base (passo a passo)
+Mini-diagrama:
 
--   **Cria estado para o input:** `const [nome, setNome] = useState("")`.
--   **Liga o input ao estado:** `value={nome}`.
--   **Atualiza com `onChange`:** `onChange={(e) => setNome(e.target.value)}`.
--   **Usa `label` com `htmlFor`:** melhora a acessibilidade.
--   **Mantém o estado e o input sincronizados:** o input mostra o estado e o estado segue o input.
-
-> **Nota sobre números:** inputs devolvem **strings**. Se precisares de um número, converte com `Number(...)` ou `parseInt(...)`.
-
-```jsx
-const [idade, setIdade] = useState(0);
-// ...
-<input
-    type="number"
-    value={idade}
-    onChange={(e) => setIdade(Number(e.target.value))}
-/>
+```
+teclado → onChange → setState → render → value atualizado
 ```
 
-### Exemplo
+Isto é poderoso porque o valor do formulário fica **previsível**:
+se o estado for X, o input mostra X.
+
+---
+
+### 1.2 Controlado vs não controlado (diferença real)
+
+- **Controlado:** `value={estado}` e `onChange` atualiza esse estado.
+- **Não controlado:** o browser guarda o valor “lá dentro” (no DOM). Tu só lês quando precisas.
+
+Neste curso vamos usar **controlados** na maioria dos casos porque:
+
+- dá para validar e bloquear valores
+- dá para limpar o formulário facilmente
+- dá para mostrar erros e estados em tempo real
+
+> Nota: há casos onde “não controlado” faz sentido (por exemplo, certos inputs de ficheiro). Vês isso na secção 5.
+
+---
+
+### 1.3 A regra que evita bugs
+
+> Se metes `value={...}`, tens de ter `onChange={...}`.  
+> Se não, o input fica “preso” porque o React está a controlar o valor e tu não estás a permitir mudanças.
+
+---
+
+### 1.4 Primeira versão (simples e correta)
 
 ```jsx
 import { useState } from "react";
 
+/**
+ * FormNome
+ * - Exemplo base de input controlado.
+ * - O valor do input vem do estado.
+ * - O onChange atualiza o estado.
+ */
 function FormNome() {
     const [nome, setNome] = useState("");
 
     return (
         <div>
             <label htmlFor="nome">Nome</label>
-            {/* value liga o input ao estado, e onChange atualiza o estado */}
+
             <input
                 id="nome"
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
+                placeholder="Escreve o teu nome"
             />
-            <p>Escreveste: {nome}</p>
+
+            <p>Estado atual: {nome}</p>
         </div>
     );
 }
@@ -90,89 +126,273 @@ function FormNome() {
 export default FormNome;
 ```
 
+O que está a acontecer aqui:
+
+- `value={nome}` liga o input ao estado
+- `onChange` lê o valor escrito (`e.target.value`) e faz `setNome(...)`
+- o `<p>` ajuda-te a confirmar que o estado está mesmo a acompanhar o input
+
+---
+
+### 1.5 Importante: nunca guardes o evento (`e`) no estado
+
+O `onChange` recebe um **evento**. Tu só queres guardar o valor.
+
+Errado:
+
+```jsx
+onChange={(e) => setNome(e)} // ERRADO
+```
+
+Certo:
+
+```jsx
+onChange={(e) => setNome(e.target.value)}
+```
+
+---
+
+### 1.6 Inputs de números: atenção (vem sempre texto)
+
+Mesmo que o input seja `type="number"`, o valor chega como **string**.
+
+Por isso, se tu queres guardar um número no estado, tens de converter.
+
 ```jsx
 import { useState } from "react";
 
-function FormNome() {
-    const [nome, setNome] = useState("");
+/**
+ * FormIdade
+ * - Exemplo com input type="number".
+ * - Converte para número ao guardar no estado.
+ */
+function FormIdade() {
+    const [idade, setIdade] = useState(0);
 
-    function atualizarNome(evento) {
-        // O valor escrito está em evento.target.value
-        setNome(evento.target.value);
+    function handleChange(e) {
+        // e.target.value é string. Number("12") -> 12
+        setIdade(Number(e.target.value));
     }
 
     return (
         <div>
-            <label htmlFor="nome">Nome</label>
-            <input id="nome" value={nome} onChange={atualizarNome} />
+            <label htmlFor="idade">Idade</label>
+            <input
+                id="idade"
+                type="number"
+                value={idade}
+                onChange={handleChange}
+                min={0}
+            />
+            <p>Idade (número): {idade}</p>
         </div>
     );
 }
+
+export default FormIdade;
 ```
 
-### Erros comuns
+> Nota: se o campo estiver vazio, `e.target.value` pode ser `""` e `Number("")` dá `0`.  
+> Em formulários reais, às vezes guardamos como string e só convertemos no submit. Depende do objetivo.
 
--   Esquecer o `onChange` e o input ficar bloqueado.
--   Ligar `value` a uma variável que não existe.
--   Guardar o evento em vez do valor (`setNome(e)` em vez de `e.target.value`).
--   Misturar `value` com `defaultValue` sem entender a diferença.
+---
 
-### Boas práticas
+### 1.7 Reset (limpar campos) e “fonte de verdade”
 
--   Usa nomes claros para o estado (`nome`, `email`).
--   Mantém cada input ligado ao seu estado.
--   Se o input for reutilizável, dá-lhe `name` para facilitar updates.
+Como o estado é a fonte de verdade, para limpar basta voltar aos valores iniciais.
 
-### Checkpoint
+```jsx
+const [nome, setNome] = useState("");
+const [email, setEmail] = useState("");
 
--   O que significa “input controlado”?
--   Porque é que um input fica bloqueado sem `onChange`?
+function limpar() {
+    setNome("");
+    setEmail("");
+}
+```
 
-<a id="sec-2"></a>
+---
 
-## 2. [ESSENCIAL] Checkbox, select e textarea
+### 1.8 Um handler por campo vs handler “genérico”
 
-### Modelo mental
+#### Opção A (mais simples): um handler por campo
 
-Cada tipo de campo tem uma forma de ler o valor. O mais importante é saber **qual é a propriedade certa**:
+```jsx
+<input value={nome} onChange={(e) => setNome(e.target.value)} />
+<input value={email} onChange={(e) => setEmail(e.target.value)} />
+```
 
--   **Checkbox:** usa `checked` (true/false).
--   **Select:** usa `value` (texto da opção).
--   **Textarea:** usa `value`, como um input normal.
+Vantagens:
 
-Se usares a propriedade errada, o campo deixa de ficar controlado.
+- mais fácil de entender no início
+- bom para formulários pequenos
 
-### Sintaxe base (passo a passo)
+#### Opção B (já útil em formulários médios): `name` + um handler
 
--   **Checkbox:** `checked={estado}` e `onChange={(e) => setEstado(e.target.checked)}`.
--   **Select:** `value={estado}` e `onChange={(e) => setEstado(e.target.value)}`.
--   **Textarea:** `value={estado}` e `onChange={(e) => setEstado(e.target.value)}`.
--   **Lembra-te das labels:** melhoram a leitura e o clique.
-
-### Exemplo
+Começas a usar o atributo `name` para saber que campo mudou.
 
 ```jsx
 import { useState } from "react";
 
-function FormPreferencias() {
-    const [aceito, setAceito] = useState(false);
-    const [curso, setCurso] = useState("web");
-    const [nota, setNota] = useState("");
+/**
+ * FormMini
+ * - Um handler genérico com base em name.
+ */
+function FormMini() {
+    const [form, setForm] = useState({ nome: "", email: "" });
+
+    function handleChange(e) {
+        const { name, value } = e.target;
+        setForm((prev) => ({ ...prev, [name]: value }));
+    }
 
     return (
         <div>
+            <input
+                name="nome"
+                value={form.nome}
+                onChange={handleChange}
+                placeholder="Nome"
+            />
+            <input
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="Email"
+            />
+        </div>
+    );
+}
+
+export default FormMini;
+```
+
+---
+
+### 1.9 Checkpoint
+
+- O que significa “o estado é a fonte de verdade”?
+- Porque é que um input fica preso se tiver `value` mas não tiver `onChange`?
+- Porque é que `type="number"` não te garante um número no estado?
+
+---
+
+<a id="sec-2"></a>
+
+## 2. [ESSENCIAL] Checkbox, radio, select e textarea
+
+### 2.1 A ideia central: nem todos os campos usam `value`
+
+O erro mais comum em formulários é usar a propriedade errada:
+
+- **checkbox:** usa `checked` (true/false)
+- **radio:** usa `checked` comparando com o valor atual
+- **select/textarea:** usam `value`
+
+A regra é: escolhe a propriedade que representa o valor “real” daquele elemento.
+
+---
+
+### 2.2 Checkbox (true/false)
+
+```jsx
+import { useState } from "react";
+
+/**
+ * Termos
+ * - Checkbox controlado com checked.
+ */
+function Termos() {
+    const [aceito, setAceito] = useState(false);
+
+    return (
+        <label>
+            <input
+                type="checkbox"
+                checked={aceito}
+                onChange={(e) => setAceito(e.target.checked)}
+            />
+            Aceito os termos
+        </label>
+    );
+}
+
+export default Termos;
+```
+
+Repara:
+
+- `e.target.checked` é boolean
+- `value` aqui não é o que tu queres
+
+---
+
+### 2.3 Radio (escolher 1 de várias)
+
+O padrão típico é guardar no estado o valor da opção escolhida.
+
+```jsx
+import { useState } from "react";
+
+/**
+ * FormRadio
+ * - Grupo de radios controlado com value no estado.
+ */
+function FormRadio() {
+    const [turno, setTurno] = useState("manha");
+
+    return (
+        <div>
+            <p>Turno:</p>
+
             <label>
-                {/* Checkbox usa checked para ligar ao estado */}
                 <input
-                    type="checkbox"
-                    checked={aceito}
-                    onChange={(e) => setAceito(e.target.checked)}
+                    type="radio"
+                    name="turno"
+                    value="manha"
+                    checked={turno === "manha"}
+                    onChange={(e) => setTurno(e.target.value)}
                 />
-                Aceito os termos
+                Manhã
             </label>
 
+            <label>
+                <input
+                    type="radio"
+                    name="turno"
+                    value="tarde"
+                    checked={turno === "tarde"}
+                    onChange={(e) => setTurno(e.target.value)}
+                />
+                Tarde
+            </label>
+
+            <p>Escolheste: {turno}</p>
+        </div>
+    );
+}
+
+export default FormRadio;
+```
+
+---
+
+### 2.4 Select (lista de opções)
+
+```jsx
+import { useState } from "react";
+
+/**
+ * FormSelect
+ * - Select controlado com value.
+ */
+function FormSelect() {
+    const [curso, setCurso] = useState("web");
+
+    return (
+        <div>
             <label htmlFor="curso">Curso</label>
-            {/* Select usa value para controlar a opção escolhida */}
+
             <select
                 id="curso"
                 value={curso}
@@ -180,205 +400,522 @@ function FormPreferencias() {
             >
                 <option value="web">Web</option>
                 <option value="redes">Redes</option>
+                <option value="bd">Bases de Dados</option>
             </select>
 
-            <label htmlFor="nota">Nota</label>
-            {/* Textarea funciona como input normal */}
-            <textarea
-                id="nota"
-                value={nota}
-                onChange={(e) => setNota(e.target.value)}
-            />
+            <p>Curso: {curso}</p>
         </div>
     );
 }
 
-export default FormPreferencias;
+export default FormSelect;
 ```
 
-### Erros comuns
+#### Select com opções vindas de uma lista (mais real)
 
--   Usar `value` em checkbox em vez de `checked`.
--   Esquecer o `value` no `select` e perder o controlo.
--   Ler `e.target.value` no checkbox (deves usar `e.target.checked`).
--   Não definir um valor inicial e o campo começar como `undefined`.
+```jsx
+const opcoes = [
+    { value: "web", label: "Web" },
+    { value: "redes", label: "Redes" },
+    { value: "bd", label: "Bases de Dados" },
+];
 
-### Boas práticas
+<select value={curso} onChange={(e) => setCurso(e.target.value)}>
+    {opcoes.map((o) => (
+        <option key={o.value} value={o.value}>
+            {o.label}
+        </option>
+    ))}
+</select>;
+```
 
--   Mantém os estados separados quando o formulário é pequeno.
--   Testa cada campo individualmente.
--   Se o formulário crescer, pondera agrupar o estado (ver secção 4).
+---
 
-### Checkpoint
+### 2.5 Textarea (texto longo)
 
--   Qual é a diferença entre `value` e `checked`?
--   Que tipo de campo usa `e.target.checked`?
+Textarea funciona como input normal: `value` + `onChange`.
+
+```jsx
+import { useState } from "react";
+
+/**
+ * Observacoes
+ * - Textarea controlada.
+ */
+function Observacoes() {
+    const [texto, setTexto] = useState("");
+
+    return (
+        <div>
+            <label htmlFor="obs">Observações</label>
+
+            <textarea
+                id="obs"
+                value={texto}
+                onChange={(e) => setTexto(e.target.value)}
+                rows={4}
+            />
+
+            <p>Caracteres: {texto.length}</p>
+        </div>
+    );
+}
+
+export default Observacoes;
+```
+
+---
+
+### 2.6 Checkpoint
+
+- Qual é a diferença entre `value` e `checked`?
+- Porque é que `radio` usa `checked={estado === "valor"}`?
+- Como é que geras `<option>` a partir de uma lista?
+
+---
 
 <a id="sec-3"></a>
 
 ## 3. [ESSENCIAL] Submissão e validação simples
 
-### Modelo mental
+### 3.1 O que acontece num `<form>` sem React?
 
-Ao submeter um formulário, o browser tenta recarregar a página. Em React, deves **impedir o refresh** e **validar os dados** antes de continuar.
+Num formulário normal, quando clicas num botão de submit:
 
-A validação serve para evitar dados vazios ou errados e para dar feedback imediato ao utilizador.
+- o browser tenta enviar o formulário
+- e normalmente **recarrega a página**
 
-### Sintaxe base (passo a passo)
+Numa SPA (React), não queres refresh. Queres:
 
--   **Usa `<form onSubmit={...}>`:** o submit é tratado num só lugar.
--   **Chama `event.preventDefault()`:** evita o refresh da página.
--   **Valida os campos:** usa `trim()` para remover espaços.
--   **Mostra erros no JSX:** guarda a mensagem num estado.
--   **Só envia se estiver tudo ok.**
+- bloquear o comportamento do browser
+- validar dados no cliente
+- e depois decidir o que fazer (mostrar erro, enviar para API, etc.)
 
-### Exemplo
+Por isso existe:
+
+```js
+e.preventDefault();
+```
+
+---
+
+### 3.2 Estrutura recomendada (limpa e fácil)
+
+- estados dos campos (ou objeto, na secção 4)
+- estado `erros` (string por campo, ou objeto)
+- `onSubmit` no `<form>`
+
+---
+
+### 3.3 Exemplo completo: validação simples por campo
+
+Regras deste exemplo:
+
+- nome é obrigatório
+- email tem de ter `@` (validação simples)
+- tem de aceitar termos
 
 ```jsx
 import { useState } from "react";
 
-function FormEmail() {
+/**
+ * FormInscricao
+ * - Exemplo completo para treinar:
+ *   - inputs controlados
+ *   - onSubmit com preventDefault
+ *   - validação simples
+ *   - mensagens de erro por campo
+ */
+function FormInscricao() {
+    const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
-    const [erro, setErro] = useState("");
+    const [aceito, setAceito] = useState(false);
 
-    function enviar(e) {
-        // Impede o refresh automático da página
-        e.preventDefault();
+    const [erros, setErros] = useState({
+        nome: "",
+        email: "",
+        aceito: "",
+    });
 
-        if (email.trim() === "") {
-            setErro("Email obrigatório");
-            return;
+    function validar({ nome, email, aceito }) {
+        const novo = { nome: "", email: "", aceito: "" };
+
+        if (nome.trim() === "") {
+            novo.nome = "O nome é obrigatório.";
         }
 
-        setErro("");
-        alert("Formulário enviado");
+        if (email.trim() === "") {
+            novo.email = "O email é obrigatório.";
+        } else if (!email.includes("@")) {
+            novo.email = "O email deve conter '@'.";
+        }
+
+        if (!aceito) {
+            novo.aceito = "Tens de aceitar os termos.";
+        }
+
+        return novo;
+    }
+
+    function temErros(obj) {
+        return Object.values(obj).some((msg) => msg !== "");
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        const novoErros = validar({ nome, email, aceito });
+        setErros(novoErros);
+
+        if (temErros(novoErros)) {
+            return; // não envia
+        }
+
+        // aqui, para já, simulamos “envio com sucesso”
+        alert("Formulário válido!");
+
+        // limpar
+        setNome("");
+        setEmail("");
+        setAceito(false);
+        setErros({ nome: "", email: "", aceito: "" });
     }
 
     return (
-        <form onSubmit={enviar}>
-            {/* Input controlado para o email */}
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label htmlFor="nome">Nome</label>
+                <input
+                    id="nome"
+                    value={nome}
+                    onChange={(e) => setNome(e.target.value)}
+                />
+                {erros.nome && <p>{erros.nome}</p>}
+            </div>
+
+            <div>
+                <label htmlFor="email">Email</label>
+                <input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                {erros.email && <p>{erros.email}</p>}
+            </div>
+
+            <div>
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={aceito}
+                        onChange={(e) => setAceito(e.target.checked)}
+                    />
+                    Aceito os termos
+                </label>
+                {erros.aceito && <p>{erros.aceito}</p>}
+            </div>
+
             <button type="submit">Enviar</button>
-            {/* Mostra erro apenas se existir */}
-            {erro && <p>{erro}</p>}
         </form>
     );
 }
 
-export default FormEmail;
+export default FormInscricao;
 ```
 
-### Erros comuns
+O que treinas neste exemplo:
 
--   Esquecer `preventDefault` e perder o estado.
--   Validar apenas depois de submeter, sem feedback.
--   Usar `onClick` no botão e esquecer o `onSubmit` no `<form>`.
+- `preventDefault()` para evitar refresh
+- validação que devolve **mensagens por campo**
+- mostrar erros com condicionais (`{erros.nome && ...}`)
+- só “envia” se não houver erros
+- reset final
 
-### Boas práticas
+---
 
--   Usa mensagens curtas e claras.
--   Valida primeiro o essencial (ex.: campos obrigatórios).
--   Se houver erro, explica o que falta e como corrigir.
+### 3.4 Estado do ecrã (opcional, mas já muito útil)
 
-### Checkpoint
+Em formulários reais, costuma existir um estado do ecrã:
 
--   Para que serve `event.preventDefault()` no formulário?
--   Porque é útil validar `trim()`?
+- `"idle"` (ainda não tentou enviar)
+- `"submitting"` (a enviar)
+- `"success"` (enviado)
+- `"error"` (falhou)
+
+Aqui, para já, basta um `status` simples para controlar UI:
+
+```jsx
+const [status, setStatus] = useState("idle"); // "idle" | "success"
+```
+
+Isto ajuda-te a mostrar mensagens e a desativar botões quando necessário.
+
+---
+
+### 3.5 Checkpoint
+
+- Para que serve `e.preventDefault()`?
+- Porque é que validar com `trim()` evita casos “falsos”?
+- Qual é a vantagem de ter mensagens de erro por campo?
+
+---
 
 <a id="sec-4"></a>
 
-## 4. [EXTRA] Agrupar estado de formulário
+## 4. [EXTRA] Agrupar estado de formulário (objeto)
 
-### Modelo mental
+### 4.1 Quando compensa usar objeto?
 
-Em formulários maiores, podes guardar todos os campos num único objeto. Isso reduz repetição, mas requer cuidado ao atualizar para não perder campos.
+Se o formulário tiver muitos campos, ter `useState` para cada um pode ficar repetitivo.
 
-A ideia é usar o atributo `name` nos inputs e atualizar a propriedade certa no objeto.
+A solução comum é:
 
-### Sintaxe base (passo a passo)
+- um objeto `form` com todos os campos
+- um handler genérico que usa `name`
 
--   **Estado com objeto:** `{ nome: "", email: "" }`.
--   **Inputs com `name`:** `name="nome"`, `name="email"`.
--   **Atualização com spread:** `setDados({ ...dados, [name]: value })`.
--   **Usa forma funcional** quando dependes do estado anterior.
+---
 
-### Exemplo
+### 4.2 Exemplo completo com objeto + validação
 
 ```jsx
 import { useState } from "react";
 
-function FormCompleto() {
-    const [dados, setDados] = useState({ nome: "", email: "" });
-    const [erro, setErro] = useState("");
+/**
+ * FormConta
+ * - Estado em objeto (form).
+ * - Handler genérico baseado em name.
+ * - Validação simples por campo.
+ */
+function FormConta() {
+    const [form, setForm] = useState({
+        nome: "",
+        email: "",
+        password: "",
+        aceito: false,
+    });
 
-    function atualizar(e) {
-        const { name, value } = e.target;
-        // Atualiza apenas o campo que mudou
-        setDados((prev) => ({ ...prev, [name]: value }));
+    const [erros, setErros] = useState({
+        nome: "",
+        email: "",
+        password: "",
+        aceito: "",
+    });
+
+    function handleChange(e) {
+        const { name, type, value, checked } = e.target;
+
+        setForm((prev) => ({
+            ...prev,
+            [name]: type === "checkbox" ? checked : value,
+        }));
     }
 
-    function enviar(e) {
+    function validar(f) {
+        const novo = { nome: "", email: "", password: "", aceito: "" };
+
+        if (f.nome.trim() === "") novo.nome = "Nome obrigatório.";
+        if (f.email.trim() === "") novo.email = "Email obrigatório.";
+        else if (!f.email.includes("@")) novo.email = "Email inválido.";
+
+        if (f.password.length < 6) novo.password = "Mínimo 6 caracteres.";
+
+        if (!f.aceito) novo.aceito = "Tens de aceitar os termos.";
+
+        return novo;
+    }
+
+    function temErros(obj) {
+        return Object.values(obj).some((msg) => msg !== "");
+    }
+
+    function handleSubmit(e) {
         e.preventDefault();
-        if (dados.nome.trim() === "" || dados.email.trim() === "") {
-            setErro("Preenche nome e email.");
-            return;
-        }
-        setErro("");
-        alert("Formulário válido");
+
+        const novoErros = validar(form);
+        setErros(novoErros);
+
+        if (temErros(novoErros)) return;
+
+        alert("Conta criada (simulação).");
+
+        setForm({ nome: "", email: "", password: "", aceito: false });
+        setErros({ nome: "", email: "", password: "", aceito: "" });
     }
 
     return (
-        <form onSubmit={enviar}>
-            <input name="nome" value={dados.nome} onChange={atualizar} />
-            <input name="email" value={dados.email} onChange={atualizar} />
-            <button type="submit">Enviar</button>
-            {erro && <p>{erro}</p>}
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label htmlFor="nome">Nome</label>
+                <input
+                    id="nome"
+                    name="nome"
+                    value={form.nome}
+                    onChange={handleChange}
+                />
+                {erros.nome && <p>{erros.nome}</p>}
+            </div>
+
+            <div>
+                <label htmlFor="email">Email</label>
+                <input
+                    id="email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                />
+                {erros.email && <p>{erros.email}</p>}
+            </div>
+
+            <div>
+                <label htmlFor="password">Password</label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    value={form.password}
+                    onChange={handleChange}
+                />
+                {erros.password && <p>{erros.password}</p>}
+            </div>
+
+            <div>
+                <label>
+                    <input
+                        type="checkbox"
+                        name="aceito"
+                        checked={form.aceito}
+                        onChange={handleChange}
+                    />
+                    Aceito os termos
+                </label>
+                {erros.aceito && <p>{erros.aceito}</p>}
+            </div>
+
+            <button type="submit">Criar conta</button>
         </form>
     );
 }
 
-export default FormCompleto;
+export default FormConta;
 ```
 
-### Erros comuns
+O que este padrão resolve:
 
--   Esquecer o spread e apagar os outros campos.
--   Ter `name` diferente do campo no estado (ex.: `name="mail"` mas o estado é `email`).
+- um único `handleChange` funciona para vários campos
+- checkbox e inputs normais funcionam no mesmo handler (`type === "checkbox"`)
+- o `form` fica todo junto (fácil de enviar para uma API mais tarde)
 
-### Boas práticas
+---
 
--   Usa objetos apenas quando o formulário cresce.
--   Mantém os nomes de `name` e do estado iguais para evitar confusão.
+### 4.3 Nota curta: quando `useReducer` começa a fazer sentido
 
-### Checkpoint
+Se tiveres muitas regras e muitas transições (ex.: 20 campos, passos, validações complexas), `useReducer` pode ajudar.
 
--   O que acontece se esqueceres o spread no `setDados`?
--   Porque é útil usar `name` nos inputs?
+Para já, o objeto + handler genérico já é um salto grande sem aumentar demasiado a complexidade.
+
+---
+
+<a id="sec-5"></a>
+
+## 5. [EXTRA] Armadilhas comuns e diagnóstico rápido
+
+### 5.1 “A component is changing an uncontrolled input to be controlled”
+
+Isto aparece quando um input começa com `value={undefined}` e depois passa a ter string.
+
+Regra simples:
+
+- inputs controlados devem ter **valor inicial coerente**
+    - texto: `""`
+    - número: `0` (ou `""`, se quiseres permitir vazio)
+    - checkbox: `false`
+    - select: um `value` que exista nas opções
+
+---
+
+### 5.2 Misturar `value` com `defaultValue` sem motivo
+
+- `value` → controlado
+- `defaultValue` → não controlado (valor inicial apenas)
+
+Evita misturar os dois no mesmo campo.
+
+---
+
+### 5.3 Input de ficheiro (nota importante)
+
+`<input type="file" />` não é controlado da mesma forma que os outros.
+
+Normalmente tu:
+
+- lês o ficheiro com `e.target.files[0]`
+- guardas esse ficheiro no estado (ou envias logo)
+- não defines `value`
+
+Exemplo:
+
+```jsx
+function Upload() {
+    const [ficheiro, setFicheiro] = useState(null);
+
+    function handleChange(e) {
+        setFicheiro(e.target.files?.[0] ?? null);
+    }
+
+    return <input type="file" onChange={handleChange} />;
+}
+```
+
+---
+
+### 5.4 Debug rápido (quando algo não está a atualizar)
+
+1. Confirma se o input tem `value={...}` ligado ao estado certo.
+2. Confirma se o `onChange` está a fazer `setState(e.target.value)` (ou `checked`).
+3. Mostra o estado no ecrã (temporariamente):
+
+```jsx
+<pre>{JSON.stringify(form, null, 2)}</pre>
+```
+
+4. Se for objeto, confirma se estás a usar `...prev` no update.
+
+---
+
+### 5.5 Checkpoint
+
+- O que causa o aviso “uncontrolled → controlled”?
+- Porque é que checkbox usa `checked` e não `value`?
+- Como é que confirmas rapidamente se o estado está a acompanhar o formulário?
+
+---
 
 <a id="exercicios"></a>
 
 ## Exercícios - Formulários controlados
 
-1. Cria um componente `FormBasico`. Primeiro, cria o estado `nome` com `useState("")`. Depois, adiciona um `<label>` e um `<input>` com `value={nome}` e `onChange` a atualizar `setNome`.
-2. No mesmo formulário, cria o estado `email`. Adiciona um segundo `<label>` e `<input>` com `value={email}` e `onChange` a atualizar `setEmail`.
-3. Por baixo do formulário, mostra dois `<p>`: um com "Nome: ..." e outro com "Email: ...", usando os valores atuais do estado.
-4. Adiciona um checkbox "Aceito os termos": cria o estado `aceito` com `useState(false)`, liga `checked={aceito}` e atualiza com `e.target.checked`. Mostra "Termos: Sim/Não".
-5. Adiciona um `select` com 3 opções de curso: cria o estado `curso`, liga `value={curso}`, atualiza com `e.target.value` e mostra "Curso: ...".
-6. Adiciona um `textarea` para observações: cria o estado `observacoes`, liga `value` e `onChange`, e mostra o texto escrito num `<p>` abaixo.
-7. No `onSubmit`, bloqueia o envio se `nome` estiver vazio. Dica: usa `trim()`.
-8. Mostra uma mensagem de erro quando o email for inválido.
-9. Limpa os campos após um envio válido.
-10. Agrupa o estado do formulário num objeto.
+1. Cria `FormBasico.jsx` com estado `nome` e um `<input>` controlado (`value` + `onChange`). Mostra o estado num `<p>` abaixo.
+2. No mesmo componente, adiciona `email` e mostra os dois valores na UI.
+3. Adiciona um campo `idade` com `type="number"`. Guarda **número** no estado usando `Number(...)`.
+4. Adiciona um checkbox “Aceito os termos” (`checked` + `e.target.checked`) e mostra “Sim/Não”.
+5. Adiciona um select com 3 opções e mostra o valor escolhido.
+6. Adiciona um textarea com contador de caracteres.
+7. Transforma o conjunto num `<form>` com `onSubmit`. Usa `preventDefault()`.
+8. Valida: nome obrigatório e email deve conter `@`. Mostra mensagem por baixo de cada campo.
+9. Bloqueia o submit se não aceitar termos. Mostra erro ao lado do checkbox.
+10. Limpa o formulário após submit válido.
+11. (EXTRA) Refaz o formulário com estado em objeto `form` + `name` + `handleChange` genérico.
+12. (EXTRA) Mostra o `form` com `<pre>{JSON.stringify(form, null, 2)}</pre>` para validar mentalmente o que está a acontecer.
+13. (EXTRA) Cria um campo `password` e valida “mínimo 6 caracteres”.
+14. (EXTRA) Cria um estado `status` (`"idle" | "success"`) e mostra “Enviado com sucesso” quando o submit for válido.
+
+---
 
 <a id="changelog"></a>
 
 ## Changelog
 
--   2026-01-11: criação do ficheiro.
--   2026-01-12: explicações detalhadas, exemplos extra e exercícios em formato passo a passo.
--   2026-01-12: exercícios 1-6 reescritos em formato tutorial.
--   2026-01-12: nota sobre inputs como strings e exemplo extra com validação simples.
+- 2026-01-11: criação do ficheiro.
+- 2026-01-12: exemplos base de inputs controlados, submit e validação simples.
+- 2026-01-26: reescrita completa para maior clareza e detalhe (nível do ficheiro 08), com modelo mental, decisões práticas, exemplos completos, validação por campo, estado em objeto e secção de diagnóstico.

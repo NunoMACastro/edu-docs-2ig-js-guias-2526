@@ -1,402 +1,711 @@
-# React.js (11.º Ano) - 07 · Comunicação síncrona e assíncrona
+# React.js (12.º Ano) - 07 · Comunicação síncrona e assíncrona
 
 > **Objetivo deste ficheiro**
-> Perceber a diferença entre comunicação síncrona e assíncrona.
-> Entender o que são Promessas e como resolver tarefas que demoram tempo.
-> Usar `async/await` de forma segura, com `try/catch`.
+>
+> - Distinguir **código síncrono** e **assíncrono** e perceber o impacto na UI.
+> - Entender o essencial do **Event Loop** (Call Stack, filas e ordem de execução).
+> - Trabalhar com **Promises** e `async/await` de forma “profissional” (sem magia).
+> - Fazer pedidos HTTP com `fetch` e tratar **loading / erro / sucesso**.
+> - Preparar o terreno para `useEffect` e consumo de APIs (ligações diretas ao ficheiro 08).
 
 ---
 
 ## Índice
 
--   [0. Como usar este ficheiro](#sec-0)
--   [1. [ESSENCIAL] Síncrono vs assíncrono](#sec-1)
--   [2. [ESSENCIAL] Promessas (Promise)](#sec-2)
--   [3. [ESSENCIAL] async/await e try/catch](#sec-3)
--   [4. [ESSENCIAL] HTTP em 2 minutos: request/response](#sec-4)
--   [5. [EXTRA] Padrão simples de loading e erro](#sec-5)
--   [Exercícios - Comunicação síncrona e assíncrona](#exercicios)
--   [Changelog](#changelog)
+- [0. Como usar este ficheiro](#sec-0)
+- [1. [ESSENCIAL] Síncrono vs assíncrono (o que muda mesmo?)](#sec-1)
+- [2. [ESSENCIAL] Event Loop: porque é que o código “não espera”?](#sec-2)
+- [3. [ESSENCIAL] Promises: a base do assíncrono moderno](#sec-3)
+- [4. [ESSENCIAL] `async/await`: Promises com sintaxe mais legível](#sec-4)
+- [5. [ESSENCIAL] `fetch`: pedidos HTTP e dados em JSON](#sec-5)
+- [6. [ESSENCIAL+] Padrões de UI: loading / erro / sucesso](#sec-6)
+- [7. [EXTRA] Diagnóstico rápido: bugs típicos e como os apanhas](#sec-7)
+- [Exercícios - Comunicação síncrona e assíncrona](#exercicios)
+- [Changelog](#changelog)
+
+---
 
 <a id="sec-0"></a>
 
 ## 0. Como usar este ficheiro
 
--   **ESSENCIAL vs EXTRA:** aprende primeiro síncrono/assíncrono e Promessas.
--   **Como estudar:** lê, copia os exemplos e observa a ordem dos logs.
--   **Ligações:** vais usar isto em `08_useEffect_e_dados.md` quando fizeres `fetch`.
+- **ESSENCIAL vs EXTRA:** domina as secções 1–6. A secção 7 é para quando já estás a fazer apps e “algo está estranho”.
+- **Como estudar:** corre os exemplos e observa a consola. O objetivo é conseguires **prever a ordem** em que as coisas aparecem.
+- **Ligações:**
+    - `04_estado_e_eventos.md` (estado e re-render).
+    - `06_formularios_controlados.md` (submissões e validação).
+    - `08_useEffect_e_dados.md` (onde colocar `fetch` em React).
+
+---
 
 <a id="sec-1"></a>
 
-## 1. [ESSENCIAL] Síncrono vs assíncrono
+## 1. [ESSENCIAL] Síncrono vs assíncrono (o que muda mesmo?)
 
-### Modelo mental
+### 1.1 A ideia central (modelo mental)
 
-Síncrono significa **uma coisa de cada vez**. O código só passa à linha seguinte quando a anterior acabou. É como uma fila: só avança quando a pessoa da frente termina.
+Em JavaScript no browser, pensa assim:
 
-Assíncrono significa **não bloquear**. Enquanto uma tarefa demora (ex.: pedido à internet), o JavaScript continua com outras coisas e só volta à tarefa quando o resultado estiver pronto.
+- **Síncrono:** o código corre **linha a linha** e só passa à próxima quando a atual terminar.
+- **Assíncrono:** o código **lança uma tarefa** (por exemplo, pedir dados a um servidor) e **continua**, porque essa tarefa vai terminar mais tarde.
 
-Pensa no dia a dia:
+O ponto importante não é “ser mais rápido”. É isto:
 
--   **Síncrono:** ficas parado numa fila até chegares ao balcão.
--   **Assíncrono:** deixas o pedido e continuas a fazer outras tarefas; recebes uma chamada quando estiver pronto.
+> **Assíncrono existe para não bloquear a aplicação.**  
+> Se o browser ficasse parado à espera de um servidor, a página congelava.
 
-Porque é que existem os dois?
+### 1.2 “Bloquear” a aplicação (o problema do síncrono pesado)
 
--   Algumas tarefas são rápidas e simples (síncrono).
--   Outras demoram (rede, ficheiros, timers) e não devem bloquear o programa (assíncrono).
--   Se tudo fosse síncrono, a página podia "congelar" enquanto esperas pela internet.
+No browser, a UI (cliques, scroll, animações) precisa de tempo para responder.
+Se tu fizeres trabalho pesado de forma síncrona, o browser não consegue tratar eventos.
 
-### Sintaxe base (passo a passo)
-
--   **Síncrono:** `console.log("A")` → `console.log("B")` (sempre nesta ordem).
--   **Assíncrono:** `setTimeout` ou `fetch` correm "mais tarde".
--   **A ordem muda:** o código continua enquanto o pedido não termina.
--   **O JavaScript não "para" o resto do código** só porque uma tarefa demora.
-
-No `fetch`, isto é exatamente o que acontece: o pedido é feito, o código continua, e a Promise resolve mais tarde com a resposta.
-
-### Exemplo
+Exemplo (não copies para produção; é para perceber o problema):
 
 ```js
-console.log("1) Inicio");
-console.log("2) Meio");
-console.log("3) Fim");
-// Ordem: 1, 2, 3 (sempre)
+console.log("Antes");
+const inicio = Date.now();
+
+while (Date.now() - inicio < 2000) {
+    // 2 segundos a bloquear
+}
+
+console.log("Depois");
 ```
 
-```js
-console.log("1) Inicio");
+O que vais sentir:
 
-setTimeout(() => {
-    // Este código corre depois, não bloqueia o resto
-    console.log("3) Timeout");
-}, 0);
+- durante esses 2 segundos, a página fica “presa” (não responde bem).
+- isto é exatamente o que evitamos quando fazemos pedidos ou timers de forma assíncrona.
 
-console.log("2) Meio");
-// Ordem: 1, 2, 3 (timeout vem no fim)
-```
+### 1.3 Onde aparece o assíncrono no dia a dia?
 
-### Erros comuns
+Alguns exemplos típicos:
 
--   Achar que `setTimeout(..., 0)` corre imediatamente.
--   Esperar que um pedido à API termine antes da linha seguinte.
+- `setTimeout`, `setInterval` (timers)
+- `fetch` (pedidos HTTP)
+- ler ficheiros (em Node.js)
+- eventos do utilizador (cliques, inputs) — não é “Promise”, mas também entra na lógica do Event Loop
 
-### Boas práticas
+### 1.4 Checkpoint
 
--   Assume que tarefas demoradas são assíncronas.
--   Usa logs para confirmar a ordem real das execuções.
+- O que é que o código assíncrono evita, em termos de UI?
+- Porque é que um `while` pesado “congela” a página?
 
-### Checkpoint
-
--   Quando é que o JavaScript “não bloqueia” o resto do código?
--   Porque é que `setTimeout(..., 0)` não corre imediatamente?
+---
 
 <a id="sec-2"></a>
 
-## 2. [ESSENCIAL] Promessas (Promise)
+## 2. [ESSENCIAL] Event Loop: porque é que o código “não espera”?
 
-### Modelo mental
+Muita gente sente que o JavaScript “faz magia” porque:
 
-Uma Promessa é um "compromisso" de que algo vai terminar no futuro. Ela representa **um valor que ainda não chegou**.
+- tu chamas uma função,
+- e coisas aparecem na consola “fora de ordem”.
 
-Uma Promessa pode estar em três estados:
+O Event Loop é o que explica isto.
 
--   **Resolver (fulfilled):** deu certo.
--   **Rejeitar (rejected):** deu erro.
--   **Estar pendente (pending):** ainda não acabou.
+### 2.1 O mínimo que tens de saber
 
-Quando a Promessa termina, usas `then` para o sucesso e `catch` para o erro.
+O browser organiza o trabalho assim:
 
-Exemplos de tarefas que devolvem Promessas:
+1. **Call Stack (pilha de chamadas)**
+    - onde o JavaScript está a executar código **agora** (síncrono).
 
--   Pedidos à internet (`fetch`).
--   Esperas com `setTimeout`.
--   Leitura de ficheiros (em Node).
+2. **Web APIs**
+    - o browser trata de coisas “externas” ao JS, como timers e rede.
 
-### Sintaxe base (passo a passo)
+3. **Filas**
+    - quando uma tarefa termina, ela entra numa fila para ser executada quando o JS estiver livre.
 
--   **Criar uma Promise:** `new Promise((resolve, reject) => { ... })`.
--   **Resolver:** chama `resolve(valor)`.
--   **Rejeitar:** chama `reject(erro)`.
--   **Ler o resultado:** `promise.then(...).catch(...)`.
--   **Opcional:** `finally(...)` corre sempre no fim.
--   **Importante:** `then` também devolve uma Promise, por isso dá para encadear.
+O Event Loop é o “gestor” que faz isto:
 
-### Exemplo
+- enquanto há código síncrono na Call Stack → executa.
+- quando a Call Stack fica vazia → vai buscar coisas às filas.
+
+### 2.2 Microtarefas vs tarefas (a ordem mais importante)
+
+Há duas filas que interessam muito:
+
+- **Fila de microtarefas** (normalmente: Promises resolvidas)
+- **Fila de tarefas** (normalmente: `setTimeout`, eventos, etc.)
+
+Regra prática (muito útil):
+
+> Depois do código síncrono terminar, o browser esvazia primeiro a fila de microtarefas,  
+> e só depois pega na fila de tarefas.
+
+### 2.3 Experiência rápida: prever a ordem
+
+Antes de correr, tenta prever.
 
 ```js
-function esperar(segundos) {
-    return new Promise((resolve) => {
-        // Simula uma tarefa que demora
-        setTimeout(() => {
-            resolve(`Esperei ${segundos}s`);
-        }, segundos * 1000);
-    });
-}
+console.log("A");
 
-esperar(1)
-    .then((mensagem) => {
-        // Sucesso: recebemos o valor
-        console.log(mensagem);
-    })
-    .catch((erro) => {
-        // Erro: algo falhou
-        console.log("Erro:", erro);
-    })
-    .finally(() => {
-        // Este bloco corre sempre
-        console.log("Terminei");
-    });
+setTimeout(() => console.log("B (timeout)"), 0);
+
+Promise.resolve().then(() => console.log("C (promise)"));
+
+console.log("D");
 ```
 
-### Erros comuns
+Ordem típica:
 
--   Esquecer o `return` da Promise numa função.
--   Escrever `then(console.log(...))` em vez de `then(() => ...)`.
--   Esquecer o `catch` e não tratar o erro.
+1. `A`
+2. `D`
+3. `C (promise)` ← microtarefa
+4. `B (timeout)` ← tarefa
 
-### Boas práticas
+Porque:
 
--   Mantém as Promessas pequenas e com um objetivo.
--   Usa `catch` para tratar erros de forma clara.
+- `A` e `D` são síncronos.
+- a Promise resolve e vai para microtarefas.
+- o timeout vai para tarefas.
 
-### Checkpoint
+> Nota: o `setTimeout(..., 0)` não significa “agora”. Significa “assim que possível”, quando o JS estiver livre e depois das microtarefas.
 
--   Quais são os 3 estados de uma Promise?
--   Para que serve o `finally`?
+### 2.4 Onde entra o `fetch` nesta história?
+
+O `fetch` começa um pedido na rede (fora do JS). Quando termina:
+
+- o resultado volta para o JS como uma **Promise**.
+- essa Promise, quando resolve, entra como microtarefa.
+
+Mas atenção: o tempo de rede é real (pode demorar muito).
+
+### 2.5 Checkpoint
+
+- O que acontece quando a Call Stack fica vazia?
+- Porque é que Promises (microtarefas) aparecem antes de `setTimeout`?
+
+---
 
 <a id="sec-3"></a>
 
-## 3. [ESSENCIAL] async/await e try/catch
+## 3. [ESSENCIAL] Promises: a base do assíncrono moderno
 
-### Modelo mental
+### 3.1 O que é uma Promise (modelo mental)
 
-`async/await` é uma forma **mais legível** de trabalhar com Promessas. Em vez de vários `then`, escreves quase como se fosse síncrono.
+Uma **Promise** é um objeto que representa:
 
--   `async` transforma a função num "modo assíncrono".
--   `await` faz o JavaScript esperar **dentro da função**.
--   Para tratar erros, usa `try/catch`.
+- “Um valor que ainda não tenho, mas vou ter mais tarde (ou vai falhar).”
 
-Importante: o `await` **não bloqueia o resto da aplicação**. Ele apenas pausa aquela função, não a página inteira.
+Uma Promise tem 3 estados:
 
-### Sintaxe base (passo a passo)
+- **pending** (ainda à espera)
+- **fulfilled** (sucesso, com valor)
+- **rejected** (falha, com erro)
 
--   **Cria a função async:** `async function carregar() { ... }`.
--   **Usa await:** `const dados = await promessa`.
--   **Envolve em try/catch:** trata erros de forma segura.
--   **Nota:** `async` devolve sempre uma Promise.
--   **Quando tens várias tarefas:** podes usar `await` uma de cada vez.
+### 3.2 Como se consome uma Promise
 
-### Exemplo
+Usas:
+
+- `.then(...)` para sucesso
+- `.catch(...)` para erro
+- `.finally(...)` para algo que corre sempre
+
+Exemplo simples:
 
 ```js
-function esperar(segundos) {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(`Esperei ${segundos}s`);
-        }, segundos * 1000);
-    });
-}
-
-async function executar() {
-    try {
-        // await espera pelo resultado da Promise
-        const mensagem = await esperar(1);
-        console.log(mensagem);
-    } catch (erro) {
-        // Se algo falhar, cai aqui
-        console.log("Erro:", erro);
-    }
-}
-
-executar();
+fetch("https://jsonplaceholder.typicode.com/users")
+    .then((res) => res.json())
+    .then((data) => console.log("Users:", data.length))
+    .catch((err) => console.log("Erro:", err.message))
+    .finally(() => console.log("Terminei"));
 ```
 
-### Erros comuns
+### 3.3 Encadeamento (o que o `then` devolve)
 
--   Usar `await` fora de funções `async`.
--   Esquecer o `try/catch` e não perceber erros.
--   Misturar `then` e `await` sem necessidade.
+O ponto mais importante para escrever Promises bem:
 
-### Boas práticas
+> Cada `.then(...)` devolve uma **nova Promise**.
 
--   Prefere `async/await` quando há várias Promessas em sequência.
--   Usa `try/catch` para dar mensagens de erro compreensíveis.
+E dentro de um `then`, se tu devolveres:
 
-### Checkpoint
+- um valor normal → ele passa para o próximo `then`
+- uma Promise → o próximo `then` espera por ela
 
--   O que acontece se usares `await` fora de uma função `async`?
--   Porque é que `try/catch` é importante em código assíncrono?
+Exemplo (observa a lógica):
+
+```js
+Promise.resolve(5)
+    .then((n) => n * 2) // devolve 10
+    .then((x) => Promise.resolve(x + 1)) // devolve Promise(11)
+    .then((final) => console.log(final)); // 11
+```
+
+### 3.4 Erros em Promises (propagação)
+
+Se houver um erro em qualquer `then`, ele “salta” para o `catch`.
+
+```js
+Promise.resolve()
+    .then(() => {
+        throw new Error("Falhou aqui");
+    })
+    .then(() => {
+        console.log("Isto não corre");
+    })
+    .catch((e) => console.log("Apanhado no catch:", e.message));
+```
+
+### 3.5 Promises em paralelo (quando queres “fazer várias coisas”)
+
+Às vezes queres fazer vários pedidos ao mesmo tempo.
+
+- `Promise.all([...])` → falha se **uma falhar**
+- `Promise.allSettled([...])` → dá sempre resultado, com sucesso/erro de cada uma
+
+Exemplo (paralelo + controlo):
+
+```js
+const p1 = fetch("https://jsonplaceholder.typicode.com/users");
+const p2 = fetch("https://jsonplaceholder.typicode.com/posts");
+
+Promise.all([p1, p2])
+    .then(async ([r1, r2]) => {
+        const users = await r1.json();
+        const posts = await r2.json();
+        console.log(users.length, posts.length);
+    })
+    .catch((e) => console.log("Falhou:", e.message));
+```
+
+### 3.6 Checkpoint
+
+- O que é uma Promise, em linguagem simples?
+- O que acontece a um erro dentro de um `then`?
+- Qual a diferença entre `Promise.all` e `Promise.allSettled`?
+
+---
 
 <a id="sec-4"></a>
 
-## 4. [ESSENCIAL] HTTP em 2 minutos: request/response
+## 4. [ESSENCIAL] `async/await`: Promises com sintaxe mais legível
 
-### Modelo mental
+### 4.1 O que `async/await` faz (sem magia)
 
-HTTP é uma conversa simples:
+- `async` marca uma função como “assíncrona”.
+- dentro dela, `await` espera por uma Promise e devolve o valor final.
 
--   O **cliente** envia um **request** (pedido).
--   O **servidor** responde com **status**, **headers** e **body**.
+Isto não bloqueia o browser inteiro.
 
-### Métodos (quando usar)
+> **Regra mental:**  
+> O `await` “pausa” só aquela função **até a Promise resolver**.  
+> O resto da aplicação continua a correr.
 
--   **GET:** pedir dados (ler).
--   **POST:** criar algo novo.
--   **PUT:** substituir um recurso inteiro.
--   **PATCH:** alterar só parte do recurso.
--   **DELETE:** apagar.
+### 4.2 Exemplo: a mesma coisa com e sem `await`
 
-### Status codes rápidos
+Sem `await`:
 
--   **200 OK:** pedido com sucesso.
--   **201 Created:** criado com sucesso (normal em POST).
--   **204 No Content:** sucesso sem body (ex.: DELETE).
--   **400 Bad Request:** pedido mal formado.
--   **401 Unauthorized:** falta autenticação.
--   **403 Forbidden:** estás autenticado, mas não tens permissão.
--   **404 Not Found:** recurso não existe.
--   **409 Conflict:** conflito (ex.: email já existe).
--   **422 Unprocessable Entity:** dados inválidos.
--   **500 Server Error:** erro inesperado no servidor.
+```js
+fetch("https://jsonplaceholder.typicode.com/users")
+    .then((res) => res.json())
+    .then((data) => console.log(data.length));
+```
 
-### Headers e body (no básico)
+Com `await`:
 
--   **Content-Type:** diz o formato do body (`application/json`).
--   **Authorization:** onde vai a credencial (conceito, vamos ver mais tarde).
--   **Body JSON:** `{ "nome": "Ana" }` quando envias dados.
+```js
+async function carregar() {
+    const res = await fetch("https://jsonplaceholder.typicode.com/users");
+    const data = await res.json();
+    console.log(data.length);
+}
+```
 
-### CORS (só o conceito)
+### 4.3 Erros com `try/catch`
 
-O browser bloqueia pedidos entre origens diferentes por segurança. O CORS é a regra que **permite ou bloqueia** pedidos cross‑origin. Mais detalhes em `15_http_rest_cors_e_contratos_api.md`.
+Quando usas `await`, o equivalente do `.catch(...)` é `try/catch`.
 
-### Erros comuns
+```js
+async function carregar() {
+    try {
+        const res = await fetch("https://jsonplaceholder.typicode.com/users");
+        const data = await res.json();
+        console.log(data.length);
+    } catch (e) {
+        const msg = e instanceof Error ? e.message : "Erro desconhecido";
+        console.log("Falhou:", msg);
+    }
+}
+```
 
--   Confundir 401 com 403.
--   Enviar `POST` sem `Content-Type: application/json`.
--   Usar `GET` para criar dados.
+### 4.4 Sequencial vs paralelo (o erro mais comum)
 
-### Boas práticas
+Se fizeres isto:
 
--   Escolhe o método certo para cada ação.
--   Usa status codes coerentes (não devolvas 200 em tudo).
--   Valida o body no backend antes de aceitar.
+```js
+const a = await fetch(url1);
+const b = await fetch(url2);
+```
 
-### Mini-checkpoint rápido
+é **sequencial** (espera pelo primeiro antes de começar o segundo).
 
--   Que método usas para criar um aluno novo?
--   O que significa `204`?
--   Em que header costuma ir a autenticação?
--   Porque existe CORS?
+Se queres **paralelo**:
+
+```js
+const [a, b] = await Promise.all([fetch(url1), fetch(url2)]);
+```
+
+Isto é importante para performance quando tens várias fontes.
+
+### 4.5 Checkpoint
+
+- O `await` bloqueia a aplicação toda?
+- Qual a diferença entre sequencial e paralelo?
+
+---
 
 <a id="sec-5"></a>
 
-## 5. [EXTRA] Padrão simples de loading e erro
+## 5. [ESSENCIAL] `fetch`: pedidos HTTP e dados em JSON
 
-### Modelo mental
+Esta secção liga diretamente ao que vais fazer em React (ficheiro 08).
+Mas antes, tens de perceber o fluxo do `fetch` com calma.
 
-Quando uma tarefa demora, deves mostrar **loading**. Se falhar, mostras **erro**. Isto melhora a experiência do utilizador porque ele sabe o que está a acontecer.
+### 5.1 O que `fetch` devolve mesmo?
 
-Em React, este padrão aparece em quase todos os pedidos a APIs.
+Quando fazes:
 
-### Sintaxe base (passo a passo)
+```js
+const res = await fetch("https://jsonplaceholder.typicode.com/users");
+```
 
--   **Estado `loading`:** começa em `true`.
--   **Estado `erro`:** começa vazio.
--   **Atualiza no fim:** `loading` passa a `false`.
--   **Renderiza conforme o estado.**
+`res` é um objeto **Response** (não é o JSON ainda).
 
-### Exemplo
+Para ter o JSON:
+
+```js
+const data = await res.json();
+```
+
+São **dois passos diferentes**.
+
+### 5.2 A armadilha mais importante: 404/500 não dão erro automático
+
+O `fetch` só rejeita a Promise em erros de rede (por exemplo, sem internet).
+
+Se o servidor responder com `404` ou `500`, a Promise resolve na mesma — porque isso é uma resposta HTTP válida.
+
+Por isso é que verificamos `res.ok`:
+
+```js
+if (!res.ok) {
+    throw new Error(`HTTP ${res.status}`);
+}
+```
+
+### 5.3 Template simples e correto (GET)
+
+```js
+async function getJson(url) {
+    const res = await fetch(url);
+
+    if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+    }
+
+    return res.json(); // devolve Promise com o JSON
+}
+
+async function teste() {
+    try {
+        const users = await getJson(
+            "https://jsonplaceholder.typicode.com/users",
+        );
+        console.log(users.length);
+    } catch (e) {
+        console.log("Falhou:", e instanceof Error ? e.message : "Erro");
+    }
+}
+```
+
+### 5.4 Enviar dados (POST) — visão rápida
+
+Em muitos projetos vais enviar dados (criar algo).
+
+```js
+async function criarPost() {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: "Olá", body: "Texto", userId: 1 }),
+    });
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const criado = await res.json();
+    console.log("Criado:", criado.id);
+}
+```
+
+### 5.5 Checkpoint
+
+- O que é um `Response`?
+- Porque é que precisamos de `await res.json()`?
+- Porque é que `res.ok` é tão importante?
+
+---
+
+<a id="sec-6"></a>
+
+## 6. [ESSENCIAL+] Padrões de UI: loading / erro / sucesso
+
+Esta secção é a ponte direta para React e para o ficheiro 08.
+
+A pergunta é:
+**“Se o `fetch` demora, o que é que o utilizador vê enquanto espera?”**
+
+### 6.1 O “estado do ecrã” (modelo mental)
+
+Quando carregas dados externos, há sempre 3 situações:
+
+1. **loading** → a app está à espera
+2. **success** → tens dados e mostras conteúdo
+3. **error** → falhou e mostras mensagem
+
+Se não modelares isto, a UI fica confusa ou vazia.
+
+### 6.2 Exemplo rápido (puro JS) só para perceber o fluxo
+
+```js
+async function carregar() {
+    console.log("loading...");
+
+    try {
+        const res = await fetch("https://jsonplaceholder.typicode.com/users");
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        console.log("success:", data.length);
+    } catch (e) {
+        console.log("error:", e instanceof Error ? e.message : "Erro");
+    }
+}
+```
+
+Em React, este “loading/success/error” vai viver em **estado**.
+
+### 6.3 Onde colocar `fetch` em React (a regra certa)
+
+- Se é uma ação do utilizador (clicar “Carregar”) → **event handler**.
+- Se é algo que deve acontecer quando a página aparece (carregar ao abrir) → **`useEffect`**.
+
+Exemplo (handler):
 
 ```jsx
 import { useState } from "react";
 
-// Simula um pedido demorado
-function pedidoSimulado() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            // 70% de chance de sucesso
-            if (Math.random() < 0.7) {
-                resolve("Dados carregados!");
-            } else {
-                reject("Falha no pedido");
-            }
-        }, 1000);
-    });
-}
-
-function PedidoSimples() {
-    const [mensagem, setMensagem] = useState("");
-    const [loading, setLoading] = useState(false);
+function BotaoCarregar() {
+    const [status, setStatus] = useState("idle"); // "idle" | "loading" | "success" | "error"
     const [erro, setErro] = useState("");
+    const [users, setUsers] = useState([]);
 
     async function carregar() {
-        // prepara o estado para o pedido
-        setLoading(true);
+        setStatus("loading");
         setErro("");
-        setMensagem("");
 
         try {
-            const resultado = await pedidoSimulado();
-            // guarda o resultado
-            setMensagem(resultado);
+            const res = await fetch(
+                "https://jsonplaceholder.typicode.com/users",
+            );
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+
+            setUsers(data.slice(0, 5));
+            setStatus("success");
         } catch (e) {
-            // guarda o erro
-            setErro(String(e));
-        } finally {
-            // termina o loading
-            setLoading(false);
+            setErro(e instanceof Error ? e.message : "Falha ao carregar");
+            setStatus("error");
         }
     }
 
     return (
         <div>
-            <button onClick={carregar}>Simular pedido</button>
-            {loading && <p>A carregar...</p>}
-            {erro && <p>Erro: {erro}</p>}
-            {mensagem && <p>{mensagem}</p>}
+            <button onClick={carregar}>Carregar</button>
+
+            {status === "loading" && <p>A carregar...</p>}
+            {status === "error" && <p>{erro}</p>}
+            {status === "success" && (
+                <ul>
+                    {users.map((u) => (
+                        <li key={u.id}>{u.name}</li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 }
 ```
 
-### Erros comuns
+Exemplo (ao montar) — aqui entra o ficheiro 08:
 
--   Esquecer de desligar o `loading`.
--   Mostrar o erro e o sucesso ao mesmo tempo.
+```jsx
+import { useEffect, useState } from "react";
 
-### Boas práticas
+function ListaAoMontar() {
+    const [status, setStatus] = useState("loading");
+    const [erro, setErro] = useState("");
+    const [users, setUsers] = useState([]);
 
--   Limpa o erro antes de um novo pedido.
--   Mostra mensagens curtas e claras.
+    useEffect(() => {
+        async function carregar() {
+            setStatus("loading");
+            setErro("");
 
-### Checkpoint
+            try {
+                const res = await fetch(
+                    "https://jsonplaceholder.typicode.com/users",
+                );
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
 
--   O que deve aparecer no ecrã quando `loading` é `true`?
--   Porque é importante mostrar erros ao utilizador?
+                setUsers(data.slice(0, 5));
+                setStatus("success");
+            } catch (e) {
+                setErro(e instanceof Error ? e.message : "Falha ao carregar");
+                setStatus("error");
+            }
+        }
+
+        carregar();
+    }, []);
+
+    if (status === "loading") return <p>A carregar...</p>;
+    if (status === "error") return <p>{erro}</p>;
+
+    return (
+        <ul>
+            {users.map((u) => (
+                <li key={u.id}>{u.name}</li>
+            ))}
+        </ul>
+    );
+}
+```
+
+### 6.4 Checkpoint
+
+- Quando é que usas handler e quando é que usas `useEffect`?
+- Quais são os 3 estados mais comuns de um ecrã com dados?
+
+---
+
+<a id="sec-7"></a>
+
+## 7. [EXTRA] Diagnóstico rápido: bugs típicos e como os apanhas
+
+### 7.1 “Porque é que isto aparece fora de ordem?”
+
+Faz este tipo de logs:
+
+```js
+console.log("Antes do fetch");
+fetch(url).then(() => console.log("Depois do fetch"));
+console.log("Depois de chamar fetch");
+```
+
+Se a ordem te surpreende, lembra-te:
+
+- chamar `fetch` começa o pedido
+- o `.then` só corre quando a Promise resolve
+- o resto do código síncrono continua
+
+### 7.2 “O meu `catch` não apanha 404/500”
+
+Quase sempre é porque te esqueceste do `res.ok`:
+
+```js
+const res = await fetch(url);
+if (!res.ok) throw new Error(`HTTP ${res.status}`);
+```
+
+Sem isto, 404/500 entram como “sucesso” do ponto de vista do `fetch`.
+
+### 7.3 “Tenho dois pedidos em simultâneo e a UI fica errada”
+
+Isto é muito comum quando há filtros/pesquisa:
+
+- pedido A começa
+- pedido B começa depois
+- A termina por último e “pisca” a UI com dados antigos
+
+No React, a solução profissional passa por `AbortController` (ver ficheiro 08, secção de cleanup/abort).
+
+### 7.4 Checkpoint
+
+- Que 2 logs metes para provar que algo é assíncrono?
+- Qual é o passo que quase toda a gente se esquece no `fetch`?
+
+---
 
 <a id="exercicios"></a>
 
 ## Exercícios - Comunicação síncrona e assíncrona
 
-1. Cria um ficheiro `teste.js`. Escreve `console.log("A")`, depois `console.log("B")`, depois `console.log("C")`. Corre com `node teste.js` e confirma a ordem.
-2. No mesmo ficheiro, coloca o log "C" dentro de `setTimeout(() => { ... }, 0)`. Corre novamente e escreve a ordem final num comentário.
-3. Cria a função `esperar(ms)` que devolve uma Promise. Dentro da Promise, usa `setTimeout` e faz `resolve("Terminei")`. Chama `esperar(500)` e usa `then` para mostrar a mensagem.
-4. Altera `esperar` para rejeitar quando `ms` for menor que 500. Chama `esperar(200)` e usa `catch` para mostrar o erro.
-5. Cria uma função `executar` com `async/await`. Dentro, usa `await esperar(1000)` e faz `console.log` do resultado.
-6. Cria um componente `PedidoSimples` com um botão "Carregar". Ao clicar, chama uma função `async` que espera 1 segundo e mostra "A carregar..." enquanto espera.
-7. Adiciona `finally` para garantir que o loading termina mesmo com erro.
-8. Cria duas Promessas e resolve-as em sequência com `await`.
-9. Usa `Promise.all` com duas Promessas simples e mostra quando ambas terminaram.
-10. Escreve, em 2 a 3 linhas, a diferença entre síncrono e assíncrono com um exemplo do dia a dia.
-11. Cria uma função `pedidoSimulado` que usa `Math.random()` para decidir sucesso ou erro. Passo a passo: (1) `const r = Math.random()`, (2) se `r < 0.5` faz `reject("Falhou")`, (3) caso contrário faz `resolve("OK")`. Depois usa `try/catch` para mostrar a mensagem certa.
+> Faz por ordem. A ideia é ires do “ver na consola” para “usar em React”.
+
+1. **Síncrono vs bloqueio**
+
+- Faz um `while` que bloqueia 1 segundo e observa como a página reage.
+- Escreve 2 frases a explicar o que significa “bloquear” no browser.
+
+2. **Ordem de execução (Event Loop)**
+
+- Copia o exemplo com `console.log("A")`, `setTimeout`, `Promise.resolve` e `console.log("D")`.
+- Antes de correr, escreve a ordem que achas que vai acontecer.
+- Depois confirma e explica porquê em 3 linhas.
+
+3. **Promise encadeada**
+
+- Cria `Promise.resolve(2)`.
+- Faz `.then` para multiplicar por 10.
+- Faz outro `.then` para somar 1.
+- Mostra o resultado final na consola.
+
+4. **Erro numa Promise**
+
+- Cria uma Promise e dentro de um `then` faz `throw new Error("x")`.
+- Garante que o `catch` apanha e mostra a mensagem.
+
+5. **`async/await`**
+
+- Reescreve o exercício 3 usando `async/await`.
+- Faz um `try/catch` e garante que lidas com um erro (podes forçar com `throw`).
+
+6. **`fetch` com `res.ok`**
+
+- Faz `fetch` para `https://jsonplaceholder.typicode.com/users`.
+- Valida `res.ok`, faz `res.json()` e mostra quantos users vieram.
+- Troca a URL para uma inválida e confirma que o `catch` apanha (porque tu lançaste erro).
+
+7. **Paralelo com `Promise.all`**
+
+- Faz `fetch` a `/users` e `/posts` ao mesmo tempo (jsonplaceholder).
+- Usa `Promise.all` e mostra os tamanhos dos dois arrays.
+
+8. **React: botão Carregar**
+
+- Cria um componente como o `BotaoCarregar` desta ficha.
+- Usa `status` (`idle/loading/success/error`) e mostra a UI correta.
+
+9. **React: carregar ao abrir**
+
+- Cria uma lista que carrega ao montar (usa `useEffect`).
+- Garante que tens loading/erro/sucesso.
+
+---
 
 <a id="changelog"></a>
 
 ## Changelog
 
--   2026-01-12: criação do ficheiro.
--   2026-01-12: explicações teóricas aprofundadas e exercícios mais guiados.
--   2026-01-12: clarificação do comportamento assíncrono do `fetch`.
--   2026-01-12: secção ESSENCIAL sobre HTTP (métodos, status e CORS).
+- 2026-01-11: criação do ficheiro.
+- 2026-01-26: reescrita completa para nível mais profissional e previsível:
+    - modelo mental (síncrono/assíncrono)
+    - Event Loop (Call Stack, microtarefas e tarefas)
+    - Promises e propagação de erros
+    - `async/await` (sequencial vs paralelo)
+    - `fetch` com `res.ok` e exemplos GET/POST
+    - ponte direta para React (`status`, handler vs `useEffect`)
+    - exercícios mais progressivos
