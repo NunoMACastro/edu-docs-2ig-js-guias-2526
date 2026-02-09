@@ -22,6 +22,13 @@
 </html>
 ```
 
+Porque é que o HTML é transformado em DOM? Qual a utilidade?
+
+- O HTML é só texto, mas o DOM é uma **estrutura de objetos** que o JavaScript pode manipular.
+- O DOM é a **interface** entre o JavaScript e a página: sem ele, o JS não conseguiria alterar o que o utilizador vê ou interage.
+
+Ou seja, o DOM surgiu da necessidade de tornar o HTML **dinâmico** e **interativo**. Antes do DOM, as páginas eram estáticas: o que estava no HTML era o que o utilizador via. Com o DOM, podemos criar interfaces ricas, jogos, aplicações web, etc.
+
 ---
 
 ## 1) Onde pôr o JavaScript?
