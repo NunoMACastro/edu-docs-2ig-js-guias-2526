@@ -6,11 +6,12 @@ Este repositório junta os apontamentos usados nas aulas de Programação para o
 
 ## Estrutura
 
-| Pasta/ficheiro | Conteúdo                                                                                 |
-| -------------- | ---------------------------------------------------------------------------------------- |
-| `Projeto/`     | Guias para o projeto final: requisitos, planeamento, boas práticas.                      |
-| `JavaScript/`  | 18 capítulos em Markdown cobrindo o percurso completo: fundamentos → browser/intermédio. |
-| `React/`       | Materiais introdutórios de React (em evolução).                                          |
+| Pasta/ficheiro | Conteúdo                                                                                                  |
+| -------------- | --------------------------------------------------------------------------------------------------------- |
+| `Projeto/`     | Guias para o projeto final: requisitos, planeamento, boas práticas.                                       |
+| `JavaScript/`  | 18 capítulos em Markdown cobrindo o percurso completo: fundamentos → browser/intermédio.                  |
+| `HTML e CSS/`  | 16 capítulos em Markdown para bases de frontend: estrutura, layout, responsividade e ponte para JS/React. |
+| `React/`       | Materiais introdutórios de React (em evolução).                                                           |
 
 > Todos os capítulos de JavaScript seguem o mesmo formato: título, objetivo, secções numeradas, exemplos comentados e desafios no fim.
 
@@ -20,9 +21,9 @@ Este repositório junta os apontamentos usados nas aulas de Programação para o
 
 Os guias do projeto final estão na pasta `Projeto/`. Incluem:
 
--   `requisitos.md`: requisitos, temas sugeridos, mini-planeamento.
--   `markdown.md`: guia prático de Markdown (usado para escrever o README do projeto).
--   `planeamento-fase-inicial.md`: checklist e passos para organizar a primeira fase.
+- `requisitos.md`: requisitos, temas sugeridos, mini-planeamento.
+- `markdown.md`: guia prático de Markdown (usado para escrever o README do projeto).
+- `planeamento-fase-inicial.md`: checklist e passos para organizar a primeira fase.
 
 ---
 
@@ -58,9 +59,9 @@ Cada ficheiro tem exemplos prontos a colar no DevTools/Node e termina com desafi
 
 ## Ambiente sugerido
 
--   **Browser (DevTools → Console)** para testar snippets de forma rápida ou usar JSFiddle / JS Playground.
--   **Node.js** para scripts standalone: `node exemplo.js`.
--   Usa `"use strict"` ou `<script type="module">` para manter o comportamento moderno.
+- **Browser (DevTools → Console)** para testar snippets de forma rápida ou usar JSFiddle / JS Playground.
+- **Node.js** para scripts standalone: `node exemplo.js`.
+- Usa `"use strict"` ou `<script type="module">` para manter o comportamento moderno.
 
 ---
 
