@@ -1,0 +1,161 @@
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+}
+
+header {
+  margin-bottom: 1.5rem;
+}
+
+header h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+}
+
+header p {
+  margin: 0;
+  color: #4f5c66;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #d6dee3;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 25px rgba(16, 24, 32, 0.05);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  border: 1px solid #9eb0bc;
+  background: #f4f8fa;
+  color: #1d2a33;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  cursor: pointer;
+  font: inherit;
+}
+
+.filter-btn.active {
+  background: #114c5f;
+  border-color: #114c5f;
+  color: #ffffff;
+}
+
+.content-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+}
+
+.menu-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.menu-item {
+  border: 1px solid #e2e8ed;
+  border-radius: 10px;
+  padding: 0.9rem;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.item-header h3 {
+  margin: 0;
+}
+
+.item-category {
+  margin: 0.35rem 0;
+  color: #4f5c66;
+  font-size: 0.9rem;
+}
+
+.item-actions {
+  margin-top: 0.7rem;
+}
+
+.add-btn {
+  border: 1px solid #0d728f;
+  background: #ffffff;
+  color: #0d728f;
+  border-radius: 8px;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+  font: inherit;
+}
+
+.quantity-controls,
+.mini-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.qty-btn {
+  border: 1px solid #0d728f;
+  background: #f2fafc;
+  color: #0d728f;
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.qty-badge {
+  min-width: 26px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.order-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.order-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border: 1px solid #e2e8ed;
+  border-radius: 8px;
+  padding: 0.6rem;
+}
+
+.order-item-row p {
+  margin: 0.2rem 0 0;
+  color: #4f5c66;
+  font-size: 0.9rem;
+}
+
+.order-total {
+  margin-top: 0.9rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid #d6dee3;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 900px) {
+  .content-layout {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,58 @@
+export const menuData = [
+  {
+    id: 1,
+    nome: "Bruschetta",
+    categoria: "Entradas",
+    preco: 4.5,
+    descricao: "Pao tostado com tomate, azeite e alho.",
+  },
+  {
+    id: 2,
+    nome: "Sopa do dia",
+    categoria: "Entradas",
+    preco: 3.5,
+    descricao: "Sopa fresca preparada diariamente.",
+  },
+  {
+    id: 3,
+    nome: "Lasanha de carne",
+    categoria: "Pratos",
+    preco: 11.9,
+    descricao: "Lasanha caseira com molho de tomate e queijo.",
+  },
+  {
+    id: 4,
+    nome: "Bacalhau grelhado",
+    categoria: "Pratos",
+    preco: 14.5,
+    descricao: "Bacalhau com batata a murro e legumes.",
+  },
+  {
+    id: 5,
+    nome: "Cheesecake",
+    categoria: "Sobremesas",
+    preco: 5,
+    descricao: "Cheesecake cremoso com doce de frutos vermelhos.",
+  },
+  {
+    id: 6,
+    nome: "Mousse de chocolate",
+    categoria: "Sobremesas",
+    preco: 4.2,
+    descricao: "Mousse leve com raspas de chocolate.",
+  },
+  {
+    id: 7,
+    nome: "Limonada",
+    categoria: "Bebidas",
+    preco: 2.8,
+    descricao: "Limonada natural com hortela.",
+  },
+  {
+    id: 8,
+    nome: "Cha gelado",
+    categoria: "Bebidas",
+    preco: 2.6,
+    descricao: "Cha preto frio com toque citrico.",
+  },
+];
