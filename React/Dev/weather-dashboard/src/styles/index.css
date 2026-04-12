@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap");
+
+:root {
+    --primary: #18b8e8;
+    --primary-strong: #0f8db3;
+    --accent: #ff932b;
+    --accent-strong: #ff7a00;
+    --bg-main: #070d14;
+    --bg-surface: #101b2a;
+    --bg-elev: #162336;
+    --text-main: #e8f2ff;
+    --text-soft: #9ab0c7;
+    --border: #29405a;
+    --ok: #23c585;
+    --danger: #ff5f72;
+    --shadow-soft: 0 20px 36px -22px rgba(0, 0, 0, 0.7);
+
+    --font-title: "Space Grotesk", system-ui, sans-serif;
+    --font-body: "Outfit", system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--text-main);
+    background:
+        radial-gradient(circle at 10% 10%, rgba(24, 184, 232, 0.16) 0%, transparent 34%),
+        radial-gradient(circle at 90% 6%, rgba(255, 147, 43, 0.14) 0%, transparent 30%),
+        linear-gradient(180deg, #050a11 0%, var(--bg-main) 100%);
+    min-height: 100vh;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+    color: inherit;
+}
