@@ -1,9 +1,16 @@
 # Tutorial passo a passo - Weather Dashboard (Ficha React 11.º ano)
 
 Este tutorial explica, do início ao fim, como construir a app **weather-dashboard**.
-É uma ficha pensada para consolidar os **8 temas fundamentais de React** (ficheiros 1–8 da pasta React), com foco em linguagem simples e prática guiada.
+É uma ficha pensada para consolidar os seguintes temas de React:
 
-> Projeto: **React + Vite** (frontend apenas). Não usamos backend e ainda **não usamos React Router**.
+1. Fundamentos e setup
+2. JSX e componentes
+3. Props e composição
+4. Estado e eventos
+5. Listas e condicionais
+6. Formulários controlados
+7. Assíncrono
+8. useEffect e dados externos
 
 ---
 
