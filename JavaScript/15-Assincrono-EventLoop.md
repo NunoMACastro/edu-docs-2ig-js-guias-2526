@@ -88,10 +88,11 @@ Para isso, usamos o construtor `Promise`:
 ```js
 const p = new Promise((resolve, reject) => {
     // faz algo assíncrono
-    if (/* correu bem */) {
-        resolve(valor); // promessa cumprida
+    const correuBem = true; // troca para false para simular falha
+    if (correuBem) {
+        resolve("resultado"); // promessa cumprida
     } else {
-        reject(erro); // promessa falhada
+        reject(new Error("falhou")); // promessa falhada
     }
 });
 ```

@@ -1,4 +1,4 @@
-# React.js (12.º Ano) - 05 · Listas e condicionais
+# React.js (11.º Ano - módulo introdutório) - 05 · Listas e condicionais
 
 > **Objetivo deste ficheiro**
 >

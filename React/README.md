@@ -7,6 +7,7 @@ Conjunto de materiais em Markdown para o módulo de React.js.
 - Começa no ficheiro `01_fundamentos_e_setup.md` e segue a ordem.
 - Faz os exemplos no teu projeto e depois resolve os exercícios.
 - Os blocos [EXTRA] são opcionais para quem quer aprofundar.
+- Neste ciclo letivo (11.º, módulo introdutório), o escopo oficial vai até ao ficheiro `08_useEffect_e_dados.md`.
 
 ## Pré-requisitos
 
@@ -55,12 +56,7 @@ npm run dev
 - [06 - Formulários controlados](06_formularios_controlados.md)
 - [07 - Comunicação síncrona e assíncrona](07_comunicacao_sincrona_e_assincrona.md)
 - [08 - useEffect e dados externos](08_useEffect_e_dados.md)
-- [09 - React Router: fundamentos e setup](09_react_router_fundamentos.md)
-- [10 - Navegação e rotas dinâmicas](10_navegacao_e_rotas_dinamicas.md)
-- [11 - Consumo de API com backend Node.js](11_consumo_api_e_backend_node.md)
-- [12 - Context API e estado global](12_context_api_estado_global.md)
-- [13 - HTTP, REST, CORS e contratos de API](13_http_rest_cors_e_contratos_api.md)
-- [14 - Autenticação em SPA: JWT, sessões e cookies](14_autenticacao_em_spa_jwt_sessions_cookies.md)
-- [15 - Upload, paginação, filtros e cliente de API](15_upload_paginacao_filtros_e_cliente_api.md)
-- [16 - Qualidade profissional: TypeScript, testes e tooling](16_qualidade_profissional_tooling_testes_typescript.md)
-- [17 - Organização, boas práticas e mini-projeto guiado](17_organizacao_boas_praticas_e_miniprojeto_guiado.md)
+
+## Conteúdos reservados para 12.º
+
+Os capítulos avançados de React (roteamento, backend/API avançada, auth, upload, tooling e mini-projeto avançado) foram retirados deste ciclo e ficam reservados para o 12.º ano.

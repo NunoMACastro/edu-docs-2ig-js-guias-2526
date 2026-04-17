@@ -157,8 +157,8 @@ class Conta {
 const c = new Conta();
 c.depositar(100);
 console.log(c.saldo); // 100
-c.#saldo = 1000; // ERRO: campo privado (não executar)
-c.#registar("DEP", 50); // ERRO: método privado (não executar)
+// c.#saldo = 1000; // ERRO de sintaxe: campo privado só dentro da classe
+// c.#registar("DEP", 50); // ERRO de sintaxe: método privado só dentro da classe
 ```
 
 > Em JS **não existe** o modificador “protegido” (protected). Se precisares que subclasses interajam, expõe **métodos públicos** específicos em vez de abrir o estado.
@@ -649,8 +649,17 @@ console.log(`Fahrenheit: ${t.fahrenheit}`); // 77
 Podemos fazer um getter para os celsius também:
 
 ```js
-get celsius() {
-    return this.#celsius;
+class Termometro {
+    #celsius;
+    constructor(celsius) {
+        this.#celsius = celsius;
+    }
+    get celsius() {
+        return this.#celsius;
+    }
+    get fahrenheit() {
+        return this.#celsius * 1.8 + 32;
+    }
 }
 ```
 
@@ -759,6 +768,9 @@ class Turma {
     aprovados() {
         return this.#alunos.filter((aluno) => aluno.nota >= 10);
     }
+    totalAlunos() {
+        return this.#alunos.length;
+    }
 }
 
 // Teste
@@ -792,32 +804,20 @@ class Escola {
         }
         this.#turmas.push(turma);
     }
-    // Média geral sem reduce
+    // Média geral ponderada pelo número de alunos de cada turma
     mediaGeral() {
         if (this.#turmas.length === 0) return 0;
         let soma = 0;
         let totalAlunos = 0;
         for (const turma of this.#turmas) {
-            for (const aluno of turma.#alunos) {
-                soma += aluno.nota;
-                totalAlunos++;
-            }
+            // A turma deve expor um método público totalAlunos()
+            const n = turma.totalAlunos();
+            soma += turma.media() * n;
+            totalAlunos += n;
         }
+        if (totalAlunos === 0) return 0;
         return Math.round((soma / totalAlunos) * 10) / 10;
     }
-    // Média geral sem reduce e usando a função media() da Turma
-    /*
-    mediaGeral() {
-        if (this.#turmas.length === 0) return 0;
-        let soma = 0;
-        let totalAlunos = 0;
-        for (const turma of this.#turmas) {
-            soma += turma.media() * turma.#alunos.length;
-            totalAlunos += turma.#alunos.length;
-        }
-        return Math.round((soma / totalAlunos) * 10) / 10;
-    }
-    */
 }
 
 // Teste

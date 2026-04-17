@@ -1,4 +1,4 @@
-# React.js (12.º Ano) - 06 · Formulários controlados
+# React.js (11.º Ano - módulo introdutório) - 06 · Formulários controlados
 
 > **Objetivo deste ficheiro**
 >

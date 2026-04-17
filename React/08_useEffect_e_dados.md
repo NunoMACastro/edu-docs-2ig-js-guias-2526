@@ -1,4 +1,4 @@
-# React.js (12.º Ano) - 08 · useEffect e dados externos
+# React.js (11.º Ano - módulo introdutório) - 08 · useEffect e dados externos
 
 > **Objetivo deste ficheiro**
 >
@@ -33,7 +33,7 @@
     - quantas vezes o componente renderiza,
     - quando o `useEffect` corre,
     - e o que muda quando mexes nas dependências.
-- **Ligações:** se precisares, revê estado e eventos em `04_estado_e_eventos.md` e consumo de APIs em `11_consumo_api_e_backend_node.md`.
+- **Ligações:** se precisares, revê estado e eventos em `04_estado_e_eventos.md`.
 
 ---
 
@@ -994,7 +994,7 @@ export default ListaPosts;
 ### 5.4 Quando é que faz sentido subir para `useReducer`? (nota curta)
 
 Quando tens muitos estados e muitas transições, `useReducer` começa a compensar.
-Mas para 12.º ano, o `status` já dá um salto enorme em organização sem aumentar demasiado a complexidade.
+Mas para o 11.º ano (módulo introdutório), o `status` já dá um salto enorme em organização sem aumentar demasiado a complexidade.
 
 ---
 

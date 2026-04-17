@@ -154,13 +154,15 @@ function fatorial(n) {
 
 Contar vogais numa palavra:
 
-````js
+```js
 function contarVogais(palavra) {
     if (palavra.length === 0) return 0;
     const primeira = palavra[0].toLowerCase();
     const resto = palavra.slice(1);
     const ehVogal = "aeiou".includes(primeira) ? 1 : 0;
     return ehVogal + contarVogais(resto);
+}
+```
 
 ---
 
@@ -176,7 +178,7 @@ let total = 0;
 function adicionar(n) {
     total += n; // impura (depende de total)
 }
-````
+```
 
 Prefere funções puras sempre que possível: mais fáceis de testar e repetir.
 
@@ -300,7 +302,3 @@ Este padrão é muito usado em código real porque:
 - **v1.1.0 — 2025-11-10**
     - Mini desafios ampliados com mais quatro propostas sobre closures e composição de funções.
     - Changelog adicionado para acompanhar futuras melhorias do capítulo.
-
-```
-
-```

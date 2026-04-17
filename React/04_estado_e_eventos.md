@@ -1,4 +1,4 @@
-# React.js (12.º Ano) - 04 · Estado e eventos
+# React.js (11.º Ano - módulo introdutório) - 04 · Estado e eventos
 
 > **Objetivo deste ficheiro**
 >
@@ -831,7 +831,7 @@ Raramente, mas há casos:
 - o cálculo é muito pesado
 - e queres memorizar com `useMemo` (mais tarde, ficheiro próprio ou secção EXTRA)
 
-Para 12.º ano, regra prática:
+Para 11.º ano (módulo introdutório), regra prática:
 
 - calcula no render sempre que for simples (e geralmente é).
 

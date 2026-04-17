@@ -222,7 +222,10 @@ container.append(p);
 function debounce(fn, delay=300){
   let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), delay); };
 }
-const filtrar = debounce(() => /* filtra lista */, 300);
+function filtrarLista() {
+  // filtra lista
+}
+const filtrar = debounce(() => filtrarLista(), 300);
 document.querySelector('#q').addEventListener('input', filtrar);
 
 // DocumentFragment

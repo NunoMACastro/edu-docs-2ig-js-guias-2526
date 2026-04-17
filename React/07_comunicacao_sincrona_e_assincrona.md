@@ -1,4 +1,4 @@
-# React.js (12.º Ano) - 07 · Comunicação síncrona e assíncrona
+# React.js (11.º Ano - módulo introdutório) - 07 · Comunicação síncrona e assíncrona
 
 > **Objetivo deste ficheiro**
 >

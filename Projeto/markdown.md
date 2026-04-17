@@ -212,8 +212,8 @@ Podes usar HTML simples quando o Markdown não chega, **mas** nem todas as plata
 | Lista           | `- item`               | subitens com 2 espaços     |
 | Lista ordenada  | `1. item`              | numeração automática       |
 | Citação         | `> texto`              | pode ter vários parágrafos |
-| Link            | `[texto](url)`         | links internos: `#secao`   |
-| Imagem          | `![alt](url "título")` | alt = acessibilidade       |
+| Link            | `[texto](https://exemplo.com)`         | links internos: `#secao`   |
+| Imagem          | `![alt](https://exemplo.com/imagem.jpg "título")` | alt = acessibilidade       |
 | Código inline   | `` `código` ``         | usa crases                 |
 | Bloco de código | ` ```js … ``` `        | indica linguagem           |
 | Tabela          | ver modelo             | GFM                        |

@@ -1,4 +1,4 @@
-# React.js (12.º Ano) - 03 · Props e composição
+# React.js (11.º Ano - módulo introdutório) - 03 · Props e composição
 
 > **Objetivo deste ficheiro**
 >
@@ -660,7 +660,7 @@ Mas quando começa a ficar demasiado longo, fica chato e aumenta a chance de err
 
 - Reorganizar componentes (meter o dono do estado mais perto de quem usa).
 - Criar componentes que recebem `children` (reduz a necessidade de passar coisas).
-- Usar **Context** quando for mesmo necessário (vais ver no `12_context_api_estado_global.md`).
+- Usar **Context** quando for mesmo necessário (tema de continuidade no 12.º ano).
 
 ---
 

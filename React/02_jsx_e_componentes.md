@@ -1,4 +1,4 @@
-# React.js (12.º Ano) - 02 · JSX e componentes
+# React.js (11.º Ano - módulo introdutório) - 02 · JSX e componentes
 
 > **Objetivo deste ficheiro**
 >
@@ -578,7 +578,7 @@ export default CartaoPerfil;
 function Footer() {
     return (
         <footer>
-            <small>© 2026 - React (12.º ano)</small>
+            <small>© 2026 - React (11.º, módulo introdutório)</small>
         </footer>
     );
 }

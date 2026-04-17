@@ -41,15 +41,16 @@ Usa sempre o literal `[]` quando possível - é mais claro.
 - `unshift` / `shift` → início.
 - `splice(índice, nRemover, ...itens)` → remove/inserir em qualquer posição. Indice -> onde começar, nRemover -> quantos remover, itens -> o que inserir.
   Exemplo:
-    ```js
-    const arr = [1, 2, 3];
-    // Adicionar
-    arr.splice(1, 0, 1.5); // [1, 1.5, 2, 3]
-    // Remover
-    arr.splice(2, 1); // [1, 1.5, 3]
-    // Adicionar e remover
-    arr.splice(0, 2, 0); // [0, 3]
-    ```
+
+```js
+const arr = [1, 2, 3];
+// Adicionar
+arr.splice(1, 0, 1.5); // [1, 1.5, 2, 3]
+// Remover
+arr.splice(2, 1); // [1, 1.5, 3]
+// Adicionar e remover
+arr.splice(0, 2, 0); // [0, 3]
+```
 - `sort(compareFn)` → ordena (muta o array!).
 - `reverse()` → inverte (muta o array!).
 - `fill(valor, inicio?, fim?)` → preenche intervalo.

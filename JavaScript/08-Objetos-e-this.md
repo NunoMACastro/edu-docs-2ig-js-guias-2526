@@ -230,12 +230,10 @@ const outraVez = JSON.parse(texto);
 // Por exemplo, guardar no localStorage
 localStorage.setItem("aluno", JSON.stringify(aluno)); // guardar
 const salvo = JSON.parse(localStorage.getItem("aluno")); // ler
-
-> O localStorage é uma API do navegador para guardar dados localmente.
-> Os dados podem depois ser recuperados pelas aplicações web.
-
-
 ```
+
+> O `localStorage` é uma API do navegador para guardar dados localmente.
+> Os dados podem depois ser recuperados pelas aplicações web.
 
 JSON usa aspas duplas e não aceita comentários.
 

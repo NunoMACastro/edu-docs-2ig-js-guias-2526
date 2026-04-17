@@ -1,4 +1,4 @@
-# React.js (12.º Ano) - 01 · Fundamentos e setup de React
+# React.js (11.º Ano - módulo introdutório) - 01 · Fundamentos e setup de React
 
 > **Objetivo deste ficheiro**
 >
@@ -67,7 +67,7 @@ Ou seja, tu dizes:
 
 E o React trata de atualizar o ecrã quando os dados mudam.
 
-> **Nota sobre SPA:** “Single Page Application” não significa uma única página de conteúdo. Significa que a app **não recarrega o browser** a cada mudança. O conteúdo muda por JavaScript (vais ver melhor quando entrarem rotas em `09_react_router_fundamentos.md`).
+> **Nota sobre SPA:** “Single Page Application” não significa uma única página de conteúdo. Significa que a app **não recarrega o browser** a cada mudança. O conteúdo muda por JavaScript. O tema de rotas fica para continuidade no 12.º ano.
 
 ---
 
