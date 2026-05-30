@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # Projeto React — Questionário de Arranque e Mapa Mental (11.º ano)
 
 > **Objetivo deste ficheiro**  
@@ -311,3 +313,5 @@ Antes de entregar esta fase do trabalho, confirmem:
     -   “O utilizador consegue …”
 
 Quando isto estiver completo, já têm uma **base sólida** para começar o planeamento do código e dos componentes em React.
+
+![Footer](../Images/Footer.png)

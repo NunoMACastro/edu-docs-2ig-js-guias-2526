@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [12] Estados Visuais, Interação e Transições (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -127,3 +129,5 @@ Resultado esperado:
 
 - v1.0.1 - `:focus-visible` e `prefers-reduced-motion` adicionados; classes normalizadas para `.cartao`.
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)

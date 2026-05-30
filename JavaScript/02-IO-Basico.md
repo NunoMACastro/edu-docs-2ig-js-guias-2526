@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [2] Input/Output Básico (11.º ano)
 
 > **Objetivo**: mostrar informação (`output`) e recolher dados (`input`) tanto no browser como em Node.js, usando ferramentas simples e previsíveis.
@@ -116,3 +118,5 @@ rl.close();
 - **v1.1.0 — 2025-11-10**
     - Acrescentados sete exercícios cobrindo browser e Node para treinar I/O.
     - Passa a existir secção de changelog para acompanhar futuras revisões.
+
+![Footer](../Images/Footer.png)

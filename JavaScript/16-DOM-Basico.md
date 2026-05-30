@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [16] DOM Básico - Seletores, Criação/Injeção, Classes, Atributos, Eventos, Delegação, Formulários (11.º ano)
 
 > **Objetivo**: perceber **o que é o DOM**, saber **selecionar elementos**, **ler/alterar** texto e atributos, **criar/injetar/remover** nós, **trabalhar com classes e estilos**, **ouvir eventos** (cliques, inputs, submit), aplicar **delegação de eventos**, e **ler formulários** de forma simples e segura. Linguagem pensada para 11.º ano.
@@ -302,3 +304,5 @@ lista.addEventListener("click", (e) => {
 - **v1.1.0 - 2025-11-10**
     - Exercícios promovidos a Mini desafios e expandidos para sete cenários de manipulação do DOM.
     - Adicionada secção de changelog para acompanhar evoluções do capítulo.
+
+![Footer](../Images/Footer.png)

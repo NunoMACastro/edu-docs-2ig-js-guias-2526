@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [14] Ponte para DOM e JavaScript (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -140,3 +142,5 @@ Resultado esperado:
 - v1.0.2 - Exemplo de criação de itens atualizado para evitar `innerHTML` inseguro.
 - v1.0.1 - Formulário com `label` + `name`, validação com `trim()` e delegação com `data-action` adicionados.
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)

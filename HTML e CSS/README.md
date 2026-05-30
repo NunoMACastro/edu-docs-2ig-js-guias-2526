@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # HTML e CSS - Capítulos (11.º ano)
 
 Coleção de 16 capítulos para consolidar bases de frontend e preparar transição natural para DOM em JavaScript e componentes em React.
@@ -66,3 +68,5 @@ mini-projeto/
 - v1.0.2 - Convenções globais ajustadas (incluindo `.input`) e revisão final de consistência.
 - v1.0.1 - Índice validado, links corrigidos e convenções globais normalizadas.
 - v1.0.0 - Estrutura inicial da coleção.
+
+![Footer](../Images/Footer.png)

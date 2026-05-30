@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # Markdown — Guia Prático (11.º ano)
 
 > **Objetivo:** aprender a escrever documentos claros e bem formatados usando **Markdown** (MD).  
@@ -227,3 +229,5 @@ Podes usar HTML simples quando o Markdown não chega, **mas** nem todas as plata
 
 -   **v1.0.0 — 2025-11-25**
     -   Versão inicial: sintaxe essencial, GFM, boas práticas, 3 modelos prontos, exercícios por níveis, checklist e cheatsheet.
+
+![Footer](../Images/Footer.png)

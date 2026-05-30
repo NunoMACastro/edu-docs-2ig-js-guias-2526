@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [17] Fetch / AJAX - Requisições HTTP no Browser (11.º ano)
 
 > **Objetivo**: aprender a **pedir e enviar dados** entre a tua página e um **servidor** usando `fetch`. Vamos explicar o essencial de **HTTP**, o que é uma **API** em linguagem simples, trabalhar com **JSON**, tratar **erros**, usar **timeout/cancelamento** com `AbortController`, fazer **GET/POST**, construir **query strings**, e enviar **ficheiros** com `FormData`. No fim tens mini‑projetos e exercícios.
@@ -286,3 +288,5 @@ async function getPrivado(url, token) {
 - **v1.1.0 - 2025-11-10**
     - Exercícios renomeados para Mini desafios e revistos para cobrir o ciclo completo de pedidos.
     - Changelog adicionado para acompanhar futuras melhorias do capítulo.
+
+![Footer](../Images/Footer.png)

@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [10] CSS Grid para Grelhas (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -132,3 +134,5 @@ Resultado esperado:
 
 - v1.0.1 - Scoping obrigatório com `.layout > ...` e exemplo completo com `grid-template-areas`.
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)

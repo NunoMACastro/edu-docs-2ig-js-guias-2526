@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [11] Responsividade Mobile-First (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -99,3 +101,5 @@ Resultado esperado:
 
 - v1.0.1 - Container com `width: min(...)` e checkpoints 375/768/1024 adicionados.
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)

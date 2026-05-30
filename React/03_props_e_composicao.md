@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # React.js (11.º Ano - módulo introdutório) - 03 · Props e composição
 
 > **Objetivo deste ficheiro**
@@ -715,3 +717,5 @@ Mas quando começa a ficar demasiado longo, fica chato e aumenta a chance de err
 - 2026-01-11: criação do ficheiro.
 - 2026-01-26: reforço do modelo mental de props como “entradas do componente”.
 - 2026-01-26: expansão didática (destructuring, defaults, booleanos, children, funções como props, exemplos com estado no pai e nota de prop drilling).
+
+![Footer](../Images/Footer.png)

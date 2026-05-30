@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [6] Ciclos (11.º ano)
 
 > **Objetivo**: repetir ações sem escrever o mesmo código várias vezes, escolhendo o ciclo certo (`for`, `while`, `for...of`, etc.) e evitando armadilhas como loops infinitos.
@@ -170,3 +172,5 @@ Isto ajuda a compreender o que `map`/`filter` fazem nos capítulos seguintes.
 - **v1.1.0 — 2025-11-10**
     - Secção de Exercícios ampliada para sete propostas cobrindo `for`, `while`, `do...while` e padrões comuns.
     - Adicionado changelog para registar futuras alterações do capítulo.
+
+![Footer](../Images/Footer.png)

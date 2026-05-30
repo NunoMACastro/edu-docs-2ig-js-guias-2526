@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [4] Strings (11.º ano)
 
 > **Objetivo**: trabalhar textos em JavaScript de forma simples: criar, formatar, procurar, recortar e substituir sem te perderes em detalhes demasiado técnicos.
@@ -158,3 +160,5 @@ Explica passo a passo aos alunos antes de copiarem; aproveita para falar de rege
 -   **v1.1.0 - 2025-11-10**
     -   Nova secção de Exercícios com sete propostas focadas em manipulação de strings.
     -   Adicionada secção de changelog para acompanhar futuras revisões.
+
+![Footer](../Images/Footer.png)

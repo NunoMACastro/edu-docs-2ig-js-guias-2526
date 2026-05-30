@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [15] Assíncrono e Event Loop (11.º ano)
 
 > **Objetivo**: perceber, com linguagem simples e exemplos práticos, o que é **síncrono** e **assíncrono**, quem comunica com quem no JavaScript, o que é uma **Promise**, o que faz o **Event Loop** e por que razão `Promise` e `setTimeout` nem sempre correm na ordem que imaginas.
@@ -317,3 +319,5 @@ Imagina que tens uma fila de pessoas (callbacks) à espera de serem atendidas. O
 - **v1.1.0 - 2025-11-10**
     - Mini desafios atualizados (agora com sete propostas). Inclui exercícios de retry, timeout e ordem de execução.
     - Changelog introduzido para acompanhar evoluções futuras do capítulo.
+
+![Footer](../Images/Footer.png)

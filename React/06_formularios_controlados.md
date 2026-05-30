@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # React.js (11.º Ano - módulo introdutório) - 06 · Formulários controlados
 
 > **Objetivo deste ficheiro**
@@ -919,3 +921,5 @@ function Upload() {
 - 2026-01-11: criação do ficheiro.
 - 2026-01-12: exemplos base de inputs controlados, submit e validação simples.
 - 2026-01-26: reescrita completa para maior clareza e detalhe (nível do ficheiro 08), com modelo mental, decisões práticas, exemplos completos, validação por campo, estado em objeto e secção de diagnóstico.
+
+![Footer](../Images/Footer.png)

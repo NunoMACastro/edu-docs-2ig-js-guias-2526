@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # JavaScript - Capítulos (11.º ano)
 
 Guia de estudo em 18 capítulos, do essencial ao browser/intermédio. Segue a ordem numérica e pratica os desafios no fim de cada ficheiro.
@@ -33,3 +35,5 @@ Guia de estudo em 18 capítulos, do essencial ao browser/intermédio. Segue a or
 - **Browser (DevTools → Console)** para testar snippets rápidos.
 - **Node.js** para scripts standalone: `node exemplo.js`.
 - Usa `"use strict"` ou `<script type="module">` para manter comportamento moderno.
+
+![Footer](../Images/Footer.png)

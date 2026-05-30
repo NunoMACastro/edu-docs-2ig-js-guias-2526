@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # React.js (11.º Ano - módulo introdutório) - 07 · Comunicação síncrona e assíncrona
 
 > **Objetivo deste ficheiro**
@@ -709,3 +711,5 @@ No React, a solução profissional passa por `AbortController` (ver ficheiro 08,
     - `fetch` com `res.ok` e exemplos GET/POST
     - ponte direta para React (`status`, handler vs `useEffect`)
     - exercícios mais progressivos
+
+![Footer](../Images/Footer.png)

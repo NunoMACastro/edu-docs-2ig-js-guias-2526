@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [13] Módulos ES (11.º ano)
 
 > **Objetivo**: dividir o código por ficheiros (`módulos`), exportar valores e importá-los noutros sítios, percebendo a diferença entre `default` e `named` exports tanto no browser como em Node.js.
@@ -255,3 +257,5 @@ No Node moderno podes usar `import dados from "./dados.json" assert { type: "jso
 - **v1.1.0 - 2025-11-10**
     - Separação entre boas práticas e mini desafios, com quatro novos desafios avançados.
     - Changelog adicionado para registar alterações ao capítulo.
+
+![Footer](../Images/Footer.png)

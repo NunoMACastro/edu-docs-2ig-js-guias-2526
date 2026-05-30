@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [20] Projeto React — Guia de Tema, Propósitos, **Requisitos e Limites Funcionais** (11.º ano)
 
 > **Objetivo:** orientar grupos de 3–4 alunos a planear e construir uma **aplicação em React sem backend**, cumprindo **requisitos funcionais mínimos** e respeitando **limites de âmbito** adequados ao nível atual (sem base de dados, sem autenticação, sem servidores).
@@ -172,3 +174,5 @@ Papéis (podem rodar): Coordenação/Docs · UI/Estilos · Lógica/Estado · Tes
 
 -   **v1.1.0 — 2025-11-25** — Adicionados **requisitos funcionais mínimos**, **limites funcionais** com alternativas, exemplos por tema, checklist de conformidade e rubrica atualizada.
 -   **v1.0.0 — 2025-11-25** — Versão inicial (objetivos, ideias de tema, planeamento, entregáveis, rubrica, glossário, anexo `localStorage`).
+
+![Footer](../Images/Footer.png)

@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [2] HTML Semântico e Estrutura (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -117,3 +119,5 @@ Resultado esperado:
 
 - v1.0.1 - Semântica reforçada, exemplos A/B completos e exercícios A/B/C com resultados esperados.
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)

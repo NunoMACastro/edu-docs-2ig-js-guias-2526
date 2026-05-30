@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [1] Variáveis e Tipos (11.º ano)
 
 > **Objetivo**: perceber porque existe `"use strict"`, quando usar `var`/`let`/`const`, o que significa “tipo” em JavaScript e como evitar surpresas com coerção e igualdade.
@@ -155,3 +157,5 @@ a === c; // true
 - **v1.1.0 — 2025-11-10**
     - Secção de Exercícios expandida para sete propostas práticas.
     - Adicionada a primeira entrada de changelog para registar futuras alterações.
+
+![Footer](../Images/Footer.png)

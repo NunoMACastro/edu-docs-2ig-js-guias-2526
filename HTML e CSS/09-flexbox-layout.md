@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [9] Flexbox para Layout Moderno (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -139,3 +141,5 @@ Resultado esperado:
 
 - v1.0.1 - `flex-direction` e `align-content` documentados; padrões completos de navbar e grelha com wrap.
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)

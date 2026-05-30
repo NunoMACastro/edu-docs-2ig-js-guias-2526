@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [7] Box Model, Unidades e Display (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -122,3 +124,5 @@ Resultado esperado:
 
 - v1.0.1 - Reset mínimo e `box-sizing` com pseudo-elementos adicionados; colapso de margens documentado.
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)

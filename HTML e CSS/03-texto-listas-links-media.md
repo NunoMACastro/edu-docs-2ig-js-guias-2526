@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [3] Texto, Listas, Links e Media (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -112,3 +114,5 @@ Resultado esperado:
 
 - v1.0.1 - Links externos normalizados com `noopener noreferrer` e bloco multimédia reforçado.
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)

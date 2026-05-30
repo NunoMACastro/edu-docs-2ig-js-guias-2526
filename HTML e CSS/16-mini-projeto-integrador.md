@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [16] Mini-Projeto Integrador (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -366,3 +368,5 @@ Resultado esperado:
 - v1.0.2 - Estrutura canónica fixada com `js/main.js` e secção de erros comuns adicionada.
 - v1.0.1 - Starter Kit completo adicionado; milestones com resultados esperados; "opcional" convertido em Desafio extra com regra explícita.
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)

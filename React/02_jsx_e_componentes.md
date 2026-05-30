@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # React.js (11.º Ano - módulo introdutório) - 02 · JSX e componentes
 
 > **Objetivo deste ficheiro**
@@ -690,3 +692,5 @@ export default App;
 - 2026-01-12: exercícios iniciais reescritos em formato passo a passo.
 - 2026-01-12: mini-seção sobre render e re-render em componentes funcionais.
 - 2026-01-26: expansão didática (JSX como expressão, condições, style como objeto com regras práticas, export default vs named export, mini-projeto guiado e exercícios com diagnóstico).
+
+![Footer](../Images/Footer.png)

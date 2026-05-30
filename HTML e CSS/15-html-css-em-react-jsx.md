@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [15] HTML/CSS em React e JSX (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -124,3 +126,5 @@ Resultado esperado:
 
 - v1.0.1 - Armadilhas críticas de JSX adicionadas (`style` objeto, camelCase e import CSS).
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)

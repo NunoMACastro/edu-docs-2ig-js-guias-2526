@@ -1,3 +1,5 @@
+![Header](../../../Images/Header.png)
+
 # App React: Menu de Restaurante (componentes, props e useState)
 
 Este guia mostra todos os passos para criar e implementar uma app simples em React para praticar:
@@ -437,3 +439,5 @@ Checklist rapido:
 
 Nesta sessao, a criacao automatica com `npm create vite@latest` falhou por falta de acesso a rede (`registry.npmjs.org`).
 A estrutura e os ficheiros da app foram criados manualmente com o mesmo resultado final esperado para um projeto Vite + React.
+
+![Footer](../../../Images/Footer.png)

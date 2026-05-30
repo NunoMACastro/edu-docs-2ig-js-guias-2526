@@ -1,3 +1,5 @@
+![Header](Images/Header.png)
+
 # Guias JavaScript (11.º ano)
 
 Este repositório junta os apontamentos usados nas aulas de Programação para o 11.º IG.
@@ -68,3 +70,5 @@ Cada ficheiro tem exemplos prontos a colar no DevTools/Node e termina com desafi
 ## React
 
 A pasta `React/` contém guias de introdução à framework (setup, componentes, estado). Estes materiais seguem a mesma filosofia: capítulos em Markdown focados em exemplos e desafios.
+
+![Footer](Images/Footer.png)

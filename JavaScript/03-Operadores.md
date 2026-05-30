@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [3] Operadores Essenciais (11.º ano)
 
 > **Objetivo**: dominar as operações básicas de matemática, comparação e decisão em JavaScript usando uma linguagem clara e evitando armadilhas de coerção.
@@ -139,3 +141,5 @@ Usa parênteses sempre que a expressão possa gerar dúvidas.
 -   **v1.1.0 - 2025-11-10**
     -   Atualização da secção de Exercícios com sete propostas focadas em coerção e operadores lógicos.
     -   Changelog adicionado para registar futuras evoluções do capítulo.
+
+![Footer](../Images/Footer.png)

@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [4] Tabelas e Conteúdo Estruturado (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -124,3 +126,5 @@ Resultado esperado:
 
 - v1.0.1 - Exemplo tabular completo, anti-padrão de layout clarificado e exercícios A/B/C alinhados.
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)

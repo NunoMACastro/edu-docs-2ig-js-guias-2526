@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [13] Acessibilidade e Boas Práticas (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -124,3 +126,5 @@ Resultado esperado:
 
 - v1.0.1 - Skip link e validação acessível com `aria-*` adicionados; regra "não usar só cor" reforçada.
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)

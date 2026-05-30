@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [5] Formulários HTML e Validação Nativa (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -460,3 +462,5 @@ Sem usar bibliotecas:
 - v1.1.0 - Capítulo expandido com tags de formulário, lista completa de `input type`, validação nativa detalhada, acessibilidade e laboratório prático.
 - v1.0.1 - Regras de `label`/`name` reforçadas, exemplos A/B ajustados e exercícios A/B/C adicionados.
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)

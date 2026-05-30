@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # React.js (11.º Ano - módulo introdutório) - 04 · Estado e eventos
 
 > **Objetivo deste ficheiro**
@@ -1017,3 +1019,5 @@ Checkpoint:
 
 - 2026-01-11: criação do ficheiro.
 - 2026-01-26: atualização completa para nível didático mais alto: modelo mental de estado como “memória do componente”, árvore de decisão (estado vs variável), snapshot de render, eventos e handlers, atualização funcional, imutabilidade, padrões para arrays/objetos e checklist de diagnóstico.
+
+![Footer](../Images/Footer.png)

@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # React.js (11.º Ano - módulo introdutório) - 01 · Fundamentos e setup de React
 
 > **Objetivo deste ficheiro**
@@ -547,3 +549,5 @@ Se estiverem a usar Git:
 - 2026-01-11: criação do ficheiro.
 - 2026-01-12: clarificação de SPA e reforço de onde editar e do papel do `root`.
 - 2026-01-26: expansão didática (modelo mental declarativo, re-render observável, Vite explicado por comandos, troubleshooting comum, e exercícios com diagnóstico).
+
+![Footer](../Images/Footer.png)

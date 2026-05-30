@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [8] Tipografia, Cores e Variáveis CSS (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -133,3 +135,5 @@ Resultado esperado:
 
 - v1.0.1 - Secção de tokens adicionada, `--focus-ring` incluído e exemplo completo de componentes normalizados.
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)

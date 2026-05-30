@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [12] Exceções (11.º ano) - guia prático e sem classes
 
 > **Objetivo**: entender o que é uma exceção, ler mensagens de erro, impedir que o programa morra de repente e criar estratégias simples para tratar problemas síncronos e assíncronos **com as ferramentas que já conheces** (funções, objetos, ciclos, arrays).
@@ -559,3 +561,5 @@ console.log(dividirSeguro(10, "a")); // { ok: false, erro: TypeError }
 - **v1.1.0 - 2025-11-10**
     - Mini desafios expandidos para sete propostas cobrindo erros síncronos e assíncronos.
     - Changelog inaugurado para seguir alterações do capítulo.
+
+![Footer](../Images/Footer.png)

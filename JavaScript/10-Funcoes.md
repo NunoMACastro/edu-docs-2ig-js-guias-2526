@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [10] Funções (11.º ano)
 
 > **Objetivo**: criar funções claras, escolher a forma certa (declaração, expressão ou arrow), trabalhar com parâmetros, entender escopos/closures e saber quando usar `return` cedo.
@@ -302,3 +304,5 @@ Este padrão é muito usado em código real porque:
 - **v1.1.0 — 2025-11-10**
     - Mini desafios ampliados com mais quatro propostas sobre closures e composição de funções.
     - Changelog adicionado para acompanhar futuras melhorias do capítulo.
+
+![Footer](../Images/Footer.png)

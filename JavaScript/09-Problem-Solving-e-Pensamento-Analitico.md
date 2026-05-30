@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [09] Problem Solving e Pensamento Analítico (11.º ano) - guia completo e didático
 
 > **Objetivo:** dar-te um **processo simples, repetível e confiável** para resolver problemas de programação.  
@@ -558,3 +560,5 @@ console.log(`Número de letras "a": ${contarAs(inputFrase)}`);
     -   Exercícios reorganizados com progressão suave, evitando funções independentes e focando numa tarefa por conceito.
 -   **v1.1.0 - 2025-11-10**
     -   Secção de Exercícios ampliada com sete atividades práticas e inclusão do changelog.
+
+![Footer](../Images/Footer.png)

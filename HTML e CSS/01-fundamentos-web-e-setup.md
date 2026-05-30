@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [1] Fundamentos Web e Setup (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -168,3 +170,5 @@ Resultado esperado:
 - v1.0.2 - Estrutura base alinhada ao padrão canónico (`base/layout/components` + `main.js`).
 - v1.0.1 - Caminhos corrigidos (`css/` e `js/`), `defer` adicionado e exercícios A/B/C normalizados.
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)

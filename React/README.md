@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # React.js - Materiais Didáticos (11.º Ano)
 
 Conjunto de materiais em Markdown para o módulo de React.js.
@@ -60,3 +62,5 @@ npm run dev
 ## Conteúdos reservados para 12.º
 
 Os capítulos avançados de React (roteamento, backend/API avançada, auth, upload, tooling e mini-projeto avançado) foram retirados deste ciclo e ficam reservados para o 12.º ano.
+
+![Footer](../Images/Footer.png)

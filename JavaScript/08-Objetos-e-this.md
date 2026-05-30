@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [8] Objetos e `this` (11.º ano)
 
 > **Objetivo**: representar dados com pares `chave → valor`, alterar e ler propriedades, entender `this` em métodos simples e copiar/mesclar objetos sem surpresas.
@@ -382,3 +384,5 @@ console.log(contaBancaria.resumo());
 - **v1.1.0 - 2025-11-10**
     - Secção de Exercícios ampliada com sete atividades sobre criação, cópia, `this` e utilitários `Object.*`.
     - Changelog incluído para registar evoluções do capítulo.
+
+![Footer](../Images/Footer.png)

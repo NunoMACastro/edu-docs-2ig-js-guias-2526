@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # React.js (11.º Ano - módulo introdutório) - 05 · Listas e condicionais
 
 > **Objetivo deste ficheiro**
@@ -836,3 +838,5 @@ Checkpoint:
 
 - 2026-01-11: criação do ficheiro.
 - 2026-01-26: atualização completa para nível didático mais alto: modelo mental de listas → JSX, secção dedicada a keys e bugs com `index`, renderização condicional (`if` cedo, `&&`, ternário), estados típicos de UI (vazio vs sem resultados), filtro/pesquisa sem duplicar estado, organização por extração de componentes e checklist de diagnóstico.
+
+![Footer](../Images/Footer.png)

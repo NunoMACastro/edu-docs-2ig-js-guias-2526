@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [11] Funções de Alto Nível em Arrays (11.º ano)
 
 > **Objetivo**: deixar os ciclos manuais de lado e usar métodos como `map`, `filter`, `reduce` e `find` para escrever código mais declarativo e fácil de ler.
@@ -142,3 +144,5 @@ Quando a cadeia crescer demasiado, guarda resultados intermédios em variáveis 
 - **v1.1.0 - 2025-11-10**
     - Mini desafios reforçados com duas novas propostas (`groupBy` e pipeline encadeado).
     - Nova secção de changelog para documentar revisões futuras.
+
+![Footer](../Images/Footer.png)

@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [18] Outros Tópicos Úteis no Browser - URLSearchParams, History API, IntersectionObserver, Intl, A11y, Segurança, Performance (11.º ano)
 
 > **Objetivo**: conhecer ferramentas úteis do browser para tornar as páginas mais **funcionais, acessíveis e rápidas**. Explicações simples, exemplos curtos e desafios.
@@ -291,3 +293,5 @@ console.timeEnd('render');
 - **v1.1.0 - 2025-11-10**
     - Secção final convertida em Mini desafios com foco em APIs modernas do browser.
     - Adicionado changelog para manter histórico de alterações.
+
+![Footer](../Images/Footer.png)

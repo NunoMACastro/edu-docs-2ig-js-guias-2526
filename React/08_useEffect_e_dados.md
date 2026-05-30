@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # React.js (11.º Ano - módulo introdutório) - 08 · useEffect e dados externos
 
 > **Objetivo deste ficheiro**
@@ -1391,3 +1393,5 @@ Isto ajuda a ver:
 - 2026-01-12: template base de `fetch` com parsing de erro JSON.
 - 2026-01-26: reforço pedagógico (render/commit/effect), explicação “referência vs valor”, nota crítica sobre `fetch` e `res.ok`, padrão `status`, race conditions, e exercícios de diagnóstico (12–14).
 - 2026-01-26: secções 1, 3, 5, 6 e 7 expandidas (mesmo estilo didático das secções 2 e 4), com árvore de decisão, stale data, status, cleanup e checklist de diagnóstico.
+
+![Footer](../Images/Footer.png)

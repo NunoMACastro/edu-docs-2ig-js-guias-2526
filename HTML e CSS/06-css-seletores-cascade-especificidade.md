@@ -1,3 +1,5 @@
+![Header](../Images/Header.png)
+
 # [6] Seletores, Cascade e Especificidade (11.º ano)
 
 ## 0) Objetivo do capítulo
@@ -127,3 +129,5 @@ Resultado esperado:
 
 - v1.0.1 - Conflito real de cascade adicionado e estratégia sem `!important` formalizada.
 - v1.0.0 - Capítulo criado.
+
+![Footer](../Images/Footer.png)
